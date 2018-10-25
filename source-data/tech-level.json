@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "primitive",
+        "display_name": "Primitive"
+    },
+    {
+        "id": 2,
+        "name": "typical",
+        "display_name": "Typical"
+    },
+    {
+        "id": 3,
+        "name": "advanced",
+        "display_name": "Advanced"
+    }
+]

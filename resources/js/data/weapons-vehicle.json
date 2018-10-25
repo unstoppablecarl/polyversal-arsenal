@@ -4,10 +4,10 @@
         "aa": "D4",
         "at": "NONE",
         "ap": "NONE",
-        "name": "Anti-Missile I",
+        "name": "Anti-Misl I",
         "range": 12,
         "damage": "NONE",
-        "isAMA": true,
+        "is_ama": true,
         "valid_tile_weapon_type_ids": [
             "TILE_WEAPON_TYPE_ONLY_AA"
         ]
@@ -17,10 +17,10 @@
         "aa": "D6",
         "at": "NONE",
         "ap": "NONE",
-        "name": "Anti-Missile II",
+        "name": "Anti-Misl II",
         "range": 12,
         "damage": "NONE",
-        "isAMA": true,
+        "is_ama": true,
         "valid_tile_weapon_type_ids": [
             "TILE_WEAPON_TYPE_ONLY_AA"
         ]
@@ -30,10 +30,10 @@
         "aa": "D8",
         "at": "NONE",
         "ap": "NONE",
-        "name": "Anti-Missile III",
+        "name": "Anti-Misl III",
         "range": 12,
         "damage": "NONE",
-        "isAMA": true,
+        "is_ama": true,
         "valid_tile_weapon_type_ids": [
             "TILE_WEAPON_TYPE_ONLY_AA"
         ]
@@ -43,10 +43,10 @@
         "aa": "D10",
         "at": "NONE",
         "ap": "NONE",
-        "name": "Anti-Missile IV",
+        "name": "Anti-Misl IV",
         "range": 12,
         "damage": "NONE",
-        "isAMA": true,
+        "is_ama": true,
         "valid_tile_weapon_type_ids": [
             "TILE_WEAPON_TYPE_ONLY_AA"
         ]
@@ -56,10 +56,10 @@
         "aa": "D12",
         "at": "NONE",
         "ap": "NONE",
-        "name": "Anti-Missile V",
+        "name": "Anti-Misl V",
         "range": 12,
         "damage": "NONE",
-        "isAMA": true,
+        "is_ama": true,
         "valid_tile_weapon_type_ids": [
             "TILE_WEAPON_TYPE_ONLY_AA"
         ]

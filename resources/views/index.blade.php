@@ -11,8 +11,8 @@
     <h1>Polyversal Arsenal</h1>
 
     <div id="app">
-        <weapon-grid>
-        </weapon-grid>
+        <tile>
+        </tile>
     </div>
 
 </div>

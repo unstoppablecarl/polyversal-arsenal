@@ -1,0 +1,237 @@
+$font-size: 6.75pt * $scale;
+$row-height: 9pt * $scale;
+$row-height: 12pt * $scale;
+$cell-width: 14pt * $scale;
+
+$grid-width: 152pt * $scale;
+
+$col-name-width: 54pt * $scale;
+$col-move-width: 10pt * $scale;
+$col-controls-width: 100pt * $scale;
+$col-arc-settings-width: 20pt * $scale;
+$col-tile-weapon-type-width: 30pt * $scale;
+
+$columns-edit-width: $col-controls-width + $col-move-width + ($col-arc-settings-width * 2) + $col-tile-weapon-type-width;
+$d4-color: #1B75BC;
+$d6-color: #009444;
+$d8-color: #FFDE17;
+$d10-color: #F26522;
+$d12-color: #ED1C24;
+
+$gray-bg: rgba(88, 89, 91, 0.9);
+
+$map: (
+    D4: $d4-color,
+    D6: $d6-color,
+    D8: $d8-color,
+    D10: $d10-color,
+    D12: $d12-color,
+    NONE: transparent
+);
+
+@each $key, $color in $map {
+    .#{$key}-bg {
+        background-color: $color;
+    }
+}
+
+.weapon-grid {
+
+    .controls {
+        margin: 20px 0;
+    }
+    .weapon-grid-list {
+        width: $grid-width + $columns-edit-width;
+        border: 0.5pt solid #000;
+    }
+
+    .grid-header {
+        font-weight: bold;
+    }
+
+    .grid-header,
+    .weapon-grid-item {
+        background: $gray-bg;
+        color: #fff;
+
+        font-size: $font-size;
+        height: $row-height;
+        line-height: $row-height;
+
+        text-transform: uppercase;
+
+        $shadow-color: rgba(0, 0, 0, 0.5);
+
+        text-shadow: 0px 0px 1px $shadow-color,
+        -1px -1px 1.5px $shadow-color,
+        1px -1px 1.5px $shadow-color,
+        -1px 1px 1.5px $shadow-color,
+        1px 1px 1.5px $shadow-color;
+
+        [class^=col-] {
+            border: 0.25pt * $scale solid #000;
+        }
+
+        display: flex;
+        flex-wrap: nowrap;
+
+        margin-right: ($grid-gutter-width / -2);
+        margin-left: ($grid-gutter-width / -2);
+    }
+
+    .col-name {
+        //flex: 2;
+        padding: 0 0 0 2pt;
+        width: $col-name-width;
+        font-weight: normal;
+    }
+    .col-move {
+        width: $col-move-width;
+        cursor: move;
+        text-align: center;
+    }
+    .col-quantity,
+    .col-arc,
+    .col-range,
+    .col-ap,
+    .col-at,
+    .col-aa,
+    .col-damage {
+        width: $cell-width;
+        text-align: center;
+    }
+
+    .label-quantity {
+        display: none;
+    }
+
+    .col-arc-size,
+    .col-arc-direction {
+        text-align: center;
+        width: $col-arc-settings-width;
+    }
+
+    .col-tile-weapon-type {
+        text-align: center;
+        width: $col-tile-weapon-type-width;
+    }
+
+    .col-controls {
+        width: $col-controls-width;
+        line-height: inherit;
+    }
+
+    .weapon-grid-item {
+        input.form-control {
+
+            padding-left: 2px;
+            padding-right: 2px;
+            border: 0;
+            text-align: center;
+            margin-top: 1pt;
+
+            height: $row-height - 2pt;
+            line-height: $row-height - 2pt;
+        }
+
+        select.form-control {
+            height: $row-height - 2pt;
+            border: 0;
+            margin-top: 1pt;
+
+            &[disabled] {
+                background-color: rgba(255, 255, 255, 0.66);
+            }
+        }
+    }
+
+    .arc {
+        height: $row-height * 0.8;
+        vertical-align: top;
+        margin-top: 1pt;
+    }
+
+    .icon-indirect,
+    .icon-ama {
+        height: $row-height;
+        float: right;
+        display: none;
+    }
+
+    .is-indirect .icon-indirect,
+    .is-ama .icon-ama {
+        display: inline;
+    }
+
+    .arc-up {
+
+    }
+
+    .arc-left {
+        transform: rotate(-90deg);
+    }
+
+    .arc-right {
+        transform: rotate(90deg);
+    }
+
+    .arc-down {
+        transform: rotate(180deg);
+    }
+
+    .grid-header {
+        .col-arc-size,
+        .col-arc-direction,
+        .col-tile-weapon-type,
+        .col-move {
+            font-weight: normal;
+        }
+    }
+
+    .weapon-grid-item-new {
+        margin: 20px;
+    }
+
+}
+
+.number-cell {
+    text-align: right;
+    font-size: 12pt;
+}
+
+.number-zero {
+    opacity: 0.5;
+}
+
+.number-positive {
+    color: $success;
+}
+
+.number-negative {
+    color: $danger;
+}
+
+@mixin print() {
+    .col-arc-size,
+    .col-arc-direction,
+    .col-tile-weapon-type,
+    .col-controls,
+    .col-move,
+    .input-quantity {
+        display: none;
+    }
+    .label-quantity {
+        display: block;
+    }
+    .weapon-grid-list {
+        width: (152pt * $scale);
+    }
+}
+
+.print {
+    @include print();
+}
+
+@media print {
+    @include print();
+}

@@ -74,7 +74,21 @@ const TILE_TYPE_INFANTRY_ID = 1;
 const TILE_TYPE_CAVALRY_ID  = 2;
 const TILE_TYPE_VEHICLE_ID  = 3;
 
+const TILE_TYPE_OPTIONS = {
+    [TILE_TYPE_INFANTRY_ID]: 'Infantry',
+    [TILE_TYPE_CAVALRY_ID]: 'Cavalry',
+    [TILE_TYPE_VEHICLE_ID]: 'Vehicle',
+};
+
+const TILE_TYPE_ARMOR_VALUES = {
+    [TILE_TYPE_INFANTRY_ID]: [0, 1, 2, 3],
+    [TILE_TYPE_CAVALRY_ID]: [0, 1, 2, 3],
+    [TILE_TYPE_VEHICLE_ID]: [0, 1, 2, 3, 4, 5],
+};
+
 export {
+    TILE_TYPE_ARMOR_VALUES,
+    TILE_TYPE_OPTIONS,
 
     TILE_TYPE_INFANTRY_ID,
     TILE_TYPE_CAVALRY_ID,

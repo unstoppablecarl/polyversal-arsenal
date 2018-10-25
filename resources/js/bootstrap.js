@@ -1,9 +1,11 @@
 
 import Vuex from 'vuex';
 import Vue from 'vue';
+import BootstrapVue from 'bootstrap-vue'
 
 window.Vue = Vue;
 Vue.use(Vuex);
+Vue.use(BootstrapVue);
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;

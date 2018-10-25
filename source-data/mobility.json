@@ -1,0 +1,88 @@
+{
+    "infantry": [
+        {
+            "id": 1,
+            "name": "infantry",
+            "display_name": "Infantry"
+        }
+    ],
+    "cavalry": [
+        {
+            "id": 2,
+            "name": "beast",
+            "display_name": "Beast"
+        },
+        {
+            "id": 3,
+            "name": "bike",
+            "display_name": "Bike"
+        },
+        {
+            "id": 4,
+            "name": "hoverbike",
+            "display_name": "Hoverbike"
+        },
+        {
+            "id": 5,
+            "name": "trike",
+            "display_name": "Trike"
+        }
+    ],
+    "vehicle": [
+        {
+            "id": 6,
+            "name": "stationary",
+            "display_name": "Stationary"
+        },
+        {
+            "id": 7,
+            "name": "wheeled",
+            "display_name": "Wheeled"
+        },
+        {
+            "id": 8,
+            "name": "half_tracked",
+            "display_name": "Half-Tracked"
+        },
+        {
+            "id": 9,
+            "name": "tracked",
+            "display_name": "Tracked"
+        },
+        {
+            "id": 10,
+            "name": "anti_gravity",
+            "display_name": "Anti-Gravity"
+        },
+        {
+            "id": 11,
+            "name": "walker",
+            "display_name": "Walker"
+        },
+        {
+            "id": 12,
+            "name": "hover",
+            "display_name": "Hover"
+        },
+        {
+            "id": 13,
+            "name": "vtol",
+            "display_name": "VTOL"
+        },
+        {
+            "id": 14,
+            "name": "turbofan",
+            "display_name": "Turbofan"
+        },
+        {
+            "id": 15,
+            "name": "aerojet",
+            "display_name": "Aerojet"
+        },
+        {
+            "id": 16,
+            "name": "naval",
+            "display_name": "Naval"
+        }
+    ]
+}

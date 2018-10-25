@@ -1,4 +1,316 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i);/*!
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i);.fade-enter-active, .fade-leave-active {
+    -webkit-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+/* workaround for https://github.com/bootstrap-vue/bootstrap-vue/issues/1560 */
+/* source: _input-group.scss */
+
+.input-group > .input-group-prepend > .b-dropdown > .btn,
+.input-group > .input-group-append:not(:last-child) > .b-dropdown > .btn,
+.input-group > .input-group-append:last-child > .b-dropdown:not(:last-child):not(.dropdown-toggle) > .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group > .input-group-append > .b-dropdown > .btn,
+.input-group > .input-group-prepend:not(:first-child) > .b-dropdown > .btn,
+.input-group > .input-group-prepend:first-child > .b-dropdown:not(:first-child) > .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Special styling for type=range and type=color input */
+input.form-control[type="range"],
+input.form-control[type="color"] {
+    height: 2.25rem;
+}
+input.form-control.form-control-sm[type="range"],
+input.form-control.form-control-sm[type="color"] {
+    height: 1.9375rem;
+}
+input.form-control.form-control-lg[type="range"],
+input.form-control.form-control-lg[type="color"] {
+    height: 3rem;
+}
+
+/* Less padding on type=color */
+input.form-control[type="color"] {
+    padding: 0.25rem 0.25rem;
+}
+input.form-control.form-control-sm[type="color"] {
+    padding: 0.125rem 0.125rem;
+}
+
+/* Add support for fixed layout table */
+table.b-table.b-table-fixed {
+    table-layout: fixed;
+}
+
+/* Busy table styling */
+table.b-table[aria-busy='false'] {
+    opacity: 1;
+}
+table.b-table[aria-busy='true'] {
+    opacity: 0.6;
+}
+
+/* Sort styling */
+table.b-table > thead > tr > th,
+table.b-table > tfoot > tr > th {
+    position: relative;
+}
+table.b-table > thead > tr > th.sorting,
+table.b-table > tfoot > tr > th.sorting {
+    padding-right: 1.5em;
+    cursor: pointer;
+}
+table.b-table > thead > tr > th.sorting::before,
+table.b-table > thead > tr > th.sorting::after,
+table.b-table > tfoot > tr > th.sorting::before,
+table.b-table > tfoot > tr > th.sorting::after {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    opacity: 0.4;
+    padding-bottom: inherit;
+    font-size: inherit;
+    line-height: 180%;
+}
+table.b-table > thead > tr > th.sorting::before,
+table.b-table > tfoot > tr > th.sorting::before {
+    right: 0.75em;
+    content: '\2191';
+}
+table.b-table > thead > tr > th.sorting::after,
+table.b-table > tfoot > tr > th.sorting::after {
+    right: 0.25em;
+    content: '\2193';
+}
+table.b-table > thead > tr > th.sorting_asc::after,
+table.b-table > thead > tr > th.sorting_desc::before,
+table.b-table > tfoot > tr > th.sorting_asc::after,
+table.b-table > tfoot > tr > th.sorting_desc::before {
+    opacity: 1;
+}
+
+/* Stacked table layout */
+/* Derived from http://blog.adrianroselli.com/2017/11/a-responsive-accessible-table.html */
+/* Always stacked */
+table.b-table.b-table-stacked {
+    width: 100%;
+}
+table.b-table.b-table-stacked,
+table.b-table.b-table-stacked > tbody,
+table.b-table.b-table-stacked > tbody > tr,
+table.b-table.b-table-stacked > tbody > tr > td,
+table.b-table.b-table-stacked > tbody > tr > th,
+table.b-table.b-table-stacked > caption {
+    display: block;
+}
+
+/* Hide stuff we can't deal with, or shouldn't show */
+table.b-table.b-table-stacked > thead,
+table.b-table.b-table-stacked > tfoot,
+table.b-table.b-table-stacked > tbody > tr.b-table-top-row,
+table.b-table.b-table-stacked > tbody > tr.b-table-bottom-row {
+    display: none;
+}
+
+/* inter-row top border */
+table.b-table.b-table-stacked > tbody > tr > :first-child {
+    border-top-width: 0.4rem;
+}
+
+/* convert TD/TH contents to "cells". Caveat: child elements become cells! */
+table.b-table.b-table-stacked > tbody > tr > [data-label] {
+    display: grid;
+    grid-template-columns: 40% auto;
+    grid-gap: 0.25rem 1rem;
+}
+
+/* generate row cell "heading" */
+table.b-table.b-table-stacked > tbody > tr > [data-label]::before {
+    content: attr(data-label);
+    display: inline;
+    text-align: right;
+    overflow-wrap: break-word;
+    font-weight: bold;
+    font-style: normal;
+}
+
+@media all and (max-width: 575.99px) {
+    /* Under SM */
+    table.b-table.b-table-stacked-sm {
+        width: 100%;
+    }
+    table.b-table.b-table-stacked-sm,
+    table.b-table.b-table-stacked-sm > tbody,
+    table.b-table.b-table-stacked-sm > tbody > tr,
+    table.b-table.b-table-stacked-sm > tbody > tr > td,
+    table.b-table.b-table-stacked-sm > tbody > tr > th,
+    table.b-table.b-table-stacked-sm > caption {
+        display: block;
+    }
+    /* hide stuff we can't deal with, or shouldn't show */
+    table.b-table.b-table-stacked-sm > thead,
+    table.b-table.b-table-stacked-sm > tfoot,
+    table.b-table.b-table-stacked-sm > tbody > tr.b-table-top-row,
+    table.b-table.b-table-stacked-sm > tbody > tr.b-table-bottom-row {
+        display: none;
+    }
+    /* inter-row top border */
+    table.b-table.b-table-stacked-sm > tbody > tr > :first-child {
+        border-top-width: 0.4rem;
+    }
+    /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
+    table.b-table.b-table-stacked-sm > tbody > tr > [data-label] {
+        display: grid;
+        grid-template-columns: 40% auto;
+        grid-gap: 0.25rem 1rem;
+    }
+    /* generate row cell "heading" */
+    table.b-table.b-table-stacked-sm > tbody > tr > [data-label]::before {
+        content: attr(data-label);
+        display: inline;
+        text-align: right;
+        overflow-wrap: break-word;
+        font-weight: bold;
+        font-style: normal;
+    }
+}
+
+@media all and (max-width: 767.99px) {
+    /* under MD  */
+    table.b-table.b-table-stacked-md {
+        width: 100%;
+    }
+    table.b-table.b-table-stacked-md,
+    table.b-table.b-table-stacked-md > tbody,
+    table.b-table.b-table-stacked-md > tbody > tr,
+    table.b-table.b-table-stacked-md > tbody > tr > td,
+    table.b-table.b-table-stacked-md > tbody > tr > th,
+    table.b-table.b-table-stacked-md > caption {
+        display: block;
+    }
+    /* hide stuff we can't deal with, or shouldn't show */
+    table.b-table.b-table-stacked-md > thead,
+    table.b-table.b-table-stacked-md > tfoot,
+    table.b-table.b-table-stacked-md > tbody > tr.b-table-top-row,
+    table.b-table.b-table-stacked-md > tbody > tr.b-table-bottom-row {
+        display: none;
+    }
+    /* inter-row top border */
+    table.b-table.b-table-stacked-md > tbody > tr > :first-child {
+        border-top-width: 0.4rem;
+    }
+    /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
+    table.b-table.b-table-stacked-md > tbody > tr > [data-label] {
+        display: grid;
+        grid-template-columns: 40% auto;
+        grid-gap: 0.25rem 1rem;
+    }
+    /* generate row cell "heading" */
+    table.b-table.b-table-stacked-md > tbody > tr > [data-label]::before {
+        content: attr(data-label);
+        display: inline;
+        text-align: right;
+        overflow-wrap: break-word;
+        font-weight: bold;
+        font-style: normal;
+    }
+}
+
+@media all and (max-width: 991.99px) {
+    /* under LG  */
+    table.b-table.b-table-stacked-lg {
+        width: 100%;
+    }
+    table.b-table.b-table-stacked-lg,
+    table.b-table.b-table-stacked-lg > tbody,
+    table.b-table.b-table-stacked-lg > tbody > tr,
+    table.b-table.b-table-stacked-lg > tbody > tr > td,
+    table.b-table.b-table-stacked-lg > tbody > tr > th,
+    table.b-table.b-table-stacked-lg > caption {
+        display: block;
+    }
+    /* hide stuff we can't deal with, or shouldn't show */
+    table.b-table.b-table-stacked-lg > thead,
+    table.b-table.b-table-stacked-lg > tfoot,
+    table.b-table.b-table-stacked-lg > tbody > tr.b-table-top-row,
+    table.b-table.b-table-stacked-lg > tbody > tr.b-table-bottom-row {
+        display: none;
+    }
+    /* inter-row top border */
+    table.b-table.b-table-stacked-lg > tbody > tr > :first-child {
+        border-top-width: 0.4rem;
+    }
+    /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
+    table.b-table.b-table-stacked-lg > tbody > tr > [data-label] {
+        display: grid;
+        grid-template-columns: 40% auto;
+        grid-gap: 0.25rem 1rem;
+    }
+    /* generate row cell "heading" */
+    table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before {
+        content: attr(data-label);
+        display: inline;
+        text-align: right;
+        overflow-wrap: break-word;
+        font-weight: bold;
+        font-style: normal;
+    }
+}
+
+@media all and (max-width: 1199.99px) {
+    /* under XL  */
+    table.b-table.b-table-stacked-xl {
+        width: 100%;
+    }
+    table.b-table.b-table-stacked-xl,
+    table.b-table.b-table-stacked-xl > tbody,
+    table.b-table.b-table-stacked-xl > tbody > tr,
+    table.b-table.b-table-stacked-xl > tbody > tr > td,
+    table.b-table.b-table-stacked-xl > tbody > tr > th,
+    table.b-table.b-table-stacked-xl > caption {
+        display: block;
+    }
+    /* hide stuff we can't deal with, or shouldn't show */
+    table.b-table.b-table-stacked-xl > thead,
+    table.b-table.b-table-stacked-xl > tfoot,
+    table.b-table.b-table-stacked-xl > tbody > tr.b-table-top-row,
+    table.b-table.b-table-stacked-xl > tbody > tr.b-table-bottom-row {
+        display: none;
+    }
+    /* inter-row top border */
+    table.b-table.b-table-stacked-xl > tbody > tr > :first-child {
+        border-top-width: 0.4rem;
+    }
+    /* convert TD/TH contents to "cells". Caveat: child elements become cells! */
+    table.b-table.b-table-stacked-xl > tbody > tr > [data-label] {
+        display: grid;
+        grid-template-columns: 40% auto;
+        grid-gap: 0.25rem 1rem;
+    }
+    /* generate row cell "heading" */
+    table.b-table.b-table-stacked-xl > tbody > tr > [data-label]::before {
+        content: attr(data-label);
+        display: inline;
+        text-align: right;
+        overflow-wrap: break-word;
+        font-weight: bold;
+        font-style: normal;
+    }
+}
+
+/* Details row styling */
+table.b-table > tbody > tr.b-table-details > td {
+    border-top: none;
+}
+/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10391,9 +10703,6 @@ a.text-dark:hover, a.text-dark:focus {
   body {
     min-width: 992px !important;
   }
-  .container {
-    min-width: 992px !important;
-  }
   .navbar {
     display: none;
   }
@@ -10450,8 +10759,13 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: transparent;
 }
 
+.weapon-grid .controls {
+  margin: 20px 0;
+}
+
 .weapon-grid .weapon-grid-list {
-  width: 514pt;
+  width: 332pt;
+  border: 0.5pt solid #000;
 }
 
 .weapon-grid .grid-header {
@@ -10462,9 +10776,9 @@ a.text-dark:hover, a.text-dark:focus {
 .weapon-grid .weapon-grid-item {
   background: rgba(88, 89, 91, 0.9);
   color: #fff;
-  font-size: 13.5pt;
-  height: 24pt;
-  line-height: 24pt;
+  font-size: 6.75pt;
+  height: 12pt;
+  line-height: 12pt;
   text-transform: uppercase;
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), -1px -1px 1.5px rgba(0, 0, 0, 0.5), 1px -1px 1.5px rgba(0, 0, 0, 0.5), -1px 1px 1.5px rgba(0, 0, 0, 0.5), 1px 1px 1.5px rgba(0, 0, 0, 0.5);
   display: -webkit-box;
@@ -10478,18 +10792,17 @@ a.text-dark:hover, a.text-dark:focus {
 
 .weapon-grid .grid-header [class^=col-],
 .weapon-grid .weapon-grid-item [class^=col-] {
-  border: 1px solid #000;
+  border: 0.25pt solid #000;
 }
 
 .weapon-grid .col-name {
-  -webkit-box-flex: 10;
-      -ms-flex: 10;
-          flex: 10;
   padding: 0 0 0 2pt;
+  width: 54pt;
+  font-weight: normal;
 }
 
 .weapon-grid .col-move {
-  width: 30pt;
+  width: 10pt;
   cursor: move;
   text-align: center;
 }
@@ -10501,14 +10814,23 @@ a.text-dark:hover, a.text-dark:focus {
 .weapon-grid .col-at,
 .weapon-grid .col-aa,
 .weapon-grid .col-damage {
-  width: 28pt;
+  width: 14pt;
   text-align: center;
+}
+
+.weapon-grid .label-quantity {
+  display: none;
 }
 
 .weapon-grid .col-arc-size,
 .weapon-grid .col-arc-direction {
-  width: 40pt;
   text-align: center;
+  width: 20pt;
+}
+
+.weapon-grid .col-tile-weapon-type {
+  text-align: center;
+  width: 30pt;
 }
 
 .weapon-grid .col-controls {
@@ -10516,18 +10838,42 @@ a.text-dark:hover, a.text-dark:focus {
   line-height: inherit;
 }
 
-.weapon-grid input.form-control {
-  border-radius: 0;
+.weapon-grid .weapon-grid-item input.form-control {
   padding-left: 2px;
   padding-right: 2px;
   border: 0;
   text-align: center;
-  height: 24pt;
-  line-height: 24pt;
+  margin-top: 1pt;
+  height: 10pt;
+  line-height: 10pt;
+}
+
+.weapon-grid .weapon-grid-item select.form-control {
+  height: 10pt;
+  border: 0;
+  margin-top: 1pt;
+}
+
+.weapon-grid .weapon-grid-item select.form-control[disabled] {
+  background-color: rgba(255, 255, 255, 0.66);
 }
 
 .weapon-grid .arc {
-  height: 19.2pt;
+  height: 9.6pt;
+  vertical-align: top;
+  margin-top: 1pt;
+}
+
+.weapon-grid .icon-indirect,
+.weapon-grid .icon-ama {
+  height: 12pt;
+  float: right;
+  display: none;
+}
+
+.weapon-grid .is-indirect .icon-indirect,
+.weapon-grid .is-ama .icon-ama {
+  display: inline;
 }
 
 .weapon-grid .arc-left {
@@ -10546,13 +10892,283 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .weapon-grid .grid-header .col-arc-size,
-.weapon-grid .grid-header .col-arc-direction {
+.weapon-grid .grid-header .col-arc-direction,
+.weapon-grid .grid-header .col-tile-weapon-type,
+.weapon-grid .grid-header .col-move {
   font-weight: normal;
 }
 
-.weapon-grid .select-arc-size,
-.weapon-grid .select-arc-direction {
+.weapon-grid .weapon-grid-item-new {
+  margin: 20px;
+}
+
+.number-cell {
+  text-align: right;
+  font-size: 12pt;
+}
+
+.number-zero {
+  opacity: 0.5;
+}
+
+.number-positive {
+  color: #38c172;
+}
+
+.number-negative {
+  color: #e3342f;
+}
+
+.print .col-arc-size,
+.print .col-arc-direction,
+.print .col-tile-weapon-type,
+.print .col-controls,
+.print .col-move,
+.print .input-quantity {
+  display: none;
+}
+
+.print .label-quantity {
+  display: block;
+}
+
+.print .weapon-grid-list {
+  width: 152pt;
+}
+
+@media print {
+  .col-arc-size,
+  .col-arc-direction,
+  .col-tile-weapon-type,
+  .col-controls,
+  .col-move,
+  .input-quantity {
+    display: none;
+  }
+  .label-quantity {
+    display: block;
+  }
+  .weapon-grid-list {
+    width: 152pt;
+  }
+}
+
+.scale-2 .D4-bg {
+  background-color: #1B75BC;
+}
+
+.scale-2 .D6-bg {
+  background-color: #009444;
+}
+
+.scale-2 .D8-bg {
+  background-color: #FFDE17;
+}
+
+.scale-2 .D10-bg {
+  background-color: #F26522;
+}
+
+.scale-2 .D12-bg {
+  background-color: #ED1C24;
+}
+
+.scale-2 .NONE-bg {
+  background-color: transparent;
+}
+
+.scale-2 .weapon-grid .controls {
+  margin: 20px 0;
+}
+
+.scale-2 .weapon-grid .weapon-grid-list {
+  width: 664pt;
+  border: 0.5pt solid #000;
+}
+
+.scale-2 .weapon-grid .grid-header {
+  font-weight: bold;
+}
+
+.scale-2 .weapon-grid .grid-header,
+.scale-2 .weapon-grid .weapon-grid-item {
+  background: rgba(88, 89, 91, 0.9);
+  color: #fff;
+  font-size: 13.5pt;
+  height: 24pt;
+  line-height: 24pt;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), -1px -1px 1.5px rgba(0, 0, 0, 0.5), 1px -1px 1.5px rgba(0, 0, 0, 0.5), -1px 1px 1.5px rgba(0, 0, 0, 0.5), 1px 1px 1.5px rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.scale-2 .weapon-grid .grid-header [class^=col-],
+.scale-2 .weapon-grid .weapon-grid-item [class^=col-] {
+  border: 0.5pt solid #000;
+}
+
+.scale-2 .weapon-grid .col-name {
+  padding: 0 0 0 2pt;
+  width: 108pt;
+  font-weight: normal;
+}
+
+.scale-2 .weapon-grid .col-move {
+  width: 20pt;
+  cursor: move;
+  text-align: center;
+}
+
+.scale-2 .weapon-grid .col-quantity,
+.scale-2 .weapon-grid .col-arc,
+.scale-2 .weapon-grid .col-range,
+.scale-2 .weapon-grid .col-ap,
+.scale-2 .weapon-grid .col-at,
+.scale-2 .weapon-grid .col-aa,
+.scale-2 .weapon-grid .col-damage {
+  width: 28pt;
+  text-align: center;
+}
+
+.scale-2 .weapon-grid .label-quantity {
+  display: none;
+}
+
+.scale-2 .weapon-grid .col-arc-size,
+.scale-2 .weapon-grid .col-arc-direction {
+  text-align: center;
   width: 40pt;
+}
+
+.scale-2 .weapon-grid .col-tile-weapon-type {
+  text-align: center;
+  width: 60pt;
+}
+
+.scale-2 .weapon-grid .col-controls {
+  width: 200pt;
+  line-height: inherit;
+}
+
+.scale-2 .weapon-grid .weapon-grid-item input.form-control {
+  padding-left: 2px;
+  padding-right: 2px;
+  border: 0;
+  text-align: center;
+  margin-top: 1pt;
+  height: 22pt;
+  line-height: 22pt;
+}
+
+.scale-2 .weapon-grid .weapon-grid-item select.form-control {
+  height: 22pt;
+  border: 0;
+  margin-top: 1pt;
+}
+
+.scale-2 .weapon-grid .weapon-grid-item select.form-control[disabled] {
+  background-color: rgba(255, 255, 255, 0.66);
+}
+
+.scale-2 .weapon-grid .arc {
+  height: 19.2pt;
+  vertical-align: top;
+  margin-top: 1pt;
+}
+
+.scale-2 .weapon-grid .icon-indirect,
+.scale-2 .weapon-grid .icon-ama {
+  height: 24pt;
+  float: right;
+  display: none;
+}
+
+.scale-2 .weapon-grid .is-indirect .icon-indirect,
+.scale-2 .weapon-grid .is-ama .icon-ama {
+  display: inline;
+}
+
+.scale-2 .weapon-grid .arc-left {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.scale-2 .weapon-grid .arc-right {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.scale-2 .weapon-grid .arc-down {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.scale-2 .weapon-grid .grid-header .col-arc-size,
+.scale-2 .weapon-grid .grid-header .col-arc-direction,
+.scale-2 .weapon-grid .grid-header .col-tile-weapon-type,
+.scale-2 .weapon-grid .grid-header .col-move {
+  font-weight: normal;
+}
+
+.scale-2 .weapon-grid .weapon-grid-item-new {
+  margin: 20px;
+}
+
+.scale-2 .number-cell {
+  text-align: right;
+  font-size: 12pt;
+}
+
+.scale-2 .number-zero {
+  opacity: 0.5;
+}
+
+.scale-2 .number-positive {
+  color: #38c172;
+}
+
+.scale-2 .number-negative {
+  color: #e3342f;
+}
+
+.scale-2 .print .col-arc-size,
+.scale-2 .print .col-arc-direction,
+.scale-2 .print .col-tile-weapon-type,
+.scale-2 .print .col-controls,
+.scale-2 .print .col-move,
+.scale-2 .print .input-quantity {
+  display: none;
+}
+
+.scale-2 .print .label-quantity {
+  display: block;
+}
+
+.scale-2 .print .weapon-grid-list {
+  width: 304pt;
+}
+
+@media print {
+  .scale-2 .col-arc-size,
+  .scale-2 .col-arc-direction,
+  .scale-2 .col-tile-weapon-type,
+  .scale-2 .col-controls,
+  .scale-2 .col-move,
+  .scale-2 .input-quantity {
+    display: none;
+  }
+  .scale-2 .label-quantity {
+    display: block;
+  }
+  .scale-2 .weapon-grid-list {
+    width: 304pt;
+  }
 }
 
 .no-select {

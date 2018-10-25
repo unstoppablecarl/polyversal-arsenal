@@ -46,9 +46,9 @@ function Repo(data) {
         return repo;
     }
 
-    function toItem(slug){
+    function toItem(slug) {
         let item = repo[slug];
-        if(!item){
+        if (!item) {
             throw new Error('invalid weapon slug: ' + slug);
         }
         return item;
@@ -79,7 +79,6 @@ function Repo(data) {
             return false;
         }
         let item = toItem(slug);
-        console.log('getGround', item.aa);
         return Object.assign({}, item, {
             aa: NONE,
         });
@@ -130,6 +129,22 @@ function Repo(data) {
         return item.valid_tile_weapon_type_ids.indexOf(tileWeaponTypeName) !== -1;
     }
 
+    function tileWeaponTypeSelect(slug) {
+
+        let types = {};
+
+        if (hasGround(slug)) {
+            types[TILE_WEAPON_TYPE_GROUND_ID] = 'Ground';
+        }
+        if (hasWithAA(slug)) {
+            types[TILE_WEAPON_TYPE_WITH_AA_ID] = 'With AA';
+        }
+        if (hasOnlyAA(slug)) {
+            types[TILE_WEAPON_TYPE_ONLY_AA_ID] = 'Only AA';
+        }
+        return types;
+    }
+
     return {
         all,
         firstKey,
@@ -137,5 +152,6 @@ function Repo(data) {
         hasGround,
         hasOnlyAA,
         hasWithAA,
+        tileWeaponTypeSelect,
     };
 }

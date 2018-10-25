@@ -1,23 +1,30 @@
 import Vuex from 'vuex';
 
 import {
+    createItem,
     updateItem,
     deleteItem,
     moveItem,
+    copyItem,
 } from '../lib/collection-helper';
 
-export default function (server) {
+import tileWeapon from './models/tile-weapon';
 
+export default function (server) {
     return new Vuex.Store({
         state: {
             weapons: [],
         },
         mutations: {
-            weaponCreate(state, weapon) {
-                state.weapons.push(weapon);
+            weaponCreate(state, {weapon, newIndex}) {
+                weapon = tileWeapon(weapon);
+                createItem(state.weapons, weapon, newIndex);
             },
             weaponUpdate(state, weapon) {
                 updateItem(state.weapons, weapon);
+            },
+            weaponCopy(state, weapon) {
+                copyItem(state.weapons, weapon);
             },
             weaponDelete(state, weapon) {
                 deleteItem(state.weapons, weapon);
@@ -28,106 +35,27 @@ export default function (server) {
             weaponsClear(state) {
                 state.weapons = [];
             },
-            asyncState(state, value) {
-                state.asyncState = value;
-            },
         },
         actions: {
-            weaponCreate({commit, state}, weapon) {
-                commit('asyncState', 'creating');
-
-                return server.create(weapon)
-                    .then(function (serverweapon) {
-
-                        commit('asyncState', null);
-                        commit('weaponCreate', serverweapon);
-                        return serverWeapon;
-                    });
+            weaponCreate({commit, state}, {weapon, newIndex}) {
+                commit('weaponCreate', {weapon, newIndex});
             },
             weaponUpdate({commit}, weapon) {
-                commit('asyncState', 'updating');
-
-                return server.update(weapon)
-                    .then(function (serverweapon) {
-
-                        commit('asyncState', null);
-                        commit('weaponUpdate', serverweapon);
-
-                    });
+                commit('weaponUpdate', weapon);
             },
             weaponCopy({commit}, weapon) {
-                commit('asyncState', 'updating');
-
-                return server.update(weapon)
-                    .then(function (serverweapon) {
-
-                        commit('asyncState', null);
-                        commit('weaponUpdate', serverweapon);
-
-                    });
+                commit('weaponCopy', weapon);
             },
             weaponDelete({commit}, weapon) {
-                commit('asyncState', 'deleting');
-
-                return server.delete(weapon)
-                    .then(function (serverweapon) {
-
-                        commit('asyncState', null);
-                        commit('weaponDelete', serverweapon);
-
-                    });
+                commit('weaponDelete', weapon);
             },
             weaponMove({commit, state}, {weapon, newIndex}) {
-                weapon.display_order = newIndex;
-
                 commit('weaponMove', {weapon, newIndex});
-
-                state.weapons.forEach((item, index) => {
-                    item.display_order = index;
-                    commit('weaponUpdate', item);
-                });
-                //
-                //return server.update(weapon)
-                //    .then((serverWeapon) => {
-                //        commit('weaponMove', {serverWeapon, newIndex});
-                //
-                //        state.weapons.forEach((item, index) => {
-                //            item.display_order = index;
-                //            commit('weaponUpdate', item);
-                //        });
-                //    });
-            },
-            fetch({commit}) {
-                commit('asyncState', 'fetching');
-
-                return server.fetch()
-                    .then(function (weapons) {
-
-                        commit('asyncState', null);
-                        weapons.forEach(function (weapon) {
-                            commit('weaponCreate', weapon);
-                        });
-
-                    });
-            },
-            sync({commit, state}) {
-
-                return server.sync(state.weapons)
-                    .then(function (weapons) {
-                        commit('weaponClear');
-
-                        weapons.forEach(function (weapon) {
-                            commit('weaponCreate', weapon);
-                        });
-                    });
             },
         },
         getters: {
             weapons(state) {
                 return state.weapons;
-            },
-            asyncState(state) {
-                return state.asyncState;
             },
         },
     });
