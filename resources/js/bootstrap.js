@@ -1,11 +1,11 @@
 
 import Vuex from 'vuex';
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue'
+import { Dropdown } from 'bootstrap-vue/es/components';
 
 window.Vue = Vue;
 Vue.use(Vuex);
-Vue.use(BootstrapVue);
+Vue.use(Dropdown);
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;

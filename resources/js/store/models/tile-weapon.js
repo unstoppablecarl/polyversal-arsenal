@@ -15,6 +15,5 @@ export default function (data) {
 
     instance.id = parseInt(instance.id, 10);
     instance.quantity = parseInt(instance.quantity, 10);
-    console.log(Object.assign({}, instance), Object.assign({},data));
     return instance;
 };

@@ -6,10 +6,10 @@
             val: Number,
             invert: Boolean,
         },
-        render(createElement, {props, data, children}) {
+        render(createElement, {props}) {
             let val = props.val;
-            let html = displayNumber(val);
 
+            let html = displayNumber(val);
 
             if (props.invert) {
                 val = val * -1;

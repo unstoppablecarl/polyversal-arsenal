@@ -194,6 +194,36 @@ $map: (
 
 }
 
+.dropdown-menu {
+    width: 100%;
+}
+
+.btn-light {
+    border: 1px solid #ced4da;
+    background-color: #fff;
+}
+
+.b-dropdown {
+    display: block;
+    > .btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+
+        &::after {
+            margin-left: 0.5em;
+            text-align: right;
+            position: absolute;
+            top: 50%;
+            right: 1em;
+        }
+    }
+
+    .dropdown-item {
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
+    }
+}
+
 .number-cell {
     text-align: right;
     font-size: 12pt;

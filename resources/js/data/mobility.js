@@ -19,12 +19,14 @@ const mobilityOptions = {
     [TILE_TYPE_VEHICLE_ID]: toIdDisplayName(mobilityData.vehicle),
 };
 
-const all              = [].concat(mobilityData.infantry, mobilityData.cavalry, mobilityData.vehicle);
-const mobilityIdToName = toIdValue(all, 'name');
+const all                     = [].concat(mobilityData.infantry, mobilityData.cavalry, mobilityData.vehicle);
+const mobilityIdToName        = toIdValue(all, 'name');
+const mobilityIdToDisplayName = toIdDisplayName(all);
 
 export {
     mobility,
     mobilityOptions,
     mobilityIdToName,
+    mobilityIdToDisplayName,
 };
 
