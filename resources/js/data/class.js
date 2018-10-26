@@ -1,49 +1,31 @@
-import {TILE_TYPE_CAVALRY_ID, TILE_TYPE_INFANTRY_ID, TILE_TYPE_VEHICLE_ID} from './constants';
-import {toIdDisplayName} from './helpers';
-
-
-const classes = [1, 2, 3, 4, 5].map((i) => {
-    return {
-        id: i,
-        display_name: 'Class ' + i,
-    };
-});
-
 const vehicleClasses = [
     {
         id: 1,
-        display_name: 'Light',
+        cost: 1,
+        label: 'Light',
     },
     {
         id: 2,
-        display_name: 'Main',
+        cost: 2,
+        label: 'Main',
     },
     {
         id: 3,
-        display_name: 'Heavy',
+        cost: 3,
+        label: 'Heavy',
     },
     {
         id: 4,
-        display_name: 'Superheavy',
+        cost: 4,
+        label: 'Superheavy',
     },
     {
         id: 5,
-        display_name: 'Colossal',
+        cost: 5,
+        label: 'Colossal',
     },
 ];
 
-let map = {
-    [TILE_TYPE_INFANTRY_ID]: classes,
-    [TILE_TYPE_CAVALRY_ID]: classes,
-    [TILE_TYPE_VEHICLE_ID]: vehicleClasses,
-};
-
-const classOptions = {
-    [TILE_TYPE_INFANTRY_ID]: toIdDisplayName(classes),
-    [TILE_TYPE_CAVALRY_ID]: toIdDisplayName(classes),
-    [TILE_TYPE_VEHICLE_ID]: toIdDisplayName(vehicleClasses),
-};
-
 export {
-    classOptions,
+    vehicleClasses,
 }

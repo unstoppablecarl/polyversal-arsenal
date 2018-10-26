@@ -10902,37 +10902,6 @@ a.text-dark:hover, a.text-dark:focus {
   margin: 20px;
 }
 
-.dropdown-menu {
-  width: 100%;
-}
-
-.btn-light {
-  border: 1px solid #ced4da;
-  background-color: #fff;
-}
-
-.b-dropdown {
-  display: block;
-}
-
-.b-dropdown > .btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-}
-
-.b-dropdown > .btn::after {
-  margin-left: 0.5em;
-  text-align: right;
-  position: absolute;
-  top: 50%;
-  right: 1em;
-}
-
-.b-dropdown .dropdown-item {
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-}
-
 .number-cell {
   text-align: right;
   font-size: 12pt;
@@ -11151,37 +11120,6 @@ a.text-dark:hover, a.text-dark:focus {
   margin: 20px;
 }
 
-.scale-2 .dropdown-menu {
-  width: 100%;
-}
-
-.scale-2 .btn-light {
-  border: 1px solid #ced4da;
-  background-color: #fff;
-}
-
-.scale-2 .b-dropdown {
-  display: block;
-}
-
-.scale-2 .b-dropdown > .btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-}
-
-.scale-2 .b-dropdown > .btn::after {
-  margin-left: 0.5em;
-  text-align: right;
-  position: absolute;
-  top: 50%;
-  right: 1em;
-}
-
-.scale-2 .b-dropdown .dropdown-item {
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-}
-
 .scale-2 .number-cell {
   text-align: right;
   font-size: 12pt;
@@ -11231,6 +11169,42 @@ a.text-dark:hover, a.text-dark:focus {
   .scale-2 .weapon-grid-list {
     width: 304pt;
   }
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background: rgba(52, 144, 220, 0.15);
+  color: inherit;
+}
+
+.btn-light {
+  border: 1px solid #ced4da;
+  background-color: #fff;
+}
+
+.b-dropdown {
+  display: block;
+}
+
+.b-dropdown > .btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.b-dropdown > .btn::after {
+  margin-left: 0.5em;
+  text-align: right;
+  position: absolute;
+  top: 50%;
+  right: 1em;
+}
+
+.b-dropdown .dropdown-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .no-select {

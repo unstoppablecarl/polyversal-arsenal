@@ -1,96 +1,44 @@
 <template>
     <div class="tile">
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Classification</label>
-            <div class="col-sm-4">
-                <select class="form-control" v-model.number="tile_type_id">
-                    <option v-for="(label, key) in classifications" v-bind:value="key">
-                        {{label}}
-                    </option>
-                </select>
-            </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Class</label>
-            <div class="col-sm-4">
-                <select class="form-control" v-model.number="tile_class" :disabled="!hasTileClass">
-                    <option v-for="(label, key) in classes" v-bind:value="key">
-                        <template v-if="tile_type_id == 3">
-                            Class {{key}}
-                        </template>
-                        {{label}}
-                    </option>
-                </select>
-            </div>
-            <div class="col-sm-1 col-form-label number-cell">
-                <strong>Cost</strong>
-            </div>
-            <div class="col-sm-1 col-form-label number-cell">
-                <strong>Move</strong>
-            </div>
-            <div class="col-sm-1 col-form-label number-cell">
-                <strong>Evasion</strong>
-            </div>
-        </div>
+        <tile-classification-row
+            v-model="tile_type_id"
+        />
 
-        <tile-stat-select
-        label="Mobility"
-        v-model="tile_mobility_id"
-        :selected_name="mobilityValueName"
-        :options="mobilityOptions"
-        :selected_cost="mobilityMods.cost"
-        :selected_move="mobilityMods.move"
-        :selected_evasion="mobilityMods.evasion"
+        <tile-class-row
+            v-model="tile_class"
+            :disabled="!hasTileClass"
         />
 
         <tile-stat-select
-        label="Tech Level"
-        v-model="tile_tech_level_id"
-        :selected_name="techLevelValueName"
-        :options="techLevelOptions"
-        :selected_cost="techLevelChassisMods.cost"
-        :selected_move="techLevelChassisMods.move"
-        :selected_evasion="techLevelChassisMods.evasion"
+            label="Mobility"
+            v-model="tile_mobility_id"
+            :options="mobilityOptions"
+        />
+
+        <tile-stat-select
+            label="Tech Level"
+            v-model="tile_tech_level_id"
+            :options="techLevelOptions"
         />
 
         <tile-stat-select
             label="Armor"
             v-model="tile_armor"
-            :selected_name="armorValueName"
             :options="armorOptions"
-            :selected_cost="armorMods.cost"
-            :selected_move="armorMods.move"
-            :selected_evasion="armorMods.evasion"
         />
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Targeting</label>
-            <div class="col-sm-4">
-                <select class="form-control" v-model.number="tile_targeting_id">
-                    <option v-for="(label, key) in dieOptions" v-bind:value="key">
-                        {{label}}
-                    </option>
-                </select>
-            </div>
-            <div class="col-sm-1 col-form-label number-cell">
-                <number :val="tile_targeting_id" :invert="true"/>
-            </div>
-        </div>
+        <tile-stat-select
+            label="Targeting"
+            v-model="tile_targeting_id"
+            :options="targetingOptions"
+        />
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Assault</label>
-            <div class="col-sm-4">
-                <select class="form-control" v-model.number="tile_assault_id">
-                    <option v-for="(label, key) in dieOptions" v-bind:value="key">
-                        {{label}}
-                    </option>
-                </select>
-            </div>
-            <div class="col-sm-1 col-form-label number-cell">
-                <number :val="tile_assault_id" :invert="true"/>
-            </div>
-        </div>
+        <tile-stat-select
+            label="Targeting"
+            v-model="tile_assault_id"
+            :options="assaultOptions"
+        />
 
         <div class="row">
             <div class="col-sm-2"></div>
@@ -112,22 +60,26 @@
 
 <script>
     import {
+        ASSAULT_OPTIONS,
+        TARGETING_OPTIONS,
         TILE_TYPE_ARMOR_VALUES,
         TILE_TYPE_CAVALRY_ID,
         TILE_TYPE_INFANTRY_ID,
         TILE_TYPE_OPTIONS, TILE_TYPE_VEHICLE_ID,
     } from '../data/constants';
     import WeaponGrid from './weapon-grid';
-    import {mobilityIdToDisplayName, mobilityOptions} from '../data/mobility';
-    import {classOptions} from '../data/class';
+    import {mobilityOptions} from '../data/mobility';
     import {getChassis} from '../data/chassis';
     import {techLevelOptions} from '../data/tech-level';
     import Number from './number';
     import TileStatSelect from './tile-stat-select';
+    import TileClassRow from './tile-class-row';
+    import TileClassificationRow from './tile-classification-row';
+    import {vehicleClasses} from '../data/class';
 
     export default {
         name: 'tile',
-        components: {TileStatSelect, Number, WeaponGrid},
+        components: {TileClassificationRow, TileClassRow, TileStatSelect, Number, WeaponGrid},
         props: {
             name: String,
         },
@@ -142,13 +94,9 @@
                 tile_assault_id: 1,
                 tileTypeArmorValues: TILE_TYPE_ARMOR_VALUES,
                 classifications: TILE_TYPE_OPTIONS,
-                dieOptions: {
-                    1: 'D4',
-                    2: 'D6',
-                    3: 'D8',
-                    4: 'D10',
-                    5: 'D12',
-                },
+                targetingOptions: TARGETING_OPTIONS,
+                assaultOptions: ASSAULT_OPTIONS,
+
             };
         },
         computed: {
@@ -163,6 +111,11 @@
             },
             totalCost() {
                 return this.chassis.cost + this.tile_armor + this.tile_targeting_id + this.tile_assault_id;
+            },
+            classOptions() {
+                return calcOptions(vehicleClasses, (tile_armor) => {
+                    return this.getZeroArmorChassisMod(tile_armor);
+                });
             },
             armorOptions() {
                 let armorOptions = this.tileTypeArmorValues[this.tile_type_id];
@@ -183,17 +136,12 @@
             mobilityOptions() {
                 let options = mobilityOptions[this.tile_type_id];
                 return calcOptions(options, (tile_mobility_id) => {
-                    return this.getChassis({tile_mobility_id, tile_tech_level_id: 2});
+                    return this.getChassis({
+                        tile_mobility_id,
+                        tile_tech_level_id: 2,
+                        tile_armor: 0,
+                    });
                 });
-            },
-            techLevelValueName() {
-                return techLevelOptions[this.tile_tech_level_id];
-            },
-            mobilityValueName() {
-                return mobilityIdToDisplayName[this.tile_mobility_id];
-            },
-            armorValueName() {
-                return 'Armor ' + this.tile_armor;
             },
             typicalChassis() {
                 return this.getChassis({
@@ -201,27 +149,10 @@
                     tile_tech_level_id: 2,
                 });
             },
-            techLevelChassisMods() {
-                return this.getTypicalChassisMod({
-                    tile_tech_level_id: this.tile_tech_level_id,
-                });
-            },
-            mobilityMods() {
-                return this.getChassis({
-                    tile_mobility_id: this.tile_mobility_id,
-                    tile_tech_level_id: 2,
-                    tile_armor: 0,
-                });
-            },
-            armorMods() {
-                return this.getZeroArmorChassisMod(this.tile_armor);
-            },
-            classes() {
-                return classOptions[this.tile_type_id];
-            },
-            hasTileClass(){
+            hasTileClass() {
                 return this.tile_type_id == TILE_TYPE_VEHICLE_ID;
-            }
+            },
+
         },
         watch: {
             tile_type_id(val) {
@@ -239,7 +170,7 @@
                 }
                 this.tile_armor = armor;
 
-                if(!this.hasTileClass){
+                if (!this.hasTileClass) {
                     this.tile_class = 1;
                 }
             },
@@ -310,7 +241,7 @@
         let out = [];
         Object.keys(options)
             .forEach((id) => {
-                id = parseInt(id, 10)
+                id                        = parseInt(id, 10);
                 let {cost, move, evasion} = getStats(id);
                 let label                 = options[id];
                 out.push({

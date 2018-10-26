@@ -19,6 +19,43 @@ $scale: 1;
     @import 'weapon-grid';
 }
 
+
+.dropdown-menu {
+    width: 100%;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background: rgba(52, 144, 220, 0.15);
+    color: inherit;
+}
+
+.btn-light {
+    border: 1px solid #ced4da;
+    background-color: #fff;
+}
+
+.b-dropdown {
+    display: block;
+    > .btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+
+        &::after {
+            margin-left: 0.5em;
+            text-align: right;
+            position: absolute;
+            top: 50%;
+            right: 1em;
+        }
+    }
+
+    .dropdown-item {
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
+    }
+}
+
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

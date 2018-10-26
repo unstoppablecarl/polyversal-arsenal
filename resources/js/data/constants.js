@@ -86,7 +86,41 @@ const TILE_TYPE_ARMOR_VALUES = {
     [TILE_TYPE_VEHICLE_ID]: [0, 1, 2, 3, 4, 5],
 };
 
+const DIE_OPTIONS = [
+    {
+        id: 1,
+        label: D4,
+        cost: 1,
+    },
+    {
+        id: 2,
+        label: D6,
+        cost: 2,
+    },
+    {
+        id: 3,
+        label: D8,
+        cost: 3,
+    },
+    {
+        id: 4,
+        label: D10,
+        cost: 4,
+    },
+    {
+        id: 5,
+        label: D12,
+        cost: 5,
+    },
+];
+
+const TARGETING_OPTIONS = DIE_OPTIONS;
+const ASSAULT_OPTIONS   = DIE_OPTIONS;
+
 export {
+    TARGETING_OPTIONS,
+    ASSAULT_OPTIONS,
+
     TILE_TYPE_ARMOR_VALUES,
     TILE_TYPE_OPTIONS,
 
