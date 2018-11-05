@@ -1,33 +1,22 @@
 <template>
-
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Class</label>
         <div class="col-sm-4">
-            <b-dropdown variant="light" :text="selectedLabel" :disabled="disabled">
+            <b-dropdown variant="light" :text="selectedDisplayName" :disabled="disabled">
                 <b-dropdown-item v-for="item in options" :key="item.id"
                                  @click="selectOption(item.id)"
                                  :active="item.id == selected_id"
                 >
-                    Class {{item.id}} {{item.label}}
-
+                    {{optionDisplayName(item)}}
                 </b-dropdown-item>
             </b-dropdown>
-        </div>
-        <div class="col-sm-1 col-form-label number-cell">
-            <strong>Cost</strong>
-        </div>
-        <div class="col-sm-1 col-form-label number-cell">
-            <strong>Move</strong>
-        </div>
-        <div class="col-sm-1 col-form-label number-cell">
-            <strong>Evasion</strong>
         </div>
     </div>
 </template>
 
 <script>
     import _ from 'lodash';
-    import {vehicleClasses} from '../data/class';
+    import {vehicleClassOptions} from '../data/options';
 
     export default {
         name: 'tile-class-row',
@@ -41,15 +30,15 @@
         },
         data() {
             return {
-                options: vehicleClasses,
+                options: vehicleClassOptions,
             };
         },
         computed: {
-            selectedLabel() {
+            selectedDisplayName() {
                 if (this.disabled) {
                     return 'None';
                 }
-                return 'Class ' + this.selectedItem.id + ' ' + this.selectedItem.label;
+                return this.optionDisplayName(this.selectedItem);
             },
             selectedItem() {
                 return _.find(this.options, (row) => {
@@ -58,6 +47,9 @@
             },
         },
         methods: {
+            optionDisplayName(item) {
+                return 'Class ' + item.id + ' ' + item.display_name;
+            },
             selectOption(id) {
                 this.$emit('select_option_id', id);
             },

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "cost": 1,
+        "name": "infantry",
+        "display_name": "Infantry"
+    },
+    {
+        "id": 2,
+        "cost": 2,
+        "name": "cavalry",
+        "display_name": "Cavalry"
+    },
+    {
+        "id": 3,
+        "cost": 3,
+        "name": "vehicle",
+        "display_name": "Vehicle"
+    }
+]

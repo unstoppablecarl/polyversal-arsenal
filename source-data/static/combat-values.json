@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "cost": 1,
+        "name": "D4",
+        "display_name": "D4"
+    },
+    {
+        "id": 2,
+        "cost": 2,
+        "name": "D6",
+        "display_name": "D6"
+    },
+    {
+        "id": 3,
+        "cost": 3,
+        "name": "D8",
+        "display_name": "D8"
+    },
+    {
+        "id": 4,
+        "cost": 4,
+        "name": "D10",
+        "display_name": "D10"
+    },
+    {
+        "id": 5,
+        "cost": 5,
+        "name": "D12",
+        "display_name": "D12"
+    }
+]

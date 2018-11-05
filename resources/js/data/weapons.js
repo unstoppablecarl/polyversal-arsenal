@@ -3,15 +3,21 @@ import {
     TILE_WEAPON_TYPE_GROUND_ID,
     TILE_WEAPON_TYPE_ONLY_AA_ID,
     TILE_WEAPON_TYPE_WITH_AA_ID,
-    TILE_WEAPON_TYPE_WITH_AA,
-    TILE_WEAPON_TYPE_ONLY_AA,
-    TILE_WEAPON_TYPE_GROUND,
     TILE_TYPE_INFANTRY_ID,
     TILE_TYPE_CAVALRY_ID, TILE_TYPE_VEHICLE_ID,
 } from './constants';
 
-import infantryData from './weapons-infantry.json';
-import vehicleData from './weapons-vehicle.json';
+import weaponData from '../../../source-data/imported/weapons.json';
+import {arcSizeById, targetingById} from './options';
+
+const WEAPON_TYPE_MOD = {
+    [TILE_WEAPON_TYPE_GROUND_ID]: 5 / 6,
+    [TILE_WEAPON_TYPE_WITH_AA_ID]: 1,
+    [TILE_WEAPON_TYPE_ONLY_AA_ID]: 1 / 6,
+};
+
+let infantryData = weaponData.filter(item => item.infantry);
+let vehicleData  = weaponData.filter(item => !item.infantry);
 
 const infantry = Repo(infantryData);
 const vehicle  = Repo(vehicleData);
@@ -32,126 +38,81 @@ function Repo(data) {
         at: NONE,
         ap: NONE,
         is_indirect: false,
-        is_ama: false,
+        has_warheads: false,
     };
 
     const repo = {};
 
-    Object.keys(data).forEach((key) => {
-        let item  = data[key];
-        repo[key] = Object.assign({}, defaults, item);
+    data.forEach((item) => {
+        repo[item.id] = Object.assign({}, defaults, item);
     });
 
     function all() {
         return repo;
     }
 
-    function toItem(slug) {
-        let item = repo[slug];
+    function toItem(id) {
+        let item = repo[id];
         if (!item) {
-            throw new Error('invalid weapon slug: ' + slug);
+            throw new Error('invalid weapon id: ' + id);
         }
         return item;
     }
 
-    function firstKey() {
+    function firstId() {
         let keys = Object.keys(repo);
         return keys[0];
     }
 
-    function get(slug, tileWeaponTypeId = 1) {
+    function get(id, tileWeaponTypeId = 1) {
         if (tileWeaponTypeId === TILE_WEAPON_TYPE_GROUND_ID) {
-            return getGround(slug);
+            return getGround(id);
         }
 
         if (tileWeaponTypeId === TILE_WEAPON_TYPE_WITH_AA_ID) {
-            return getWithAA(slug);
+            return getWithAA(id);
         }
 
         if (tileWeaponTypeId === TILE_WEAPON_TYPE_ONLY_AA_ID) {
-            return getOnlyAA(slug);
+            return getOnlyAA(id);
         }
         throw new Error('invalid tile weapon type');
     }
 
-    function getGround(slug) {
-        if (!hasGround(slug)) {
-            return false;
-        }
-        let item = toItem(slug);
+    function getGround(id) {
+        let item = toItem(id);
         return Object.assign({}, item, {
             aa: NONE,
         });
     }
 
-    function getWithAA(slug) {
-        if (!hasWithAA(slug)) {
-            return false;
-        }
-        let item = toItem(slug);
+    function getWithAA(id) {
+        let item = toItem(id);
         return Object.assign({}, item);
     }
 
-    function getOnlyAA(slug) {
-
-        if (!hasOnlyAA(slug)) {
-            return false;
-        }
-
-        let item = toItem(slug);
-
+    function getOnlyAA(id) {
+        let item = toItem(id);
         return Object.assign({}, item, {
             at: NONE,
             ap: NONE,
         });
     }
 
-    function hasGround(slug) {
-        return validTileWeaponType(slug, TILE_WEAPON_TYPE_GROUND);
-    }
-
-    function hasWithAA(slug) {
-        return validTileWeaponType(slug, TILE_WEAPON_TYPE_WITH_AA);
-    }
-
-    function hasOnlyAA(slug) {
-        return validTileWeaponType(slug, TILE_WEAPON_TYPE_ONLY_AA);
-    }
-
-    function validTileWeaponType(slug, tileWeaponTypeName) {
-        if (slug === null) {
-            return false;
-        }
-        let item = toItem(slug);
-        if (!item.valid_tile_weapon_type_ids) {
-            return true;
-        }
-        return item.valid_tile_weapon_type_ids.indexOf(tileWeaponTypeName) !== -1;
-    }
-
-    function tileWeaponTypeSelect(slug) {
-
-        let types = {};
-
-        if (hasGround(slug)) {
-            types[TILE_WEAPON_TYPE_GROUND_ID] = 'Ground';
-        }
-        if (hasWithAA(slug)) {
-            types[TILE_WEAPON_TYPE_WITH_AA_ID] = 'With AA';
-        }
-        if (hasOnlyAA(slug)) {
-            types[TILE_WEAPON_TYPE_ONLY_AA_ID] = 'Only AA';
-        }
-        return types;
+    function cost(attackStatId, weaponId, arcSizeId, weaponTypeId) {
+        let attackDie = targetingById[attackStatId].name;
+        let item    = toItem(weaponId);
+        let typeMod = WEAPON_TYPE_MOD[weaponTypeId];
+        let arcMod  = arcSizeById[arcSizeId].cost_multiplier;
+        let key = 'cost_' + attackDie.toLowerCase();
+        let cost = Math.round(item[key] * typeMod * arcMod);
+        return Math.max(1, cost);
     }
 
     return {
         all,
-        firstKey,
+        firstId,
         get,
-        hasGround,
-        hasOnlyAA,
-        hasWithAA,
-        tileWeaponTypeSelect,
+        cost,
     };
 }

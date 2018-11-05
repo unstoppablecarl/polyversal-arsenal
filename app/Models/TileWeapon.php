@@ -9,8 +9,9 @@ class TileWeapon extends Model
     protected $fillable = [
         'tile_id',
         'weapon_id',
-        'arc_id',
         'tile_weapon_type_id',
+        'arc_direction_id',
+        'arc_size_id',
         'quantity',
         'display_order',
     ];
@@ -25,8 +26,18 @@ class TileWeapon extends Model
         return $this->belongsTo(Weapon::class);
     }
 
-    public function arc()
+    public function arcSize()
     {
-        return $this->belongsTo(Arc::class);
+        return $this->belongsTo(ArcSize::class);
+    }
+
+    public function arcDirection()
+    {
+        return $this->belongsTo(ArcDirection::class);
+    }
+
+    public function tileWeaponType()
+    {
+        return $this->belongsTo(TileWeaponType::class);
     }
 }

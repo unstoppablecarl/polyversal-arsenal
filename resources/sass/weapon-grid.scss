@@ -7,11 +7,12 @@ $grid-width: 152pt * $scale;
 
 $col-name-width: 54pt * $scale;
 $col-move-width: 10pt * $scale;
-$col-controls-width: 100pt * $scale;
+$col-controls-width: 50pt * $scale;
 $col-arc-settings-width: 20pt * $scale;
 $col-tile-weapon-type-width: 30pt * $scale;
+$col-cost-width: 40pt * $scale;
 
-$columns-edit-width: $col-controls-width + $col-move-width + ($col-arc-settings-width * 2) + $col-tile-weapon-type-width;
+$columns-edit-width: $col-controls-width + $col-move-width + ($col-arc-settings-width * 2) + $col-tile-weapon-type-width + $col-cost-width;
 $d4-color: #1B75BC;
 $d6-color: #009444;
 $d8-color: #FFDE17;
@@ -36,6 +37,7 @@ $map: (
 }
 
 .weapon-grid {
+    margin: 0 0 20px;
 
     .controls {
         margin: 20px 0;
@@ -121,6 +123,12 @@ $map: (
         line-height: inherit;
     }
 
+    .col-cost {
+        width: $col-cost-width;
+        text-align: right;
+        padding: 0 3pt;
+    }
+
     .weapon-grid-item {
         input.form-control {
 
@@ -159,7 +167,7 @@ $map: (
     }
 
     .is-indirect .icon-indirect,
-    .is-ama .icon-ama {
+    .icon-ama {
         display: inline;
     }
 
@@ -183,9 +191,14 @@ $map: (
         .col-arc-size,
         .col-arc-direction,
         .col-tile-weapon-type,
-        .col-move {
+        .col-move,
+        .col-cost {
             font-weight: normal;
         }
+    }
+
+    .grid-header .col-cost {
+        text-align: center;
     }
 
     .weapon-grid-item-new {
@@ -194,14 +207,13 @@ $map: (
 
 }
 
-
 .number-cell {
     text-align: right;
     font-size: 12pt;
 }
 
 .number-zero {
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .number-positive {
@@ -213,26 +225,43 @@ $map: (
 }
 
 @mixin print() {
+
+}
+
+.print {
     .col-arc-size,
     .col-arc-direction,
     .col-tile-weapon-type,
     .col-controls,
     .col-move,
+    .col-cost,
     .input-quantity {
         display: none;
     }
     .label-quantity {
         display: block;
     }
-    .weapon-grid-list {
+
+    .weapon-grid .weapon-grid-list {
         width: (152pt * $scale);
     }
 }
 
-.print {
-    @include print();
-}
-
 @media print {
-    @include print();
+    .col-arc-size,
+    .col-arc-direction,
+    .col-tile-weapon-type,
+    .col-controls,
+    .col-move,
+    .col-cost,
+    .input-quantity {
+        display: none;
+    }
+    .label-quantity {
+        display: block;
+    }
+
+    .weapon-grid .weapon-grid-list {
+        width: (152pt * $scale);
+    }
 }

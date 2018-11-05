@@ -1,0 +1,32 @@
+
+.tab-content {
+    padding: 15px;
+    border: 1px solid $nav-tabs-border-color;
+    border-width: 0 1px 1px;
+}
+
+.tabs-container {
+    margin: 0 0 20px;
+}
+
+.nav-tabs .badge {
+    font-size: 80%;
+    line-height: inherit;
+    padding: 0.25em 0.75em;
+    background: $primary;
+    color: #fff;
+}
+
+.nav-tabs .active .badge {
+    background: $secondary;
+}
+
+.tab-content-divider {
+    border-bottom: 1px solid $nav-tabs-border-color;
+    margin-bottom: 15px;
+}
+
+.tab-content-divider-bottom {
+    border-bottom: 1px solid $nav-tabs-border-color;
+}
+

@@ -10,5 +10,6 @@ class TileWeaponType extends Model
         'name',
         'display_name',
     ];
+
     public $timestamps = false;
 }

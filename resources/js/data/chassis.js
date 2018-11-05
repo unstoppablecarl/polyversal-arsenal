@@ -1,9 +1,9 @@
-import infantry from '../../../source-data/infantry-chassis.json';
-import cavalry from '../../../source-data/cavalry-chassis.json';
-import vehicle from '../../../source-data/vehicle-chassis.json';
+import infantry from '../../../source-data/imported/infantry-chassis.json';
+import cavalry from '../../../source-data/imported/cavalry-chassis.json';
+import vehicle from '../../../source-data/imported/vehicle-chassis.json';
 import {TILE_TYPE_CAVALRY_ID, TILE_TYPE_INFANTRY_ID, TILE_TYPE_VEHICLE_ID} from './constants';
-import {mobilityIdToName} from './mobility';
-import {techLevelIdToName} from './tech-level';
+import {mobilityById} from './options-mobility';
+import {techLevelById} from './options';
 
 let map = {
     [TILE_TYPE_INFANTRY_ID]: infantry,
@@ -11,25 +11,26 @@ let map = {
     [TILE_TYPE_VEHICLE_ID]: vehicle,
 };
 
-function getChassis(tileTypeId, tileClassId, armor, techLevelId, mobilityId){
+function getChassis({
+                        type_id,
+                        class_id,
+                        armor,
+                        tech_level_id,
+                        mobility_id,
+                    }) {
 
-    let data = map[tileTypeId];
-    let mobility = mobilityIdToName[mobilityId];
-    let techLevel = techLevelIdToName[techLevelId];
+    let data      = map[type_id];
+    let mobility  = mobilityById[mobility_id].name;
+    let techLevel = techLevelById[tech_level_id].name;
+    let isVehicle = type_id == TILE_TYPE_VEHICLE_ID;
 
-    if(tileTypeId == TILE_TYPE_INFANTRY_ID){
-        return data[mobility][techLevel][armor];
-    }
-    else if(tileTypeId == TILE_TYPE_CAVALRY_ID){
-        return data[mobility][techLevel][armor];
-    }
-    else if(tileTypeId == TILE_TYPE_VEHICLE_ID){
-        return data[tileClassId][mobility][techLevel][armor];
+    if (isVehicle) {
+        return data[class_id][mobility][techLevel][armor];
     } else {
-        throw new Error('invalid tileTypeId : ' + tileTypeId);
+        return data[mobility][techLevel][armor];
     }
 }
 
 export {
-    getChassis
-}
+    getChassis,
+};

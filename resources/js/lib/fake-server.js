@@ -1,8 +1,8 @@
 export default function ({
                              emptyItem = {
                                  id: null,
+                                 name: null,
                                  display_order: null,
-                                 slug: null,
                                  arcDirection: null,
                                  arcSize: null,
                                  quantity: 1,

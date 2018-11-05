@@ -2,20 +2,22 @@
 
 namespace App\Services;
 
-use App\Models\TileWeaponType;
+use App\Models\TileType;
 use App\Services\Support\StaticDBData;
 
 class TileTypes extends StaticDBData
 {
     protected $modelClass = TileType::class;
 
-    public const INFANTRY_ID = 1;
-    public const CAVALRY_ID = 2;
-    public const VEHICLE_ID = 3;
+    const IDS = [1, 2, 3];
 
-    public const INFANTRY = 'infantry';
-    public const CAVALRY = 'cavalry';
-    public const VEHICLE = 'vehicle';
+    const INFANTRY_ID = 1;
+    const CAVALRY_ID = 2;
+    const VEHICLE_ID = 3;
+
+    const INFANTRY = 'infantry';
+    const CAVALRY = 'cavalry';
+    const VEHICLE = 'vehicle';
 
     protected $data = [
         self::INFANTRY_ID => [

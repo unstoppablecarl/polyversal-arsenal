@@ -10759,12 +10759,16 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: transparent;
 }
 
+.weapon-grid {
+  margin: 0 0 20px;
+}
+
 .weapon-grid .controls {
   margin: 20px 0;
 }
 
 .weapon-grid .weapon-grid-list {
-  width: 332pt;
+  width: 322pt;
   border: 0.5pt solid #000;
 }
 
@@ -10834,8 +10838,14 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .weapon-grid .col-controls {
-  width: 100pt;
+  width: 50pt;
   line-height: inherit;
+}
+
+.weapon-grid .col-cost {
+  width: 40pt;
+  text-align: right;
+  padding: 0 3pt;
 }
 
 .weapon-grid .weapon-grid-item input.form-control {
@@ -10872,7 +10882,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .weapon-grid .is-indirect .icon-indirect,
-.weapon-grid .is-ama .icon-ama {
+.weapon-grid .icon-ama {
   display: inline;
 }
 
@@ -10894,8 +10904,13 @@ a.text-dark:hover, a.text-dark:focus {
 .weapon-grid .grid-header .col-arc-size,
 .weapon-grid .grid-header .col-arc-direction,
 .weapon-grid .grid-header .col-tile-weapon-type,
-.weapon-grid .grid-header .col-move {
+.weapon-grid .grid-header .col-move,
+.weapon-grid .grid-header .col-cost {
   font-weight: normal;
+}
+
+.weapon-grid .grid-header .col-cost {
+  text-align: center;
 }
 
 .weapon-grid .weapon-grid-item-new {
@@ -10908,7 +10923,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .number-zero {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .number-positive {
@@ -10924,6 +10939,7 @@ a.text-dark:hover, a.text-dark:focus {
 .print .col-tile-weapon-type,
 .print .col-controls,
 .print .col-move,
+.print .col-cost,
 .print .input-quantity {
   display: none;
 }
@@ -10932,7 +10948,7 @@ a.text-dark:hover, a.text-dark:focus {
   display: block;
 }
 
-.print .weapon-grid-list {
+.print .weapon-grid .weapon-grid-list {
   width: 152pt;
 }
 
@@ -10942,15 +10958,73 @@ a.text-dark:hover, a.text-dark:focus {
   .col-tile-weapon-type,
   .col-controls,
   .col-move,
+  .col-cost,
   .input-quantity {
     display: none;
   }
   .label-quantity {
     display: block;
   }
-  .weapon-grid-list {
+  .weapon-grid .weapon-grid-list {
     width: 152pt;
   }
+}
+
+.damage-track {
+  color: #fff;
+  text-align: center;
+  font-size: 6pt;
+  margin: 20px 0;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), -1px -1px 1.5px rgba(0, 0, 0, 0.5), 1px -1px 1.5px rgba(0, 0, 0, 0.5), -1px 1px 1.5px rgba(0, 0, 0, 0.5), 1px 1px 1.5px rgba(0, 0, 0, 0.5);
+}
+
+.damage-track .cell-w-1, .damage-track .cell-w-2, .damage-track .cell-w-3, .damage-track .cell-w-4, .damage-track .cell-w-5, .damage-track .cell-w-6, .damage-track .cell-dmg, .scale-2 .damage-track .cell-w-1, .scale-2 .damage-track .cell-w-2, .scale-2 .damage-track .cell-w-3, .scale-2 .damage-track .cell-w-4, .scale-2 .damage-track .cell-w-5, .scale-2 .damage-track .cell-w-6, .scale-2 .damage-track .cell-dmg {
+  width: 10pt;
+  height: 8pt;
+  line-height: 8pt;
+  border: 0.5pt solid #000;
+}
+
+.damage-track .cell-w-2 {
+  width: 20pt;
+}
+
+.damage-track .cell-w-3 {
+  width: 30pt;
+}
+
+.damage-track .cell-w-4 {
+  width: 40pt;
+}
+
+.damage-track .cell-w-5 {
+  width: 50pt;
+}
+
+.damage-track .cell-w-6 {
+  width: 60pt;
+}
+
+.damage-track .cell-dmg {
+  padding: 0 2pt;
+  text-align: left;
+  width: 15pt;
+}
+
+.damage-track .damage-track-header {
+  letter-spacing: -1pt;
+}
+
+.damage-track .damage-track-header .cell-dmg,
+.damage-track .damage-track-header .cell-w-1,
+.damage-track .damage-track-header .cell-w-2 {
+  background: #4A4B4D;
+}
+
+.damage-track .damage-track-results .cell-dmg,
+.damage-track .damage-track-results .cell-w-1,
+.damage-track .damage-track-results .cell-w-2 {
+  background: rgba(88, 89, 91, 0.9);
 }
 
 .scale-2 .D4-bg {
@@ -10977,12 +11051,16 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: transparent;
 }
 
+.scale-2 .weapon-grid {
+  margin: 0 0 20px;
+}
+
 .scale-2 .weapon-grid .controls {
   margin: 20px 0;
 }
 
 .scale-2 .weapon-grid .weapon-grid-list {
-  width: 664pt;
+  width: 644pt;
   border: 0.5pt solid #000;
 }
 
@@ -11052,8 +11130,14 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .scale-2 .weapon-grid .col-controls {
-  width: 200pt;
+  width: 100pt;
   line-height: inherit;
+}
+
+.scale-2 .weapon-grid .col-cost {
+  width: 80pt;
+  text-align: right;
+  padding: 0 3pt;
 }
 
 .scale-2 .weapon-grid .weapon-grid-item input.form-control {
@@ -11090,7 +11174,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .scale-2 .weapon-grid .is-indirect .icon-indirect,
-.scale-2 .weapon-grid .is-ama .icon-ama {
+.scale-2 .weapon-grid .icon-ama {
   display: inline;
 }
 
@@ -11112,8 +11196,13 @@ a.text-dark:hover, a.text-dark:focus {
 .scale-2 .weapon-grid .grid-header .col-arc-size,
 .scale-2 .weapon-grid .grid-header .col-arc-direction,
 .scale-2 .weapon-grid .grid-header .col-tile-weapon-type,
-.scale-2 .weapon-grid .grid-header .col-move {
+.scale-2 .weapon-grid .grid-header .col-move,
+.scale-2 .weapon-grid .grid-header .col-cost {
   font-weight: normal;
+}
+
+.scale-2 .weapon-grid .grid-header .col-cost {
+  text-align: center;
 }
 
 .scale-2 .weapon-grid .weapon-grid-item-new {
@@ -11126,7 +11215,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .scale-2 .number-zero {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .scale-2 .number-positive {
@@ -11142,6 +11231,7 @@ a.text-dark:hover, a.text-dark:focus {
 .scale-2 .print .col-tile-weapon-type,
 .scale-2 .print .col-controls,
 .scale-2 .print .col-move,
+.scale-2 .print .col-cost,
 .scale-2 .print .input-quantity {
   display: none;
 }
@@ -11150,7 +11240,7 @@ a.text-dark:hover, a.text-dark:focus {
   display: block;
 }
 
-.scale-2 .print .weapon-grid-list {
+.scale-2 .print .weapon-grid .weapon-grid-list {
   width: 304pt;
 }
 
@@ -11160,15 +11250,104 @@ a.text-dark:hover, a.text-dark:focus {
   .scale-2 .col-tile-weapon-type,
   .scale-2 .col-controls,
   .scale-2 .col-move,
+  .scale-2 .col-cost,
   .scale-2 .input-quantity {
     display: none;
   }
   .scale-2 .label-quantity {
     display: block;
   }
-  .scale-2 .weapon-grid-list {
+  .scale-2 .weapon-grid .weapon-grid-list {
     width: 304pt;
   }
+}
+
+.scale-2 .damage-track {
+  color: #fff;
+  text-align: center;
+  font-size: 12pt;
+  margin: 20px 0;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), -1px -1px 1.5px rgba(0, 0, 0, 0.5), 1px -1px 1.5px rgba(0, 0, 0, 0.5), -1px 1px 1.5px rgba(0, 0, 0, 0.5), 1px 1px 1.5px rgba(0, 0, 0, 0.5);
+}
+
+.scale-2 .damage-track .cell-w-1, .scale-2 .damage-track .cell-w-2, .scale-2 .damage-track .cell-w-3, .scale-2 .damage-track .cell-w-4, .scale-2 .damage-track .cell-w-5, .scale-2 .damage-track .cell-w-6, .scale-2 .damage-track .cell-dmg {
+  width: 20pt;
+  height: 16pt;
+  line-height: 16pt;
+  border: 0.5pt solid #000;
+}
+
+.scale-2 .damage-track .cell-w-2 {
+  width: 40pt;
+}
+
+.scale-2 .damage-track .cell-w-3 {
+  width: 60pt;
+}
+
+.scale-2 .damage-track .cell-w-4 {
+  width: 80pt;
+}
+
+.scale-2 .damage-track .cell-w-5 {
+  width: 100pt;
+}
+
+.scale-2 .damage-track .cell-w-6 {
+  width: 120pt;
+}
+
+.scale-2 .damage-track .cell-dmg {
+  padding: 0 2pt;
+  text-align: left;
+  width: 30pt;
+}
+
+.scale-2 .damage-track .damage-track-header {
+  letter-spacing: -1pt;
+}
+
+.scale-2 .damage-track .damage-track-header .cell-dmg,
+.scale-2 .damage-track .damage-track-header .cell-w-1,
+.scale-2 .damage-track .damage-track-header .cell-w-2 {
+  background: #4A4B4D;
+}
+
+.scale-2 .damage-track .damage-track-results .cell-dmg,
+.scale-2 .damage-track .damage-track-results .cell-w-1,
+.scale-2 .damage-track .damage-track-results .cell-w-2 {
+  background: rgba(88, 89, 91, 0.9);
+}
+
+.tab-content {
+  padding: 15px;
+  border: 1px solid #dee2e6;
+  border-width: 0 1px 1px;
+}
+
+.tabs-container {
+  margin: 0 0 20px;
+}
+
+.nav-tabs .badge {
+  font-size: 80%;
+  line-height: inherit;
+  padding: 0.25em 0.75em;
+  background: #3490dc;
+  color: #fff;
+}
+
+.nav-tabs .active .badge {
+  background: #6c757d;
+}
+
+.tab-content-divider {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 15px;
+}
+
+.tab-content-divider-bottom {
+  border-bottom: 1px solid #dee2e6;
 }
 
 .dropdown-menu {
@@ -11205,6 +11384,37 @@ a.text-dark:hover, a.text-dark:focus {
 
 .b-dropdown .dropdown-item {
   border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.ability-cost {
+  opacity: 0.6;
+}
+
+.ability-selected {
+  opacity: 1;
+  color: #e3342f;
+}
+
+.ability-disabled {
+  opacity: 0.6;
+}
+
+.header-row {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.header {
+  background: #6c757d;
+  color: #fff;
+  padding: 15px 0 5px;
+  margin: 0 0 20px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.navigation {
+  margin: 0 0 20px;
 }
 
 .no-select {

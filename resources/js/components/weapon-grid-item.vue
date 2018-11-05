@@ -1,43 +1,48 @@
 <template>
     <div class="weapon-grid-item list-item-sortable">
         <div class="col-move">:::</div>
-        <div :class="['col-name', {'is-indirect': weapon.is_indirect}, {'is-ama': weapon.is_ama}]">
+        <div :class="['col-name', {'is-indirect': weapon.is_indirect}]">
             <img src="/img/icon-indirect.svg" class="icon-indirect"/>
-            <img src="/img/icon-ama.svg" class="icon-ama"/>
-            {{weapon.name}}
+            {{weapon.display_name}}
         </div>
         <div class="col-quantity">
-            <input v-model.number="currentQuantity" class="form-control input-quantity"/>
+            <input v-model.number="currentQuantity" class="form-control input-quantity" @blur="checkMinQuantity"/>
             <div class="label-quantity">{{currentQuantity}}</div>
         </div>
         <div class="col-arc">
             <img :src="arcSvg" :class="arcDirectionClass" class="arc"/>
         </div>
         <div class="col-arc-direction">
-            <select class="form-control select-arc-direction" v-model="arcDirection" :disabled="(arcDirection == 'X')">
-                <option v-for="(label, key) in arcDirections" v-bind:value="key" v-html="label">
+            <select class="form-control select-arc-direction" v-model="arcDirectionId" :disabled="(arcSize.name == '360')">
+                <option v-for="(direction, key) in arcDirections" v-bind:value="key" v-html="direction">
                 </option>
             </select>
         </div>
         <div class="col-arc-size">
-            <select class="form-control select-arc-size" v-model.number="arcSize">
-                <option v-for="label in arcSizes" v-bind:value="label">
-                    {{ label }}
+            <select class="form-control select-arc-size" v-model.number="arcSizeId">
+                <option v-for="size in arcSizeOptions" v-bind:value="size.id">
+                    {{size.display_name}}
                 </option>
             </select>
         </div>
         <div class="col-range">{{weapon.range}}</div>
-        <div :class="['col-ap', weapon.ap + '-bg']">{{apDisplay}}</div>
-        <div :class="['col-at', weapon.at + '-bg']">{{atDisplay}}</div>
-        <div :class="['col-aa', weapon.aa + '-bg']">{{aaDisplay}}</div>
-        <div class="col-damage">{{damageDisplay}}</div>
+        <div :class="['col-ap', weapon.ap + '-bg']">{{weapon.ap | format}}</div>
+        <div :class="['col-at', weapon.at + '-bg']">{{weapon.at | format}}</div>
+        <div :class="['col-aa', weapon.aa + '-bg']">{{weapon.aa | format}}</div>
+        <div class="col-damage">{{weapon.damage | format}}</div>
         <div class="col-tile-weapon-type">
-            <select class="form-control select-tile-weapon-type" v-model.number="currentTileWeaponTypeId"
-                    :disabled="tileWeaponTypesLength == 1">
+            <select class="form-control select-tile-weapon-type" v-model.number="tileWeaponTypeId">
                 <option v-for="(label, key) in tileWeaponTypes" v-bind:value="key">
-                    {{ label }}
+                    {{label}}
                 </option>
             </select>
+        </div>
+        <div class="col-cost">
+            {{weaponTotalCost}}
+            <template v-if="currentQuantity > 1">
+                =
+                ({{weaponCost}} &times; Q{{currentQuantity}})
+            </template>
         </div>
         <div class="col-controls">
             <div class="btn-group no-print">
@@ -54,124 +59,119 @@
 
 <script>
     import {
-        NONE, TILE_WEAPON_TYPE_GROUND_ID, TILE_WEAPON_TYPE_SELECT,
+        NONE,
+        TILE_WEAPON_TYPE_GROUND_ID,
+        TILE_WEAPON_TYPE_ONLY_AA_ID,
+        TILE_WEAPON_TYPE_WITH_AA_ID,
     } from '../data/constants';
+
+    import {getWeaponCost} from '../data/weapons';
+
+    import {arcDirectionById, arcSizeById, arcSizeOptions} from '../data/options';
 
     export default {
         name: 'weapon-grid-item',
         props: {
             id: {},
-            slug: String,
-            quantity: Number,
-            arc: {
-                default: 'UP_90',
-            },
+            weapon_id: Number,
+            quantity: null,
+            arc_direction_id: Number,
+            arc_size_id: Number,
             tile_weapon_type_id: {
                 default: TILE_WEAPON_TYPE_GROUND_ID,
             },
             display_order: null,
-            weaponsRepo: Object,
         },
         data() {
             return {
                 currentQuantity: this.quantity,
-                arcDirection: this.arc.split('_')[0],
-                i_arcSize: this.arc.split('_')[1],
+                arcDirectionId: this.arc_direction_id,
+                arcSizeId: this.arc_size_id,
+                tileWeaponTypeId: this.tile_weapon_type_id,
                 arcDirections: {
-                    'UP': '&uparrow;',
-                    'LEFT': '&leftarrow;',
-                    'RIGHT': '&rightarrow;',
-                    'DOWN': '&downarrow;',
+                    1: '&uparrow;',
+                    2: '&leftarrow;',
+                    3: '&rightarrow;',
+                    4: '&downarrow;',
                 },
-                arcSizes: [
-                    '90',
-                    '180',
-                    '270',
-                    '360',
-                ],
-                currentTileWeaponTypeId: this.tile_weapon_type_id,
+                arcSizeOptions,
+                tileWeaponTypes: {
+                    [TILE_WEAPON_TYPE_GROUND_ID]: 'Ground',
+                    [TILE_WEAPON_TYPE_WITH_AA_ID]: 'With AA',
+                    [TILE_WEAPON_TYPE_ONLY_AA_ID]: 'Only AA',
+                },
             };
         },
         computed: {
-            apDisplay() {
-                return formatNone(this.weapon.ap);
-            },
-            atDisplay() {
-                return formatNone(this.weapon.at);
-            },
-            aaDisplay() {
-                return formatNone(this.weapon.aa);
-            },
-            damageDisplay() {
-                return formatNone(this.weapon.damage);
-            },
-            currentArc() {
-                return this.arcDirection + '_' + this.arcSize;
-            },
             arcDirectionClass() {
-                return 'arc-' + this.arcDirection.toLowerCase();
+                const direction = arcDirectionById[this.arcDirectionId];
+                return 'arc-' + direction.name.toLowerCase();
             },
             arcSvg() {
-                return '/img/arc-' + this.arcSize + '.svg';
+                const size = arcSizeById[this.arcSizeId];
+                return '/img/arc-' + size.name + '.svg';
             },
-            arcSize: {
-                get() {
-                    return this.i_arcSize;
-                },
-                set(val) {
-                    if (val === 360) {
-                        this.arcDirection = 'X';
-                    } else if (this.arcDirection === 'X') {
-                        this.arcDirection = 'UP';
-                    }
-                    this.i_arcSize = val;
-                },
+            arcSize() {
+                return arcSizeById[this.arcSizeId];
             },
-            hasGround() {
-                return this.weaponsRepo.hasGround(this.slug);
-            },
-            hasWithAA() {
-                return this.weaponsRepo.hasWithAA(this.slug);
-            },
-            hasOnlyAA() {
-                return this.weaponsRepo.hasOnlyAA(this.slug);
-            },
-            tileWeaponTypes() {
-                return this.weaponsRepo.tileWeaponTypeSelect(this.slug);
-            },
-            tileWeaponTypesLength() {
-                return Object.keys(this.tileWeaponTypes).length;
+            arcDirection() {
+                return arcDirectionById[this.arcDirectionId];
             },
             weapon() {
-                let item = this.weaponsRepo.get(this.slug, this.currentTileWeaponTypeId);
+                let item = this.$store.getters.weaponOptions.get(this.weapon_id, this.tileWeaponTypeId);
 
                 return _.pick(item, [
-                    'name',
+                    'display_name',
                     'aa',
                     'at',
                     'ap',
-                    'is_ama',
                     'is_indirect',
+                    'has_warheads',
                     'damage',
                     'range',
                 ]);
             },
+            weaponCost() {
+                return this.$store.getters.getWeaponCost(this.weapon_id, this.arcSizeId, this.tileWeaponTypeId);
+            },
+            weaponTotalCost() {
+                return this.currentQuantity * this.weaponCost;
+            },
         },
         watch: {
-            currentQuantity(val) {
-                this.$store.dispatch('weaponUpdate', this.toModel());
+            tileWeaponTypeId(value) {
+                this.update({tile_weapon_type_id: value});
+            },
+            arcSizeId(value) {
+                value = parseInt(value, 10);
+                const ARC_DIRECTION_360_ID = 4;
+                if (value == ARC_DIRECTION_360_ID) {
+                    this.arcDirectionId = 1;
+                }
+                this.update({arc_size_id: value});
+            },
+            arcDirectionId(value) {
+                this.update({arc_direction_id: value});
+            },
+            currentQuantity(value) {
+                this.update({quantity: value});
             },
         },
         methods: {
             toModel() {
                 return {
                     id: this.id,
-                    slug: this.slug,
-                    tile_weapon_type_id: this.currentTileWeaponTypeId,
+                    weapon_id: this.weapon_id,
+                    tile_weapon_type_id: this.tileWeaponTypeId,
                     quantity: this.currentQuantity,
-                    arc: this.currentArc,
+                    arc_direction_id: this.arcDirectionId,
+                    arc_size_id: this.arcSizeId,
                     display_order: this.display_order,
                 };
+            },
+            update(data) {
+                let update = Object.assign({id: this.id}, data);
+                this.$store.dispatch('weaponUpdate', update);
             },
             onCopy() {
                 this.$store.dispatch('weaponCopy', this.toModel());
@@ -179,14 +179,20 @@
             onDelete() {
                 this.$store.dispatch('weaponDelete', this.toModel());
             },
+            checkMinQuantity() {
+                if (this.currentQuantity < 1) {
+                    this.currentQuantity = 1;
+                }
+            },
+        },
+        filters: {
+            format(val) {
+                if (val === NONE) {
+                    return '-';
+                }
+                return val;
+            },
         },
     };
-
-    function formatNone(val) {
-        if (val === NONE) {
-            return '-';
-        }
-        return val;
-    }
 
 </script>

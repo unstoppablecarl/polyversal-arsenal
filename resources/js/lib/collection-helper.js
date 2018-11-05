@@ -91,7 +91,6 @@ let newId = 1;
 
 function createItem(items, item, newIndex) {
     item.id = 'new-' + newId++;
-
     if (newIndex) {
         items.splice(newIndex, 0, item);
         setDisplayOrders(items);

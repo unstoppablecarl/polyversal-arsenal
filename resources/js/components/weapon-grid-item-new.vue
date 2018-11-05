@@ -3,20 +3,14 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Add Weapon</label>
             <div class="col-sm-4">
-                <select class="form-control" v-model="selectedWeapon">
-                    <option v-for="item in weapons" v-bind:value="item.slug">
-                        {{ item.name }}
-                    </option>
+                <select class="form-control" v-model="selectedWeaponId">
+                    <option v-for="item in weapons" v-bind:value="item.id">{{ item.display_name }}</option>
                 </select>
             </div>
             <div class="col-sm-4">
-                <button class="btn btn-primary" v-on:click="addWeapon" :disabled="!selectedWeaponHasGround">Add</button>
-                <button class="btn btn-primary" v-on:click="addWeaponWithAA"
-                        :disabled="!selectedWeaponHasWithAA">Add With AA
-                </button>
-                <button class="btn btn-primary" v-on:click="addWeaponOnlyAA"
-                        :disabled="!selectedWeaponHasOnlyAA">Add Only AA
-                </button>
+                <button class="btn btn-primary" v-on:click="addWeaponGround">Add</button>
+                <button class="btn btn-primary" v-on:click="addWeaponWithAA">Add With AA</button>
+                <button class="btn btn-primary" v-on:click="addWeaponOnlyAA">Add Only AA</button>
             </div>
         </div>
     </div>
@@ -28,44 +22,52 @@
         TILE_WEAPON_TYPE_ONLY_AA_ID,
         TILE_WEAPON_TYPE_WITH_AA_ID,
     } from '../data/constants';
+    import {mapTileProperties} from '../data/mappers';
 
     export default {
         name: 'weapon-grid-item-new',
-        props: {
-            tile_type_id: Number,
-            weaponsRepo: Object,
-        },
         data() {
             return {
-                selectedWeapon: null,
+                selectedWeaponId: null,
             };
         },
-        mounted() {
-            this.selectedWeapon = this.weaponsRepo.firstKey();
+        created() {
+            this.selectFirst();
+        },
+        watch: {
+            tile_type_id() {
+                this.selectFirst();
+            },
         },
         methods: {
-            addWeapon(event) {
-                this.$emit('add', this.selectedWeapon, TILE_WEAPON_TYPE_GROUND_ID);
+            addWeapon(tileWeaponTypeId) {
+                let weapon = {
+                    weapon_id: this.selectedWeaponId,
+                    tile_weapon_type_id: tileWeaponTypeId,
+                    arc: 'UP_90',
+                };
+
+                this.$store.dispatch('weaponCreate', {weapon});
             },
-            addWeaponWithAA(event) {
-                this.$emit('add', this.selectedWeapon, TILE_WEAPON_TYPE_WITH_AA_ID);
+            addWeaponGround() {
+                this.addWeapon(TILE_WEAPON_TYPE_GROUND_ID);
             },
-            addWeaponOnlyAA(event) {
-                this.$emit('add', this.selectedWeapon, TILE_WEAPON_TYPE_ONLY_AA_ID);
+            addWeaponWithAA() {
+                this.addWeapon(TILE_WEAPON_TYPE_WITH_AA_ID);
+            },
+            addWeaponOnlyAA() {
+                this.addWeapon(TILE_WEAPON_TYPE_ONLY_AA_ID);
+            },
+            selectFirst() {
+                this.selectedWeaponId = this.$store.getters.weaponOptions.firstId();
             },
         },
         computed: {
+            ...mapTileProperties({
+                tile_type_id: 'type_id',
+            }),
             weapons() {
-                return this.weaponsRepo.all();
-            },
-            selectedWeaponHasGround() {
-                return this.weaponsRepo.hasGround(this.selectedWeapon);
-            },
-            selectedWeaponHasWithAA() {
-                return this.weaponsRepo.hasWithAA(this.selectedWeapon);
-            },
-            selectedWeaponHasOnlyAA() {
-                return this.weaponsRepo.hasOnlyAA(this.selectedWeapon);
+                return this.$store.getters.weaponOptions.all();
             },
         },
     };

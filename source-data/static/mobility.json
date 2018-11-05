@@ -1,0 +1,99 @@
+[
+    {
+        "id": 1,
+        "name": "infantry",
+        "display_name": "Infantry",
+        "tile_type_id": 1
+    },
+    {
+        "id": 2,
+        "name": "beast",
+        "display_name": "Beast",
+        "tile_type_id": 2
+    },
+    {
+        "id": 3,
+        "name": "bike",
+        "display_name": "Bike",
+        "tile_type_id": 2
+    },
+    {
+        "id": 4,
+        "name": "hoverbike",
+        "display_name": "Hoverbike",
+        "tile_type_id": 2
+    },
+    {
+        "id": 5,
+        "name": "trike",
+        "display_name": "Trike",
+        "tile_type_id": 2
+    },
+    {
+        "id": 6,
+        "name": "stationary",
+        "display_name": "Stationary",
+        "tile_type_id": 3
+    },
+    {
+        "id": 7,
+        "name": "wheeled",
+        "display_name": "Wheeled",
+        "tile_type_id": 3
+    },
+    {
+        "id": 8,
+        "name": "half_tracked",
+        "display_name": "Half-Tracked",
+        "tile_type_id": 3
+    },
+    {
+        "id": 9,
+        "name": "tracked",
+        "display_name": "Tracked",
+        "tile_type_id": 3
+    },
+    {
+        "id": 10,
+        "name": "anti_gravity",
+        "display_name": "Anti-Gravity",
+        "tile_type_id": 3
+    },
+    {
+        "id": 11,
+        "name": "walker",
+        "display_name": "Walker",
+        "tile_type_id": 3
+    },
+    {
+        "id": 12,
+        "name": "hover",
+        "display_name": "Hover",
+        "tile_type_id": 3
+    },
+    {
+        "id": 13,
+        "name": "vtol",
+        "display_name": "VTOL",
+        "tile_type_id": 3
+    },
+    {
+        "id": 14,
+        "name": "turbofan",
+        "display_name": "Turbofan",
+        "tile_type_id": 3
+    },
+    {
+        "id": 15,
+        "name": "aerojet",
+        "display_name": "Aerojet",
+        "tile_type_id": 3
+    },
+    {
+        "id": 16,
+        "name": "naval",
+        "display_name": "Naval",
+        "tile_type_id": 3
+    }
+]
+

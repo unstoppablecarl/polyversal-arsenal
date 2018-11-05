@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\Import;
+use App\Console\Commands\ImportChassis;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Import::class,
+        ImportChassis::class,
     ];
 
     /**

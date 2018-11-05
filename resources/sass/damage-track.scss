@@ -1,0 +1,76 @@
+.damage-track {
+    color: #fff;
+    text-align: center;
+    font-size: 6pt * $scale;
+
+    margin: 20px 0;
+
+    $shadow-color: rgba(0, 0, 0, 0.5);
+
+    text-shadow: 0px 0px 1px $shadow-color,
+    -1px -1px 1.5px $shadow-color,
+    1px -1px 1.5px $shadow-color,
+    -1px 1px 1.5px $shadow-color,
+    1px 1px 1.5px $shadow-color;
+
+    %cell {
+        width: 10pt * $scale;
+        height: 8pt * $scale;
+        //padding: 2pt;
+        line-height: 8pt * $scale;
+        border: 0.5pt solid #000;
+        //overflow: hidden;
+        //margin: 0;
+
+    }
+    .cell-w-1 {
+        @extend %cell;
+    }
+    .cell-w-2 {
+        @extend %cell;
+        width: 20pt * $scale;
+    }
+    .cell-w-3 {
+        @extend %cell;
+        width: 30pt * $scale;
+    }
+    .cell-w-4 {
+        @extend %cell;
+        width: 40pt * $scale;
+    }
+    .cell-w-5 {
+        @extend %cell;
+        width: 50pt * $scale;
+    }
+    .cell-w-6 {
+        @extend %cell;
+        width: 60pt * $scale;
+    }
+
+    .cell-dmg {
+        @extend %cell;
+        padding: 0 2pt;
+        text-align: left;
+        width: 15pt * $scale;
+    }
+
+    .damage-track-header {
+        //font-weight: bold;
+        letter-spacing: -1pt;
+        .cell-dmg,
+        .cell-w-1,
+        .cell-w-2 {
+
+            background: #4A4B4D;
+        }
+    }
+
+    .damage-track-results {
+        .cell-dmg,
+        .cell-w-1,
+        .cell-w-2 {
+
+            background: rgba(88, 89, 91, 0.9);
+        }
+    }
+}

@@ -8,17 +8,17 @@
 @import 'open-iconic-bootstrap';
 @import "print";
 
-
-
 $scale: 1;
 @import 'weapon-grid';
-
+@import 'damage-track.scss';
 
 .scale-2 {
     $scale: 2;
     @import 'weapon-grid';
+    @import 'damage-track.scss';
 }
 
+@import 'tabs';
 
 .dropdown-menu {
     width: 100%;
@@ -56,6 +56,35 @@ $scale: 1;
     }
 }
 
+.ability-cost {
+    opacity: 0.6;
+}
+
+.ability-selected {
+    opacity: 1;
+    color: $danger;
+}
+
+.ability-disabled {
+    opacity: 0.6;
+}
+
+.header-row {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.header {
+    background: $secondary;
+    color: #fff;
+    padding: 15px 0 5px;
+    margin: 0 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.navigation {
+    margin: 0 0 20px;
+}
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

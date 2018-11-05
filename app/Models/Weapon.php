@@ -6,21 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Weapon extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
     protected $fillable = [
         'user_id',
-        'slug',
         'name',
+        'display_name',
         'ap',
         'at',
         'aa',
         'damage',
-        'is_ama',
+        'range',
         'is_indirect',
+        'has_warheads'
     ];
 
     public function scopeWherePublic($query)

@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "up",
+        "display_name": "Up"
+    },
+    {
+        "id": 2,
+        "name": "left",
+        "display_name": "Left"
+    },
+    {
+        "id": 3,
+        "name": "right",
+        "display_name": "Right"
+    },
+    {
+        "id": 4,
+        "name": "down",
+        "display_name": "Down"
+    }
+]
