@@ -5,7 +5,10 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import 'open-iconic-bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+@import 'vue-notification.scss';
 @import "print";
 
 $scale: 1;

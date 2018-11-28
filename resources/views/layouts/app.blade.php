@@ -22,7 +22,7 @@
         @include('layouts.partials.message')
     </div>
 
-    <div class="app-wrapper {{$app_container_class OR 'container' }}">
+    <div class="app-wrapper container">
         @yield('content')
     </div>
     @yield('content-after')

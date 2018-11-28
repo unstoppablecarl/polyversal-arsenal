@@ -26,7 +26,7 @@
 
                     <draggable
                         class="list-group"
-                        :list="weapons"
+                        :list="tile_weapons"
                         :options="sortableOptions"
                         @change="onSortableChange"
                         @start="dragStart"
@@ -35,11 +35,14 @@
                         <transition-group type="transition">
 
                             <weapon-grid-item
-                                v-for="item in weapons"
+                                v-for="item in tile_weapons"
                                 :key="item.id"
                                 :id="item.id"
                                 :weapon_id="item.weapon_id"
                                 :quantity="item.quantity"
+                                :cost="item.cost"
+                                :weapon="item.weapon"
+                                :total_cost="item.total_cost"
                                 :tile_weapon_type_id="item.tile_weapon_type_id"
                                 :display_order="item.display_order"
                                 :arc_direction_id="item.arc_direction_id"
@@ -61,7 +64,7 @@
     import {TILE_TYPE_VEHICLE_ID} from '../data/constants';
     import WeaponGridAma from './weapon-grid-ama';
     import {mapGetters} from 'vuex';
-    import {mapTileProperties} from '../data/mappers';
+    import {mapTileProperties, mapTileWeaponGetters} from '../data/mappers';
 
     export default {
         name: 'weapon-grid',
@@ -83,13 +86,6 @@
                 dragging: false,
             };
         },
-        watch: {
-            tile_type_id(newVal, prevVal) {
-                if (newVal == TILE_TYPE_VEHICLE_ID || prevVal == TILE_TYPE_VEHICLE_ID) {
-                    this.$store.dispatch('weaponClear');
-                }
-            },
-        },
         methods: {
             onSortableChange(event) {
                 let moved = event.moved;
@@ -102,7 +98,7 @@
                     newIndex: moved.newIndex,
                 };
 
-                this.$store.dispatch('weaponMove', settings);
+                this.$store.dispatch('tile_weapons/move', settings);
             },
             dragStart() {
                 this.dragging = true;
@@ -112,11 +108,11 @@
             },
         },
         computed: {
-            ...mapGetters([
-                'weapons',
+            ...mapTileWeaponGetters([
+                'tile_weapons',
             ]),
             ...mapTileProperties({
-                tile_type_id: 'type_id',
+                tile_type_id: 'tile_type_id',
             }),
             loading() {
                 return this.$store.getters.asyncState === 'fetching';

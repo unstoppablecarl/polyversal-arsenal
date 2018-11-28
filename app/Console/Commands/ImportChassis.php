@@ -13,7 +13,7 @@ class ImportChassis extends Command
      *
      * @var string
      */
-    protected $signature = 'import:chassis';
+    protected $signature = 'import:chassis2';
 
     /**
      * The console command description.

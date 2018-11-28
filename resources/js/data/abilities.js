@@ -15,7 +15,6 @@ function abilityValid(abilityId, tileTypeId) {
 function abilityCost(abilityId, tileTypeId, tileClassId, warheadWeaponsTotalCost) {
     let ability      = abilitiesById[abilityId];
     let tileTypeName = tileTypeById[tileTypeId].name;
-
     if(ability.warhead_multiplier){
         return ability.warhead_multiplier * warheadWeaponsTotalCost;
     }
@@ -27,7 +26,7 @@ function abilityCost(abilityId, tileTypeId, tileClassId, warheadWeaponsTotalCost
     if (isVehicle) {
         return ability.cost[tileTypeName][tileClassId];
     }
-    return ability.cost[tileTypeName];
+    return ability.cost[tileTypeName] || 0;
 }
 
 function abilityIsDefensive(abilityId) {

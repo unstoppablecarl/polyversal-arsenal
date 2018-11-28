@@ -7,17 +7,18 @@
         <div class="col-sm-8">
             @section('form-title')
 
-                <h2 class="admin-form-title">
+                <h1 class="h4 admin-form-title">
                     @section('form-title-text')
                         @if(!empty($item_action))
                             <span class="text-muted">{{$item_action}}</span>
                         @endif
                         <strong>
-                            {{$item_type_name OR ''}}@if(!empty($item_instance_name)):@endif
+
+                            {{$item_type_name ?? ''}}@if(!empty($item_instance_name)):@endif
                         </strong>
-                        {{$item_instance_name OR ''}}
+                        {{$item_instance_name ?? ''}}
                     @show
-                </h2>
+                </h1>
 
                 @hasSection('item-subtitle')
                     <h4>@yield('item-subtitle')</h4>
@@ -26,7 +27,7 @@
             @show
         </div>
         <div class="col-sm-4">
-            <div class="pull-right">
+            <div class="pull-right text-right">
                 @yield('controls')
             </div>
         </div>

@@ -23,32 +23,31 @@
         //margin: 0;
 
     }
-    .cell-w-1 {
-        @extend %cell;
+    .cell {
+        height: 8pt * $scale;
+        line-height: 8pt * $scale;
+        border: 0.5pt solid #000;
     }
-    .cell-w-2 {
-        @extend %cell;
+    .cell-1 {
+        width: 10pt * $scale;
+    }
+    .cell-2 {
         width: 20pt * $scale;
     }
-    .cell-w-3 {
-        @extend %cell;
+    .cell-3 {
         width: 30pt * $scale;
     }
-    .cell-w-4 {
-        @extend %cell;
+    .cell-4 {
         width: 40pt * $scale;
     }
-    .cell-w-5 {
-        @extend %cell;
+    .cell-5 {
         width: 50pt * $scale;
     }
-    .cell-w-6 {
-        @extend %cell;
+    .cell-6 {
         width: 60pt * $scale;
     }
 
     .cell-dmg {
-        @extend %cell;
         padding: 0 2pt;
         text-align: left;
         width: 15pt * $scale;
@@ -57,19 +56,13 @@
     .damage-track-header {
         //font-weight: bold;
         letter-spacing: -1pt;
-        .cell-dmg,
-        .cell-w-1,
-        .cell-w-2 {
-
+        .cell {
             background: #4A4B4D;
         }
     }
 
     .damage-track-results {
-        .cell-dmg,
-        .cell-w-1,
-        .cell-w-2 {
-
+        .cell {
             background: rgba(88, 89, 91, 0.9);
         }
     }

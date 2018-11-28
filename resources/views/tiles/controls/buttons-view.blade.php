@@ -6,6 +6,6 @@ $disabled = $can ? '' : ' disabled';
 
 ?>
 
-<a href="{{$url}}" class="btn btn-default{{$disabled}}">
+<a href="{{$url}}" class="btn btn-light{{$disabled}}">
     View
 </a>

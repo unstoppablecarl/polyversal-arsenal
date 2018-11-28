@@ -1,218 +1,179 @@
 <template>
+
     <div class="tile">
+        <tile-notifications/>
 
-        <h1>{{tile_name}}</h1>
-        <h2>{{subTitle}}</h2>
-        <tabs>
-            <template slot="stats">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1 class="h4 admin-form-title">
+                    <span class="text-muted">Edit</span>
+                    <strong>
+                        Tile:
+                    </strong>
+                    {{tile_name}}
+                </h1>
 
-                <div class="form-group row header-row">
-                    <div class="col-sm-6 col-form-label">
-                        Stat
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        Cost
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        Move
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        Evasion
+            </div>
+            <div class="col-sm-4">
+                <div class="pull-right text-right">
+                    <div class="btn-group" v-if="tile_id">
+
+                        <a :href="viewURL" class="btn btn-light">
+                            View
+                        </a>
+                        <a :href="editURL" class="btn btn-light">
+                            Edit
+                        </a>
+                        <a :href="deleteURL" class="btn btn-danger">
+                            Delete
+                        </a>
+
                     </div>
                 </div>
-                <div class="tab-content-divider"></div>
+            </div>
+        </div>
+        <hr>
 
-                <tile-name-row/>
+        <template v-if="notFound">
+            <h1>Tile Not Found</h1>
 
-                <tile-classification-row
-                    v-model="tile_type_id"
-                />
+            <router-link :to="{name: 'tile-stats', params: {id: 'create'}}" class="btn btn-primary">
+                Create New Tile
+            </router-link>
+        </template>
+        <template v-else-if="loading">
+            <h1 class="text-center">Loading Tile
+                <i class="fas fa-spin fa-cog"></i>
+            </h1>
+        </template>
+        <template v-else>
 
-                <tile-class-row
-                    v-model="tile_class_id"
-                    :disabled="!hasTileClass"
-                />
+            <div class="float-right">
+                <button class="btn btn-primary" @click="save" :disabled="saving">
+                    <template v-if="saving">
+                        Saving
+                        <i class="fas fa-fw fa-spin fa-cog"></i>
+                    </template>
+                    <template v-else>
+                        Save
+                        <i class="fas fa-fw fa-save"></i>
+                    </template>
+                </button>
+            </div>
 
-                <tile-stat-select
-                    title="Mobility"
-                    v-model="tile_mobility_id"
-                    :options="mobilityOptions"
-                />
+            <h4>{{subTitle}}</h4>
 
-                <tile-stat-select
-                    title="Tech Level"
-                    v-model="tile_tech_level_id"
-                    :options="techLevelOptions"
-                />
-
-                <tile-stat-select
-                    title="Armor"
-                    v-model="tile_armor"
-                    :options="armorOptions"
-                    :show-evasion="false"
-                />
-
-                <tile-stat-select
-                    title="Targeting"
-                    v-model="tile_targeting_id"
-                    :options="targetingOptions"
-                    :show-move="false"
-                    :show-evasion="false"
-                />
-
-                <tile-stat-select
-                    title="Assault"
-                    v-model="tile_assault_id"
-                    :options="assaultOptions"
-                    :show-move="false"
-                    :show-evasion="false"
-                />
-                <div class="tab-content-divider-bottom"></div>
-
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-4 col-form-label number-cell">
-                        <strong>Total</strong>
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        {{statsTotalCost}}
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        {{chassis.move}}
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        {{chassis.evasion}}
-                        <template v-if="tile_stealth">
-                            (+{{tile_stealth}})
-                        </template>
-                    </div>
+            <div class="tabs-container">
+                <tabs/>
+                <div class="tab-content">
+                    <router-view/>
                 </div>
-            </template>
-            <template slot="abilities">
-                <div class="form-group row header-row">
-                    <label class="col-sm-2 col-form-label">Ability</label>
-                    <div class="col-sm-4">
+            </div>
 
-                    </div>
-                    <div class="col-sm-1 col-form-label number-cell">
-                        Cost
-                    </div>
-                    <div class="col-sm col-form-label">
-                        Notes
-                    </div>
-
-                </div>
-
-                <div class="tab-content-divider"></div>
-
-                <tile-ability-select
-                    title="Stealth / Active Camo"
-                    v-model="tile_stealth"
-                    :options="stealthOptions"
-                    :is-defensive="true"
-                    :show-move="false"
-                    :show-evasion="false"
-                />
-
-                <tile-ability-select
-                    title="Anti-Missile Autoguns"
-                    v-model="tile_ama_id"
-                    :options="amaOptions"
-                    :is-defensive="true"
-                    :show-move="false"
-                    :show-evasion="false"
-                    :disabled="!hasAMAOption"
-                />
-
-                <tile-ability-list/>
-            </template>
-
-            <template slot="weapons">
-                <weapon-grid
-                    :scale="true"
-                    :print-preview="false"
-                />
-
-                <weapon-grid-item-new/>
-            </template>
-        </tabs>
-
-        <tile-print/>
+            <tile-print/>
+        </template>
     </div>
 
 </template>
 
 <script>
 
-    import WeaponGrid from './weapon-grid';
-    import Number from './number';
-    import TileStatSelect from './tile-stat-select';
-    import TileClassRow from './tile-class-row';
-    import TileClassificationRow from './tile-classification-row';
-    import TileDamageTrack from './tile-damage-track';
-    import {amaOptions, assaultOptions, targetingOptions} from '../data/options';
     import {mapGetters} from 'vuex';
-    import {mapTileProperties} from '../data/mappers';
-    import TileAbilitySelect from './tile-ability-select';
+    import {mapTileGetters, mapTileProperties} from '../data/mappers';
     import {TILE_TYPE_VEHICLE_ID} from '../data/constants';
-    import TileAbilityList from './tile-ability-list';
     import Tabs from './tabs';
-    import WeaponGridItemNew from './weapon-grid-item-new';
     import TilePrint from './tile-print';
-    import TileNameRow from './tile-name-row';
+    import TileNotifications from './tile-notifications';
 
     export default {
         name: 'tile',
         components: {
-            TileNameRow,
+            TileNotifications,
             TilePrint,
-            WeaponGridItemNew,
             Tabs,
-            TileAbilityList,
-            TileAbilitySelect,
-            TileDamageTrack, TileClassificationRow, TileClassRow, TileStatSelect, Number, WeaponGrid,
         },
         props: {
             name: String,
         },
         data() {
             return {
-                targetingOptions: targetingOptions,
-                assaultOptions: assaultOptions,
-                amaOptions: amaOptions,
+                saving: false,
+                loading: false,
+                notFound: false,
             };
         },
+        mounted() {
+            this.fetchIfIdChanged();
+        },
         computed: {
-            ...mapGetters([
-                'chassis',
-                'totalCost',
-                'hasTileClass',
-                'mobilityOptions',
-                'techLevelOptions',
-                'stealthOptions',
-                'armorOptions',
+            ...mapTileGetters([
                 'subTitle',
-                'statsTotalCost'
             ]),
-
+            ...mapGetters([
+                'viewURL',
+                'editURL',
+                'deleteURL'
+            ]),
             ...mapTileProperties({
-                tile_type_id: 'type_id',
-                tile_class_id: 'class_id',
+                tile_id: 'id',
+                tile_type_id: 'tile_type_id',
+                tile_class_id: 'tile_class_id',
                 tile_armor: 'armor',
                 tile_tech_level_id: 'tech_level_id',
                 tile_mobility_id: 'mobility_id',
                 tile_targeting_id: 'targeting_id',
                 tile_assault_id: 'assault_id',
                 tile_stealth: 'stealth',
-                tile_ama_id: 'ama_id',
-                tile_name: 'name'
+                tile_ama_id: 'anti_missile_system_id',
+                tile_name: 'name',
             }),
             hasAMAOption() {
                 return this.tile_type_id == TILE_TYPE_VEHICLE_ID;
             },
         },
-        watch: {},
-        methods: {},
+        watch: {
+            tile_id() {
+                this.setRoute();
+            },
+            '$route'(to) {
+                this.fetchIfIdChanged();
+            },
+        },
+        methods: {
+            fetchIfIdChanged() {
+                const routeId = this.$route.params.id;
+                if (routeId == 'create') {
+                    this.notFound = false;
+                    return;
+                }
+                if (this.tile_id != routeId) {
+                    this.loading = true;
+                    this.$store.dispatch('fetch', routeId)
+                        .then((result) => {
+                            this.loading = false;
+                            if (result) {
+
+                                if (result.not_found || result.unauthorized) {
+                                    this.notFound = true;
+                                }
+                            }
+                        });
+                }
+            },
+            setRoute() {
+                this.$router.push({
+                    name: this.$route.name,
+                    params: {id: this.tile_id},
+                });
+            },
+            save() {
+                this.saving = true;
+                this.$store.dispatch('save')
+                    .then(() => {
+                        this.saving = false;
+                    });
+            },
+        },
     };
 
 </script>

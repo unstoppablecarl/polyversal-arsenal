@@ -13,7 +13,8 @@
             <img :src="arcSvg" :class="arcDirectionClass" class="arc"/>
         </div>
         <div class="col-arc-direction">
-            <select class="form-control select-arc-direction" v-model="arcDirectionId" :disabled="(arcSize.name == '360')">
+            <select class="form-control select-arc-direction" v-model="arcDirectionId"
+                    :disabled="(arcSize.name == '360')">
                 <option v-for="(direction, key) in arcDirections" v-bind:value="key" v-html="direction">
                 </option>
             </select>
@@ -38,19 +39,19 @@
             </select>
         </div>
         <div class="col-cost">
-            {{weaponTotalCost}}
+            {{total_cost}}
             <template v-if="currentQuantity > 1">
                 =
-                ({{weaponCost}} &times; Q{{currentQuantity}})
+                ({{total_cost}} &times; Q{{currentQuantity}})
             </template>
         </div>
         <div class="col-controls">
             <div class="btn-group no-print">
                 <button class="btn btn-sm btn-light" data-tooltip title="Copy" @click="onCopy">
-                    <span class="oi oi-layers"></span>
+                    <span class="fas fa-fw fa-copy"></span>
                 </button>
                 <button class="btn btn-sm btn-danger" @click="onDelete">
-                    <span class="oi oi-trash"></span>
+                    <span class="fas fa-fw fa-trash"></span>
                 </button>
             </div>
         </div>
@@ -68,13 +69,16 @@
     import {getWeaponCost} from '../data/weapons';
 
     import {arcDirectionById, arcSizeById, arcSizeOptions} from '../data/options';
+    import {mapTileWeaponGetters} from '../data/mappers';
 
     export default {
         name: 'weapon-grid-item',
         props: {
             id: {},
             weapon_id: Number,
+            weapon: Object,
             quantity: null,
+            total_cost: Number,
             arc_direction_id: Number,
             arc_size_id: Number,
             tile_weapon_type_id: {
@@ -103,6 +107,9 @@
             };
         },
         computed: {
+            ...mapTileWeaponGetters({
+                tile_weapons: 'tile_weapons',
+            }),
             arcDirectionClass() {
                 const direction = arcDirectionById[this.arcDirectionId];
                 return 'arc-' + direction.name.toLowerCase();
@@ -117,26 +124,6 @@
             arcDirection() {
                 return arcDirectionById[this.arcDirectionId];
             },
-            weapon() {
-                let item = this.$store.getters.weaponOptions.get(this.weapon_id, this.tileWeaponTypeId);
-
-                return _.pick(item, [
-                    'display_name',
-                    'aa',
-                    'at',
-                    'ap',
-                    'is_indirect',
-                    'has_warheads',
-                    'damage',
-                    'range',
-                ]);
-            },
-            weaponCost() {
-                return this.$store.getters.getWeaponCost(this.weapon_id, this.arcSizeId, this.tileWeaponTypeId);
-            },
-            weaponTotalCost() {
-                return this.currentQuantity * this.weaponCost;
-            },
         },
         watch: {
             tileWeaponTypeId(value) {
@@ -144,9 +131,11 @@
             },
             arcSizeId(value) {
                 value = parseInt(value, 10);
-                const ARC_DIRECTION_360_ID = 4;
-                if (value == ARC_DIRECTION_360_ID) {
-                    this.arcDirectionId = 1;
+
+                const ARC_DIRECTION_UP_ID = 1;
+                const ARC_SIZE_360_ID     = 4;
+                if (value == ARC_SIZE_360_ID) {
+                    this.arcDirectionId = ARC_DIRECTION_UP_ID;
                 }
                 this.update({arc_size_id: value});
             },
@@ -171,13 +160,13 @@
             },
             update(data) {
                 let update = Object.assign({id: this.id}, data);
-                this.$store.dispatch('weaponUpdate', update);
+                this.$store.dispatch('tile_weapons/update', update);
             },
             onCopy() {
-                this.$store.dispatch('weaponCopy', this.toModel());
+                this.$store.dispatch('tile_weapons/copy', this.toModel());
             },
             onDelete() {
-                this.$store.dispatch('weaponDelete', this.toModel());
+                this.$store.dispatch('tile_weapons/delete', this.toModel());
             },
             checkMinQuantity() {
                 if (this.currentQuantity < 1) {

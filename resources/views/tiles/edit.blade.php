@@ -7,19 +7,10 @@
 ])
 
 @section('breadcrumbs')
-    @component('records.tiles.partials.breadcrumbs', [
-        'name' => 'Edit'
-    ])
-    @endcomponent
 @endsection
 
 @section('controls')
-    @include('tiles')
-@endsection
-
-@section('form-title')
-    @parent
-    @include('records.tiles.controls.title-details')
+    @include('tiles.controls.buttons')
 @endsection
 
 @section('form')
@@ -36,5 +27,10 @@
     </div>
 
     {!! Form::close() !!}
+
+    <div id="app">
+        <tile>
+        </tile>
+    </div>
 
 @endsection

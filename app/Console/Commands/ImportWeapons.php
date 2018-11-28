@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
+use League\Csv\Writer;
 
 class ImportWeapons extends Command
 {
@@ -32,35 +33,24 @@ class ImportWeapons extends Command
             $displayName = Str::replaceFirst('Inf. ', '', $displayName);
 
             $newRow = [
-                'id'           => $index + 1,
-                'display_name' => $displayName,
+                'id'           => $index,
                 'name'         => $slug,
+                'display_name' => $displayName,
                 'range'        => $row['range'],
-                'ap'           => 'D' . $row['ap'],
-                'at'           => 'D' . $row['at_aa'],
-                'aa'           => 'D' . $row['at_aa'],
+                'ap'           => $row['ap'],
+                'at'           => $row['at'],
+                'aa'           => $row['aa'],
                 'damage'       => $row['damage'],
 
-                'cost_d4'  => $row['D4'],
-                'cost_d6'  => $row['D6'],
-                'cost_d8'  => $row['D8'],
-                'cost_d10' => $row['D10'],
-                'cost_d12' => $row['D12'],
+                'cost_d4'  => $row['cost_d4'],
+                'cost_d6'  => $row['cost_d6'],
+                'cost_d8'  => $row['cost_d8'],
+                'cost_d10' => $row['cost_d10'],
+                'cost_d12' => $row['cost_d12'],
+                'is_infantry' => $row['is_infantry'],
+                'is_indirect' => $row['is_indirect'],
+                'has_warheads' => $row['has_warheads'],
             ];
-
-
-
-            $conditionals = [
-              'infantry',
-              'has_warheads',
-              'is_indirect',
-            ];
-
-            foreach($conditionals as $conditionalKey){
-                if($row[$conditionalKey]){
-                    $newRow[$conditionalKey] = true;
-                }
-            }
 
             $data[] = $newRow;
         }

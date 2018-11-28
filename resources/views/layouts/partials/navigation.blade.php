@@ -14,11 +14,11 @@
                         Tiles
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">
-                            Manage
+                        <a class="dropdown-item" href="{{route('tiles.index')}}">
+                            <i class="fas fa-fw fa-th-list"></i> Manage
                         </a>
-                        <a class="dropdown-item" href="#">
-                            Create
+                        <a class="dropdown-item" href="{{route('tiles.app')}}">
+                            <i class="fas fa-fw fa-plus"></i> Create
                         </a>
                     </div>
             @endauth
@@ -48,7 +48,7 @@
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{csrf_token()}}
+                            {{csrf_field()}}
                         </form>
                     </div>
                 </li>

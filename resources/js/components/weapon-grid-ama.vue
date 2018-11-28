@@ -47,7 +47,7 @@
         },
         computed: {
             ...mapTileProperties({
-                tile_ama_id: 'ama_id',
+                tile_ama_id: 'anti_missile_system_id',
             }),
             hasAMA() {
                 return this.tile_ama_id !== AMA_NONE_ID;

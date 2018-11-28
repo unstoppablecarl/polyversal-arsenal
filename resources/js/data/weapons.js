@@ -16,8 +16,8 @@ const WEAPON_TYPE_MOD = {
     [TILE_WEAPON_TYPE_ONLY_AA_ID]: 1 / 6,
 };
 
-let infantryData = weaponData.filter(item => item.infantry);
-let vehicleData  = weaponData.filter(item => !item.infantry);
+let infantryData = weaponData.filter(item => item.is_infantry);
+let vehicleData  = weaponData.filter(item => !item.is_infantry);
 
 const infantry = Repo(infantryData);
 const vehicle  = Repo(vehicleData);

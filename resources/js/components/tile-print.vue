@@ -1,6 +1,37 @@
 <template>
     <div class="tile-print">
 
+        <h1 class="text-center">{{tile_name}}</h1>
+        <h2 class="text-center">{{printSubTitle}}</h2>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                <p>
+                    <strong>Move</strong> {{move}}
+                </p>
+                <p>
+                    <strong>Targeting</strong> {{targeting}}
+                </p>
+                <p>
+                    <strong>Assault</strong> {{assault}}
+                </p>
+                <p>
+                    <strong>Evasion</strong> {{evasion}}
+                </p>
+
+                <p v-if="tile_stealth">
+                    <strong>Stealth / Active Camo</strong> {{tile_stealth}}
+                </p>
+            </div>
+            <div class="col-sm-3">
+
+                <h4>Abilities</h4>
+                <p v-for="ability in abilityList">{{ability}}</p>
+            </div>
+        </div>
+
+
+
         <div class="controls">
             <div class="btn-group btn-group-sm">
                 <button class="btn btn-dark" disabled>
@@ -14,31 +45,11 @@
                 </button>
             </div>
         </div>
-
-        <h1>{{tile_name}}</h1>
-        <h2>{{subTitle}}</h2>
-        <p>
-            <strong>Move</strong> {{move}}
-        </p>
-        <p>
-            <strong>Targeting</strong> {{targeting}}
-        </p>
-        <p>
-            <strong>Assault</strong> {{assault}}
-        </p>
-        <p>
-            <strong>Evasion</strong> {{evasion}}
-        </p>
-
-        <p v-if="tile_stealth">
-            <strong>Stealth</strong> {{tile_stealth}}
-        </p>
-
         <div :class="[{'scale-2': scale}]">
 
             <weapon-grid
-                :scale="scale"
-                :print-preview="true"
+            :scale="scale"
+            :print-preview="true"
             />
 
             <tile-damage-track/>
@@ -51,7 +62,7 @@
     import WeaponGrid from './weapon-grid';
     import TileDamageTrack from './tile-damage-track';
     import {mapGetters} from 'vuex';
-    import {mapTileProperties} from '../data/mappers';
+    import {mapAbilityGetters, mapTileGetters, mapTileProperties} from '../data/mappers';
     import {targetingById} from '../data/options';
 
     export default {
@@ -64,27 +75,22 @@
             };
         },
         computed: {
-            ...mapGetters([
-                'subTitle',
-                'chassis',
+            ...mapTileGetters([
+                'printSubTitle',
+                'evasion',
+                'move',
             ]),
-            ...mapTileProperties({
-                tile_stealth: 'stealth',
-            }),
+            ...mapAbilityGetters([
+'abilityList'
+            ]),
             targeting() {
                 return targetingById[this.tile_targeting_id].display_name;
             },
             assault() {
                 return targetingById[this.tile_assault_id].display_name;
             },
-            evasion() {
-                return this.chassis.evasion;
-            },
-            move() {
-                return this.chassis.move;
-            },
             ...mapTileProperties({
-                tile_type_id: 'type_id',
+                tile_type_id: 'tile_type_id',
                 tile_class_id: 'class_id',
                 tile_armor: 'armor',
                 tile_tech_level_id: 'tech_level_id',

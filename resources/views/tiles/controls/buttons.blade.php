@@ -12,9 +12,9 @@ if ($size) {
     <div class="btn-group {{$size}}">
         @endif
 
-        @include('records.tiles.controls.buttons-view', ['item' => $item])
-        @include('records.tiles.controls.buttons-edit', ['item' => $item])
-        @include('records.tiles.controls.buttons-delete', ['item' => $item])
+        @include('tiles.controls.buttons-view', ['item' => $item])
+        @include('tiles.controls.buttons-edit', ['item' => $item])
+        @include('tiles.controls.buttons-delete', ['item' => $item])
 
         @if($useBtnGroup)
     </div>

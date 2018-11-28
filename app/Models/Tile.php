@@ -3,28 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tile extends Model
 {
     protected $fillable = [
         'user_id',
         'name',
-        'tile_type_id',
-        'tile_class_id',
+        'chassis_id',
         'targeting_id',
         'assault_id',
-        'tech_level_id',
-        'mobility_id',
         'anti_missile_system_id',
         'armor',
         'stealth',
-        'tile_data',
         'cached_cost',
-        'app_version',
-    ];
-
-    protected $casts = [
-        'tile_data' => 'json',
     ];
 
     public function user()
@@ -32,19 +24,19 @@ class Tile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tileType()
+    public function chassis()
     {
-        return $this->belongsTo(TileType::class);
+        return $this->belongsTo(Chassis::class);
     }
 
-    public function tileClass()
+    public function getChassisArmorStat()
     {
-        return $this->belongsTo(TileClass::class);
-    }
-
-    public function mobility()
-    {
-        return $this->belongsTo(Mobility::class);
+        return $this->chassis
+            ->chassisArmorStat()
+            ->where([
+                'armor' => $this->armor,
+            ])
+            ->first();
     }
 
     public function targeting()
@@ -57,11 +49,6 @@ class Tile extends Model
         return $this->belongsTo(CombatValue::class, 'assault_id');
     }
 
-    public function techLevel()
-    {
-        return $this->belongsTo(TechLevel::class);
-    }
-
     public function antiMissileSystem()
     {
         return $this->belongsTo(AntiMissileSystem::class);
@@ -72,8 +59,21 @@ class Tile extends Model
         return $this->belongsToMany(Ability::class, 'tile_abilities');
     }
 
+    public function weapons(): BelongsToMany
+    {
+        return $this->belongsToMany(Weapon::class, 'tile_weapons')
+            ->using(TileWeapon::class)
+            ->withPivot([
+                'tile_weapon_type_id',
+                'arc_direction_id',
+                'arc_size_id',
+                'quantity',
+                'display_order',
+            ]);
+    }
+
     public function tileWeapons()
     {
-        return $this->hasMany(TileWeaponType::class);
+        return $this->hasMany(TileWeapon::class);
     }
 }

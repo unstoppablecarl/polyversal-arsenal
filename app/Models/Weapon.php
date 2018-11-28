@@ -16,8 +16,15 @@ class Weapon extends Model
         'aa',
         'damage',
         'range',
+        'is_infantry',
         'is_indirect',
-        'has_warheads'
+        'has_warheads',
+        'cost_d4',
+        'cost_d6',
+        'cost_d8',
+        'cost_d10',
+        'cost_d12',
+
     ];
 
     public function scopeWherePublic($query)

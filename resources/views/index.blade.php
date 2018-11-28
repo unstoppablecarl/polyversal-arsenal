@@ -2,10 +2,6 @@
 
 @section('content')
 
-
-    <div id="app">
-        <tile>
-        </tile>
-    </div>
+<h1>Polyversal Arsenal</h1>
 
 @endsection

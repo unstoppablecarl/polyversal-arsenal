@@ -29,4 +29,45 @@ class User extends Authenticatable
     {
         return $this->hasMany(Weapon::class);
     }
+
+    public function setLastLogin($timestamp = null)
+    {
+        $this->last_login_at = $timestamp ?: $this->freshTimestamp();
+        $prev                = $this->timestamps;
+        $this->timestamps    = false;
+        $this->save();
+        $this->timestamps = $prev;
+    }
+
+
+    public function isBanned()
+    {
+        return (bool)$this->banned_at;
+    }
+
+
+    public function updateBannedStatus($value)
+    {
+        $changed = $this->isBanned() !== (bool)$value;
+
+        if (!$changed) {
+            return;
+        }
+
+        if ($value) {
+            $this->setBanned();
+        } else {
+            $this->clearBanned();
+        }
+    }
+
+    public function setBanned()
+    {
+        $this->banned_at = $this->freshTimestamp();
+    }
+
+    public function clearBanned()
+    {
+        $this->banned_at = null;
+    }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TileWeapon extends Model
+class TileWeapon extends Pivot
 {
+    protected $table = 'tile_weapons';
+
     protected $fillable = [
         'tile_id',
         'weapon_id',

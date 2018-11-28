@@ -19,7 +19,7 @@ class JsonSeeder extends Seeder
     public function run()
     {
         $map = [
-            'source-data/static/abilities.json'            => Ability::class,
+            // 'source-data/static/abilities.json'            => Ability::class,
             'source-data/static/arc-sizes.json'            => ArcSize::class,
             'source-data/static/arc-directions.json'       => ArcDirection::class,
             'source-data/static/anti-missile-systems.json' => AntiMissileSystem::class,
@@ -29,7 +29,7 @@ class JsonSeeder extends Seeder
             'source-data/static/tile-types.json'           => TileType::class,
             'source-data/static/tile-classes.json'         => TileClass::class,
             'source-data/static/tile-weapon-types.json'  => TileWeaponType::class,
-            'source-data/imported/weapons.json'            => Weapon::class,
+            // 'source-data/imported/weapons.json'            => Weapon::class,
         ];
 
         foreach ($map as $file => $modelClass) {

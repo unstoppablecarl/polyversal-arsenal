@@ -26,6 +26,10 @@ mix
         processCssUrls: false,
     });
 
+if (mix.inProduction()) {
+    mix.version();
+}
+
 mix.webpackConfig({
     module: {
         rules: [

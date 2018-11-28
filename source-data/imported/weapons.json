@@ -1,8 +1,8 @@
 [
     {
-        "id": 2,
-        "display_name": "Autocannon I",
+        "id": 1,
         "name": "autocannon-1",
+        "display_name": "Autocannon I",
         "range": 10,
         "ap": "D4",
         "at": "D4",
@@ -12,12 +12,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 1
+        "cost_d12": 1,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 3,
-        "display_name": "Autocannon II",
+        "id": 2,
         "name": "autocannon-2",
+        "display_name": "Autocannon II",
         "range": 14,
         "ap": "D6",
         "at": "D6",
@@ -27,12 +30,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 4,
-        "cost_d12": 4
+        "cost_d12": 4,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 4,
-        "display_name": "Autocannon III",
+        "id": 3,
         "name": "autocannon-3",
+        "display_name": "Autocannon III",
         "range": 180,
         "ap": "D8",
         "at": "D8",
@@ -42,12 +48,15 @@
         "cost_d6": 4,
         "cost_d8": 5,
         "cost_d10": 6,
-        "cost_d12": 6
+        "cost_d12": 6,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 5,
-        "display_name": "Autocannon IV",
+        "id": 4,
         "name": "autocannon-4",
+        "display_name": "Autocannon IV",
         "range": 22,
         "ap": "D10",
         "at": "D10",
@@ -57,12 +66,15 @@
         "cost_d6": 6,
         "cost_d8": 7,
         "cost_d10": 8,
-        "cost_d12": 9
+        "cost_d12": 9,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 6,
-        "display_name": "Autocannon V",
+        "id": 5,
         "name": "autocannon-5",
+        "display_name": "Autocannon V",
         "range": 26,
         "ap": "D12",
         "at": "D12",
@@ -72,12 +84,15 @@
         "cost_d6": 10,
         "cost_d8": 11,
         "cost_d10": 13,
-        "cost_d12": 14
+        "cost_d12": 14,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 7,
-        "display_name": "Bombs I",
+        "id": 6,
         "name": "bombs-1",
+        "display_name": "Bombs I",
         "range": 0,
         "ap": "D4",
         "at": "D4",
@@ -88,12 +103,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "has_warheads": true
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": 1
     },
     {
-        "id": 8,
-        "display_name": "Bombs II",
+        "id": 7,
         "name": "bombs-2",
+        "display_name": "Bombs II",
         "range": 0,
         "ap": "D6",
         "at": "D6",
@@ -104,12 +121,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "has_warheads": true
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": 1
     },
     {
-        "id": 9,
-        "display_name": "Bombs III",
+        "id": 8,
         "name": "bombs-3",
+        "display_name": "Bombs III",
         "range": 0,
         "ap": "D8",
         "at": "D8",
@@ -120,12 +139,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "has_warheads": true
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": 1
     },
     {
-        "id": 10,
-        "display_name": "Bombs IV",
+        "id": 9,
         "name": "bombs-4",
+        "display_name": "Bombs IV",
         "range": 0,
         "ap": "D10",
         "at": "D10",
@@ -136,12 +157,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "has_warheads": true
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": 1
     },
     {
-        "id": 11,
-        "display_name": "Bombs V",
+        "id": 10,
         "name": "bombs-5",
+        "display_name": "Bombs V",
         "range": 0,
         "ap": "D12",
         "at": "D12",
@@ -152,12 +175,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "has_warheads": true
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": 1
     },
     {
-        "id": 12,
-        "display_name": "Chemical Spray I",
-        "name": "chemical-spray-1",
+        "id": 11,
+        "name": "chem-spray-1",
+        "display_name": "Chem Spray I",
         "range": 2,
         "ap": "D8",
         "at": "D4",
@@ -167,12 +192,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 1
+        "cost_d12": 1,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 13,
-        "display_name": "Chemical Spray II",
-        "name": "chemical-spray-2",
+        "id": 12,
+        "name": "chem-spray-2",
+        "display_name": "Chem Spray II",
         "range": 3,
         "ap": "D8",
         "at": "D4",
@@ -182,12 +210,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 1
+        "cost_d12": 1,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 14,
-        "display_name": "Chemical Spray III",
-        "name": "chemical-spray-3",
+        "id": 13,
+        "name": "chem-spray-3",
+        "display_name": "Chem Spray III",
         "range": 4,
         "ap": "D10",
         "at": "D6",
@@ -197,12 +228,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 15,
-        "display_name": "Chemical Spray IV",
-        "name": "chemical-spray-4",
+        "id": 14,
+        "name": "chem-spray-4",
+        "display_name": "Chem Spray IV",
         "range": 5,
         "ap": "D12",
         "at": "D8",
@@ -212,12 +246,15 @@
         "cost_d6": 2,
         "cost_d8": 2,
         "cost_d10": 3,
-        "cost_d12": 3
+        "cost_d12": 3,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 16,
-        "display_name": "Chemical Spray V",
-        "name": "chemical-spray-5",
+        "id": 15,
+        "name": "chem-spray-5",
+        "display_name": "Chem Spray V",
         "range": 6,
         "ap": "D12",
         "at": "D8",
@@ -227,12 +264,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 3,
-        "cost_d12": 4
+        "cost_d12": 4,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 17,
-        "display_name": "Conventional Gun I",
-        "name": "conventional-gun-1",
+        "id": 16,
+        "name": "conv-gun-1",
+        "display_name": "Conv Gun I",
         "range": 12,
         "ap": "D4",
         "at": "D4",
@@ -242,12 +282,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 18,
-        "display_name": "Conventional Gun II",
-        "name": "conventional-gun-2",
+        "id": 17,
+        "name": "conv-gun-2",
+        "display_name": "Conv Gun II",
         "range": 16,
         "ap": "D4",
         "at": "D6",
@@ -257,12 +300,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 4,
-        "cost_d12": 5
+        "cost_d12": 5,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 19,
-        "display_name": "Conventional Gun III",
-        "name": "conventional-gun-3",
+        "id": 18,
+        "name": "conv-gun-3",
+        "display_name": "Conv Gun III",
         "range": 20,
         "ap": "D6",
         "at": "D8",
@@ -272,12 +318,15 @@
         "cost_d6": 4,
         "cost_d8": 5,
         "cost_d10": 6,
-        "cost_d12": 7
+        "cost_d12": 7,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 20,
-        "display_name": "Conventional Gun IV",
-        "name": "conventional-gun-4",
+        "id": 19,
+        "name": "conv-gun-4",
+        "display_name": "Conv Gun IV",
         "range": 24,
         "ap": "D8",
         "at": "D10",
@@ -287,12 +336,15 @@
         "cost_d6": 6,
         "cost_d8": 7,
         "cost_d10": 9,
-        "cost_d12": 10
+        "cost_d12": 10,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 21,
-        "display_name": "Conventional Gun V",
-        "name": "conventional-gun-5",
+        "id": 20,
+        "name": "conv-gun-5",
+        "display_name": "Conv Gun V",
         "range": 28,
         "ap": "D10",
         "at": "D12",
@@ -302,12 +354,15 @@
         "cost_d6": 10,
         "cost_d8": 11,
         "cost_d10": 13,
-        "cost_d12": 15
+        "cost_d12": 15,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 22,
-        "display_name": "Flamethrower I",
-        "name": "flamethrower-1",
+        "id": 21,
+        "name": "flamethrow-1",
+        "display_name": "Flamethrow I",
         "range": 2,
         "ap": "D8",
         "at": "D4",
@@ -317,12 +372,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 1
+        "cost_d12": 1,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 23,
-        "display_name": "Flamethrower II",
-        "name": "flamethrower-2",
+        "id": 22,
+        "name": "flamethrow-2",
+        "display_name": "Flamethrow II",
         "range": 3,
         "ap": "D8",
         "at": "D4",
@@ -332,12 +390,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 2,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 24,
-        "display_name": "Flamethrower III",
-        "name": "flamethrower-3",
+        "id": 23,
+        "name": "flamethrow-3",
+        "display_name": "Flamethrow III",
         "range": 4,
         "ap": "D10",
         "at": "D6",
@@ -347,12 +408,15 @@
         "cost_d6": 2,
         "cost_d8": 2,
         "cost_d10": 2,
-        "cost_d12": 3
+        "cost_d12": 3,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 25,
-        "display_name": "Flamethrower IV",
-        "name": "flamethrower-4",
+        "id": 24,
+        "name": "flamethrow-4",
+        "display_name": "Flamethrow IV",
         "range": 5,
         "ap": "D12",
         "at": "D8",
@@ -362,12 +426,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 3,
-        "cost_d12": 3
+        "cost_d12": 3,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 26,
-        "display_name": "Flamethrower V",
-        "name": "flamethrower-5",
+        "id": 25,
+        "name": "flamethrow-5",
+        "display_name": "Flamethrow V",
         "range": 6,
         "ap": "D12",
         "at": "D8",
@@ -377,12 +444,15 @@
         "cost_d6": 3,
         "cost_d8": 3,
         "cost_d10": 4,
-        "cost_d12": 5
+        "cost_d12": 5,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 27,
-        "display_name": "Howitzer I",
+        "id": 26,
         "name": "howitzer-1",
+        "display_name": "Howitzer I",
         "range": 20,
         "ap": "D4",
         "at": "D4",
@@ -393,13 +463,14 @@
         "cost_d8": 3,
         "cost_d10": 5,
         "cost_d12": 7,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 28,
-        "display_name": "Howitzer II",
+        "id": 27,
         "name": "howitzer-2",
+        "display_name": "Howitzer II",
         "range": 30,
         "ap": "D6",
         "at": "D6",
@@ -410,13 +481,14 @@
         "cost_d8": 7,
         "cost_d10": 10,
         "cost_d12": 12,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 29,
-        "display_name": "Howitzer III",
+        "id": 28,
         "name": "howitzer-3",
+        "display_name": "Howitzer III",
         "range": 40,
         "ap": "D8",
         "at": "D8",
@@ -427,13 +499,14 @@
         "cost_d8": 11,
         "cost_d10": 15,
         "cost_d12": 18,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 30,
-        "display_name": "Howitzer IV",
+        "id": 29,
         "name": "howitzer-4",
+        "display_name": "Howitzer IV",
         "range": 50,
         "ap": "D10",
         "at": "D10",
@@ -444,13 +517,14 @@
         "cost_d8": 20,
         "cost_d10": 25,
         "cost_d12": 28,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 31,
-        "display_name": "Howitzer V",
+        "id": 30,
         "name": "howitzer-5",
+        "display_name": "Howitzer V",
         "range": 60,
         "ap": "D12",
         "at": "D12",
@@ -461,13 +535,14 @@
         "cost_d8": 32,
         "cost_d10": 36,
         "cost_d12": 41,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 32,
-        "display_name": "Chem. Spray I",
-        "name": "inf-chem-spray-1",
+        "id": 31,
+        "name": "chem-spray-1",
+        "display_name": "Chem Spray I",
         "range": 2,
         "ap": "D6",
         "at": "D4",
@@ -478,12 +553,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 33,
-        "display_name": "Chem. Spray II",
-        "name": "inf-chem-spray-2",
+        "id": 32,
+        "name": "chem-spray-2",
+        "display_name": "Chem Spray II",
         "range": 3,
         "ap": "D8",
         "at": "D6",
@@ -494,12 +571,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 34,
-        "display_name": "Chem. Spray III",
-        "name": "inf-chem-spray-3",
+        "id": 33,
+        "name": "chem-spray-3",
+        "display_name": "Chem Spray III",
         "range": 4,
         "ap": "D10",
         "at": "D8",
@@ -510,12 +589,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 3,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 35,
-        "display_name": "Flamethrower I",
-        "name": "inf-flamethrower-1",
+        "id": 34,
+        "name": "flamethrow-1",
+        "display_name": "Flamethrow I",
         "range": 2,
         "ap": "D8",
         "at": "D4",
@@ -526,12 +607,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 36,
-        "display_name": "Flamethrower II",
-        "name": "inf-flamethrower-2",
+        "id": 35,
+        "name": "flamethrow-2",
+        "display_name": "Flamethrow II",
         "range": 3,
         "ap": "D8",
         "at": "D4",
@@ -542,12 +625,14 @@
         "cost_d8": 1,
         "cost_d10": 2,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 37,
-        "display_name": "Flamethrower III",
-        "name": "inf-flamethrower-3",
+        "id": 36,
+        "name": "flamethrow-3",
+        "display_name": "Flamethrow III",
         "range": 4,
         "ap": "D10",
         "at": "D6",
@@ -558,12 +643,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 3,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 38,
+        "id": 37,
+        "name": "laser-1",
         "display_name": "Laser I",
-        "name": "inf-laser-1",
         "range": 24,
         "ap": "D6",
         "at": "D4",
@@ -574,12 +661,14 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 6,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 39,
+        "id": 38,
+        "name": "laser-2",
         "display_name": "Laser II",
-        "name": "inf-laser-2",
         "range": 30,
         "ap": "D8",
         "at": "D6",
@@ -590,12 +679,14 @@
         "cost_d8": 7,
         "cost_d10": 9,
         "cost_d12": 10,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 40,
+        "id": 39,
+        "name": "laser-3",
         "display_name": "Laser III",
-        "name": "inf-laser-3",
         "range": 36,
         "ap": "D10",
         "at": "D8",
@@ -606,12 +697,14 @@
         "cost_d8": 10,
         "cost_d10": 13,
         "cost_d12": 16,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 41,
-        "display_name": "Laser Small Arms I",
-        "name": "inf-laser-small-arms-1",
+        "id": 40,
+        "name": "laser-sm-arms-1",
+        "display_name": "Laser Sm Arms I",
         "range": 12,
         "ap": "D4",
         "at": "D4",
@@ -622,12 +715,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 42,
-        "display_name": "Laser Small Arms II",
-        "name": "inf-laser-small-arms-2",
+        "id": 41,
+        "name": "laser-sm-arms-2",
+        "display_name": "Laser Sm Arms II",
         "range": 14,
         "ap": "D4",
         "at": "D6",
@@ -638,12 +733,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 43,
-        "display_name": "Laser Small Arms III",
-        "name": "inf-laser-small-arms-3",
+        "id": 42,
+        "name": "laser-sm-arms-3",
+        "display_name": "Laser Sm Arms III",
         "range": 16,
         "ap": "D6",
         "at": "D8",
@@ -654,12 +751,14 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 5,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 44,
-        "display_name": "Machine Gun I",
-        "name": "inf-machine-gun-1",
+        "id": 43,
+        "name": "m-g-1",
+        "display_name": "MG I",
         "range": 7,
         "ap": "D6",
         "at": "D4",
@@ -670,12 +769,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 45,
-        "display_name": "Machine Gun II",
-        "name": "inf-machine-gun-2",
+        "id": 44,
+        "name": "m-g-2",
+        "display_name": "MG II",
         "range": 10,
         "ap": "D8",
         "at": "D6",
@@ -686,12 +787,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 46,
-        "display_name": "Machine Gun III",
-        "name": "inf-machine-gun-3",
+        "id": 45,
+        "name": "m-g-3",
+        "display_name": "MG III",
         "range": 13,
         "ap": "D10",
         "at": "D8",
@@ -702,12 +805,14 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 5,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 47,
-        "display_name": "Missile Launcher I",
-        "name": "inf-missile-launcher-1",
+        "id": 46,
+        "name": "missile-1",
+        "display_name": "Missile I",
         "range": 20,
         "ap": "D4",
         "at": "D6",
@@ -718,12 +823,14 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 48,
-        "display_name": "Missile Launcher II",
-        "name": "inf-missile-launcher-2",
+        "id": 47,
+        "name": "missile-2",
+        "display_name": "Missile II",
         "range": 24,
         "ap": "D6",
         "at": "D8",
@@ -734,12 +841,14 @@
         "cost_d8": 5,
         "cost_d10": 7,
         "cost_d12": 8,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 49,
-        "display_name": "Missile Launcher III",
-        "name": "inf-missile-launcher-3",
+        "id": 48,
+        "name": "missile-3",
+        "display_name": "Missile III",
         "range": 28,
         "ap": "D8",
         "at": "D10",
@@ -750,12 +859,14 @@
         "cost_d8": 9,
         "cost_d10": 10,
         "cost_d12": 12,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 50,
+        "id": 49,
+        "name": "mortar-1",
         "display_name": "Mortar I",
-        "name": "inf-mortar-1",
         "range": 10,
         "ap": "D4",
         "at": "D4",
@@ -766,13 +877,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 3,
-        "infantry": true,
-        "is_indirect": true
+        "is_infantry": 1,
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 51,
+        "id": 50,
+        "name": "mortar-2",
         "display_name": "Mortar II",
-        "name": "inf-mortar-2",
         "range": 14,
         "ap": "D4",
         "at": "D4",
@@ -783,13 +895,14 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 4,
-        "infantry": true,
-        "is_indirect": true
+        "is_infantry": 1,
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 52,
+        "id": 51,
+        "name": "mortar-3",
         "display_name": "Mortar III",
-        "name": "inf-mortar-3",
         "range": 18,
         "ap": "D6",
         "at": "D6",
@@ -800,13 +913,14 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 6,
-        "infantry": true,
-        "is_indirect": true
+        "is_infantry": 1,
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 53,
+        "id": 52,
+        "name": "plasma-1",
         "display_name": "Plasma I",
-        "name": "inf-plasma-1",
         "range": 4,
         "ap": "D8",
         "at": "D8",
@@ -817,12 +931,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 54,
+        "id": 53,
+        "name": "plasma-2",
         "display_name": "Plasma II",
-        "name": "inf-plasma-2",
         "range": 5,
         "ap": "D10",
         "at": "D10",
@@ -833,12 +949,14 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 55,
+        "id": 54,
+        "name": "plasma-3",
         "display_name": "Plasma III",
-        "name": "inf-plasma-3",
         "range": 6,
         "ap": "D12",
         "at": "D12",
@@ -849,12 +967,14 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 56,
+        "id": 55,
+        "name": "pulse-laser-1",
         "display_name": "Pulse Laser I",
-        "name": "inf-pulse-laser-1",
         "range": 24,
         "ap": "D4",
         "at": "D4",
@@ -865,12 +985,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 57,
+        "id": 56,
+        "name": "pulse-laser-2",
         "display_name": "Pulse Laser II",
-        "name": "inf-pulse-laser-2",
         "range": 30,
         "ap": "D6",
         "at": "D4",
@@ -881,12 +1003,14 @@
         "cost_d8": 3,
         "cost_d10": 3,
         "cost_d12": 4,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 58,
+        "id": 57,
+        "name": "pulse-laser-3",
         "display_name": "Pulse Laser III",
-        "name": "inf-pulse-laser-3",
         "range": 36,
         "ap": "D8",
         "at": "D4",
@@ -897,12 +1021,14 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 5,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 59,
-        "display_name": "Small Arms I",
-        "name": "inf-small-arms-1",
+        "id": 58,
+        "name": "sm-arms-1",
+        "display_name": "Sm Arms I",
         "range": 6,
         "ap": "D4",
         "at": "D4",
@@ -913,12 +1039,14 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 60,
-        "display_name": "Small Arms II",
-        "name": "inf-small-arms-2",
+        "id": 59,
+        "name": "sm-arms-2",
+        "display_name": "Sm Arms II",
         "range": 8,
         "ap": "D6",
         "at": "D6",
@@ -929,12 +1057,14 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 61,
-        "display_name": "Small Arms III",
-        "name": "inf-small-arms-3",
+        "id": 60,
+        "name": "sm-arms-3",
+        "display_name": "Sm Arms III",
         "range": 10,
         "ap": "D8",
         "at": "D8",
@@ -945,12 +1075,14 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "infantry": true
+        "is_infantry": 1,
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 62,
-        "display_name": "Laser I",
+        "id": 61,
         "name": "laser-1",
+        "display_name": "Laser I",
         "range": 30,
         "ap": "D6",
         "at": "D6",
@@ -960,12 +1092,15 @@
         "cost_d6": 4,
         "cost_d8": 6,
         "cost_d10": 7,
-        "cost_d12": 8
+        "cost_d12": 8,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 63,
-        "display_name": "Laser II",
+        "id": 62,
         "name": "laser-2",
+        "display_name": "Laser II",
         "range": 34,
         "ap": "D6",
         "at": "D8",
@@ -975,12 +1110,15 @@
         "cost_d6": 5,
         "cost_d8": 7,
         "cost_d10": 9,
-        "cost_d12": 10
+        "cost_d12": 10,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 64,
-        "display_name": "Laser III",
+        "id": 63,
         "name": "laser-3",
+        "display_name": "Laser III",
         "range": 38,
         "ap": "D8",
         "at": "D8",
@@ -990,12 +1128,15 @@
         "cost_d6": "",
         "cost_d8": 10,
         "cost_d10": 12,
-        "cost_d12": 13
+        "cost_d12": 13,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 65,
-        "display_name": "Laser IV",
+        "id": 64,
         "name": "laser-4",
+        "display_name": "Laser IV",
         "range": 42,
         "ap": "D8",
         "at": "D10",
@@ -1005,12 +1146,15 @@
         "cost_d6": 11,
         "cost_d8": 13,
         "cost_d10": 17,
-        "cost_d12": 19
+        "cost_d12": 19,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 66,
-        "display_name": "Laser V",
+        "id": 65,
         "name": "laser-5",
+        "display_name": "Laser V",
         "range": 46,
         "ap": "D10",
         "at": "D12",
@@ -1020,12 +1164,15 @@
         "cost_d6": 15,
         "cost_d8": 18,
         "cost_d10": 21,
-        "cost_d12": 24
+        "cost_d12": 24,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 67,
-        "display_name": "Machine Gun I",
-        "name": "machine-gun-1",
+        "id": 66,
+        "name": "m-g-1",
+        "display_name": "MG I",
         "range": 8,
         "ap": "D6",
         "at": "D4",
@@ -1035,12 +1182,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 1,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 68,
-        "display_name": "Machine Gun II",
-        "name": "machine-gun-2",
+        "id": 67,
+        "name": "m-g-2",
+        "display_name": "MG II",
         "range": 10,
         "ap": "D8",
         "at": "D6",
@@ -1050,12 +1200,15 @@
         "cost_d6": 2,
         "cost_d8": 2,
         "cost_d10": 2,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 69,
-        "display_name": "Machine Gun III",
-        "name": "machine-gun-3",
+        "id": 68,
+        "name": "m-g-3",
+        "display_name": "MG III",
         "range": 12,
         "ap": "D8",
         "at": "D6",
@@ -1065,12 +1218,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 4,
-        "cost_d12": 4
+        "cost_d12": 4,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 70,
-        "display_name": "Machine Gun IV",
-        "name": "machine-gun-4",
+        "id": 69,
+        "name": "m-g-4",
+        "display_name": "MG IV",
         "range": 14,
         "ap": "D10",
         "at": "D8",
@@ -1080,12 +1236,15 @@
         "cost_d6": 3,
         "cost_d8": 4,
         "cost_d10": 5,
-        "cost_d12": 5
+        "cost_d12": 5,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 71,
-        "display_name": "Machine Gun V",
-        "name": "machine-gun-5",
+        "id": 70,
+        "name": "m-g-5",
+        "display_name": "MG V",
         "range": 16,
         "ap": "D10",
         "at": "D8",
@@ -1095,12 +1254,15 @@
         "cost_d6": 4,
         "cost_d8": 5,
         "cost_d10": 6,
-        "cost_d12": 7
+        "cost_d12": 7,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 72,
-        "display_name": "Missile I",
+        "id": 71,
         "name": "missile-1",
+        "display_name": "Missile I",
         "range": 20,
         "ap": "D4",
         "at": "D6",
@@ -1111,13 +1273,14 @@
         "cost_d8": 3,
         "cost_d10": 5,
         "cost_d12": 6,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 73,
-        "display_name": "Missile II",
+        "id": 72,
         "name": "missile-2",
+        "display_name": "Missile II",
         "range": 30,
         "ap": "D6",
         "at": "D8",
@@ -1128,13 +1291,14 @@
         "cost_d8": 8,
         "cost_d10": 9,
         "cost_d12": 11,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 74,
-        "display_name": "Missile III",
+        "id": 73,
         "name": "missile-3",
+        "display_name": "Missile III",
         "range": 40,
         "ap": "D8",
         "at": "D10",
@@ -1145,13 +1309,14 @@
         "cost_d8": 13,
         "cost_d10": 15,
         "cost_d12": 17,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 75,
-        "display_name": "Missile IV",
+        "id": 74,
         "name": "missile-4",
+        "display_name": "Missile IV",
         "range": 50,
         "ap": "D10",
         "at": "D12",
@@ -1162,13 +1327,14 @@
         "cost_d8": 20,
         "cost_d10": 23,
         "cost_d12": 26,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 76,
-        "display_name": "Missile V",
+        "id": 75,
         "name": "missile-5",
+        "display_name": "Missile V",
         "range": 60,
         "ap": "D12",
         "at": "D12",
@@ -1179,13 +1345,14 @@
         "cost_d8": 33,
         "cost_d10": 38,
         "cost_d12": 42,
-        "has_warheads": true,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": 1
     },
     {
-        "id": 77,
-        "display_name": "Mortar I",
+        "id": 76,
         "name": "mortar-1",
+        "display_name": "Mortar I",
         "range": 12,
         "ap": "D4",
         "at": "D4",
@@ -1196,12 +1363,14 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 78,
-        "display_name": "Mortar II",
+        "id": 77,
         "name": "mortar-2",
+        "display_name": "Mortar II",
         "range": 18,
         "ap": "D4",
         "at": "D6",
@@ -1212,12 +1381,14 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 5,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 79,
-        "display_name": "Mortar III",
+        "id": 78,
         "name": "mortar-3",
+        "display_name": "Mortar III",
         "range": 24,
         "ap": "D6",
         "at": "D6",
@@ -1228,12 +1399,14 @@
         "cost_d8": 5,
         "cost_d10": 7,
         "cost_d12": 8,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 80,
-        "display_name": "Mortar IV",
+        "id": 79,
         "name": "mortar-4",
+        "display_name": "Mortar IV",
         "range": 30,
         "ap": "D6",
         "at": "D8",
@@ -1244,12 +1417,14 @@
         "cost_d8": 7,
         "cost_d10": 9,
         "cost_d12": 10,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 81,
-        "display_name": "Mortar V",
+        "id": 80,
         "name": "mortar-5",
+        "display_name": "Mortar V",
         "range": 36,
         "ap": "D8",
         "at": "D8",
@@ -1260,12 +1435,14 @@
         "cost_d8": 10,
         "cost_d10": 13,
         "cost_d12": 16,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 82,
-        "display_name": "Particle Bolter I",
-        "name": "particle-bolter-1",
+        "id": 81,
+        "name": "particle-bolt-1",
+        "display_name": "Particle Bolt I",
         "range": 10,
         "ap": "D4",
         "at": "D4",
@@ -1275,12 +1452,15 @@
         "cost_d6": 1,
         "cost_d8": 2,
         "cost_d10": 3,
-        "cost_d12": 3
+        "cost_d12": 3,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 83,
-        "display_name": "Particle Bolter II",
-        "name": "particle-bolter-2",
+        "id": 82,
+        "name": "particle-bolt-2",
+        "display_name": "Particle Bolt II",
         "range": 16,
         "ap": "D4",
         "at": "D4",
@@ -1290,12 +1470,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 4,
-        "cost_d12": 5
+        "cost_d12": 5,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 84,
-        "display_name": "Particle Bolter III",
-        "name": "particle-bolter-3",
+        "id": 83,
+        "name": "particle-bolt-3",
+        "display_name": "Particle Bolt III",
         "range": 22,
         "ap": "D6",
         "at": "D6",
@@ -1305,12 +1488,15 @@
         "cost_d6": 4,
         "cost_d8": 6,
         "cost_d10": 7,
-        "cost_d12": 9
+        "cost_d12": 9,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 85,
-        "display_name": "Particle Bolter IV",
-        "name": "particle-bolter-4",
+        "id": 84,
+        "name": "particle-bolt-4",
+        "display_name": "Particle Bolt IV",
         "range": 28,
         "ap": "D6",
         "at": "D6",
@@ -1320,12 +1506,15 @@
         "cost_d6": 5,
         "cost_d8": 7,
         "cost_d10": 10,
-        "cost_d12": 13
+        "cost_d12": 13,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 86,
-        "display_name": "Particle Bolter V",
-        "name": "particle-bolter-5",
+        "id": 85,
+        "name": "particle-bolt-5",
+        "display_name": "Particle Bolt V",
         "range": 34,
         "ap": "D8",
         "at": "D8",
@@ -1335,12 +1524,15 @@
         "cost_d6": 8,
         "cost_d8": 11,
         "cost_d10": 15,
-        "cost_d12": 18
+        "cost_d12": 18,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 87,
-        "display_name": "Plasma I",
+        "id": 86,
         "name": "plasma-1",
+        "display_name": "Plasma I",
         "range": 8,
         "ap": "D8",
         "at": "D10",
@@ -1350,12 +1542,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 4,
-        "cost_d12": 4
+        "cost_d12": 4,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 88,
-        "display_name": "Plasma II",
+        "id": 87,
         "name": "plasma-2",
+        "display_name": "Plasma II",
         "range": 9,
         "ap": "D8",
         "at": "D10",
@@ -1365,12 +1560,15 @@
         "cost_d6": 3,
         "cost_d8": 4,
         "cost_d10": 4,
-        "cost_d12": 5
+        "cost_d12": 5,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 89,
-        "display_name": "Plasma III",
+        "id": 88,
         "name": "plasma-3",
+        "display_name": "Plasma III",
         "range": 10,
         "ap": "D10",
         "at": "D12",
@@ -1380,12 +1578,15 @@
         "cost_d6": 4,
         "cost_d8": 4,
         "cost_d10": 5,
-        "cost_d12": 6
+        "cost_d12": 6,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 90,
-        "display_name": "Plasma IV",
+        "id": 89,
         "name": "plasma-4",
+        "display_name": "Plasma IV",
         "range": 11,
         "ap": "D10",
         "at": "D12",
@@ -1395,12 +1596,15 @@
         "cost_d6": 5,
         "cost_d8": 6,
         "cost_d10": 7,
-        "cost_d12": 7
+        "cost_d12": 7,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 91,
-        "display_name": "Plasma V",
+        "id": 90,
         "name": "plasma-5",
+        "display_name": "Plasma V",
         "range": 12,
         "ap": "D12",
         "at": "D12",
@@ -1410,12 +1614,15 @@
         "cost_d6": 6,
         "cost_d8": 6,
         "cost_d10": 7,
-        "cost_d12": 8
+        "cost_d12": 8,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 92,
-        "display_name": "Pulse Laser I",
+        "id": 91,
         "name": "pulse-laser-1",
+        "display_name": "Pulse Laser I",
         "range": 24,
         "ap": "D4",
         "at": "D4",
@@ -1425,12 +1632,15 @@
         "cost_d6": 1,
         "cost_d8": 2,
         "cost_d10": 2,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 93,
-        "display_name": "Pulse Laser II",
+        "id": 92,
         "name": "pulse-laser-2",
+        "display_name": "Pulse Laser II",
         "range": 28,
         "ap": "D6",
         "at": "D4",
@@ -1440,12 +1650,15 @@
         "cost_d6": 2,
         "cost_d8": 3,
         "cost_d10": 3,
-        "cost_d12": 4
+        "cost_d12": 4,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 94,
-        "display_name": "Pulse Laser III",
+        "id": 93,
         "name": "pulse-laser-3",
+        "display_name": "Pulse Laser III",
         "range": 32,
         "ap": "D8",
         "at": "D4",
@@ -1455,12 +1668,15 @@
         "cost_d6": 4,
         "cost_d8": 6,
         "cost_d10": 7,
-        "cost_d12": 9
+        "cost_d12": 9,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 95,
-        "display_name": "Pulse Laser IV",
+        "id": 94,
         "name": "pulse-laser-4",
+        "display_name": "Pulse Laser IV",
         "range": 36,
         "ap": "D10",
         "at": "D6",
@@ -1470,12 +1686,15 @@
         "cost_d6": 7,
         "cost_d8": 8,
         "cost_d10": 10,
-        "cost_d12": 11
+        "cost_d12": 11,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 96,
-        "display_name": "Pulse Laser V",
+        "id": 95,
         "name": "pulse-laser-5",
+        "display_name": "Pulse Laser V",
         "range": 40,
         "ap": "D12",
         "at": "D6",
@@ -1485,12 +1704,15 @@
         "cost_d6": 8,
         "cost_d8": 10,
         "cost_d10": 12,
-        "cost_d12": 13
+        "cost_d12": 13,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 97,
-        "display_name": "Railgun I",
+        "id": 96,
         "name": "railgun-1",
+        "display_name": "Railgun I",
         "range": 18,
         "ap": "D4",
         "at": "D4",
@@ -1500,12 +1722,15 @@
         "cost_d6": 1,
         "cost_d8": 1,
         "cost_d10": 2,
-        "cost_d12": 2
+        "cost_d12": 2,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 98,
-        "display_name": "Railgun II",
+        "id": 97,
         "name": "railgun-2",
+        "display_name": "Railgun II",
         "range": 27,
         "ap": "D4",
         "at": "D6",
@@ -1515,12 +1740,15 @@
         "cost_d6": 3,
         "cost_d8": 4,
         "cost_d10": 6,
-        "cost_d12": 7
+        "cost_d12": 7,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 99,
-        "display_name": "Railgun III",
+        "id": 98,
         "name": "railgun-3",
+        "display_name": "Railgun III",
         "range": 36,
         "ap": "D4",
         "at": "D8",
@@ -1530,12 +1758,15 @@
         "cost_d6": 5,
         "cost_d8": 7,
         "cost_d10": 9,
-        "cost_d12": 11
+        "cost_d12": 11,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 100,
-        "display_name": "Railgun IV",
+        "id": 99,
         "name": "railgun-4",
+        "display_name": "Railgun IV",
         "range": 45,
         "ap": "D4",
         "at": "D10",
@@ -1545,12 +1776,15 @@
         "cost_d6": 7,
         "cost_d8": 10,
         "cost_d10": 13,
-        "cost_d12": 15
+        "cost_d12": 15,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 101,
-        "display_name": "Railgun V",
+        "id": 100,
         "name": "railgun-5",
+        "display_name": "Railgun V",
         "range": 54,
         "ap": "D4",
         "at": "D12",
@@ -1560,12 +1794,15 @@
         "cost_d6": 13,
         "cost_d8": 16,
         "cost_d10": 21,
-        "cost_d12": 24
+        "cost_d12": 24,
+        "is_infantry": "",
+        "is_indirect": "",
+        "has_warheads": ""
     },
     {
-        "id": 102,
-        "display_name": "Rockets I",
+        "id": 101,
         "name": "rockets-1",
+        "display_name": "Rockets I",
         "range": 20,
         "ap": "D4",
         "at": "D4",
@@ -1576,12 +1813,14 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 103,
-        "display_name": "Rockets II",
+        "id": 102,
         "name": "rockets-2",
+        "display_name": "Rockets II",
         "range": 24,
         "ap": "D6",
         "at": "D6",
@@ -1592,12 +1831,14 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 104,
-        "display_name": "Rockets III",
+        "id": 103,
         "name": "rockets-3",
+        "display_name": "Rockets III",
         "range": 28,
         "ap": "D6",
         "at": "D6",
@@ -1608,12 +1849,14 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 9,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 105,
-        "display_name": "Rockets IV",
+        "id": 104,
         "name": "rockets-4",
+        "display_name": "Rockets IV",
         "range": 32,
         "ap": "D8",
         "at": "D8",
@@ -1624,12 +1867,14 @@
         "cost_d8": 9,
         "cost_d10": 11,
         "cost_d12": 12,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     },
     {
-        "id": 106,
-        "display_name": "Rockets V",
+        "id": 105,
         "name": "rockets-5",
+        "display_name": "Rockets V",
         "range": 36,
         "ap": "D10",
         "at": "D10",
@@ -1640,6 +1885,8 @@
         "cost_d8": 13,
         "cost_d10": 15,
         "cost_d12": 17,
-        "is_indirect": true
+        "is_infantry": "",
+        "is_indirect": 1,
+        "has_warheads": ""
     }
 ]

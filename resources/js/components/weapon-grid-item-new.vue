@@ -4,7 +4,7 @@
             <label class="col-sm-2 col-form-label">Add Weapon</label>
             <div class="col-sm-4">
                 <select class="form-control" v-model="selectedWeaponId">
-                    <option v-for="item in weapons" v-bind:value="item.id">{{ item.display_name }}</option>
+                    <option v-for="item in options" v-bind:value="item.id">{{ item.display_name }}</option>
                 </select>
             </div>
             <div class="col-sm-4">
@@ -22,7 +22,7 @@
         TILE_WEAPON_TYPE_ONLY_AA_ID,
         TILE_WEAPON_TYPE_WITH_AA_ID,
     } from '../data/constants';
-    import {mapTileProperties} from '../data/mappers';
+    import {mapTileProperties, mapTileWeaponGetters} from '../data/mappers';
 
     export default {
         name: 'weapon-grid-item-new',
@@ -47,7 +47,7 @@
                     arc: 'UP_90',
                 };
 
-                this.$store.dispatch('weaponCreate', {weapon});
+                this.$store.dispatch('tile_weapons/create', {weapon});
             },
             addWeaponGround() {
                 this.addWeapon(TILE_WEAPON_TYPE_GROUND_ID);
@@ -59,16 +59,17 @@
                 this.addWeapon(TILE_WEAPON_TYPE_ONLY_AA_ID);
             },
             selectFirst() {
-                this.selectedWeaponId = this.$store.getters.weaponOptions.firstId();
+                this.selectedWeaponId = this.firstValidWeaponId;
             },
         },
         computed: {
             ...mapTileProperties({
-                tile_type_id: 'type_id',
+                tile_type_id: 'tile_type_id',
             }),
-            weapons() {
-                return this.$store.getters.weaponOptions.all();
-            },
+            ...mapTileWeaponGetters([
+                'options',
+                'firstValidWeaponId'
+            ])
         },
     };
 </script>

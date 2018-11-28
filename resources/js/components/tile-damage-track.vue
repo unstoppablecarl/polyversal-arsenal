@@ -2,10 +2,10 @@
     <div>
         <div class="damage-track">
             <div class="d-flex justify-content-center damage-track-header">
-                <div class="cell-dmg">
+                <div class="cell cell-dmg">
                     DMG
                 </div>
-                <div :class="'cell-w-' + (stressIsRange ? 2 : 1)">
+                <div :class="cellStressClass">
                     <template v-if="stressIsRange">
                         {{stressMin}} - {{stressMax}}
                     </template>
@@ -14,23 +14,23 @@
                     </template>
                 </div>
 
-                <div v-for="(val, index) in headerColumns" :key="index" class="cell-w-1">
+                <div v-for="(val, index) in headerColumns" :key="index" class="cell cell-1">
                     {{val}}
                     <small v-if="index == headerColumns.length - 1">+</small>
                 </div>
             </div>
             <div class="d-flex justify-content-center damage-track-results">
-                <div class="cell-dmg">
+                <div class="cell cell-dmg">
                     EFF
                 </div>
-                <div :class="'cell-w-' + (stressIsRange ? 2 : 1)">
+                <div :class="cellStressClass">
                     S
                 </div>
                 <div v-for="item in resultColumns"
                      :key="item.key"
-                     :class="'cell-w-' + item.range"
+                     :class="['cell', 'cell-' + item.range]"
                 >
-                    {{item.key.charAt(0).toUpperCase()}}
+                    {{item.label}}
                 </div>
             </div>
         </div>
@@ -39,14 +39,11 @@
 
 <script>
     import _ from 'lodash';
-    import {TILE_TYPE_VEHICLE_ID} from '../data/constants';
-    import {mapTileProperties} from '../data/mappers';
-    import {mapGetters} from 'vuex';
+    import {mapAbilityGetters, mapTileGetters, mapTileProperties} from '../data/mappers';
 
     export default {
         name: 'tile-damage-track',
-        props: {
-        },
+        props: {},
         data() {
             return {
                 stress: 0,
@@ -57,20 +54,28 @@
         },
         watch: {},
         computed: {
-            ...mapGetters([
+            ...mapAbilityGetters([
                 'hasJumpJets',
-                'hasDefensiveSystems',
             ]),
-            ...mapTileProperties({
-                tile_type_id: 'type_id',
-                tile_stealth: 'stealth',
-                armor: 'armor'
+            ...mapTileGetters({
+                tileDamageTrack: 'damageTrack',
+                hasDefensiveSystems: 'hasDefensiveSystems',
             }),
-            damageColumns() {
-                return this.$store.getters.chassis.damage_track;
+            ...mapTileProperties({
+                tile_type_id: 'tile_type_id',
+                tile_stealth: 'stealth',
+                armor: 'armor',
+            }),
+            cellStressClass() {
+                let width = 1;
+                if (this.stressIsRange) {
+                    width = 2;
+                }
+                return ['cell', 'cell-' + width];
             },
             damageTrack() {
-                let track = Object.assign({}, this.damageColumns);
+
+                let track = Object.assign({}, this.tileDamageTrack);
 
                 if (this.hasJumpJets) {
                     if (track.stress > 0) {
@@ -132,13 +137,21 @@
                     let prev   = track[index - 1];
                     let range  = item.value - prev.value;
                     item.range = range;
+
+                    if (item.key == 'destroyed') {
+                        item.label = 'X';
+                    } else {
+                        item.label = item.key.charAt(0).toUpperCase();
+                    }
+
+
                 });
 
                 track.shift();
+
                 return track;
             },
         },
-
     };
 
 </script>

@@ -10,14 +10,14 @@ if ($size) {
     $size = ' btn-' . $size;
 }
 
-$url      = route('tiles.delete');
-$can      = Gate::allows('delete', Tile::class);
+$url      = route('tiles.delete',  $item);
+$can      = Gate::allows('delete', $item);
 
-$disabled = $can;
+$disabled = $can ? '' : ' disabled';
 
 ?>
 @if($can || $showUnauthorized)
-    <a href="{{$url}}" class="btn btn-default{{$disabled}}{{$size}}">
+    <a href="{{$url}}" class="btn btn-danger{{$disabled}}{{$size}}">
         Delete
     </a>
 @endif

@@ -12,20 +12,20 @@ let map = {
 };
 
 function getChassis({
-                        type_id,
-                        class_id,
+                        tile_type_id,
+                        tile_class_id,
                         armor,
                         tech_level_id,
                         mobility_id,
                     }) {
 
-    let data      = map[type_id];
+    let data      = map[tile_type_id];
     let mobility  = mobilityById[mobility_id].name;
     let techLevel = techLevelById[tech_level_id].name;
-    let isVehicle = type_id == TILE_TYPE_VEHICLE_ID;
+    let isVehicle = tile_type_id == TILE_TYPE_VEHICLE_ID;
 
     if (isVehicle) {
-        return data[class_id][mobility][techLevel][armor];
+        return data[tile_class_id][mobility][techLevel][armor];
     } else {
         return data[mobility][techLevel][armor];
     }

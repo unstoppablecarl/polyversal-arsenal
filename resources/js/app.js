@@ -1,36 +1,88 @@
 import './bootstrap';
 
 import Vue from 'vue';
-
-import Store from './store';
-import Server from './lib/fake-server';
+import VueRouter from 'vue-router';
+import store from './store';
 import Tile from './components/tile';
+import TabStats from './components/tabs-stats';
+import TabAbilities from './components/tabs-abilities';
+import TabWeapons from './components/tabs-weapons';
 import WeaponGrid from './components/weapon-grid';
-let server = Server({
-    responseDelay: 100,
-});
+import {tileWeaponCreate} from './store/models/tile-weapon';
 
-let store = Store(server);
-
-let app = new Vue({
-    el: '#app',
-    store: store,
-    components: {
-        Tile,
-        WeaponGrid
+const routes = [
+    {
+        path: '/',
+        redirect: '/tile/create/stats',
     },
-});
+    {
+        path: '/tile/:id',
+        component: Tile,
+        name: 'tile',
+        redirect: {name: 'tile-stats'},
 
-let weapon = {
-    id: 1,
-    display_order: 0,
-    quantity: 3,
-    weapon_id: 28,
-    arc_direction: 'UP',
-    arc_size: 90,
-    tile_weapon_type_id: 1,
-};
-store.dispatch('weaponCreate', {weapon});
+        children: [
+            {
+                name: 'tile-stats',
+                path: 'stats',
+                component: TabStats,
+            },
+            {
+                name: 'tile-abilities',
+                path: 'abilities',
+                component: TabAbilities,
+            },
+            {
+                name: 'tile-weapons',
+                path: 'weapons',
+                component: TabWeapons,
+            },
+        ],
+    },
+];
+
+
+if (document.getElementById('app-tile')) {
+
+
+    //let tileData = null
+    //if(window.APP_DATA && window.APP_DATA.tile_data){
+    //    tileData = window.APP_DATA.tile_data;
+    //}
+    //
+    //let tile_weapons = [];
+    //
+    //if(tileData.tile_weapons){
+    //    tile_weapons = tileData.tile_weapons.map((item) => tileWeaponCreate(item));
+    //}
+
+    const router = new VueRouter({
+        routes,
+    });
+    let app = new Vue({
+        el: '#app-tile',
+        store,
+        router,
+        components: {
+            Tile,
+            WeaponGrid,
+        },
+    });
+}
+
+//router.push({name: 'tile-stats', params: {id: 'create'}});
+
+
+//let weapon = {
+//    id: 1,
+//    display_order: 0,
+//    quantity: 3,
+//    weapon_id: 28,
+//    arc_direction: 'UP',
+//    arc_size: 90,
+//    tile_weapon_type_id: 1,
+//};
+//store.dispatch('weaponCreate', {weapon});
 
 //let weapon = {
 //    id: 1,

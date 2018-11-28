@@ -19,7 +19,28 @@ class CreateTileTables extends Migration
             $table->increments('id');
 
             $table->string('name');
+            $table->string('icon')->nullable();
             $table->string('display_name');
+            $table->integer('display_order')->nullable();
+
+            $table->integer('cost_static')->nullable();
+
+            $table->integer('cost_infantry')->nullable();
+            $table->integer('cost_cavalry')->nullable();
+
+            $table->integer('cost_vehicle_class_1')->nullable();
+            $table->integer('cost_vehicle_class_2')->nullable();
+            $table->integer('cost_vehicle_class_3')->nullable();
+            $table->integer('cost_vehicle_class_4')->nullable();
+            $table->integer('cost_vehicle_class_5')->nullable();
+
+            $table->tinyInteger('infantry_valid')->nullable();
+            $table->tinyInteger('cavalry_valid')->nullable();
+            $table->tinyInteger('vehicle_valid')->nullable();
+
+            $table->tinyInteger('is_defensive')->nullable();
+            $table->decimal('warhead_cost_multiplier')->nullable();
+
         });
 
         Schema::create('anti_missile_systems', function (Blueprint $table) {
@@ -27,6 +48,7 @@ class CreateTileTables extends Migration
 
             $table->string('name');
             $table->string('display_name');
+            $table->integer('cost');
         });
 
         Schema::create('arc_directions', function (Blueprint $table) {
@@ -71,11 +93,8 @@ class CreateTileTables extends Migration
             $table->string('display_name');
         });
 
-        Schema::create('tiles', function (Blueprint $table) {
+        Schema::create('chassis', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedInteger('tile_type_id');
             $table->foreign('tile_type_id')->references('id')->on('tile_types');
@@ -83,28 +102,57 @@ class CreateTileTables extends Migration
             $table->unsignedInteger('tile_class_id');
             $table->foreign('tile_class_id')->references('id')->on('tile_classes');
 
-            $table->unsignedInteger('targeting_id');
-            $table->foreign('targeting_id')->references('id')->on('combat_values');
-
-            $table->unsignedInteger('assault_id');
-            $table->foreign('assault_id')->references('id')->on('combat_values');
-
             $table->unsignedInteger('tech_level_id');
             $table->foreign('tech_level_id')->references('id')->on('tech_levels');
 
             $table->unsignedInteger('mobility_id');
             $table->foreign('mobility_id')->references('id')->on('mobilities');
 
+            $table->integer('cost');
+            $table->integer('evasion');
+
+            $table->integer('damage_stress')->nullable();
+            $table->integer('damage_immobilized')->nullable();
+            $table->integer('damage_weapon_destroyed')->nullable();
+            $table->integer('damage_targeting_destroyed')->nullable();
+            $table->integer('damage_hull_breach')->nullable();
+            $table->integer('damage_fuel_leak')->nullable();
+            $table->integer('damage_destroyed')->nullable();
+        });
+
+        Schema::create('chassis_armor_stats', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->unsignedInteger('chassis_id');
+            $table->foreign('chassis_id')->references('id')->on('chassis');
+
+            $table->integer('armor');
+            $table->integer('move');
+            $table->integer('cost');
+        });
+
+        Schema::create('tiles', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedInteger('chassis_id');
+            $table->foreign('chassis_id')->references('id')->on('chassis');
+
             $table->unsignedInteger('anti_missile_system_id');
             $table->foreign('anti_missile_system_id')->references('id')->on('anti_missile_systems');
 
-            $table->string('name');
+            $table->unsignedInteger('targeting_id');
+            $table->foreign('targeting_id')->references('id')->on('combat_values');
 
-            $table->decimal('app_version');
+            $table->unsignedInteger('assault_id');
+            $table->foreign('assault_id')->references('id')->on('combat_values');
+
+            $table->string('name');
 
             $table->integer('armor');
             $table->integer('stealth');
-            $table->json('tile_data')->nullable();
 
             $table->integer('cached_cost');
 
@@ -126,9 +174,16 @@ class CreateTileTables extends Migration
             $table->integer('range');
 
             $table->string('damage');
-            $table->tinyInteger('is_ama')->default(0);
-            $table->tinyInteger('is_indirect')->default(0);
-            $table->tinyInteger('has_warheads')->default(0);
+
+            $table->tinyInteger('is_infantry')->nullable();
+            $table->tinyInteger('is_indirect')->nullable();
+            $table->tinyInteger('has_warheads')->nullable();
+
+            $table->integer('cost_d4')->nullable();
+            $table->integer('cost_d6')->nullable();
+            $table->integer('cost_d8')->nullable();
+            $table->integer('cost_d10')->nullable();
+            $table->integer('cost_d12')->nullable();
 
             $table->timestamps();
         });
@@ -137,7 +192,7 @@ class CreateTileTables extends Migration
             $table->increments('id');
 
             $table->unsignedInteger('tile_id');
-            $table->foreign('tile_id')->references('id')->on('tiles');
+            $table->foreign('tile_id')->references('id')->on('tiles')->onDelete('cascade');
 
             $table->unsignedInteger('ability_id');
             $table->foreign('ability_id')->references('id')->on('abilities');
@@ -154,7 +209,7 @@ class CreateTileTables extends Migration
             $table->increments('id');
 
             $table->unsignedInteger('tile_id');
-            $table->foreign('tile_id')->references('id')->on('tiles');
+            $table->foreign('tile_id')->references('id')->on('tiles')->onDelete('cascade');
 
             $table->unsignedInteger('weapon_id');
             $table->foreign('weapon_id')->references('id')->on('weapons');

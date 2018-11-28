@@ -1,4 +1,5 @@
 import {extend, findIndex} from 'lodash';
+import {make as makeTileWeapon} from '../store/models/tile-weapon';
 
 export {
     findItemById,
@@ -36,6 +37,7 @@ function findItemIndex(items, item) {
 function findItemIndexOrFail(items, item) {
     let index = findItemIndex(items, item);
     if (index === false) {
+        console.error('item not found', item);
         throw Error('Item not found', item);
     }
     return index;
@@ -76,7 +78,7 @@ function move(items, fromIndex, toIndex) {
 
 
 function copyItem(items, item) {
-    let index = findItemIndex(items, item);
+    let index   = findItemIndex(items, item);
     let toIndex = index + 1;
     createItem(items, item, toIndex);
 }
@@ -90,7 +92,9 @@ function setDisplayOrders(items) {
 let newId = 1;
 
 function createItem(items, item, newIndex) {
+
     item.id = 'new-' + newId++;
+
     if (newIndex) {
         items.splice(newIndex, 0, item);
         setDisplayOrders(items);

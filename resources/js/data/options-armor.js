@@ -16,6 +16,15 @@ function make(values) {
     });
 }
 
+function maxArmorForTileType(typeId) {
+    let armorOptions = armorOptionsByTileTypeId[typeId];
+    let keys         = Object.keys(armorOptions);
+    let last         = keys[keys.length - 1];
+    return parseInt(last, 10);
+}
+
 export {
-    armorOptionsByTileTypeId
+    armorOptionsByTileTypeId,
+    maxArmorForTileType
+
 }

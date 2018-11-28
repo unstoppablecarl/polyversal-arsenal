@@ -9,6 +9,7 @@ class AntiMissileSystem extends Model
     protected $fillable = [
         'name',
         'display_name',
+        'cost'
     ];
 
     public $timestamps = false;

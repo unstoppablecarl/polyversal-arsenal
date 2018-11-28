@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <div :class="['form-group row', {'ability-disabled': !item.valid}]" v-for="item in abilityOptions"
-             :key="item.id">
+        <div :class="['form-group row', {'ability-disabled': !item.valid}]" v-for="item in options"
+             :key="item.id" v-if="item.valid">
             <label class="col-sm-2 col-form-label">
 
                 {{item.display_name}}
@@ -34,6 +34,10 @@
                 <span class="text-primary" data-tooltip :title.once="defensiveSystemTooltip" v-if="item.is_defensive">
                     Defensive System
                 </span>
+                <span class="text-primary" data-tooltip :title.once="jumpJetSystemTooltip"
+                      v-if="item.is_jumpjet">
+                    Jump System
+                </span>
             </div>
         </div>
     </div>
@@ -41,9 +45,8 @@
 
 <script>
     import Number from './number';
-    import {mapTileProperties} from '../data/mappers';
-    import {mapGetters} from 'vuex';
-    import {defensiveSystemTooltip} from '../content/tooltips';
+    import {mapAbilityGetters, mapTileProperties} from '../data/mappers';
+    import {defensiveSystemTooltip, jumpJetSystemTooltip} from '../content/tooltips';
 
     export default {
         name: 'tile-ability-list',
@@ -51,24 +54,25 @@
         props: {},
         data() {
             return {
-                defensiveSystemTooltip
+                defensiveSystemTooltip,
+                jumpJetSystemTooltip
             };
         },
         computed: {
             ...mapTileProperties({
-                tile_type_id: 'type_id',
+                tile_type_id: 'tile_type_id',
                 tile_class_id: 'class_id',
             }),
-            ...mapGetters([
-                'abilityOptions',
+            ...mapAbilityGetters([
+                'options',
             ]),
         },
         methods: {
             add(abilityId) {
-                this.$store.commit('addAbility', abilityId);
+                this.$store.dispatch('abilities/add', abilityId);
             },
             remove(abilityId) {
-                this.$store.commit('removeAbility', abilityId);
+                this.$store.dispatch('abilities/remove', abilityId);
             },
             toggle(item) {
                 if (item.active) {

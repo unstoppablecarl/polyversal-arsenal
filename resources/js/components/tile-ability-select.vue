@@ -79,7 +79,7 @@
         },
         computed: {
             ...mapTileProperties({
-                tile_type_id: 'type_id',
+                tile_type_id: 'tile_type_id',
             }),
             isDefensiveSystem() {
                 if (this.tile_type_id === TILE_TYPE_VEHICLE_ID) {

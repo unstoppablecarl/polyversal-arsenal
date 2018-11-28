@@ -3,33 +3,31 @@
     'item_action' => 'Delete',
 
     'item_type_name' => 'Tile',
-    'item_instance_name' => $item->title,
+    'item_instance_name' => $item->name,
 ])
 
 @section('breadcrumbs')
-    @component('records.tiles.partials.breadcrumbs', [
-        'name' => 'Delete'
-    ])
-    @endcomponent
-@endsection
 
-@section('form-title')
-    @parent
-    @include('records.tiles.controls.title-details')
 @endsection
 
 @section('controls')
-    @include('records.tiles.controls.buttons')
+    @include('tiles.controls.buttons')
 @endsection
 
 @section('form')
 
-    <h2 class="text-danger">Are you sure you want to delete this Tile?</h2>
 
+    <div class="float-right">
     {!! Form::model( $item, ['url' => route('tiles.destroy', $item), 'method' => 'delete']) !!}
 
-        {!! Form::submit( 'Delete', ['class' => 'btn btn-large btn-danger']) !!}
-
+        <button type="submit" class="btn btn-danger">
+            Delete Tile
+            <i class="fas fa-fw fa-trash"></i>
+        </button>
     {!! Form::close() !!}
+    </div>
+    <h2 class="text-danger">Are you sure you want to delete this Tile?</h2>
+
+    @include('tiles.partials.view-tile', ['item' => $item])
 
 @endsection

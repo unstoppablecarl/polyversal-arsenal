@@ -41,8 +41,8 @@
                             <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
+                                        <input type="hidden" name="remember" value="0" />
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1" {{ old('remember') === '0' ? '' : 'checked' }}>
                                         <label class="form-check-label" for="remember">
                                             {{ __('Remember Me') }}
                                         </label>
