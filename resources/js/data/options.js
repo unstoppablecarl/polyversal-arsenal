@@ -2,7 +2,7 @@ import vehicleClassOptions from '../../../source-data/static/tile-classes.json';
 import techLevelOptions from '../../../source-data/static/tech-levels.json';
 import attackStats from '../../../source-data/static/combat-values.json';
 import tileTypeOptions from '../../../source-data/static/tile-types.json';
-import abilityOptionsData from '../../../source-data/static/abilities.json';
+import abilityOptionsData from '../../../source-data/imported/abilities.json';
 import amaOptions from '../../../source-data/static/anti-missile-systems.json';
 import arcSizeOptions from '../../../source-data/static/arc-sizes.json';
 import arcDirectionOptions from '../../../source-data/static/arc-directions.json';
@@ -38,7 +38,6 @@ export {
     targetingById,
     arcSizeById,
     arcDirectionById,
-
 
     amaById,
 };

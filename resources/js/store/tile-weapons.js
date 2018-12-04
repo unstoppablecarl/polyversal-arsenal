@@ -1,6 +1,3 @@
-import {abilityOptions, amaById} from '../data/options';
-import {ABILITY_JUMP_JETS_ID, TILE_TYPE_VEHICLE_ID} from '../data/constants';
-import {abilityCost, abilityValid} from '../data/abilities';
 import {make as makeTileWeapon, sanitize as sanitizeTileWeapon} from './models/tile-weapon';
 import {copyItem, createItem, deleteItem, moveItem, updateItem} from '../lib/collection-helper';
 import Weapons from '../data/weapons';

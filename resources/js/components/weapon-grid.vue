@@ -36,7 +36,7 @@
 
                             <weapon-grid-item
                                 v-for="item in tile_weapons"
-                                :key="item.id"
+                                :key="item.display_order"
                                 :id="item.id"
                                 :weapon_id="item.weapon_id"
                                 :quantity="item.quantity"

@@ -2,7 +2,6 @@
 
 use App\Models\Chassis;
 use App\Models\ChassisArmorStat;
-use App\Models\ChassisDamageTrack;
 use App\Models\Mobility;
 use App\Models\TechLevel;
 use App\Models\TileType;
@@ -25,7 +24,6 @@ class ChassisSeeder extends Seeder
 
         $chassisByKey = $this->seedChassis();
 
-        // $this->seedChassisDamageTracks($chassisByKey);
         $this->seedChassisArmorStats($chassisByKey);
     }
 
@@ -62,34 +60,6 @@ class ChassisSeeder extends Seeder
             $chassisByKey[$key] = Chassis::query()->updateOrCreate($where, $row);
         }
         return $chassisByKey;
-    }
-
-    protected function seedChassisDamageTracks($chassisByKey)
-    {
-        $records = $this->getCsvData('source-data/chassis-damage-tracks.csv');
-
-        foreach ($records as $row) {
-            $row = $this->mapRowIds($row);
-            $key = $this->keyFromRow($row);
-
-            $chassis           = $chassisByKey[$key];
-            $row               = array_only($row, [
-                'damage_stress',
-                'damage_immobilized',
-                'damage_weapon_destroyed',
-                'damage_targeting_destroyed',
-                'damage_hull_breach',
-                'damage_fuel_leak',
-                'damage_destroyed',
-            ]);
-            $row['chassis_id'] = $chassis->id;
-
-            $where = array_only($row, [
-                'chassis_id',
-            ]);
-
-            ChassisDamageTrack::query()->updateOrCreate($where, $row);
-        }
     }
 
     protected function seedChassisArmorStats($chassisByKey)

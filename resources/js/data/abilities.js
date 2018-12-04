@@ -1,4 +1,5 @@
-import abilityData from '../../../source-data/static/abilities.json';
+import abilityData from '../../../source-data/imported/abilities.json';
+
 import {keyBy, find} from 'lodash';
 import {TILE_TYPE_VEHICLE_ID} from './constants';
 import {tileTypeById} from './options';
@@ -9,24 +10,28 @@ function abilityValid(abilityId, tileTypeId) {
     let ability      = abilitiesById[abilityId];
     let tileTypeName = tileTypeById[tileTypeId].name;
 
-    return !!ability.cost[tileTypeName];
+    return !!ability[tileTypeName + '_valid'];
 }
 
 function abilityCost(abilityId, tileTypeId, tileClassId, warheadWeaponsTotalCost) {
-    let ability      = abilitiesById[abilityId];
+    let ability = abilitiesById[abilityId];
     let tileTypeName = tileTypeById[tileTypeId].name;
-    if(ability.warhead_multiplier){
-        return ability.warhead_multiplier * warheadWeaponsTotalCost;
+    if (!abilityValid(abilityId, tileTypeId)) {
+        throw new Error('invalid ability: ' + ability.display_name + ', for tile type: ' + tileTypeName);
+    }
+    if (ability.warhead_cost_multiplier) {
+        return ability.warhead_cost_multiplier * warheadWeaponsTotalCost;
     }
 
-    if (ability.cost.static) {
-        return ability.cost.static;
+    if (ability.cost_static) {
+        return ability.cost_static;
     }
+
     let isVehicle = tileTypeId === TILE_TYPE_VEHICLE_ID;
     if (isVehicle) {
-        return ability.cost[tileTypeName][tileClassId];
+        return ability['cost_vehicle_class_' + tileClassId];
     }
-    return ability.cost[tileTypeName] || 0;
+    return ability['cost_' + tileTypeName] || 0;
 }
 
 function abilityIsDefensive(abilityId) {

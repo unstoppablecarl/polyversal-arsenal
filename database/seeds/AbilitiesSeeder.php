@@ -13,7 +13,7 @@ class AbilitiesSeeder extends Seeder
         $data = $this->getCsvData('source-data/abilities.csv');
         foreach ($data as $row) {
             $where = [
-                'name' => $row['name'],
+                'id' => $row['id'],
             ];
 
             Ability::query()->updateOrCreate($where, $row);

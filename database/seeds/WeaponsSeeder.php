@@ -15,7 +15,7 @@ class WeaponsSeeder extends Seeder
         $data = $this->getCsvData('source-data/weapons.csv');
         foreach ($data as $row) {
             $where = [
-                'name' => $row['name'],
+                'id' => $row['id']
             ];
 
             \App\Models\Weapon::query()->updateOrCreate($where, $row);

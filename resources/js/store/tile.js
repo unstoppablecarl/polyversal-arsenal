@@ -17,7 +17,6 @@ import {
 import {getMaxStealth, getStealthOptions} from '../data/options-stealth';
 
 import {
-    make as makeTile,
     sanitize as sanitizeTile,
 } from './models/tile';
 
@@ -36,12 +35,16 @@ export default {
         assault_id: 1,
         stealth: 0,
         anti_missile_system_id: 6,
-
+        image_url: null,
+        new_image_data: null,
     },
     mutations: {
         update(state, data) {
             data = sanitizeTile(data);
             Object.assign(state, data);
+        },
+        setNewImageData(state, data) {
+            state.new_image_data = data;
         },
     },
     actions: {
@@ -78,11 +81,12 @@ export default {
                 tile.stealth = stealth;
 
             }
+            dispatch('abilities/removeInvalid', tile.tile_type_id, {root: true});
 
             commit('update', tile);
 
-            dispatch('abilities/removeInvalid', null, {root: true});
         },
+
     },
     getters: {
         tile(state) {
@@ -239,6 +243,9 @@ export default {
         },
         printSubTitle(state, getters) {
             return getters.makeSubtitle('Cls');
+        },
+        new_image_data(state) {
+            return state.new_image_data;
         },
     },
 };

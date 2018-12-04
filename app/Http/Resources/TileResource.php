@@ -35,6 +35,7 @@ class TileResource extends Resource
                 'armor'                  => $this->armor,
                 'stealth'                => $this->stealth,
                 'cached_cost'            => $this->cached_cost,
+                'image_url'              => $this->front_image_file,
             ],
             'ability_ids'  => $this->abilities()->pluck('abilities.id'),
             'tile_weapons' => TileWeaponResource::collection($this->tileWeapons),

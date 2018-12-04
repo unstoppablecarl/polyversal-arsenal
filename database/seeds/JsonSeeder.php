@@ -49,7 +49,7 @@ class JsonSeeder extends Seeder
         $items = $this->getJsonData($file);
 
         foreach ($items as $item) {
-            $where = array_only($item, ['id', 'name']);
+            $where = array_only($item, ['id']);
             $modelClass::reguard();
             $item = (new $modelClass($item))->toArray();
             $item['id'] = $where['id'];

@@ -47,15 +47,22 @@ class ImportWeapons extends Command
                 'cost_d8'  => $row['cost_d8'],
                 'cost_d10' => $row['cost_d10'],
                 'cost_d12' => $row['cost_d12'],
-                'is_infantry' => $row['is_infantry'],
-                'is_indirect' => $row['is_indirect'],
-                'has_warheads' => $row['has_warheads'],
+                'is_infantry' => $row['is_infantry'] ?: null,
+                'is_indirect' => $row['is_indirect'] ?: null,
+                'has_warheads' => $row['has_warheads'] ?: null,
             ];
 
             $data[] = $newRow;
         }
 
-        file_put_contents('source-data/imported/weapons.json', json_encode($data, JSON_NUMERIC_CHECK));
+        $writer = Writer::createFromPath('source-data/weapons2.csv');
+
+        $first = $data[0];
+        $writer->insertOne(array_keys($first));
+
+        $writer->insertAll($data);
+
+        // file_put_contents('source-data/imported/weapons.json', json_encode($data, JSON_NUMERIC_CHECK));
     }
 
     protected function normalizeNumbers($str)

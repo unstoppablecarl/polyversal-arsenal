@@ -13,9 +13,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 2,
@@ -31,9 +31,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 3,
@@ -49,9 +49,9 @@
         "cost_d8": 5,
         "cost_d10": 6,
         "cost_d12": 6,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 4,
@@ -67,9 +67,9 @@
         "cost_d8": 7,
         "cost_d10": 8,
         "cost_d12": 9,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 5,
@@ -85,9 +85,9 @@
         "cost_d8": 11,
         "cost_d10": 13,
         "cost_d12": 14,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 6,
@@ -103,8 +103,8 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
+        "is_infantry": null,
+        "is_indirect": null,
         "has_warheads": 1
     },
     {
@@ -121,8 +121,8 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
+        "is_infantry": null,
+        "is_indirect": null,
         "has_warheads": 1
     },
     {
@@ -139,8 +139,8 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
+        "is_infantry": null,
+        "is_indirect": null,
         "has_warheads": 1
     },
     {
@@ -157,8 +157,8 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
+        "is_infantry": null,
+        "is_indirect": null,
         "has_warheads": 1
     },
     {
@@ -175,8 +175,8 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
+        "is_infantry": null,
+        "is_indirect": null,
         "has_warheads": 1
     },
     {
@@ -193,9 +193,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 12,
@@ -211,9 +211,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 13,
@@ -229,9 +229,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 14,
@@ -247,9 +247,9 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 15,
@@ -265,9 +265,9 @@
         "cost_d8": 3,
         "cost_d10": 3,
         "cost_d12": 4,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 16,
@@ -283,9 +283,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 17,
@@ -301,9 +301,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 5,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 18,
@@ -319,9 +319,9 @@
         "cost_d8": 5,
         "cost_d10": 6,
         "cost_d12": 7,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 19,
@@ -337,9 +337,9 @@
         "cost_d8": 7,
         "cost_d10": 9,
         "cost_d12": 10,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 20,
@@ -355,9 +355,9 @@
         "cost_d8": 11,
         "cost_d10": 13,
         "cost_d12": 15,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 21,
@@ -373,9 +373,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 1,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 22,
@@ -391,9 +391,9 @@
         "cost_d8": 1,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 23,
@@ -409,9 +409,9 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 3,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 24,
@@ -427,9 +427,9 @@
         "cost_d8": 3,
         "cost_d10": 3,
         "cost_d12": 3,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 25,
@@ -445,9 +445,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 5,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 26,
@@ -463,7 +463,7 @@
         "cost_d8": 3,
         "cost_d10": 5,
         "cost_d12": 7,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -481,7 +481,7 @@
         "cost_d8": 7,
         "cost_d10": 10,
         "cost_d12": 12,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -499,7 +499,7 @@
         "cost_d8": 11,
         "cost_d10": 15,
         "cost_d12": 18,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -517,7 +517,7 @@
         "cost_d8": 20,
         "cost_d10": 25,
         "cost_d12": 28,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -535,7 +535,7 @@
         "cost_d8": 32,
         "cost_d10": 36,
         "cost_d12": 41,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -554,8 +554,8 @@
         "cost_d10": 1,
         "cost_d12": 1,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 32,
@@ -572,8 +572,8 @@
         "cost_d10": 1,
         "cost_d12": 1,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 33,
@@ -590,8 +590,8 @@
         "cost_d10": 2,
         "cost_d12": 3,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 34,
@@ -608,8 +608,8 @@
         "cost_d10": 1,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 35,
@@ -626,8 +626,8 @@
         "cost_d10": 2,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 36,
@@ -644,8 +644,8 @@
         "cost_d10": 2,
         "cost_d12": 3,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 37,
@@ -662,8 +662,8 @@
         "cost_d10": 5,
         "cost_d12": 6,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 38,
@@ -680,8 +680,8 @@
         "cost_d10": 9,
         "cost_d12": 10,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 39,
@@ -698,8 +698,8 @@
         "cost_d10": 13,
         "cost_d12": 16,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 40,
@@ -716,8 +716,8 @@
         "cost_d10": 1,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 41,
@@ -734,8 +734,8 @@
         "cost_d10": 2,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 42,
@@ -752,8 +752,8 @@
         "cost_d10": 5,
         "cost_d12": 5,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 43,
@@ -770,8 +770,8 @@
         "cost_d10": 1,
         "cost_d12": 1,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 44,
@@ -788,8 +788,8 @@
         "cost_d10": 2,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 45,
@@ -806,8 +806,8 @@
         "cost_d10": 5,
         "cost_d12": 5,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 46,
@@ -824,8 +824,8 @@
         "cost_d10": 3,
         "cost_d12": 3,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 47,
@@ -842,8 +842,8 @@
         "cost_d10": 7,
         "cost_d12": 8,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 48,
@@ -860,8 +860,8 @@
         "cost_d10": 10,
         "cost_d12": 12,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 49,
@@ -879,7 +879,7 @@
         "cost_d12": 3,
         "is_infantry": 1,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 50,
@@ -897,7 +897,7 @@
         "cost_d12": 4,
         "is_infantry": 1,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 51,
@@ -915,7 +915,7 @@
         "cost_d12": 6,
         "is_infantry": 1,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 52,
@@ -932,8 +932,8 @@
         "cost_d10": 2,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 53,
@@ -950,8 +950,8 @@
         "cost_d10": 3,
         "cost_d12": 3,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 54,
@@ -968,8 +968,8 @@
         "cost_d10": 4,
         "cost_d12": 4,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 55,
@@ -986,8 +986,8 @@
         "cost_d10": 2,
         "cost_d12": 2,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 56,
@@ -1004,8 +1004,8 @@
         "cost_d10": 3,
         "cost_d12": 4,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 57,
@@ -1022,8 +1022,8 @@
         "cost_d10": 5,
         "cost_d12": 5,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 58,
@@ -1040,8 +1040,8 @@
         "cost_d10": 1,
         "cost_d12": 1,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 59,
@@ -1058,8 +1058,8 @@
         "cost_d10": 3,
         "cost_d12": 3,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 60,
@@ -1076,8 +1076,8 @@
         "cost_d10": 4,
         "cost_d12": 4,
         "is_infantry": 1,
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 61,
@@ -1093,9 +1093,9 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 8,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 62,
@@ -1111,9 +1111,9 @@
         "cost_d8": 7,
         "cost_d10": 9,
         "cost_d12": 10,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 63,
@@ -1129,9 +1129,9 @@
         "cost_d8": 10,
         "cost_d10": 12,
         "cost_d12": 13,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 64,
@@ -1147,9 +1147,9 @@
         "cost_d8": 13,
         "cost_d10": 17,
         "cost_d12": 19,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 65,
@@ -1165,9 +1165,9 @@
         "cost_d8": 18,
         "cost_d10": 21,
         "cost_d12": 24,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 66,
@@ -1183,9 +1183,9 @@
         "cost_d8": 1,
         "cost_d10": 1,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 67,
@@ -1201,9 +1201,9 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 68,
@@ -1219,9 +1219,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 69,
@@ -1237,9 +1237,9 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 5,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 70,
@@ -1255,9 +1255,9 @@
         "cost_d8": 5,
         "cost_d10": 6,
         "cost_d12": 7,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 71,
@@ -1273,7 +1273,7 @@
         "cost_d8": 3,
         "cost_d10": 5,
         "cost_d12": 6,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -1291,7 +1291,7 @@
         "cost_d8": 8,
         "cost_d10": 9,
         "cost_d12": 11,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -1309,7 +1309,7 @@
         "cost_d8": 13,
         "cost_d10": 15,
         "cost_d12": 17,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -1327,7 +1327,7 @@
         "cost_d8": 20,
         "cost_d10": 23,
         "cost_d12": 26,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -1345,7 +1345,7 @@
         "cost_d8": 33,
         "cost_d10": 38,
         "cost_d12": 42,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
         "has_warheads": 1
     },
@@ -1363,9 +1363,9 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 77,
@@ -1381,9 +1381,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 5,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 78,
@@ -1399,9 +1399,9 @@
         "cost_d8": 5,
         "cost_d10": 7,
         "cost_d12": 8,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 79,
@@ -1417,9 +1417,9 @@
         "cost_d8": 7,
         "cost_d10": 9,
         "cost_d12": 10,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 80,
@@ -1435,9 +1435,9 @@
         "cost_d8": 10,
         "cost_d10": 13,
         "cost_d12": 16,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 81,
@@ -1453,9 +1453,9 @@
         "cost_d8": 2,
         "cost_d10": 3,
         "cost_d12": 3,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 82,
@@ -1471,9 +1471,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 5,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 83,
@@ -1489,9 +1489,9 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 9,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 84,
@@ -1507,9 +1507,9 @@
         "cost_d8": 7,
         "cost_d10": 10,
         "cost_d12": 13,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 85,
@@ -1525,9 +1525,9 @@
         "cost_d8": 11,
         "cost_d10": 15,
         "cost_d12": 18,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 86,
@@ -1543,9 +1543,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 87,
@@ -1561,9 +1561,9 @@
         "cost_d8": 4,
         "cost_d10": 4,
         "cost_d12": 5,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 88,
@@ -1579,9 +1579,9 @@
         "cost_d8": 4,
         "cost_d10": 5,
         "cost_d12": 6,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 89,
@@ -1597,9 +1597,9 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 7,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 90,
@@ -1615,9 +1615,9 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 8,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 91,
@@ -1633,9 +1633,9 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 92,
@@ -1651,9 +1651,9 @@
         "cost_d8": 3,
         "cost_d10": 3,
         "cost_d12": 4,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 93,
@@ -1669,9 +1669,9 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 9,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 94,
@@ -1687,9 +1687,9 @@
         "cost_d8": 8,
         "cost_d10": 10,
         "cost_d12": 11,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 95,
@@ -1705,9 +1705,9 @@
         "cost_d8": 10,
         "cost_d10": 12,
         "cost_d12": 13,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 96,
@@ -1723,9 +1723,9 @@
         "cost_d8": 1,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 97,
@@ -1741,9 +1741,9 @@
         "cost_d8": 4,
         "cost_d10": 6,
         "cost_d12": 7,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 98,
@@ -1759,9 +1759,9 @@
         "cost_d8": 7,
         "cost_d10": 9,
         "cost_d12": 11,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 99,
@@ -1777,9 +1777,9 @@
         "cost_d8": 10,
         "cost_d10": 13,
         "cost_d12": 15,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 100,
@@ -1795,9 +1795,9 @@
         "cost_d8": 16,
         "cost_d10": 21,
         "cost_d12": 24,
-        "is_infantry": "",
-        "is_indirect": "",
-        "has_warheads": ""
+        "is_infantry": null,
+        "is_indirect": null,
+        "has_warheads": null
     },
     {
         "id": 101,
@@ -1813,9 +1813,9 @@
         "cost_d8": 2,
         "cost_d10": 2,
         "cost_d12": 2,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 102,
@@ -1831,9 +1831,9 @@
         "cost_d8": 3,
         "cost_d10": 4,
         "cost_d12": 4,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 103,
@@ -1849,9 +1849,9 @@
         "cost_d8": 6,
         "cost_d10": 7,
         "cost_d12": 9,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 104,
@@ -1867,9 +1867,9 @@
         "cost_d8": 9,
         "cost_d10": 11,
         "cost_d12": 12,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     },
     {
         "id": 105,
@@ -1885,8 +1885,8 @@
         "cost_d8": 13,
         "cost_d10": 15,
         "cost_d12": 17,
-        "is_infantry": "",
+        "is_infantry": null,
         "is_indirect": 1,
-        "has_warheads": ""
+        "has_warheads": null
     }
 ]

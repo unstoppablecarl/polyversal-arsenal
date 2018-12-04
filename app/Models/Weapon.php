@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Weapon extends Model
 {
-
     protected $fillable = [
         'user_id',
         'name',
@@ -24,7 +23,6 @@ class Weapon extends Model
         'cost_d8',
         'cost_d10',
         'cost_d12',
-
     ];
 
     public function scopeWherePublic($query)

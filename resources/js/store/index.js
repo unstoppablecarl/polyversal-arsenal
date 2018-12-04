@@ -6,7 +6,7 @@ import server from './server-repo';
 import {notificationFromErrorResponse, notificationSuccess} from './notification';
 
 export default new Vuex.Store({
-    mutations: {},
+
     actions: {
         set({commit, dispatch}, data) {
             dispatch('tile/update', data.tile);
@@ -16,7 +16,7 @@ export default new Vuex.Store({
         update({commit, dispatch}, data) {
             dispatch('tile/update', data.tile);
             dispatch('abilities/set', data.ability_ids);
-            dispatch('tile_weapons/updateAll', data.tile_weapons);
+            dispatch('tile_weapons/set', data.tile_weapons);
         },
         fetch({commit, state, dispatch}, tileId) {
             return server.fetch(tileId)
@@ -58,6 +58,7 @@ export default new Vuex.Store({
                 'assault_id',
                 'stealth',
                 'anti_missile_system_id',
+                'new_image_data',
             ]);
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
@@ -107,6 +108,25 @@ export default new Vuex.Store({
                     })
                     .catch(handleError);
             }
+        },
+        saveNewImage({commit, state, getters, dispatch}) {
+
+            let newImageData = state.tile.new_image_data;
+
+            const handleError = (error) => {
+                console.error(error);
+                notificationFromErrorResponse(error.response);
+            };
+
+            server.updateImage(state.tile.id, newImageData)
+                .then((response) => {
+                    notificationSuccess({
+                        title: 'Tile Image Updated',
+                    });
+                    let payload = response.data.data;
+                    return dispatch('set', {front_image_url: payload.front_image_url});
+                })
+                .catch(handleError);
         },
     },
     getters: {

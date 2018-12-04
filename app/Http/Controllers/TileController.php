@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TileSaveRequest;
+use App\Http\Resources\TileGridResource;
 use App\Http\Resources\TileResource;
 use App\Models\Tile;
 use App\Services\CostService;
@@ -13,22 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TileController extends Controller
 {
-    public function index(Request $request, TileListService $service)
-    {
-        $tiles = $service->get(Auth::user()->id);
-
-        $tiles->each(function ($row) {
-            $model      = new Tile((array)$row);
-            $model->id  = $row->id;
-            $row->model = $model;
-        });
-
-        return view('tiles.index')
-            ->with([
-                'items' => $tiles,
-            ]);
-    }
-
     public function create()
     {
         return view('tiles.create');
@@ -51,14 +36,12 @@ class TileController extends Controller
     public function edit(Tile $tile)
     {
         return view('tiles.app');
-        // ->with([
-        //     'item' => $tile,
-        // ]);
     }
 
     public function update(TileSaveRequest $request, TileService $service, Tile $tile)
     {
         $service->update($tile, $request->all());
+
         if ($request->wantsJson()) {
             return new TileResource($tile);
         }

@@ -44,28 +44,28 @@ const routes = [
 
 if (document.getElementById('app-tile')) {
 
-
-    //let tileData = null
-    //if(window.APP_DATA && window.APP_DATA.tile_data){
-    //    tileData = window.APP_DATA.tile_data;
-    //}
-    //
-    //let tile_weapons = [];
-    //
-    //if(tileData.tile_weapons){
-    //    tile_weapons = tileData.tile_weapons.map((item) => tileWeaponCreate(item));
-    //}
-
     const router = new VueRouter({
         routes,
     });
-    let app = new Vue({
+    let app      = new Vue({
         el: '#app-tile',
         store,
         router,
         components: {
             Tile,
             WeaponGrid,
+        },
+    });
+}
+
+import TileGrid from './components/tile-grid';
+
+if (document.getElementById('app-tile-grid')) {
+
+    let app = new Vue({
+        el: '#app-tile-grid',
+        components: {
+            TileGrid,
         },
     });
 }

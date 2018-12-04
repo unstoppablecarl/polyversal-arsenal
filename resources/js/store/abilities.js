@@ -33,10 +33,10 @@ export default {
         remove({commit, state}, abilityId) {
             commit('remove', abilityId);
         },
-        removeInvalid({commit, state, rootState}) {
-            let abilityIds = state.ability_ids.forEach((abilityId) => {
-                if (!abilityValid(abilityId, rootState.tile.tile_type_id)) {
-                    commit('remove', abilityIds);
+        removeInvalid({commit, state, rootState}, newTileTypeId) {
+            state.ability_ids.forEach((abilityId) => {
+                if (!abilityValid(abilityId, newTileTypeId)) {
+                    commit('remove', abilityId);
                 }
             });
         },
@@ -50,7 +50,6 @@ export default {
                 .filter((item) => {
                     let active = state.ability_ids.indexOf(item.id) !== -1;
                     return active;
-
                 })
                 .map((item) => item.display_name);
         },

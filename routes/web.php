@@ -26,13 +26,20 @@ use App\Models\Tile;
 Route::group([
     'middleware' => 'auth',
 ], function () {
-    Route::get('tiles', 'TileController@index')
-        ->name('tiles.index')
-        ->middleware('can:view,' . Tile::class);
 
+
+    Route::group([
+        'middleware' => 'can:view,' . Tile::class
+    ], function () {
+
+    Route::get('tiles', 'TileGridController@index')
+        ->name('tiles.index');
+
+    Route::get('tiles-grid', 'TileGridController@grid')
+        ->name('tiles.grid');
+    });
 
     Route::view('app', 'app')->name('tiles.app');
-
 
     Route::group([
         'middleware' => 'can:create,' . Tile::class,
@@ -49,6 +56,9 @@ Route::group([
 
         Route::put('tiles/{tile}', 'TileController@update')
             ->name('tiles.update');
+
+        Route::post('tiles/{tile}/upload-image', 'TileController@updateImage')
+            ->name('tiles.upload-image');
     });
 
     Route::group([

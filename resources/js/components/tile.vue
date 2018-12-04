@@ -84,10 +84,12 @@
     import Tabs from './tabs';
     import TilePrint from './tile-print';
     import TileNotifications from './tile-notifications';
+    import FileUpload from './file-upload';
 
     export default {
         name: 'tile',
         components: {
+            FileUpload,
             TileNotifications,
             TilePrint,
             Tabs,

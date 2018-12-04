@@ -13,9 +13,17 @@ function update(data) {
     return axios.put(url, data);
 }
 
+function updateImage(tileId, imageData) {
+    const url = updateImageURL(tileId);
+    return axios.post(url, {new_image_data: imageData});
+}
 
 function updateURL(tileId) {
     return '/tiles/' + tileId;
+}
+
+function updateImageURL(tileId) {
+    return '/tiles/' + tileId + '/upload-image';
 }
 
 
@@ -35,8 +43,10 @@ export default {
     fetch,
     create,
     update,
+    updateImage,
     editURL,
     updateURL,
     viewURL,
     deleteURL,
+    updateImageURL,
 };

@@ -7,6 +7,7 @@ use App\Models\AntiMissileSystem;
 use App\Models\Mobility;
 use App\Models\Weapon;
 use App\Services\TileTypes;
+use App\Services\Validation\Base64ImageRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -73,6 +74,10 @@ class TileSaveRequest extends FormRequest
             'costs.tile_weapons' => 'integer|required',
             'costs.abilities'    => 'integer|required',
 
+            'new_image_data' => [
+                'nullable',
+                new Base64ImageRule,
+            ],
         ];
     }
 

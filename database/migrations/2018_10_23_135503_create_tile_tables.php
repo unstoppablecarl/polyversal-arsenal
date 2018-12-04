@@ -40,7 +40,6 @@ class CreateTileTables extends Migration
 
             $table->tinyInteger('is_defensive')->nullable();
             $table->decimal('warhead_cost_multiplier')->nullable();
-
         });
 
         Schema::create('anti_missile_systems', function (Blueprint $table) {
@@ -154,6 +153,8 @@ class CreateTileTables extends Migration
             $table->integer('armor');
             $table->integer('stealth');
 
+            $table->string('front_image_file')->nullable();
+
             $table->integer('cached_cost');
 
             $table->timestamps();
@@ -233,8 +234,21 @@ class CreateTileTables extends Migration
     public function down()
     {
         Schema::dropIfExists('tile_weapons');
-        Schema::dropIfExists('arcs');
-        Schema::dropIfExists('tiles');
+        Schema::dropIfExists('tile_weapon_types');
+        Schema::dropIfExists('tile_abilities');
         Schema::dropIfExists('weapons');
+        Schema::dropIfExists('tiles');
+        Schema::dropIfExists('chassis_armor_stats');
+        Schema::dropIfExists('chassis');
+        Schema::dropIfExists('tile_classes');
+        Schema::dropIfExists('tech_levels');
+        Schema::dropIfExists('mobilities');
+        Schema::dropIfExists('combat_values');
+        Schema::dropIfExists('arc_sizes');
+        Schema::dropIfExists('arc_directions');
+
+        Schema::dropIfExists('anti_missile_systems');
+        Schema::dropIfExists('abilities');
+        Schema::dropIfExists('tile_types');
     }
 }
