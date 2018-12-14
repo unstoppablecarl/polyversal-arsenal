@@ -266,9 +266,6 @@ export default {
         printSubTitle(state, getters) {
             return getters.makeSubtitle('Cls');
         },
-        fileName(state) {
-            return state.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        },
         //new_front_image_data(state) {
         //    return state.new_front_image_data;
         //},

@@ -59,15 +59,11 @@ export default new Vuex.Store({
                 'assault_id',
                 'stealth',
                 'anti_missile_system_id',
-                'new_front_image_data',
-                'new_back_image_data',
-                'new_front_svg_data',
-                'new_back_svg_data',
                 'flavor_text',
             ]);
 
             data.new_front_source_image = getters['images/newFrontSourceImageBase64'];
-            data.new_back_source_image = getters['images/newBackSourceImageBase64'];
+            data.new_back_source_image  = getters['images/newBackSourceImageBase64'];
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
             data.ability_ids  = state.abilities.ability_ids;
@@ -90,29 +86,42 @@ export default new Vuex.Store({
                 }
             };
 
-            if (!state.tile.id) {
-                return server.create(data)
-                    .then((response) => {
-                        notificationSuccess({
-                            title: 'Tile Created',
-                        });
-                        let payload = response.data.data;
-                        handelSuccess(payload);
-                        return dispatch('set', payload);
-                    })
-                    .catch(handleError);
-            }
-            else {
-                return server.update(data)
-                    .then((response) => {
-                        notificationSuccess({
-                            title: 'Tile Saved',
-                        });
-                        let payload = response.data.data;
-                        handelSuccess(payload);
-                        return dispatch('set', payload);
-                    })
-                    .catch(handleError);
+            Promise.all([
+                    dispatch('images/getFrontImageBase64'),
+                    dispatch('images/getFrontSvgString'),
+                ])
+                .then((results) => {
+                    data.new_front_image = results[0];
+                    data.new_front_svg   = results[1];
+                    sendRequest();
+                });
+
+            function sendRequest() {
+
+                if (!state.tile.id) {
+                    return server.create(data)
+                        .then((response) => {
+                            notificationSuccess({
+                                title: 'Tile Created',
+                            });
+                            let payload = response.data.data;
+                            handelSuccess(payload);
+                            return dispatch('set', payload);
+                        })
+                        .catch(handleError);
+                }
+                else {
+                    return server.update(data)
+                        .then((response) => {
+                            notificationSuccess({
+                                title: 'Tile Saved',
+                            });
+                            let payload = response.data.data;
+                            handelSuccess(payload);
+                            return dispatch('set', payload);
+                        })
+                        .catch(handleError);
+                }
             }
         },
         saveNewImage({commit, state, getters, dispatch}) {

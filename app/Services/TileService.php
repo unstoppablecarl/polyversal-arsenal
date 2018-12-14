@@ -170,7 +170,7 @@ class TileService
 
     protected function saveImageData(Tile $tile, array $input): array
     {
-        $tileInput = [];
+        $tileInput      = [];
         $frontImageData = array_get($input, 'new_front_source_image');
         if ($frontImageData) {
             $images    = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
@@ -182,6 +182,19 @@ class TileService
             $images    = $this->tileImage->saveBackSourceImage($tile, $backImageData);
             $tileInput = array_merge($tileInput, $images);
         }
+
+        $frontImageData = array_get($input, 'new_front_image');
+        if ($frontImageData) {
+            $images    = $this->tileImage->saveFrontImage($tile, $frontImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+
+        $frontImageData = array_get($input, 'new_front_svg');
+        if ($frontImageData) {
+            $images    = $this->tileImage->saveFrontSvg($tile, $frontImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+
         return $tileInput;
     }
 

@@ -14,11 +14,23 @@ class TileImage
 {
     protected $dir = 'tile-images';
 
+    public function saveFrontImage(Tile $tile, $data)
+    {
+        Storage::disk('local')->delete($this->local($tile->front_image));
+        Storage::disk('local')->delete($this->local($tile->front_thumb));
+
+        $images = $this->saveImage($tile, 'front', $data);
+
+        return [
+            'front_image' => $images['image'],
+            'front_thumb' => $images['thumb'],
+        ];
+    }
+
     public function saveFrontSourceImage(Tile $tile, $data)
     {
-        $image = $this->saveSourceImage($tile, 'front-source', $data);
-
         Storage::disk('local')->delete($this->local($tile->front_source_image));
+        $image = $this->saveSourceImage($tile, 'front-source', $data);
 
         return [
             'front_source_image' => $image,
@@ -27,9 +39,9 @@ class TileImage
 
     public function saveBackSourceImage(Tile $tile, $data)
     {
+        Storage::disk('local')->delete($this->local($tile->back_source_image));
         $image = $this->saveSourceImage($tile, 'back-source', $data);
 
-        Storage::disk('local')->delete($this->local($tile->back_source_image));
 
         return [
             'back_source_image' => $image,
@@ -38,15 +50,11 @@ class TileImage
 
     public function saveFrontSvg(Tile $tile, $data)
     {
-        $base64ImageParser = new Base64ImageParser;
-        list($extension, $payload) = $base64ImageParser->parse($data);
-
         $timestamp = Carbon::now()->getTimestamp();
-        $fileName  = 'svg-' . $tile->id . '-' . $timestamp . '.' . $extension;
-
-        Storage::disk('local')->put($this->local($fileName), $payload);
+        $fileName  = 'front-' . $tile->id . '-' . $timestamp . '.svg';
 
         Storage::disk('local')->delete($this->local($tile->front_svg));
+        Storage::disk('local')->put($this->local($fileName), $data);
 
         return [
             'front_svg' => $fileName,
@@ -85,7 +93,7 @@ class TileImage
         return $fileName;
     }
 
-    protected function saveImage(Tile $tile, $prefix, $data, $generateThumb = false)
+    protected function saveImage(Tile $tile, $prefix, $data)
     {
         $base64ImageParser = new Base64ImageParser;
         $extension         = $base64ImageParser->extension($data);
@@ -104,12 +112,10 @@ class TileImage
             })
             ->save($file);
 
-        if ($generateThumb) {
-            $img->fit(251, 218, function (Constraint $constraint) {
-                $constraint->upsize();
-            })
-                ->save($thumbFile);
-        }
+        $img->fit(251, 218, function (Constraint $constraint) {
+            $constraint->upsize();
+        })
+            ->save($thumbFile);
 
         return [
             'image' => $fileName,

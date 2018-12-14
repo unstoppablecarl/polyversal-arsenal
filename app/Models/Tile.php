@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Tile\TileImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -84,5 +85,31 @@ class Tile extends Model
     public function tileWeapons()
     {
         return $this->hasMany(TileWeapon::class);
+    }
+
+    public function imageUrls()
+    {
+        $map = [
+            'front_source_image_url' => $this->front_source_image,
+            'back_source_image_url'  => $this->back_source_image,
+
+            'front_image_url' => $this->front_image,
+            'front_thumb_url' => $this->front_thumb,
+            'back_image_url'  => $this->back_image,
+            'back_thumb_url'  => $this->back_thumb,
+            'front_svg_url'   => $this->front_svg,
+            'back_svg_url'    => $this->back_svg,
+        ];
+
+        $tileImage = app(TileImage::class);
+        $out       = [];
+        foreach ($map as $key => $file) {
+            if ($file) {
+                $out[$key] = $tileImage->url($file);
+            } else {
+                $out[$key] = null;
+            }
+        }
+        return $out;
     }
 }

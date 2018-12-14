@@ -64,9 +64,8 @@
 
     import WeaponGrid from './weapon-grid';
     import TileDamageTrack from './tile-damage-track';
-    import {mapAbilityGetters} from '../data/mappers';
+    import {mapAbilityGetters, mapImageGetters} from '../data/mappers';
     import TileFrontSvg from './tile-print/tile-front-svg';
-    import svgToPngBase64 from '../lib/svg-to-png-base64';
     import svgToBase64 from '../lib/svg-to-base64';
     import downloadDataURL from '../lib/download-data-url';
 
@@ -79,29 +78,27 @@
                 scale: true,
                 showFrontCutLine: false,
                 showBackCutLine: false,
-
             };
         },
         computed: {
             ...mapAbilityGetters([
                 'abilityList',
             ]),
-
+            ...mapImageGetters([
+                'frontFileName'
+            ])
         },
         methods: {
             toggleFrontCutLine() {
                 this.showFrontCutLine = !this.showFrontCutLine;
             },
-            toggleBackCutLine(){
+            toggleBackCutLine() {
 
             },
             saveFrontSvg() {
-
-                this.$store.dispatch('images/loadFrontSourceImageBase64FromUrl')
-                    .then(() => {
-                        let fileName = 'polyversal-front-' + this.fileName + '.svg';
-                        let base64   = svgToBase64('tile-front-svg');
-
+                this.$store.dispatch('images/getFrontSvgBase64')
+                    .then((base64) => {
+                        let fileName = this.frontFileName + '.svg';
                         downloadDataURL(base64, fileName);
                     });
             },
@@ -110,26 +107,16 @@
             },
             saveFrontPng() {
 
-                this.$store.dispatch('images/loadFrontSourceImageBase64FromUrl')
-                    .then(() => {
-
-                        let inchHeight = 3.25;
-                        let inchWidth  = 3.71;
-
-                        let pxWidth  = inchWidth * 300;
-                        let pxHeight = inchHeight * 300;
-
-                        let fileName = 'polyversal-front-' + this.fileName + '.png';
-                        svgToPngBase64('tile-front-svg', pxWidth, pxHeight)
-                            .then((base64) => {
-                                downloadDataURL(base64, fileName);
-                            });
-
+                this.$store.dispatch('images/getFrontImageBase64')
+                    .then((base64) => {
+                        let fileName = this.frontFileName + '.png';
+                        downloadDataURL(base64, fileName);
                     });
-            },
-            saveBackPng(){
 
-            }
+            },
+            saveBackPng() {
+
+            },
         },
     };
 

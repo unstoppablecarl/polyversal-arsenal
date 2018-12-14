@@ -78,6 +78,10 @@ class TileSaveRequest extends FormRequest
                 'nullable',
                 new Base64ImageRule,
             ],
+            'new_front_image' => [
+                'nullable',
+                new Base64ImageRule,
+            ]
         ];
     }
 

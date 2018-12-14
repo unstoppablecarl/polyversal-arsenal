@@ -44,11 +44,11 @@ class TileResource extends Resource
                 'front_source_image_url' => $this->url($this->front_source_image),
                 'back_source_image_url'  => $this->url($this->back_source_image),
 
-                // 'front_image_url'        => $this->url($this->front_image),
-                // 'front_thumb_url'        => $this->url($this->front_thumb),
+                'front_image_url'        => $this->url($this->front_image),
+                'front_thumb_url'        => $this->url($this->front_thumb),
                 // 'back_image_url'         => $this->url($this->back_image),
                 // 'back_thumb_url'         => $this->url($this->back_thumb),
-                // 'front_svg_url'          => $this->url($this->front_svg),
+                'front_svg_url'          => $this->url($this->front_svg),
                 // 'back_svg_url'           => $this->url($this->back_svg),
             ],
 
