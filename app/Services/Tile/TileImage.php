@@ -25,6 +25,17 @@ class TileImage
         ];
     }
 
+    public function saveBackSourceImage(Tile $tile, $data)
+    {
+        $image = $this->saveSourceImage($tile, 'back-source', $data);
+
+        Storage::disk('local')->delete($this->local($tile->back_source_image));
+
+        return [
+            'back_source_image' => $image,
+        ];
+    }
+
     public function saveFrontSvg(Tile $tile, $data)
     {
         $base64ImageParser = new Base64ImageParser;

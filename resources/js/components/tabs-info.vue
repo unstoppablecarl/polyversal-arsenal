@@ -26,6 +26,13 @@
             @imageSet="frontImageLoaded"
         />
 
+        <file-upload
+            label="Back Image"
+            :image-url="backSourceImageUrl"
+            :new-image-data="newBackSourceImageBase64"
+            @imageSet="backImageLoaded"
+        />
+
     </div>
 
 </template>
@@ -52,11 +59,17 @@
             ...mapImageGetters([
                 'frontSourceImageUrl',
                 'newFrontSourceImageBase64',
+
+                'backSourceImageUrl',
+                'newBackSourceImageBase64',
             ]),
         },
         methods: {
             frontImageLoaded(value) {
                 this.$store.dispatch('images/setNewFrontSourceImageBase64', value);
+            },
+            backImageLoaded(value) {
+                this.$store.dispatch('images/setNewBackSourceImageBase64', value);
             },
         },
     };

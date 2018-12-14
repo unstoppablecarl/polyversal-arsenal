@@ -15,6 +15,8 @@ export default new Vuex.Store({
             dispatch('abilities/set', data.ability_ids);
             dispatch('tile_weapons/set', data.tile_weapons);
             dispatch('images/setFrontSourceImageUrl', data.tile.front_source_image_url);
+            dispatch('images/setBackSourceImageUrl', data.tile.back_source_image_url);
+
         },
 
         fetch({commit, state, dispatch}, tileId) {
@@ -65,6 +67,7 @@ export default new Vuex.Store({
             ]);
 
             data.new_front_source_image = getters['images/newFrontSourceImageBase64'];
+            data.new_back_source_image = getters['images/newBackSourceImageBase64'];
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
             data.ability_ids  = state.abilities.ability_ids;

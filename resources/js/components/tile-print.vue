@@ -3,31 +3,60 @@
 
         <h4>Abilities</h4>
         <div v-for="ability in abilityList">{{ability}}</div>
-        <button class="btn btn-light" @click="toggleCutLine">
-            <template v-if="showCutLine">
-                Hide
-            </template>
-            <template v-else>
-                Show
-            </template>
 
-            Cut Line
-        </button>
-        <button class="btn btn-light" @click="savePng">Save PNG</button>
-        <button class="btn btn-light" @click="saveSvg">Save SVG</button>
 
         <div class="tile-print">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right">
+                        <button class="btn btn-light" @click="toggleFrontCutLine">
+                            <template v-if="showFrontCutLine">
+                                Hide
+                            </template>
+                            <template v-else>
+                                Show
+                            </template>
+                            Cut Line
+                        </button>
 
-            <tile-svg
-                :show-cut-line="showCutLine"/>
+                        <button class="btn btn-light" @click="saveFrontPng">Save PNG</button>
+                        <button class="btn btn-light" @click="saveFrontSvg">Save SVG</button>
+                    </div>
+                    <h3 class="card-title">Tile Front</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <tile-front-svg
+                        :show-cut-line="showFrontCutLine"/>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right">
+                        <button class="btn btn-light" @click="toggleBackCutLine">
+                            <template v-if="showBackCutLine">
+                                Hide
+                            </template>
+                            <template v-else>
+                                Show
+                            </template>
+                            Cut Line
+                        </button>
+
+                        <button class="btn btn-light" @click="saveBackPng">Save PNG</button>
+                        <button class="btn btn-light" @click="saveBackSvg">Save SVG</button>
+                    </div>
+                    <h3 class="card-title">Tile Back</h3>
+                </div>
+
+                <div class="card-body">
+
+                </div>
+            </div>
         </div>
-
         <br>
-        <br>
-        <br>
-        <br>
-
-
     </div>
 </template>
 
@@ -35,89 +64,53 @@
 
     import WeaponGrid from './weapon-grid';
     import TileDamageTrack from './tile-damage-track';
-    import {mapAbilityGetters, mapTileGetters, mapTileProperties} from '../data/mappers';
-    import {targetingById} from '../data/options';
-    import TileSvg from './tile-print/tile-svg';
+    import {mapAbilityGetters} from '../data/mappers';
+    import TileFrontSvg from './tile-print/tile-front-svg';
     import svgToPngBase64 from '../lib/svg-to-png-base64';
     import svgToBase64 from '../lib/svg-to-base64';
     import downloadDataURL from '../lib/download-data-url';
 
     export default {
         name: 'tile-print',
-        components: {TileSvg, TileDamageTrack, WeaponGrid},
+        components: {TileFrontSvg, TileDamageTrack, WeaponGrid},
         props: {},
         data() {
             return {
                 scale: true,
-                showCutLine: false,
+                showFrontCutLine: false,
+                showBackCutLine: false,
+
             };
         },
         computed: {
-            ...mapTileGetters([
-                'printSubTitle',
-                'evasion',
-                'move',
-                'fileName',
-                'imageBase64',
-            ]),
             ...mapAbilityGetters([
                 'abilityList',
             ]),
-            targeting() {
-                return targetingById[this.tile_targeting_id].display_name;
-            },
-            assault() {
-                return targetingById[this.tile_assault_id].display_name;
-            },
-            assaultIconCssClass() {
-                return 'icon-' + targetingById[this.tile_assault_id].name;
-            },
-            targetingIconCssClass() {
-                return 'icon-' + targetingById[this.tile_targeting_id].name;
-            },
-            assaultNumber() {
-                return this.assault.split('D')[1];
-            },
-            targetingNumber() {
-                return this.targeting.split('D')[1];
-            },
-            ...mapTileProperties({
-                tile_type_id: 'tile_type_id',
-                tile_class_id: 'class_id',
-                tile_armor: 'armor',
-                tile_tech_level_id: 'tech_level_id',
-                tile_mobility_id: 'mobility_id',
-                tile_targeting_id: 'targeting_id',
-                tile_assault_id: 'assault_id',
-                tile_stealth: 'stealth',
-                tile_ama_id: 'ama_id',
-                tile_name: 'name',
-                tile_front_image_url: 'front_image_url',
-            }),
-            bgStyle() {
-                return {
-                    'background-image': `url('${this.tile_front_image_url}')`,
-                };
-            },
+
         },
         methods: {
-            toggleCutLine() {
-                this.showCutLine = !this.showCutLine;
+            toggleFrontCutLine() {
+                this.showFrontCutLine = !this.showFrontCutLine;
             },
-            saveSvg() {
+            toggleBackCutLine(){
 
-                this.$store.dispatch('tile/loadImageBase64')
+            },
+            saveFrontSvg() {
+
+                this.$store.dispatch('images/loadFrontSourceImageBase64FromUrl')
                     .then(() => {
-                        let fileName = 'polyversal-' + this.fileName + '.svg';
-
-                        let base64 = svgToBase64('tile-svg');
+                        let fileName = 'polyversal-front-' + this.fileName + '.svg';
+                        let base64   = svgToBase64('tile-front-svg');
 
                         downloadDataURL(base64, fileName);
                     });
             },
-            savePng() {
+            saveBackSvg() {
 
-                this.$store.dispatch('tile/loadImageBase64')
+            },
+            saveFrontPng() {
+
+                this.$store.dispatch('images/loadFrontSourceImageBase64FromUrl')
                     .then(() => {
 
                         let inchHeight = 3.25;
@@ -126,15 +119,17 @@
                         let pxWidth  = inchWidth * 300;
                         let pxHeight = inchHeight * 300;
 
-                        let fileName = 'polyversal-' + this.fileName + '.png';
-                        svgToPngBase64('tile-svg', pxWidth, pxHeight)
+                        let fileName = 'polyversal-front-' + this.fileName + '.png';
+                        svgToPngBase64('tile-front-svg', pxWidth, pxHeight)
                             .then((base64) => {
-
                                 downloadDataURL(base64, fileName);
                             });
 
                     });
             },
+            saveBackPng(){
+
+            }
         },
     };
 

@@ -15415,56 +15415,8 @@ readers do not read off random characters that represent icons */
   background: rgba(88, 89, 91, 0.9);
 }
 
-.tile-print,
-.tile-bg,
-.tile-bg-mask,
-.tile-content {
-  margin: 0 auto;
-  position: relative;
-}
-
-.tile-svg-bg {
-  position: absolute;
+.tile-svg {
   width: 100%;
-}
-
-.tile-content {
-  position: absolute;
-}
-
-.tile-print .title,
-.tile-print .subtitle {
-  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), -1px -1px 1.5px rgba(0, 0, 0, 0.5), 1px -1px 1.5px rgba(0, 0, 0, 0.5), -1px 1px 1.5px rgba(0, 0, 0, 0.5), 1px 1px 1.5px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  line-height: 1;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.tile-print .title {
-  margin-top: 15pt;
-  font-size: 12pt;
-  font-weight: bold;
-}
-
-.tile-print .subtitle {
-  font-size: 8pt;
-}
-
-.tile-print .damage-track-container {
-  position: absolute;
-  bottom: 20pt;
-  width: 267.12pt;
-}
-
-.tile-print .damage-track-container .damage-track {
-  margin: 0 auto;
-}
-
-.tile-print .weapon-grid-container {
-  position: absolute;
-  bottom: 40pt;
-  width: 267.12pt;
 }
 
 .scale-2 .D4-bg {
@@ -15764,56 +15716,8 @@ readers do not read off random characters that represent icons */
   background: rgba(88, 89, 91, 0.9);
 }
 
-.scale-2 .tile-print,
-.scale-2 .tile-bg,
-.scale-2 .tile-bg-mask,
-.scale-2 .tile-content {
-  margin: 0 auto;
-  position: relative;
-}
-
-.scale-2 .tile-svg-bg {
-  position: absolute;
+.scale-2 .tile-svg {
   width: 100%;
-}
-
-.scale-2 .tile-content {
-  position: absolute;
-}
-
-.scale-2 .tile-print .title,
-.scale-2 .tile-print .subtitle {
-  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), -1px -1px 1.5px rgba(0, 0, 0, 0.5), 1px -1px 1.5px rgba(0, 0, 0, 0.5), -1px 1px 1.5px rgba(0, 0, 0, 0.5), 1px 1px 1.5px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  line-height: 1;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.scale-2 .tile-print .title {
-  margin-top: 30pt;
-  font-size: 24pt;
-  font-weight: bold;
-}
-
-.scale-2 .tile-print .subtitle {
-  font-size: 16pt;
-}
-
-.scale-2 .tile-print .damage-track-container {
-  position: absolute;
-  bottom: 40pt;
-  width: 534.24pt;
-}
-
-.scale-2 .tile-print .damage-track-container .damage-track {
-  margin: 0 auto;
-}
-
-.scale-2 .tile-print .weapon-grid-container {
-  position: absolute;
-  bottom: 80pt;
-  width: 534.24pt;
 }
 
 .tab-content {

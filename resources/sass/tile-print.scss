@@ -1,75 +1,9 @@
-//
-//.tile-print {
-//
-//    width: 267.12pt * $scale;
-//    height: 231.334pt * $scale;
-//}
 
-.tile-print,
-.tile-bg,
-.tile-bg-mask,
-.tile-content {
-    //width: 267.12pt * $scale;
-    //height: 231.334pt * $scale;
-    margin: 0 auto;
-    position: relative;
-}
-
-.tile-svg-bg {
-    position: absolute;
+.tile-svg {
     width: 100%;
 }
 
-.tile-content {
-    position: absolute;
-}
-
 .tile-print {
-
-    .title,
-    .subtitle {
-
-        $shadow-color: rgba(0, 0, 0, 0.5);
-
-        text-shadow: 0px 0px 1px $shadow-color,
-        -1px -1px 1.5px $shadow-color,
-        1px -1px 1.5px $shadow-color,
-        -1px 1px 1.5px $shadow-color,
-        1px 1px 1.5px $shadow-color;
-
-        text-align: center;
-        line-height: 1;
-        color: #fff;
-        text-transform: uppercase;
-    }
-
-    .title {
-        margin-top: 15pt * $scale;
-        font-size: 12pt * $scale;
-        font-weight: bold;
-    }
-
-    .subtitle {
-        font-size: 8pt * $scale;
-    }
-
-    .damage-track-container {
-        position: absolute;
-        bottom: 20pt * $scale;
-        width: 267.12pt * $scale;
-
-        .damage-track {
-            margin: 0 auto;
-
-        }
-    }
-
-    .weapon-grid-container {
-        position: absolute;
-        bottom: 40pt * $scale;
-        width: 267.12pt * $scale;
-
-    }
 
     // svg styles
     //

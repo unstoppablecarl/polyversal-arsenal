@@ -46,13 +46,9 @@ class TileService
         $tile['cached_cost'] = $this->costService->total($tile);
         $tile->save();
 
-        $frontImageData = array_get($input, 'new_front_source_image');
+        $tileInput = $this->saveImageData($tile, $input);
 
-        if ($frontImageData) {
-            $images = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
-            $tile->update($images);
-        }
-
+        $tile->update($tileInput);
         return $tile;
     }
 
@@ -71,11 +67,7 @@ class TileService
             'flavor_text',
         ]);
 
-        $frontImageData = array_get($input, 'new_front_source_image');
-        if ($frontImageData) {
-            $images    = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
-            $tileInput = array_merge($tileInput, $images);
-        }
+        $tileInput = $this->saveImageData($tile, $input);
 
         $tile->update($tileInput);
         $abilityIds  = array_get($input, 'ability_ids', []);
@@ -174,6 +166,23 @@ class TileService
         }
 
         $tile->abilities()->sync($abilityIds);
+    }
+
+    protected function saveImageData(Tile $tile, array $input): array
+    {
+        $tileInput = [];
+        $frontImageData = array_get($input, 'new_front_source_image');
+        if ($frontImageData) {
+            $images    = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+
+        $backImageData = array_get($input, 'new_back_source_image');
+        if ($backImageData) {
+            $images    = $this->tileImage->saveBackSourceImage($tile, $backImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+        return $tileInput;
     }
 
 }
