@@ -7,6 +7,7 @@ use App\Models\Chassis;
 use App\Models\Tile;
 use App\Models\TileWeapon;
 use App\Services\Exceptions\InvalidAbilityTileTypeException;
+use App\Services\Tile\TileImage;
 use Illuminate\Support\Collection;
 
 class TileService
@@ -15,10 +16,15 @@ class TileService
      * @var CostService
      */
     protected $costService;
+    /**
+     * @var TileImage
+     */
+    protected $tileImage;
 
-    public function __construct(CostService $costService)
+    public function __construct(CostService $costService, TileImage $tileImage)
     {
         $this->costService = $costService;
+        $this->tileImage   = $tileImage;
     }
 
     public function create(array $input, $userId): Tile
@@ -31,6 +37,7 @@ class TileService
         $tileWeapons         = array_get($input, 'tile_weapons', []);
 
         $input['cached_cost'] = 0;
+
         /** @var Tile $tile */
         $tile = Tile::query()->create($input);
         $this->syncAbilities($tile, $abilityIds);
@@ -38,6 +45,13 @@ class TileService
 
         $tile['cached_cost'] = $this->costService->total($tile);
         $tile->save();
+
+        $frontImageData = array_get($input, 'new_front_source_image');
+
+        if ($frontImageData) {
+            $images = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
+            $tile->update($images);
+        }
 
         return $tile;
     }
@@ -54,9 +68,16 @@ class TileService
             'anti_missile_system_id',
             'armor',
             'stealth',
+            'flavor_text',
         ]);
-        $tile->update($tileInput);
 
+        $frontImageData = array_get($input, 'new_front_source_image');
+        if ($frontImageData) {
+            $images    = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+
+        $tile->update($tileInput);
         $abilityIds  = array_get($input, 'ability_ids', []);
         $tileWeapons = array_get($input, 'tile_weapons', []);
 
@@ -69,6 +90,15 @@ class TileService
         );
 
         return $tile;
+    }
+
+    public function delete(Tile $tile)
+    {
+        $tileImage = app(TileImage::class);
+
+        $tileImage->deleteAllImages($tile);
+
+        $tile->delete();
     }
 
     protected function syncTileWeapons(Tile $tile, array $tileWeapons)

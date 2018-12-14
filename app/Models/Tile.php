@@ -17,6 +17,15 @@ class Tile extends Model
         'armor',
         'stealth',
         'cached_cost',
+        'front_source_image',
+        'back_source_image',
+        'front_image',
+        'front_thumb',
+        'back_image',
+        'back_thumb',
+        'front_svg',
+        'back_svg',
+        'flavor_text',
     ];
 
     public function user()

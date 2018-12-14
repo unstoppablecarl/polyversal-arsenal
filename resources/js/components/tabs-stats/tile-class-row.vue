@@ -16,7 +16,7 @@
 
 <script>
     import _ from 'lodash';
-    import {vehicleClassOptions} from '../data/options';
+    import {vehicleClassOptions} from '../../data/options';
 
     export default {
         name: 'tile-class-row',

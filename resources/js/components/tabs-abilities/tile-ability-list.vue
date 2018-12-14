@@ -44,9 +44,9 @@
 </template>
 
 <script>
-    import Number from './number';
-    import {mapAbilityGetters, mapTileProperties} from '../data/mappers';
-    import {defensiveSystemTooltip, jumpJetSystemTooltip} from '../content/tooltips';
+    import Number from '../functional/number';
+    import {mapAbilityGetters, mapTileProperties} from '../../data/mappers';
+    import {defensiveSystemTooltip, jumpJetSystemTooltip} from '../../content/tooltips';
 
     export default {
         name: 'tile-ability-list',

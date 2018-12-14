@@ -10,14 +10,23 @@ class Base64ImageRule implements Rule
     protected $validFileFormats = [];
     protected $fileFormatInvalid = false;
     protected $payloadInvalid = false;
+    /**
+     * @var bool
+     */
+    protected $required;
 
-    public function __construct(array $validFileFormats = ['png', 'jpg', 'svg'])
+    public function __construct($required = false, array $validFileFormats = ['png', 'jpg', 'jpeg'])
     {
         $this->validFileFormats = $validFileFormats;
+        $this->required         = $required;
     }
 
     public function passes($attribute, $value)
     {
+        if (!$this->required && !$value) {
+            return true;
+        }
+
         list($format, $payload) = (new Base64ImageParser())->parse($value);
         if (!$this->isValidFileFormat($format)) {
             $this->fileFormatInvalid = true;

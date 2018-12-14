@@ -4,11 +4,13 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from './store';
 import Tile from './components/tile';
+import TabInfo from './components/tabs-info';
 import TabStats from './components/tabs-stats';
 import TabAbilities from './components/tabs-abilities';
 import TabWeapons from './components/tabs-weapons';
 import WeaponGrid from './components/weapon-grid';
 import {tileWeaponCreate} from './store/models/tile-weapon';
+ import axios from 'axios';
 
 const routes = [
     {
@@ -22,6 +24,11 @@ const routes = [
         redirect: {name: 'tile-stats'},
 
         children: [
+            {
+                name: 'tile-info',
+                path: 'info',
+                component: TabInfo,
+            },
             {
                 name: 'tile-stats',
                 path: 'stats',
@@ -69,6 +76,19 @@ if (document.getElementById('app-tile-grid')) {
         },
     });
 }
+//
+//axios.get('/img/damage-weapon.svg'). then(response => {
+//    console.log(response.data);
+//
+//    var parser = new DOMParser();
+//    var ajaxdoc = parser.parseFromString( response.data, "image/svg+xml" );
+//    var el = ajaxdoc.getElementsByTagName('svg')[0];
+//
+//    console.log(el);
+//
+//    //document.getElementsByTagName('svg')[0].appendChild(  );
+//
+//});
 
 //router.push({name: 'tile-stats', params: {id: 'create'}});
 

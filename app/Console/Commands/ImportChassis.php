@@ -34,85 +34,89 @@ class ImportChassis extends Command
 
     public function handle()
     {
-        $csv = Reader::createFromPath('source-data/chassis-list.csv', 'r');
-        $csv->setHeaderOffset(0);
+        $chassisRecords      = $this->load('source-data/chassis.csv');
+        $chassisArmorRecords = $this->load('source-data/chassis-armor-stats.csv');
 
-        $header  = $csv->getHeader();
-        $records = $csv->getRecords();
 
-        $replaceColumns = [
-            'Class'     => 'class',
-            'Mobility'  => 'mobility',
-            'Armor'     => 'armor',
-            'TechLevel' => 'tech_level',
-            'Move'      => 'move',
-            'Evasion'   => 'evasion',
-            'Cost'      => 'cost',
-        ];
-
-        $replaceClasses = [
-            'light'      => 1,
-            'main'       => 2,
-            'heavy'      => 3,
-            'superheavy' => 4,
-            'colossal'   => 5,
-        ];
+        $chassisArmorRecords = $chassisArmorRecords->groupBy(function ($row) {
+            return $this->chassisKey($row);
+        });
 
         $data = [];
+        foreach ($chassisRecords as $row) {
+            $key       = $this->chassisKey($row);
+            $armorRows = $chassisArmorRecords[$key];
 
-        foreach ($records as $row) {
-            list($row, $damageTrack) = $this->prepareDamageTrack($row);
+            foreach ($armorRows as $armorRow) {
+                $armorRow = array_except($armorRow, ['cost']);
+                $row      = array_merge($row, $armorRow);
 
-            $row = $this->replaceKeys($row, $replaceColumns);
-            $row = $this->normalizeValues($row);
+                $row['armor']   = (int)$row['armor'];
+                $row['move']    = (int)$row['move'];
+                $row['evasion'] = (int)$row['evasion'];
+                $row['cost']    = (int)$row['cost'];
 
-            $row['damage_track'] = $damageTrack;
-            $row['armor']        = (int)$row['armor'];
-            $row['move']         = (int)$row['move'];
-            $row['evasion']      = (int)$row['evasion'];
-            $row['cost']         = (int)$row['cost'];
+                $rules = [
+                    'armor'      => 'integer',
+                    'move'       => 'integer',
+                    'evasion'    => 'integer',
+                    'tech_level' => Rule::in([
+                        'primitive',
+                        'typical',
+                        'advanced',
+                    ]),
+                ];
 
-            $class        = $row['class'];
-            $row['class'] = array_get($replaceClasses, $class) ?: $class;
+                $this->validateRow($row);
+                $this->validate($row, $rules);
 
-            $rules = [
-                'armor'      => 'integer',
-                'move'       => 'integer',
-                'evasion'    => 'integer',
-                'tech_level' => Rule::in([
-                    'primitive',
-                    'typical',
-                    'advanced',
-                ]),
-            ];
+                $damageTrack = [
+                    'stress'              => (int)$row['damage_stress'],
+                    'immobilized'         => (int)$row['damage_immobilized'],
+                    'weapon_destroyed'    => (int)$row['damage_weapon_destroyed'],
+                    'targeting_destroyed' => (int)$row['damage_targeting_destroyed'],
+                    'fuel_leak'           => (int)$row['damage_fuel_leak'],
+                    'hull_breach'         => (int)$row['damage_hull_breach'],
+                    'destroyed'           => (int)$row['damage_destroyed'],
+                ];
 
-            $this->validateRow($row);
-            $this->validate($row, $rules);
-            $data[] = $row;
+                $damageTrack = array_filter($damageTrack);
+                $newRow      = [
+                    'tile_type'     => $row['tile_type'],
+                    'tile_class_id' => (int)$row['tile_class_id'],
+                    'mobility'      => $row['mobility'],
+                    'tech_level'    => $row['tech_level'],
+                    'armor'         => $row['armor'],
+                    'move'          => $row['move'],
+                    'evasion'       => $row['evasion'],
+                    'cost'          => $row['cost'],
+                    'damage_track'  => $damageTrack,
+                ];
+                $data[]      = $newRow;
+            }
         }
 
-        $data = $this->groupBy($data, ['class', 'mobility', 'tech_level']);
+        // $data = collect($data)->map(function($row){
+        //     // $row['class'] = $row['tile_class_id'];
+        //
+        //     unset($row['class']);
+        //     return $row;
+        // });
+
+        $data = $this->groupBy($data, ['tile_type', 'tile_class_id', 'mobility', 'tech_level']);
         // $data = $this->sortByArmor($data);
-        $data = $this->copyMobilityCost($data);
+        // $data = $this->copyMobilityCost($data);
 
         $infantry = $data['infantry'];
         $cavalry  = $data['cavalry'];
-        $vehicle  = array_except($data, ['infantry', 'cavalry']);
+        $vehicle  = $data['vehicle'];
 
 
         file_put_contents('./source-data/imported/infantry-chassis.json', json_encode($infantry));
         file_put_contents('./source-data/imported/cavalry-chassis.json', json_encode($cavalry));
         file_put_contents('./source-data/imported/vehicle-chassis.json', json_encode($vehicle));
-        // dd($vehicle);
     }
 
-    protected function validateMobility($row, $validValues)
-    {
-        $rules = [
-            'mobility' => Rule::in($validValues),
-        ];
-        $this->validate($row, $rules);
-    }
 
     protected function groupBy($data, array $keys)
     {
@@ -128,19 +132,9 @@ class ImportChassis extends Command
             ->toArray();
     }
 
-    protected function normalizeValues($row): array
-    {
-        $row = array_map(function ($value) {
-            $value = str_replace('-', '_', $value);
-            $value = strtolower($value);
-            return $value;
-        }, $row);
-        return $row;
-    }
-
     protected function validateRow(array $row)
     {
-        $class = $row['class'];
+        $class = $row['tile_type'];
 
         if ($class == 'infantry') {
             $validValues = [
@@ -171,6 +165,24 @@ class ImportChassis extends Command
         $this->validateMobility($row, $validValues);
     }
 
+    protected function validateMobility($row, $validValues)
+    {
+        $rules = [
+            'mobility' => Rule::in($validValues),
+        ];
+        $this->validate($row, $rules);
+    }
+
+    protected function chassisKey($row)
+    {
+        return implode('_', [
+            $row['tile_type'],
+            $row['tile_class_id'],
+            $row['mobility'],
+            $row['tech_level'],
+        ]);
+    }
+
     protected function validate(array $data, array $rules)
     {
         $validator = \Validator::make($data, $rules);
@@ -180,72 +192,11 @@ class ImportChassis extends Command
         }
     }
 
-    protected function sortByArmor($data): array
+    protected function load($file)
     {
-        foreach ($data as $class => $classRows) {
-            foreach ($classRows as $mobility => $mobilityRows) {
-                foreach ($mobilityRows as $techLevel => $techLevelRows) {
-                    $data[$class][$mobility][$techLevel] = collect($techLevelRows)
-                        ->sortBy('armor')
-                        ->toArray();
-                }
-            }
-        }
-        return $data;
-    }
-
-    protected function replaceKeys($row, $replaceColumns): array
-    {
-        return array_combine(array_merge($row, $replaceColumns), $row);
-    }
-
-    protected function copyMobilityCost($data)
-    {
-        foreach ($data as $class => $classRows) {
-            foreach ($classRows as $mobility => $mobilityRows) {
-                foreach ($mobilityRows as $techLevel => $techLevelRows) {
-                    $cost = collect($techLevelRows)->firstWhere('armor', 0)['cost'];
-
-                    $data[$class][$mobility][$techLevel] = collect($techLevelRows)
-                        ->sortBy('armor')
-                        ->map(function ($row) use ($cost) {
-                            $row['cost'] = $cost;
-                            return $row;
-                        })
-                        ->toArray();
-                }
-            }
-        }
-        return $data;
-    }
-
-    protected function prepareDamageTrack($row): array
-    {
-        $damageTrack = [
-            'stress'              => $row['S'],
-            'immobilized'         => $row['I'],
-            'weapon_destroyed'    => $row['W'],
-            'targeting_destroyed' => $row['T'],
-            'hull_breach'         => $row['H'],
-            'fuel_leak'           => $row['F'],
-            'destroyed'           => $row['X'],
-        ];
-        unset(
-            $row['S'],
-            $row['I'],
-            $row['W'],
-            $row['T'],
-            $row['H'],
-            $row['F'],
-            $row['X']
-        );
-
-        foreach ($damageTrack as $key => $val) {
-            if ($val === '-0') {
-                unset($damageTrack[$key]);
-            }
-        }
-
-        return [$row, $damageTrack];
+        $csv = Reader::createFromPath($file, 'r');
+        $csv->setHeaderOffset(0);
+        $chassisRecords = $csv->getRecords();
+        return collect($chassisRecords);
     }
 }

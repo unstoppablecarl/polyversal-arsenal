@@ -42,11 +42,11 @@
 </template>
 
 <script>
-    import Number from './number';
+    import Number from '../functional/number';
     import _ from 'lodash';
-    import {mapTileProperties} from '../data/mappers';
-    import {TILE_TYPE_VEHICLE_ID} from '../data/constants';
-    import {defensiveSystemTooltip} from '../content/tooltips';
+    import {mapTileProperties} from '../../data/mappers';
+    import {TILE_TYPE_VEHICLE_ID} from '../../data/constants';
+    import {defensiveSystemTooltip} from '../../content/tooltips';
 
     export default {
         name: 'tile-ability-select',

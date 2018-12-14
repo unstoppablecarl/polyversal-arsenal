@@ -55,14 +55,14 @@ class ImportWeapons extends Command
             $data[] = $newRow;
         }
 
-        $writer = Writer::createFromPath('source-data/weapons2.csv');
+        // $writer = Writer::createFromPath('source-data/weapons2.csv');
 
-        $first = $data[0];
-        $writer->insertOne(array_keys($first));
+        // $first = $data[0];
+        // $writer->insertOne(array_keys($first));
+        //
+        // $writer->insertAll($data);
 
-        $writer->insertAll($data);
-
-        // file_put_contents('source-data/imported/weapons.json', json_encode($data, JSON_NUMERIC_CHECK));
+        file_put_contents('source-data/imported/weapons.json', json_encode($data, JSON_NUMERIC_CHECK));
     }
 
     protected function normalizeNumbers($str)

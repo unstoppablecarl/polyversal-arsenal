@@ -3,7 +3,7 @@
     <div class="tile">
         <tile-notifications/>
 
-        <div class="row">
+        <div class="row no-print">
             <div class="col-sm-8">
                 <h1 class="h4 admin-form-title">
                     <span class="text-muted">Edit</span>
@@ -33,7 +33,6 @@
             </div>
         </div>
         <hr>
-
         <template v-if="notFound">
             <h1>Tile Not Found</h1>
 
@@ -48,28 +47,29 @@
         </template>
         <template v-else>
 
-            <div class="float-right">
-                <button class="btn btn-primary" @click="save" :disabled="saving">
-                    <template v-if="saving">
-                        Saving
-                        <i class="fas fa-fw fa-spin fa-cog"></i>
-                    </template>
-                    <template v-else>
-                        Save
-                        <i class="fas fa-fw fa-save"></i>
-                    </template>
-                </button>
-            </div>
+            <div class="no-print">
+                <div class="float-right">
+                    <button class="btn btn-primary" @click="save" :disabled="saving">
+                        <template v-if="saving">
+                            Saving
+                            <i class="fas fa-fw fa-spin fa-cog"></i>
+                        </template>
+                        <template v-else>
+                            Save
+                            <i class="fas fa-fw fa-save"></i>
+                        </template>
+                    </button>
+                </div>
 
-            <h4>{{subTitle}}</h4>
+                <h4>{{subTitle}}</h4>
 
-            <div class="tabs-container">
-                <tabs/>
-                <div class="tab-content">
-                    <router-view/>
+                <div class="tabs-container">
+                    <tabs/>
+                    <div class="tab-content">
+                        <router-view/>
+                    </div>
                 </div>
             </div>
-
             <tile-print/>
         </template>
     </div>
@@ -84,7 +84,7 @@
     import Tabs from './tabs';
     import TilePrint from './tile-print';
     import TileNotifications from './tile-notifications';
-    import FileUpload from './file-upload';
+    import FileUpload from './tabs-info/file-upload';
 
     export default {
         name: 'tile',
@@ -114,7 +114,7 @@
             ...mapGetters([
                 'viewURL',
                 'editURL',
-                'deleteURL'
+                'deleteURL',
             ]),
             ...mapTileProperties({
                 tile_id: 'id',

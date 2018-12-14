@@ -35,9 +35,9 @@
 </template>
 
 <script>
-    import {amaById} from '../data/options';
-    import {mapTileProperties} from '../data/mappers';
-    import {AMA_NONE_ID} from '../data/constants';
+    import {amaById} from '../../data/options';
+    import {mapTileProperties} from '../../data/mappers';
+    import {AMA_NONE_ID} from '../../data/constants';
 
     export default {
         name: 'weapon-grid-ama',

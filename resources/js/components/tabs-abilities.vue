@@ -41,26 +41,18 @@
 </template>
 
 <script>
-    import Number from './number';
-    import TileStatSelect from './tile-stat-select';
+    import Number from './functional/number';
     import {amaOptions} from '../data/options';
     import {mapTileGetters, mapTileProperties} from '../data/mappers';
-    import TileAbilitySelect from './tile-ability-select';
-    import {TILE_TYPE_VEHICLE_ID} from '../data/constants';
-    import TileAbilityList from './tile-ability-list';
-    import {mapGetters} from 'vuex';
-
+    import TileAbilitySelect from './tabs-abilities/tile-ability-select';
+    import TileAbilityList from './tabs-abilities/tile-ability-list';
 
     export default {
         name: 'tabs-abilities',
         components: {
             TileAbilityList,
             TileAbilitySelect,
-            TileStatSelect,
             Number,
-        },
-        props: {
-            name: String,
         },
         data() {
             return {

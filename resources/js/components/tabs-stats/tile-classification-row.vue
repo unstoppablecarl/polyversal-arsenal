@@ -26,7 +26,7 @@
 
 <script>
     import _ from 'lodash';
-    import {tileTypeOptions} from '../data/options';
+    import {tileTypeOptions} from '../../data/options';
 
     export default {
         name: 'tile-classification-row',

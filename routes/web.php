@@ -27,15 +27,14 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
 
-
     Route::group([
         'middleware' => 'can:view,' . Tile::class
     ], function () {
 
-    Route::get('tiles', 'TileGridController@index')
+    Route::get('tiles', 'TileController@index')
         ->name('tiles.index');
 
-    Route::get('tiles-grid', 'TileGridController@grid')
+    Route::get('tiles-grid', 'TileController@grid')
         ->name('tiles.grid');
     });
 

@@ -21,8 +21,8 @@
         TILE_WEAPON_TYPE_GROUND_ID,
         TILE_WEAPON_TYPE_ONLY_AA_ID,
         TILE_WEAPON_TYPE_WITH_AA_ID,
-    } from '../data/constants';
-    import {mapTileProperties, mapTileWeaponGetters} from '../data/mappers';
+    } from '../../data/constants';
+    import {mapTileProperties, mapTileWeaponGetters} from '../../data/mappers';
 
     export default {
         name: 'weapon-grid-item-new',

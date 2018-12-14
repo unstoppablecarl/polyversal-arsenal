@@ -3,6 +3,8 @@ import tile from './tile';
 import abilities from './abilities';
 import tile_weapons from './tile-weapons';
 import server from './server-repo';
+import images from './images';
+
 import {notificationFromErrorResponse, notificationSuccess} from './notification';
 
 export default new Vuex.Store({
@@ -12,12 +14,9 @@ export default new Vuex.Store({
             dispatch('tile/update', data.tile);
             dispatch('abilities/set', data.ability_ids);
             dispatch('tile_weapons/set', data.tile_weapons);
+            dispatch('images/setFrontSourceImageUrl', data.tile.front_source_image_url);
         },
-        update({commit, dispatch}, data) {
-            dispatch('tile/update', data.tile);
-            dispatch('abilities/set', data.ability_ids);
-            dispatch('tile_weapons/set', data.tile_weapons);
-        },
+
         fetch({commit, state, dispatch}, tileId) {
             return server.fetch(tileId)
                 .then((response) => {
@@ -58,8 +57,14 @@ export default new Vuex.Store({
                 'assault_id',
                 'stealth',
                 'anti_missile_system_id',
-                'new_image_data',
+                'new_front_image_data',
+                'new_back_image_data',
+                'new_front_svg_data',
+                'new_back_svg_data',
+                'flavor_text',
             ]);
+
+            data.new_front_source_image = getters['images/newFrontSourceImageBase64'];
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
             data.ability_ids  = state.abilities.ability_ids;
@@ -77,8 +82,6 @@ export default new Vuex.Store({
             };
 
             const handelSuccess = (payload) => {
-
-
                 if (payload.cost_diff) {
                     console.warn('server disagrees with cost calculation!', payload.cost_diff);
                 }
@@ -104,7 +107,7 @@ export default new Vuex.Store({
                         });
                         let payload = response.data.data;
                         handelSuccess(payload);
-                        return dispatch('update', payload);
+                        return dispatch('set', payload);
                     })
                     .catch(handleError);
             }
@@ -149,5 +152,6 @@ export default new Vuex.Store({
         tile,
         abilities,
         tile_weapons,
+        images,
     },
 });

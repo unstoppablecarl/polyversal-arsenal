@@ -29,6 +29,11 @@ const {
           mapActions: mapTileWeaponActions,
       } = createNamespacedHelpers('tile_weapons');
 
+const {
+          mapGetters: mapImageGetters,
+          mapActions: mapImageActions,
+      } = createNamespacedHelpers('images');
+
 
 export {
     mapTileProperties,
@@ -38,4 +43,6 @@ export {
     mapAbilityGetters,
     mapTileWeaponActions,
     mapTileWeaponGetters,
+    mapImageGetters,
+    mapImageActions,
 };

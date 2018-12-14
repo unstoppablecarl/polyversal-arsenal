@@ -1,4 +1,4 @@
-tile_type,tile_class_id,mobility,tech_level,cost,evasion,damage_stress,damage_immobilized,hull_damage_breach,targeting_damage_destroyed,fuel_damage_leak,damage_weapon_destroyed,damage_destroyed
+tile_type,tile_class_id,mobility,tech_level,cost,evasion,damage_stress,damage_immobilized,damage_hull_breach,damage_targeting_destroyed,damage_fuel_leak,damage_weapon_destroyed,damage_destroyed
 infantry,1,infantry,primitive,1,14,1,,,,,,2
 infantry,1,infantry,typical,2,15,1,,,,,,2
 infantry,1,infantry,advanced,3,16,2,,,,,,3
@@ -64,7 +64,7 @@ vehicle,2,anti_gravity,typical,7,16,3,,,,,5,6
 vehicle,2,anti_gravity,advanced,8,17,5,,,,,7,8
 vehicle,2,walker,primitive,4,12,1,2,,,,3,4
 vehicle,2,walker,typical,5,13,3,4,,,,5,6
-vehicle,2,walker,advanced,6,14,5,,,,,7,8
+vehicle,2,walker,advanced,6,14,5,6,,,,7,8
 vehicle,2,hover,primitive,6,15,1,3,,,,,4
 vehicle,2,hover,typical,7,15,2,5,,,,,6
 vehicle,2,hover,advanced,8,16,4,7,,,,,8

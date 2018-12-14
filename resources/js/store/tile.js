@@ -19,6 +19,7 @@ import {getMaxStealth, getStealthOptions} from '../data/options-stealth';
 import {
     sanitize as sanitizeTile,
 } from './models/tile';
+import toDataURL from '../lib/image-to-base64';
 
 export default {
     namespaced: true,
@@ -35,17 +36,26 @@ export default {
         assault_id: 1,
         stealth: 0,
         anti_missile_system_id: 6,
-        image_url: null,
-        new_image_data: null,
+
+        //front_image_url: null,
+        //front_thumb_url: null,
+        //back_image_url: null,
+        //back_thumb_url: null,
+
     },
     mutations: {
         update(state, data) {
-            data = sanitizeTile(data);
+            data                      = sanitizeTile(data);
+            //state.front_image_base_64 = null;
             Object.assign(state, data);
         },
-        setNewImageData(state, data) {
-            state.new_image_data = data;
-        },
+        //setNewFrontImageData(state, data) {
+        //    state.front_image_base_64  = null;
+        //    state.new_front_image_data = data;
+        //},
+        //setImageBase64(state, value) {
+        //    state.front_image_base_64 = value;
+        //},
     },
     actions: {
         update({commit, state, getters, dispatch}, tile) {
@@ -81,12 +91,25 @@ export default {
                 tile.stealth = stealth;
 
             }
-            dispatch('abilities/removeInvalid', tile.tile_type_id, {root: true});
+            let tileTypeId = tile.tile_type_id || state.tile_type_id;
+
+            dispatch('abilities/removeInvalid', tileTypeId, {root: true});
 
             commit('update', tile);
-
         },
-
+        //setNewFrontImageData({commit}, data) {
+        //    commit('setNewFrontImageData', data);
+        //},
+        //loadImageBase64({state, commit}) {
+        //    if (!state.front_image_base_64) {
+        //        return toDataURL(state.front_image_url, 'png')
+        //            .then((dataURL) => {
+        //                commit('setImageBase64', dataURL);
+        //            });
+        //    }
+        //
+        //    return Promise.resolve();
+        //},
     },
     getters: {
         tile(state) {
@@ -205,7 +228,6 @@ export default {
         stealthOptions(state) {
             return getStealthOptions(state.tile_type_id, state.tile_class_id);
         },
-
         makeSubtitle(state) {
             return (vehiclePrefix) => {
                 let mobility         = '';
@@ -244,9 +266,18 @@ export default {
         printSubTitle(state, getters) {
             return getters.makeSubtitle('Cls');
         },
-        new_image_data(state) {
-            return state.new_image_data;
+        fileName(state) {
+            return state.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
         },
+        //new_front_image_data(state) {
+        //    return state.new_front_image_data;
+        //},
+        //imageFrontURL(state) {
+        //    if (state.front_image_base_64) {
+        //        return state.front_image_base_64;
+        //    }
+        //    return state.front_image_url;
+        //},
     },
 };
 

@@ -16,8 +16,6 @@
         </div>
         <div class="tab-content-divider"></div>
 
-        <tile-name-row/>
-
         <tile-classification-row
             v-model="tile_type_id"
         />
@@ -88,26 +86,20 @@
 
 <script>
 
-    import Number from './number';
-    import TileStatSelect from './tile-stat-select';
-    import TileClassRow from './tile-class-row';
-    import TileClassificationRow from './tile-classification-row';
+    import Number from './functional/number';
+    import TileStatSelect from './tabs-stats/tile-stat-select';
+    import TileClassRow from './tabs-stats/tile-class-row';
+    import TileClassificationRow from './tabs-stats/tile-classification-row';
     import TileDamageTrack from './tile-damage-track';
     import {amaOptions, assaultOptions, targetingOptions} from '../data/options';
-    import {mapGetters} from 'vuex';
     import {mapTileGetters, mapTileProperties} from '../data/mappers';
-    import TileNameRow from './tile-name-row';
 
     export default {
         name: 'tabs-stats',
         components: {
-            TileNameRow,
             TileDamageTrack,
             TileClassificationRow,
             TileClassRow, TileStatSelect, Number,
-        },
-        props: {
-            name: String,
         },
         data() {
             return {
@@ -141,12 +133,6 @@
                 tile_name: 'name',
             }),
         },
-        watch: {
-            '$route'(to, from) {
-
-            },
-        },
-        methods: {},
     };
 
 </script>

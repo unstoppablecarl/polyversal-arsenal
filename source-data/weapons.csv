@@ -1,7 +1,7 @@
 id,name,display_name,range,ap,at,aa,damage,cost_d4,cost_d6,cost_d8,cost_d10,cost_d12,is_infantry,is_indirect,has_warheads
 1,autocannon-1,"Autocannon I",10,D4,D4,D4,L,1,1,1,1,1,,,
 2,autocannon-2,"Autocannon II",14,D6,D6,D6,ML,1,2,3,4,4,,,
-3,autocannon-3,"Autocannon III",180,D8,D8,D8,ML,3,4,5,6,6,,,
+3,autocannon-3,"Autocannon III",18,D8,D8,D8,ML,3,4,5,6,6,,,
 4,autocannon-4,"Autocannon IV",22,D10,D10,D10,MH,5,6,7,8,9,,,
 5,autocannon-5,"Autocannon V",26,D12,D12,D12,H,9,10,11,13,14,,,
 6,bombs-1,"Bombs I",0,D4,D4,D4,L,1,1,1,1,1,,,1

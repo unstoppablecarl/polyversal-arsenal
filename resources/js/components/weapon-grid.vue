@@ -59,10 +59,10 @@
 </template>
 
 <script>
-    import WeaponGridItem from './weapon-grid-item';
+    import WeaponGridItem from './weapon-grid/weapon-grid-item';
     import draggable from 'vuedraggable';
     import {TILE_TYPE_VEHICLE_ID} from '../data/constants';
-    import WeaponGridAma from './weapon-grid-ama';
+    import WeaponGridAma from './weapon-grid/weapon-grid-ama';
     import {mapGetters} from 'vuex';
     import {mapTileProperties, mapTileWeaponGetters} from '../data/mappers';
 

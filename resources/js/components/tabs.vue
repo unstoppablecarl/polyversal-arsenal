@@ -1,5 +1,13 @@
 <template>
     <ul class="nav nav-tabs">
+        <li class="nav-item nav-item-info">
+            <router-link :to="{name: 'tile-info', params: {id}}" :class="['nav-link', {active: selectedInfo}]">
+                Info
+                <span class="badge badge-x">
+                        -
+                    </span>
+            </router-link>
+        </li>
         <li class="nav-item">
             <router-link :to="{name: 'tile-stats', params: {id}}" :class="['nav-link', {active: selectedStats}]">
                 Stats
@@ -62,6 +70,9 @@
             }),
             id() {
                 return this.tile_id || 'create';
+            },
+            selectedInfo() {
+                return this.$route.name == 'tile-info';
             },
             selectedStats() {
                 return this.$route.name == 'tile-stats';

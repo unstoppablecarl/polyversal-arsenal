@@ -33,6 +33,7 @@ $map: (
 @each $key, $color in $map {
     .#{$key}-bg {
         background-color: $color;
+        fill: $color;
     }
 }
 

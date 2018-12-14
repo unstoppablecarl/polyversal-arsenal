@@ -2,12 +2,15 @@
 
 namespace App\Http\Resources;
 
+use App\Services\Tile\TileImage;
 use Illuminate\Http\Resources\Json\Resource;
 
 class TileResource extends Resource
 {
 
     protected $costDiff;
+    /** @var TileImage */
+    protected $tileImage;
 
     public function setCostDiff($costDiff)
     {
@@ -20,8 +23,11 @@ class TileResource extends Resource
         if (!$costDiff) {
             $costDiff = null;
         }
+
+        $this->tileImage = app(TileImage::class);
+
         return [
-            'tile'         => [
+            'tile' => [
                 'id'                     => $this->id,
                 'name'                   => $this->name,
                 'user_id'                => $this->user_id,
@@ -35,11 +41,29 @@ class TileResource extends Resource
                 'armor'                  => $this->armor,
                 'stealth'                => $this->stealth,
                 'cached_cost'            => $this->cached_cost,
-                'image_url'              => $this->front_image_file,
+                'front_source_image_url' => $this->url($this->front_source_image),
+                'back_source_image_url'  => $this->url($this->back_source_image),
+
+                // 'front_image_url'        => $this->url($this->front_image),
+                // 'front_thumb_url'        => $this->url($this->front_thumb),
+                // 'back_image_url'         => $this->url($this->back_image),
+                // 'back_thumb_url'         => $this->url($this->back_thumb),
+                // 'front_svg_url'          => $this->url($this->front_svg),
+                // 'back_svg_url'           => $this->url($this->back_svg),
             ],
+
             'ability_ids'  => $this->abilities()->pluck('abilities.id'),
             'tile_weapons' => TileWeaponResource::collection($this->tileWeapons),
             'cost_diff'    => $costDiff,
         ];
+    }
+
+    protected function url($file)
+    {
+        if (!$file) {
+            return;
+        }
+
+        return $this->tileImage->url($file);
     }
 }

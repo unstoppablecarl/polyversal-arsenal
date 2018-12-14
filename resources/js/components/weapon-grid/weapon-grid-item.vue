@@ -64,12 +64,12 @@
         TILE_WEAPON_TYPE_GROUND_ID,
         TILE_WEAPON_TYPE_ONLY_AA_ID,
         TILE_WEAPON_TYPE_WITH_AA_ID,
-    } from '../data/constants';
+    } from '../../data/constants';
 
-    import {getWeaponCost} from '../data/weapons';
+    import {getWeaponCost} from '../../data/weapons';
 
-    import {arcDirectionById, arcSizeById, arcSizeOptions} from '../data/options';
-    import {mapTileWeaponGetters} from '../data/mappers';
+    import {arcDirectionById, arcSizeById, arcSizeOptions} from '../../data/options';
+    import {mapTileWeaponGetters} from '../../data/mappers';
 
     export default {
         name: 'weapon-grid-item',

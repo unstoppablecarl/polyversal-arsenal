@@ -153,9 +153,20 @@ class CreateTileTables extends Migration
             $table->integer('armor');
             $table->integer('stealth');
 
-            $table->string('front_image_file')->nullable();
+            $table->string('front_source_image')->nullable();
+            $table->string('back_source_image')->nullable();
+
+            $table->string('front_svg')->nullable();
+            $table->string('front_image')->nullable();
+            $table->string('front_thumb')->nullable();
+
+            $table->string('back_svg')->nullable();
+            $table->string('back_image')->nullable();
+            $table->string('back_thumb')->nullable();
 
             $table->integer('cached_cost');
+
+            $table->text('flavor_text')->nullable();
 
             $table->timestamps();
         });

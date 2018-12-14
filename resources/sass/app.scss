@@ -13,11 +13,14 @@
 $scale: 1;
 @import 'weapon-grid';
 @import 'damage-track.scss';
+@import 'tile-print.scss';
 
 .scale-2 {
     $scale: 2;
     @import 'weapon-grid';
     @import 'damage-track.scss';
+    @import 'tile-print.scss';
+
 }
 
 @import 'tabs';
@@ -87,6 +90,7 @@ $scale: 1;
 .navigation {
     margin: 0 0 20px;
 }
+
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -97,6 +101,5 @@ $scale: 1;
     /* Non-prefixed version, currently
                                      supported by Chrome and Opera */
 }
-
 
 

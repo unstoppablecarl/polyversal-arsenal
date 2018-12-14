@@ -24,8 +24,8 @@ function getChassis({
     let techLevel = techLevelById[tech_level_id].name;
     let isVehicle = tile_type_id == TILE_TYPE_VEHICLE_ID;
 
-    if (isVehicle) {
         return data[tile_class_id][mobility][techLevel][armor];
+    if (isVehicle) {
     } else {
         return data[mobility][techLevel][armor];
     }

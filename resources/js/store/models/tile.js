@@ -13,6 +13,11 @@ const defaults = {
     assault_id: 1,
     stealth: 0,
     anti_missile_system_id: AMA_NONE_ID,
+    front_image_url: null,
+    front_thumb_url: null,
+    back_image_url: null,
+    back_thumb_url: null,
+    flavor_text: null,
 };
 
 const formatters = {

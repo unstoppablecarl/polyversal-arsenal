@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import Number from './number';
+    import Number from '../functional/number';
     import _ from 'lodash';
 
     export default {
