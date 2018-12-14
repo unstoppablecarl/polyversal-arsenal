@@ -27,6 +27,19 @@ class TileImage
         ];
     }
 
+    public function saveBackImage(Tile $tile, $data)
+    {
+        Storage::disk('local')->delete($this->local($tile->back_image));
+        Storage::disk('local')->delete($this->local($tile->back_thumb));
+
+        $images = $this->saveImage($tile, 'back', $data);
+
+        return [
+            'back_image' => $images['image'],
+            'back_thumb' => $images['thumb'],
+        ];
+    }
+
     public function saveFrontSourceImage(Tile $tile, $data)
     {
         Storage::disk('local')->delete($this->local($tile->front_source_image));
@@ -41,7 +54,6 @@ class TileImage
     {
         Storage::disk('local')->delete($this->local($tile->back_source_image));
         $image = $this->saveSourceImage($tile, 'back-source', $data);
-
 
         return [
             'back_source_image' => $image,
@@ -58,6 +70,19 @@ class TileImage
 
         return [
             'front_svg' => $fileName,
+        ];
+    }
+
+    public function saveBackSvg(Tile $tile, $data)
+    {
+        $timestamp = Carbon::now()->getTimestamp();
+        $fileName  = 'back-' . $tile->id . '-' . $timestamp . '.svg';
+
+        Storage::disk('local')->delete($this->local($tile->back_svg));
+        Storage::disk('local')->put($this->local($fileName), $data);
+
+        return [
+            'back_svg' => $fileName,
         ];
     }
 

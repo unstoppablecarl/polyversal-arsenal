@@ -46,10 +46,10 @@ class TileResource extends Resource
 
                 'front_image_url'        => $this->url($this->front_image),
                 'front_thumb_url'        => $this->url($this->front_thumb),
-                // 'back_image_url'         => $this->url($this->back_image),
-                // 'back_thumb_url'         => $this->url($this->back_thumb),
+                'back_image_url'         => $this->url($this->back_image),
+                'back_thumb_url'         => $this->url($this->back_thumb),
                 'front_svg_url'          => $this->url($this->front_svg),
-                // 'back_svg_url'           => $this->url($this->back_svg),
+                'back_svg_url'           => $this->url($this->back_svg),
             ],
 
             'ability_ids'  => $this->abilities()->pluck('abilities.id'),

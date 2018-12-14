@@ -4,7 +4,6 @@
         <h4>Abilities</h4>
         <div v-for="ability in abilityList">{{ability}}</div>
 
-
         <div class="tile-print">
             <div class="card">
                 <div class="card-header">
@@ -26,9 +25,9 @@
                 </div>
 
                 <div class="card-body">
-
                     <tile-front-svg
-                        :show-cut-line="showFrontCutLine"/>
+                        :show-cut-line="showFrontCutLine"
+                    />
                 </div>
             </div>
             <br>
@@ -52,7 +51,9 @@
                 </div>
 
                 <div class="card-body">
-
+                    <tile-back-svg
+                        :show-cut-line="showFrontCutLine"
+                    />
                 </div>
             </div>
         </div>
@@ -66,12 +67,12 @@
     import TileDamageTrack from './tile-damage-track';
     import {mapAbilityGetters, mapImageGetters} from '../data/mappers';
     import TileFrontSvg from './tile-print/tile-front-svg';
-    import svgToBase64 from '../lib/svg-to-base64';
     import downloadDataURL from '../lib/download-data-url';
+    import TileBackSvg from './tile-print/tile-back-svg';
 
     export default {
         name: 'tile-print',
-        components: {TileFrontSvg, TileDamageTrack, WeaponGrid},
+        components: {TileBackSvg, TileFrontSvg, TileDamageTrack, WeaponGrid},
         props: {},
         data() {
             return {
@@ -85,7 +86,8 @@
                 'abilityList',
             ]),
             ...mapImageGetters([
-                'frontFileName'
+                'frontFileName',
+                'backFileName'
             ])
         },
         methods: {
@@ -93,7 +95,7 @@
                 this.showFrontCutLine = !this.showFrontCutLine;
             },
             toggleBackCutLine() {
-
+                this.showBackCutLine = !this.showBackCutLine;
             },
             saveFrontSvg() {
                 this.$store.dispatch('images/getFrontSvgBase64')
@@ -103,7 +105,11 @@
                     });
             },
             saveBackSvg() {
-
+                this.$store.dispatch('images/getBackSvgBase64')
+                    .then((base64) => {
+                        let fileName = this.backFileName + '.svg';
+                        downloadDataURL(base64, fileName);
+                    });
             },
             saveFrontPng() {
 
@@ -115,7 +121,11 @@
 
             },
             saveBackPng() {
-
+                this.$store.dispatch('images/getBackImageBase64')
+                    .then((base64) => {
+                        let fileName = this.backFileName + '.png';
+                        downloadDataURL(base64, fileName);
+                    });
             },
         },
     };

@@ -17,7 +17,7 @@
             <div class="card-header">
                 <h5>Tile Front SVG</h5>
 
-                <a href="{{$front_svg_url}}" class="btn btn-primary" target="_blank">Save PNG</a>
+                <a href="{{$front_svg_url}}" class="btn btn-primary" target="_blank">Save SVG</a>
             </div>
             <div class="card-body">
                 <img src="{{$front_svg_url}}" class="img-fluid"/>
@@ -45,7 +45,7 @@
             <div class="card-header">
                 <h5>Tile Back SVG</h5>
 
-                <a href="{{$back_svg_url}}" class="btn btn-primary" target="_blank">Save PNG</a>
+                <a href="{{$back_svg_url}}" class="btn btn-primary" target="_blank">Save SVG</a>
             </div>
             <div class="card-body">
                 <img src="{{$back_svg_url}}" class="img-fluid"/>

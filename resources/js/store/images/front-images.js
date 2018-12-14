@@ -1,7 +1,7 @@
 import toDataURL from '../../lib/image-to-base64';
-import svgToBase64 from '../../lib/svg-to-base64';
 import svgToPngBase64 from '../../lib/svg-to-png-base64';
 import svgToString from '../../lib/svg-to-string';
+import svgToBase64 from '../../lib/svg-to-base64';
 
 export default {
     state: {
@@ -47,6 +47,12 @@ export default {
             return dispatch('loadFrontSourceImageBase64FromUrl')
                 .then(() => {
                     return svgToString('tile-front-svg');
+                });
+        },
+        getFrontSvgBase64({dispatch}){
+            return dispatch('loadFrontSourceImageBase64FromUrl')
+                .then(() => {
+                    return svgToBase64('tile-front-svg');
                 });
         },
         getFrontImageBase64({dispatch, getters}) {

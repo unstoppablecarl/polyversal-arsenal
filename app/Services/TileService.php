@@ -189,9 +189,21 @@ class TileService
             $tileInput = array_merge($tileInput, $images);
         }
 
+        $frontImageData = array_get($input, 'new_back_image');
+        if ($frontImageData) {
+            $images    = $this->tileImage->saveBackImage($tile, $frontImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+
         $frontImageData = array_get($input, 'new_front_svg');
         if ($frontImageData) {
             $images    = $this->tileImage->saveFrontSvg($tile, $frontImageData);
+            $tileInput = array_merge($tileInput, $images);
+        }
+
+        $frontImageData = array_get($input, 'new_back_svg');
+        if ($frontImageData) {
+            $images    = $this->tileImage->saveBackSvg($tile, $frontImageData);
             $tileInput = array_merge($tileInput, $images);
         }
 

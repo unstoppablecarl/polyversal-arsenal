@@ -40,7 +40,7 @@ class TileGridResource extends Resource
             'armor'                  => $this->armor,
             'stealth'                => $this->stealth,
             'cached_cost'            => $this->cached_cost,
-            'image_url'              => $this->front_image_file,
+            'image_url'              => $this->front_image,
             'buttons'                => view('tiles.controls.buttons', ['item' => $model, 'size' => 'sm'])->render(),
         ];
     }

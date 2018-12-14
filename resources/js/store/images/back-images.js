@@ -1,6 +1,7 @@
 import toDataURL from '../../lib/image-to-base64';
-import svgToBase64 from '../../lib/svg-to-base64';
 import svgToPngBase64 from '../../lib/svg-to-png-base64';
+import svgToString from '../../lib/svg-to-string';
+import svgToBase64 from '../../lib/svg-to-base64';
 
 export default {
     state: {
@@ -31,7 +32,7 @@ export default {
         },
         loadBackSourceImageBase64FromUrl({state, commit}) {
             let imageBase64 = state.back_source_image_base64;
-            let imageUrl    = state.back_image_url;
+            let imageUrl    = state.back_source_image_url;
 
             if (!imageBase64 && imageUrl) {
                 return toDataURL(imageUrl, 'png')
@@ -42,7 +43,13 @@ export default {
 
             return Promise.resolve();
         },
-        getBackSvgBase64({dispatch}) {
+        getBackSvgString({dispatch}) {
+            return dispatch('loadBackSourceImageBase64FromUrl')
+                .then(() => {
+                    return svgToString('tile-back-svg');
+                });
+        },
+        getBackSvgBase64({dispatch}){
             return dispatch('loadBackSourceImageBase64FromUrl')
                 .then(() => {
                     return svgToBase64('tile-back-svg');
