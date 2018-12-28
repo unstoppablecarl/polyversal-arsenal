@@ -19,7 +19,7 @@ import {getMaxStealth, getStealthOptions} from '../data/options-stealth';
 import {
     sanitize as sanitizeTile,
 } from './models/tile';
-import toDataURL from '../lib/image-to-base64';
+import getMaxSize from '../data/combatant-max-sizes';
 
 export default {
     namespaced: true,
@@ -36,7 +36,7 @@ export default {
         assault_id: 1,
         stealth: 0,
         anti_missile_system_id: 6,
-
+        flavor_text: '',
         //front_image_url: null,
         //front_thumb_url: null,
         //back_image_url: null,
@@ -45,7 +45,7 @@ export default {
     },
     mutations: {
         update(state, data) {
-            data                      = sanitizeTile(data);
+            data = sanitizeTile(data);
             //state.front_image_base_64 = null;
             Object.assign(state, data);
         },
@@ -153,7 +153,7 @@ export default {
         hasAMAOption(state) {
             return state.tile_type_id == TILE_TYPE_VEHICLE_ID;
         },
-        hasDefensiveSystems(state, getters) {
+        hasDefensiveSystems(state, getters, rootState, rootGetters) {
             const isInfantry = state.tile_type_id === TILE_TYPE_INFANTRY_ID;
             const isVehicle  = state.tile_type_id === TILE_TYPE_VEHICLE_ID;
 
@@ -163,10 +163,10 @@ export default {
             if (isVehicle && state.stealth) {
                 return true;
             }
-            if (state.anti_missile_system_id) {
+            if (state.anti_missile_system_id !== AMA_NONE_ID) {
                 return true;
             }
-            return getters.abilities.hasDefensiveAbility;
+            return rootGetters['abilities/hasDefensiveAbility'];
         },
         techLevelOptions(state, getters) {
             return makeOptions(techLevelOptions, (id) => {
@@ -275,6 +275,9 @@ export default {
         //    }
         //    return state.front_image_url;
         //},
+        maxSize(state){
+            return getMaxSize(state.tile_type_id, state.tile_class_id);
+        }
     },
 };
 

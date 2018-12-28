@@ -22,6 +22,9 @@ mix
     .extract(['vue', 'vuex', 'axios'])
 
     .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/tile-front-svg.scss', 'public/css')
+    .sass('resources/sass/tile-back-svg.scss', 'public/css')
+
     .options({
         processCssUrls: false,
     });
@@ -35,13 +38,13 @@ mix.webpackConfig({
         rules: [
             {
                 test: /\.(ttf|eot|woff|woff2)$/,
-                use : {
-                    loader : "file-loader",
+                use: {
+                    loader: 'file-loader',
                     options: {
-                        name: "../fonts/[name].[ext]",
+                        name: '../fonts/[name].[ext]',
                     },
-                }
-            }
-        ]
-    }
+                },
+            },
+        ],
+    },
 });

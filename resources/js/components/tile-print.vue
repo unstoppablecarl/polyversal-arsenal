@@ -5,57 +5,38 @@
         <div v-for="ability in abilityList">{{ability}}</div>
 
         <div class="tile-print">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-right">
-                        <button class="btn btn-light" @click="toggleFrontCutLine">
-                            <template v-if="showFrontCutLine">
-                                Hide
-                            </template>
-                            <template v-else>
-                                Show
-                            </template>
-                            Cut Line
-                        </button>
 
-                        <button class="btn btn-light" @click="saveFrontPng">Save PNG</button>
-                        <button class="btn btn-light" @click="saveFrontSvg">Save SVG</button>
-                    </div>
-                    <h3 class="card-title">Tile Front</h3>
-                </div>
-
-                <div class="card-body">
+            <tile-print-card
+                title="Tile Front"
+                id-prefix="tile-front"
+                @savePng="saveFrontPng"
+                @saveSvg="saveFrontSvg"
+            >
+                <template slot-scope="{showCutLine, printerFriendly, cutLineColor}">
                     <tile-front-svg
-                        :show-cut-line="showFrontCutLine"
+                        :show-cut-line="showCutLine"
+                        :printer-friendly="printerFriendly"
+                        :cut-line-color="cutLineColor"
                     />
-                </div>
-            </div>
+                </template>
+            </tile-print-card>
+
             <br>
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-right">
-                        <button class="btn btn-light" @click="toggleBackCutLine">
-                            <template v-if="showBackCutLine">
-                                Hide
-                            </template>
-                            <template v-else>
-                                Show
-                            </template>
-                            Cut Line
-                        </button>
 
-                        <button class="btn btn-light" @click="saveBackPng">Save PNG</button>
-                        <button class="btn btn-light" @click="saveBackSvg">Save SVG</button>
-                    </div>
-                    <h3 class="card-title">Tile Back</h3>
-                </div>
-
-                <div class="card-body">
+            <tile-print-card
+                title="Tile Back"
+                id-prefix="tile-back"
+                @savePng="saveBackPng"
+                @saveSvg="saveBackSvg"
+            >
+                <template slot-scope="{showCutLine, printerFriendly, cutLineColor}">
                     <tile-back-svg
-                        :show-cut-line="showFrontCutLine"
+                        :show-cut-line="showCutLine"
+                        :printer-friendly="printerFriendly"
+                        :cut-line-color="cutLineColor"
                     />
-                </div>
-            </div>
+                </template>
+            </tile-print-card>
         </div>
         <br>
     </div>
@@ -69,15 +50,18 @@
     import TileFrontSvg from './tile-print/tile-front-svg';
     import downloadDataURL from '../lib/download-data-url';
     import TileBackSvg from './tile-print/tile-back-svg';
+    import TilePrintCard from './tile-print/tile-print-card';
 
     export default {
         name: 'tile-print',
-        components: {TileBackSvg, TileFrontSvg, TileDamageTrack, WeaponGrid},
+        components: {TilePrintCard, TileBackSvg, TileFrontSvg, TileDamageTrack, WeaponGrid},
         props: {},
         data() {
             return {
                 scale: true,
                 showFrontCutLine: false,
+                frontCutLineColor: 'red',
+                frontPrinterFriendly: false,
                 showBackCutLine: false,
             };
         },
@@ -87,8 +71,8 @@
             ]),
             ...mapImageGetters([
                 'frontFileName',
-                'backFileName'
-            ])
+                'backFileName',
+            ]),
         },
         methods: {
             toggleFrontCutLine() {

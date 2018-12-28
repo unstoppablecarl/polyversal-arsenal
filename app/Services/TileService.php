@@ -67,7 +67,9 @@ class TileService
             'flavor_text',
         ]);
 
-        $tileInput = $this->saveImageData($tile, $input);
+        $imageInput = $this->saveImageData($tile, $input);
+
+        $tileInput = array_merge($tileInput, $imageInput);
 
         $tile->update($tileInput);
         $abilityIds  = array_get($input, 'ability_ids', []);

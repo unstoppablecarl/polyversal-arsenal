@@ -1,0 +1,116 @@
+@import 'tile-svg/font.scss';
+@import 'tile-svg/titles.scss';
+
+%text {
+    font-family: 'Roboto Condensed';
+    fill: #fff;
+    paint-order: stroke;
+    stroke: #000000;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    dominant-baseline: middle;
+    text-transform: uppercase;
+}
+
+.flavor-text {
+    @extend %text;
+    font-size: 8pt;
+    stroke-width: 0.75pt;
+}
+
+.shape-value {
+    @extend %text;
+    font-size: 6pt;
+    stroke-width: 0.75pt;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+.shape-header-value {
+    @extend %text;
+    font-size: 6pt;
+    stroke-width: 0.75pt;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+.max-size {
+    font-size: 5.5pt;
+}
+
+%cost-text {
+    @extend %text;
+    stroke-width: 0.3pt;
+    font-size: 4.75pt;
+}
+
+.cost-header-left {
+    @extend %cost-text;
+    font-weight: bold;
+    text-anchor: start;
+}
+
+.cost-header-center {
+    @extend %cost-text;
+    font-weight: bold;
+    text-anchor: middle;
+}
+
+.cost-row-left {
+    @extend %cost-text;
+    text-anchor: start;
+}
+
+.cost-row-center {
+    @extend %cost-text;
+    text-anchor: middle;
+}
+
+.cost-row-right {
+    @extend %cost-text;
+    text-anchor: end;
+}
+
+%box {
+    stroke-width: 0.5;
+    stroke-miterlimit: 10;
+}
+
+.cost-header-box {
+    @extend %box;
+    fill: #4B4B4D;
+    stroke: #0A0A0A;
+}
+
+.cost-row-box,
+.shape-fill {
+    @extend %box;
+    fill: #58595B;
+    stroke: #0C0C0C;
+}
+
+.printer-friendly {
+    .title,
+    .subtitle,
+    .flavor-text,
+    .shape-value,
+    .shape-header-value,
+    .cost-header-left,
+    .cost-header-center,
+    .cost-row-left,
+    .cost-row-center,
+    .cost-row-right {
+        fill: #000;
+        stroke-width: 0;
+    }
+
+    .cost-row-box,
+    .cost-header-box,
+    .shape-fill {
+        fill: #fff;
+    }
+
+    .bg-image {
+        visibility: hidden;
+    }
+}

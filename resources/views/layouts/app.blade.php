@@ -9,6 +9,8 @@
     <title>Polyversal Arsenal</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/tile-front-svg.css') }}" rel="stylesheet" id="tile-front-svg-css">
+    <link href="{{ asset('css/tile-back-svg.css') }}" rel="stylesheet" id="tile-back-svg-css">
 
 </head>
 <body>

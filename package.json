@@ -25,6 +25,7 @@
         "babel-cli": "^6.26.0",
         "babel-preset-es2015": "^6.24.1",
         "bootstrap-vue": "^2.0.0-rc.11",
+        "svg-text-wrap": "0.0.1",
         "vue-notification": "^1.3.13",
         "vue-router": "^3.0.1",
         "vuedraggable": "^2.16.0",
