@@ -204,7 +204,10 @@
                 flavor_text: 'flavor_text',
             }),
             flavorTextArray() {
-                return textWrap(this.flavor_text + '', 200);
+                if(this.flavor_text){
+                    return textWrap(this.flavor_text + '', 200);
+                }
+                return '';
             },
             psychProfiles() {
                 return psychProfiles.map(item => {
