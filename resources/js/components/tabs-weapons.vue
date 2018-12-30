@@ -10,7 +10,6 @@
         <div class="tab-content-divider"></div>
         <weapon-grid
             :scale="true"
-            :print-preview="false"
         />
 
         <weapon-grid-item-new/>

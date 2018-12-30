@@ -42,7 +42,7 @@
             {{total_cost}}
             <template v-if="currentQuantity > 1">
                 =
-                ({{total_cost}} &times; Q{{currentQuantity}})
+                ({{cost}} &times; Q{{currentQuantity}})
             </template>
         </div>
         <div class="col-controls">
@@ -79,6 +79,7 @@
             weapon: Object,
             quantity: null,
             total_cost: Number,
+            cost: Number,
             arc_direction_id: Number,
             arc_size_id: Number,
             tile_weapon_type_id: {

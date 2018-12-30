@@ -1,7 +1,6 @@
 <template>
 
     <div :class="[{'scale-2': scale}]">
-        <div :class="{'print': printPreview}">
             <div :class="['weapon-grid', {'no-select': dragging}]">
 
                 <div class="container weapon-grid-list">
@@ -54,7 +53,6 @@
                 </div>
 
             </div>
-        </div>
     </div>
 </template>
 
@@ -77,9 +75,6 @@
             scale: {
                 default: true,
             },
-            printPreview: {
-                default: false,
-            }
         },
         data() {
             return {
