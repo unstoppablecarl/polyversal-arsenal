@@ -11,11 +11,11 @@
         <defs>
             <svg:style type="text/css" v-html="svgCss"></svg:style>
 
-            <g id="damage-defense" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-defense" transform="translate(-5, 0)">
                 <polygon points="3.3,1.5 2.5,2.2 2.5,5.1 5,6.5 7.5,5.1 7.5,2.2 6.7,1.5 "/>
             </g>
 
-            <g id="damage-destroyed" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-destroyed" transform="translate(-5, 0)">
                 <path d="M7.1,5l0-2.5L5,1.2L2.9,2.5l0,2.5l0.9,0.5v1.1L4,6.8l0.3-0.1l0-1.2l0.3-0.1l0.3,0.1l0,1.2L5,6.8l0.3-0.1l0-1.2
 		l0.3-0.1l0.3,0.1v1.2L6,6.8l0.3-0.1V5.5L7.1,5z M4,4.8L3.4,4.5l0-0.7L4,3.5l0.6,0.3l0,0.7L4,4.8z M5.4,4.5l0-0.7L6,3.5l0.6,0.3
 		l0,0.7L6,4.8L5.4,4.5z"/>
@@ -24,35 +24,35 @@
 			l0.6,0.3l0,0.7L6,4.8L5.4,4.5z"/>
             </g>
 
-            <g id="damage-fuel-leak" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-fuel-leak" transform="translate(-5, 0)">
                 <path d="M6.1,3.7C5.7,3,5.4,2.4,5.1,1.8L5,1.5L4.9,1.8C4.6,2.4,4.3,3,3.9,3.7C3.6,4.1,3.1,5.2,3.9,6
 	C4.2,6.3,4.6,6.5,5,6.5c0.4,0,0.8-0.2,1.1-0.5C6.9,5.2,6.4,4.1,6.1,3.7z"/>
             </g>
 
-            <g id="damage-hull-breach" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-hull-breach" transform="translate(-5, 0)">
                 <path d="M7.6,4.4H5l1.6-2.9h1V4.4z M2.4,4.4H5L3.4,1.5h-1V4.4z M5.4,5.4C5.2,5.1,5.1,4.8,5,4.6C4.9,4.8,4.8,5.1,4.6,5.4
 	C4.5,5.6,4.3,6,4.6,6.3C4.7,6.4,4.8,6.5,5,6.5c0.2,0,0.3-0.1,0.4-0.2C5.7,6,5.5,5.6,5.4,5.4z"/>
             </g>
 
-            <g id="damage-immobilized" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-immobilized" transform="translate(-5, 0)">
                 <polygon points="6,1.5 4,1.5 2.5,3 2.5,5 4,6.5 6,6.5 7.5,5 7.5,3 "/>
             </g>
 
-            <g id="damage-jump" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-jump" transform="translate(-5, 0)">
                 <path d="M6.2,4.9l-0.7,1L5.5,5.2L5,6.5v0v0l0,0v0L4.5,5.2L4.5,5.9l-0.7-1C4.1,4.9,4.6,5,5,5C5.4,5,5.9,4.9,6.2,4.9z
 	 M6.6,1.5H3.4L2.8,3.1v1.1C3.4,4.3,4.2,4.4,5,4.4c0.8,0,1.6-0.1,2.2-0.3V3.1L6.6,1.5z"/>
             </g>
 
-            <g id="damage-stress" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-stress" transform="translate(-5, 0)">
                 <polygon points="7.5,4 5,3.2 5,1.5 2.5,4 5,4.8 5,6.5 "/>
             </g>
 
-            <g id="damage-targeting" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-targeting" transform="translate(-5, 0)">
                 <path
                     d="M3,3H2.5V1.5H4V2H3V3z M4,6H3V5H2.5v1.5H4V6z M7.5,1.5H6V2h1v1h0.5V1.5z M7.5,5H7v1H6v0.5h1.5V5z"/>
             </g>
 
-            <g id="damage-weapon" transform="translate(-5, 0)" class="icon-damage">
+            <g id="damage-weapon" transform="translate(-5, 0)">
                 <polygon points="7.5,1.5 5,3.2 2.5,1.5 4.2,4 2.5,6.5 5,4.8 7.5,6.5 5.8,4 "/>
             </g>
         </defs>
@@ -200,10 +200,10 @@
                 return targetingById[this.tile_assault_id].display_name;
             },
             assaultIconCssClass() {
-                return 'fill-' + targetingById[this.tile_assault_id].name;
+                return targetingById[this.tile_assault_id].display_name + '-bg';
             },
             targetingIconCssClass() {
-                return 'fill-' + targetingById[this.tile_targeting_id].name;
+                return targetingById[this.tile_targeting_id].display_name + '-bg';
             },
             assaultNumber() {
                 return this.assault.split('D')[1];
@@ -219,7 +219,6 @@
                 tile_front_image_url: 'front_image_url',
             }),
         },
-
     };
 
 </script>

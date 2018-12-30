@@ -1,7 +1,7 @@
 <template>
 
-    <g class="svg-damage-track" :transform="'translate(' +  (268.3 * 0.5 - totalWidth * 0.5) + ', 0)'">
-        <g class="svg-damage-track-header-boxes">
+    <g class="damage-track" :transform="'translate(' +  (268.3 * 0.5 - totalWidth * 0.5) + ', 0)'">
+        <g class="damage-track-header-boxes">
 
             <rect x="0" y="0" width="15" height="8"/>
             <rect x="15" y="0" :width="cellStressWidth" height="8"/>
@@ -15,7 +15,7 @@
             </rect>
         </g>
 
-        <g class="svg-damage-track-result-boxes">
+        <g class="damage-track-result-boxes">
             <rect x="0" y="8" width="15" height="8"/>
             <rect x="15" y="8" :width="cellStressWidth" height="8"/>
             <rect v-for="(item, index) in resultColumns"
@@ -27,8 +27,8 @@
             />
         </g>
 
-        <g class="svg-damage-track-header-text">
-            <text x="1" y="4.5" class="svg-damage-track-label">DMG</text>
+        <g class="damage-track-header-text">
+            <text x="1" y="4.5" class="damage-track-label">DMG</text>
             <text :x="15 + (cellStressWidth * 0.5)" y="4.5">
                 <template v-if="stressIsRange">
                     {{stressMin}} - {{stressMax}}
@@ -46,15 +46,16 @@
             </text>
         </g>
 
-        <g class="svg-damage-track-result-text">
-            <text x="1" y="12.5" class="svg-damage-track-label">EFF</text>
-            <use :href="'#damage-stress'" :transform="'translate(' + stressCenterX + ', 8)'"/>
+        <g class="damage-track-result-text">
+            <text x="1" y="12.5" class="damage-track-label">EFF</text>
+            <use :href="'#damage-stress'" :transform="'translate(' + stressCenterX + ', 8)'" class="icon-damage"/>
 
             <use
                 v-for="(item, index) in resultColumns"
                 :key="item.key"
                 :href="'#' + item.svg_id"
                 :transform="'translate(' + resultCenterX(item) + ', 8)'"
+                class="icon-damage"
             />
         </g>
 

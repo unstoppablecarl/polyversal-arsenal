@@ -1,0 +1,14 @@
+$d4-color: #1B75BC;
+$d6-color: #009444;
+$d8-color: #FFDE17;
+$d10-color: #F26522;
+$d12-color: #ED1C24;
+
+$die-color-map: (
+        D4: $d4-color,
+        D6: $d6-color,
+        D8: $d8-color,
+        D10: $d10-color,
+        D12: $d12-color,
+        NONE: transparent
+);

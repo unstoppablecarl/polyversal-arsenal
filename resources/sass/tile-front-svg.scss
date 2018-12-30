@@ -8,33 +8,22 @@
 .icon-white {
     fill: #FFFFFF;
     stroke: #000000;
-    stroke-width: 0.2;
+    stroke-width: 0.25pt;
     stroke-miterlimit: 10;
+    paint-order: stroke;
 }
 
-.fill-d4 {
-    fill: #1B75BC;
-}
 
-.fill-d6 {
-    fill: #009444;
-}
+@import 'die-colors';
 
-.fill-d8 {
-    fill: #FFDE17;
-}
-
-.fill-d10 {
-    fill: #F26522;
-}
-
-.fill-d12 {
-    fill: #ED1C24;
+@each $key, $color in $die-color-map {
+    .#{$key}-bg {
+        fill: $color;
+    }
 }
 
 .icon-number {
     fill: #ffffff;
-
     font-size: 7pt;
     font-family: 'Roboto Condensed';
     text-align: center;
@@ -42,7 +31,7 @@
     dominant-baseline: middle;
     paint-order: stroke;
     stroke: #000000;
-    stroke-width: 0.3pt;
+    stroke-width: 0.5pt;
     stroke-linecap: butt;
     stroke-linejoin: miter;
 }
@@ -63,7 +52,7 @@
     dominant-baseline: middle;
     paint-order: stroke;
     stroke: #000000;
-    stroke-width: 0.3pt;
+    stroke-width: 0.5pt;
     stroke-linecap: butt;
     stroke-linejoin: miter;
 }
@@ -83,19 +72,19 @@
     fill: #58595B;
     fill-opacity: 0.9;
     stroke: #0C0C0C;
-    stroke-width: 0.5;
+    stroke-width: 0.5pt;
     stroke-miterlimit: 10;
 }
 
-.svg-damage-track-header-boxes {
+.damage-track-header-boxes {
     fill: #4A4B4D;
     stroke: #0C0C0C;
-    stroke-width: 0.5;
+    stroke-width: 0.5pt;
     stroke-miterlimit: 10;
 }
 
-.svg-damage-track-header-text,
-.svg-damage-track-result-text {
+.damage-track-header-text,
+.damage-track-result-text {
     font-family: 'Roboto Condensed';
     font-size: 5pt;
     font-weight: bold;
@@ -105,26 +94,72 @@
     dominant-baseline: middle;
     paint-order: stroke;
     stroke: #000000;
-    stroke-width: 0.3pt;
+    stroke-width: 0.5pt;
     stroke-linecap: butt;
     stroke-linejoin: miter;
 }
 
-.svg-damage-track-result-boxes {
+.damage-track-result-boxes {
     fill: rgba(88, 89, 91, 0.9);
     stroke: #0C0C0C;
-    stroke-width: 0.5;
+    stroke-width: 0.5pt;
     stroke-miterlimit: 10;
 }
 
-.svg-damage-track-label {
+.damage-track-label {
     text-align: left;
     text-anchor: start;
 }
 
 .icon-damage {
     fill: #E6E7E8;
-    stroke-width: 0.4pt;
+    stroke-width: 0.5pt;
     stroke: #000;
+    paint-order: stroke;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
 }
 
+
+.printer-friendly {
+    .title,
+    .subtitle,
+    .icon-number,
+    .icon-white,
+    .damage-track-header-text,
+    .damage-track-result-text,
+    .weapon-grid-heading,
+    .weapon-grid-heading-left,
+    .weapon-grid-row,
+    .icon-damage{
+        fill: #000;
+        stroke-width: 0;
+    }
+
+    .damage-track-header-boxes,
+    .damage-track-result-boxes,
+    .weapon-grid-block,
+    .fill-gray,
+    .fill-d4,
+    .fill-d6,
+    .fill-d8,
+    .fill-d10,
+    .fill-d12 {
+        fill: #fff;
+    }
+
+    .bg-image {
+        visibility: hidden;
+    }
+
+    @each $key, $color in $die-color-map {
+        .#{$key}-bg {
+            fill: none;
+        }
+    }
+
+}
+
+.printer-friendly-black-white {
+
+}

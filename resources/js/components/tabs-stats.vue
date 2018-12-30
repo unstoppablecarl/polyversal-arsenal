@@ -76,9 +76,6 @@
                 {{evasion}}
             </div>
         </div>
-        <div class="scale-2">
-            <tile-damage-track/>
-        </div>
 
     </div>
 
@@ -90,14 +87,12 @@
     import TileStatSelect from './tabs-stats/tile-stat-select';
     import TileClassRow from './tabs-stats/tile-class-row';
     import TileClassificationRow from './tabs-stats/tile-classification-row';
-    import TileDamageTrack from './tile-damage-track';
     import {amaOptions, assaultOptions, targetingOptions} from '../data/options';
     import {mapTileGetters, mapTileProperties} from '../data/mappers';
 
     export default {
         name: 'tabs-stats',
         components: {
-            TileDamageTrack,
             TileClassificationRow,
             TileClassRow, TileStatSelect, Number,
         },

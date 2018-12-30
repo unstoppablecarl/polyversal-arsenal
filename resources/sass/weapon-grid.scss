@@ -13,32 +13,20 @@ $col-tile-weapon-type-width: 30pt * $scale;
 $col-cost-width: 40pt * $scale;
 
 $columns-edit-width: $col-controls-width + $col-move-width + ($col-arc-settings-width * 2) + $col-tile-weapon-type-width + $col-cost-width;
-$d4-color: #1B75BC;
-$d6-color: #009444;
-$d8-color: #FFDE17;
-$d10-color: #F26522;
-$d12-color: #ED1C24;
+
 
 $gray-bg: rgba(88, 89, 91, 0.9);
 
-$map: (
-    D4: $d4-color,
-    D6: $d6-color,
-    D8: $d8-color,
-    D10: $d10-color,
-    D12: $d12-color,
-    NONE: transparent
-);
-
-@each $key, $color in $map {
-    .#{$key}-bg {
-        background-color: $color;
-        fill: $color;
-    }
-}
+@import 'die-colors';
 
 .weapon-grid {
     margin: 0 0 20px;
+
+    @each $key, $color in $die-color-map {
+        .#{$key}-bg {
+            background-color: $color;
+        }
+    }
 
     .controls {
         margin: 20px 0;

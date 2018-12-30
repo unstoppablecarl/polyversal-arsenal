@@ -12,13 +12,11 @@
 
 $scale: 1;
 @import 'weapon-grid';
-@import 'damage-track.scss';
 @import 'tile-print.scss';
 
 .scale-2 {
     $scale: 2;
     @import 'weapon-grid';
-    @import 'damage-track.scss';
     @import 'tile-print.scss';
 
 }

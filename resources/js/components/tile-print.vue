@@ -45,7 +45,6 @@
 <script>
 
     import WeaponGrid from './weapon-grid';
-    import TileDamageTrack from './tile-damage-track';
     import {mapAbilityGetters, mapImageGetters} from '../data/mappers';
     import TileFrontSvg from './tile-print/tile-front-svg';
     import downloadDataURL from '../lib/download-data-url';
@@ -54,7 +53,7 @@
 
     export default {
         name: 'tile-print',
-        components: {TilePrintCard, TileBackSvg, TileFrontSvg, TileDamageTrack, WeaponGrid},
+        components: {TilePrintCard, TileBackSvg, TileFrontSvg, WeaponGrid},
         props: {},
         data() {
             return {
