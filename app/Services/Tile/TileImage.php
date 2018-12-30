@@ -88,9 +88,11 @@ class TileImage
 
     public function deleteAllImages(Tile $tile)
     {
+        Storage::disk('local')->delete($this->local($tile->front_source_image));
         Storage::disk('local')->delete($this->local($tile->front_image));
         Storage::disk('local')->delete($this->local($tile->front_thumb));
 
+        Storage::disk('local')->delete($this->local($tile->back_source_image));
         Storage::disk('local')->delete($this->local($tile->back_image));
         Storage::disk('local')->delete($this->local($tile->back_thumb));
 

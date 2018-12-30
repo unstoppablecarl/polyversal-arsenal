@@ -70,9 +70,9 @@ class CostService
 
     public function getCostDiff($tile, array $costs)
     {
-        $total        = array_get($costs, 'total') + 1;
+        $total        = array_get($costs, 'total');
         $tile_weapons = array_get($costs, 'tile_weapons');
-        $abilities    = array_get($costs, 'abilities') + 2;
+        $abilities    = array_get($costs, 'abilities');
         $stats        = array_get($costs, 'stats');
 
         $results = [
