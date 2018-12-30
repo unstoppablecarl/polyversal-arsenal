@@ -80,10 +80,15 @@ export default new Vuex.Store({
                 notificationFromErrorResponse(error.response);
             };
 
-            const handelSuccess = (payload) => {
+            const handelResponse = (response) => {
+
+                let payload = response.data.data;
+
                 if (payload.cost_diff) {
                     console.warn('server disagrees with cost calculation!', payload.cost_diff);
                 }
+
+                dispatch('set', payload);
             };
 
             return Promise.all([
@@ -97,7 +102,7 @@ export default new Vuex.Store({
                     data.new_front_svg   = results[1];
                     data.new_back_image  = results[2];
                     data.new_back_svg    = results[3];
-                    sendRequest();
+                    return sendRequest();
                 });
 
             function sendRequest() {
@@ -105,24 +110,19 @@ export default new Vuex.Store({
                 if (!state.tile.id) {
                     return server.create(data)
                         .then((response) => {
-                            notificationSuccess({
-                                title: 'Tile Created',
-                            });
-                            let payload = response.data.data;
-                            handelSuccess(payload);
-                            return dispatch('set', payload);
-                        })
-                        .catch(handleError);
-                }
-                else {
-                    return server.update(data)
-                        .then((response) => {
+                            handelResponse(response);
                             notificationSuccess({
                                 title: 'Tile Saved',
                             });
-                            let payload = response.data.data;
-                            handelSuccess(payload);
-                            return dispatch('set', payload);
+                        })
+                        .catch(handleError);
+                } else {
+                    return server.update(data)
+                        .then((response) => {
+                            handelResponse(response);
+                            notificationSuccess({
+                                title: 'Tile Saved',
+                            });
                         })
                         .catch(handleError);
                 }
