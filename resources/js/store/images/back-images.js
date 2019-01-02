@@ -5,6 +5,7 @@ import svgToBase64 from '../../lib/svg-to-base64';
 
 export default {
     state: {
+        back_source_image_delete: false,
         back_source_image_url: null,
         back_source_image_base64: null,
         back_source_image_base64_new: null,
@@ -12,6 +13,7 @@ export default {
     mutations: {
         setNewBackSourceImageBase64(state, data) {
             state.back_source_image_base64     = null;
+            state.back_source_image_delete     = false;
             state.back_source_image_base64_new = data;
         },
         setBackSourceImageBase64(state, value) {
@@ -20,7 +22,11 @@ export default {
         setBackSourceImageUrl(state, url) {
             state.back_source_image_base64     = null;
             state.back_source_image_base64_new = null;
-            state.back_source_image_url = url;
+            state.back_source_image_delete     = false;
+            state.back_source_image_url        = url;
+        },
+        setBackSourceImageDelete(state, value) {
+            state.back_source_image_delete = value;
         },
     },
     actions: {
@@ -29,6 +35,9 @@ export default {
         },
         setBackSourceImageUrl({commit}, url) {
             commit('setBackSourceImageUrl', url);
+        },
+        setBackSourceImageDelete({commit}, value) {
+            commit('setBackSourceImageDelete', value);
         },
         loadBackSourceImageBase64FromUrl({state, commit}) {
             let imageBase64 = state.back_source_image_base64;
@@ -49,7 +58,7 @@ export default {
                     return svgToString('tile-back-svg');
                 });
         },
-        getBackSvgBase64({dispatch}){
+        getBackSvgBase64({dispatch}) {
             return dispatch('loadBackSourceImageBase64FromUrl')
                 .then(() => {
                     return svgToBase64('tile-back-svg');
@@ -74,6 +83,9 @@ export default {
         },
         newBackSourceImageBase64(state) {
             return state.back_source_image_base64_new;
+        },
+        backImageDelete(state) {
+            return state.back_source_image_delete;
         },
         backFileName(state, getters) {
             return 'polyversal-tile-back-' + getters.fileName;

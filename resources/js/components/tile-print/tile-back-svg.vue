@@ -24,8 +24,8 @@
         <g :class="{'printer-friendly': printerFriendly}">
 
             <image
-                v-if="backSourceImageUrl"
-                :href="backSourceImageUrl"
+                v-if="sourceImageUrl"
+                :href="sourceImageUrl"
                 width="100%"
                 height="100%"
                 clip-path="url(#tile-clip)"
@@ -150,6 +150,7 @@
 <script>
 
     import {
+        mapBackImageGetters,
         mapImageGetters,
         mapTileGetters,
         mapTileProperties,
@@ -195,8 +196,8 @@
                 'printSubTitle',
                 'maxSize',
             ]),
-            ...mapImageGetters([
-                'backSourceImageUrl',
+            ...mapBackImageGetters([
+                'sourceImageUrl',
             ]),
             ...mapTileProperties({
                 tile_name: 'name',

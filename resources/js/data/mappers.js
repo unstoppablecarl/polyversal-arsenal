@@ -35,6 +35,17 @@ const {
       } = createNamespacedHelpers('images');
 
 
+const {
+          mapGetters: mapFrontImageGetters,
+          mapActions: mapFrontImageActions,
+      } = createNamespacedHelpers('images/front');
+
+const {
+          mapGetters: mapBackImageGetters,
+          mapActions: mapBackImageActions,
+      } = createNamespacedHelpers('images/back');
+
+
 export {
     mapTileProperties,
     mapTileActions,
@@ -45,4 +56,8 @@ export {
     mapTileWeaponGetters,
     mapImageGetters,
     mapImageActions,
+    mapFrontImageGetters,
+    mapFrontImageActions,
+    mapBackImageGetters,
+    mapBackImageActions
 };

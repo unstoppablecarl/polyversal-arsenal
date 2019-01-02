@@ -5,6 +5,7 @@ import svgToBase64 from '../../lib/svg-to-base64';
 
 export default {
     state: {
+        front_source_image_delete: false,
         front_source_image_url: null,
         front_source_image_base64: null,
         front_source_image_base64_new: null,
@@ -12,6 +13,7 @@ export default {
     mutations: {
         setNewFrontSourceImageBase64(state, data) {
             state.front_source_image_base64     = null;
+            state.front_source_image_delete     = false;
             state.front_source_image_base64_new = data;
         },
         setFrontSourceImageBase64(state, value) {
@@ -20,7 +22,11 @@ export default {
         setFrontSourceImageUrl(state, url) {
             state.front_source_image_base64     = null;
             state.front_source_image_base64_new = null;
+            state.front_source_image_delete     = false;
             state.front_source_image_url        = url;
+        },
+        setFrontSourceImageDelete(state, value) {
+            state.front_source_image_delete = value;
         },
     },
     actions: {
@@ -29,6 +35,9 @@ export default {
         },
         setFrontSourceImageUrl({commit}, url) {
             commit('setFrontSourceImageUrl', url);
+        },
+        setFrontSourceImageDelete({commit}, value) {
+            commit('setFrontSourceImageDelete', value);
         },
         loadFrontSourceImageBase64FromUrl({state, commit}) {
             let imageBase64 = state.front_source_image_base64;
@@ -49,7 +58,7 @@ export default {
                     return svgToString('tile-front-svg');
                 });
         },
-        getFrontSvgBase64({dispatch}){
+        getFrontSvgBase64({dispatch}) {
             return dispatch('loadFrontSourceImageBase64FromUrl')
                 .then(() => {
                     return svgToBase64('tile-front-svg');
@@ -74,6 +83,9 @@ export default {
         },
         newFrontSourceImageBase64(state) {
             return state.front_source_image_base64_new;
+        },
+        frontImageDelete(state) {
+            return state.front_source_image_delete;
         },
         frontFileName(state, getters) {
             return 'polyversal-tile-front-' + getters.fileName;

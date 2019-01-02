@@ -74,22 +74,14 @@ class TileSaveRequest extends FormRequest
             'costs.tile_weapons' => 'integer|required',
             'costs.abilities'    => 'integer|required',
 
-            'new_front_source_image' => [
+            'new_front_image'        => [
                 'nullable',
                 new Base64ImageRule,
             ],
-            'new_back_source_image' => [
+            'new_back_image'         => [
                 'nullable',
                 new Base64ImageRule,
             ],
-            'new_front_image' => [
-                'nullable',
-                new Base64ImageRule,
-            ],
-            'new_back_image' => [
-                'nullable',
-                new Base64ImageRule,
-            ]
         ];
     }
 

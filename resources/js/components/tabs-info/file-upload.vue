@@ -1,50 +1,130 @@
 <template>
-    <div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">{{label}}</label>
-            <div class="col-sm-4">
-                <input type="file" v-on:change="onFileChange" class="form-control-file" ref="file_input">
-            </div>
-            <div class="col-md-3">
+    <div class="card">
+        <div class="card-header">
+            <h4>{{label}}</h4>
+        </div>
+        <div class="card-body">
 
-                <figure class="figure">
-                    <figcaption class="figure-caption">New Image</figcaption>
-                    <template v-if="newImageData">
-                        <img :src="newImageData" class="figure-img img-fluid img-thumbnail">
-                    </template>
-                </figure>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="file" v-on:change="onFileChange" class="form-control-file" ref="file_input">
+                    <br>
 
-            </div>
-            <div class="col-md-3">
-                <figure class="figure">
-                    <figcaption class="figure-caption">Current Image</figcaption>
-                    <template v-if="imageUrl">
-                        <img :src="imageUrl" class="figure-img img-fluid img-thumbnail">
+                    <p>
+                        <strong>Note:</strong> Uploading images does not automatically save the finished tile.
+                    </p>
+                    <template v-if="unsavedChanges">
+
+                        <p class="text-danger">
+                            Changes to this background image have not been saved to the finished tile.
+
+                            Don't forget to <btn-save :inline="true"/> when you are done making changes.
+                        </p>
                     </template>
-                </figure>
+                </div>
+                <div class="col-md-4">
+                    <figure class="figure">
+                        <figcaption class="figure-caption">New Image</figcaption>
+
+                        <img :src="newImageSrc" class="figure-img img-fluid img-thumbnail">
+
+                    </figure>
+                    <p>
+                        <button class="btn btn-success" @click="onUpload" v-if="newImageData" :disabled="syncing">
+                            <template v-if="uploading">
+                                Uploading
+                                <i class="fas fa-fw fa-spin fa-cog"></i>
+                            </template>
+                            <template v-else>
+                                Upload
+                                <i class="fas fa-fw fa-save"></i>
+                            </template>
+                        </button>
+                        <button class="btn btn-light" @click="onCancelUpload" v-if="newImageData && !uploading">Cancel
+                        </button>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <figure class="figure">
+                        <figcaption class="figure-caption">Current Image</figcaption>
+
+                        <img :src="currentImageSrc" class="figure-img img-fluid img-thumbnail">
+
+                    </figure>
+
+                    <p class="text-danger">
+                        <strong>
+                            <template v-if="deleteClicked">
+                                Are you sure you want to Delete this image?
+                            </template>
+                            <template v-else>
+                                &nbsp;
+                            </template>
+                        </strong>
+                    </p>
+                    <button class="btn btn-danger" @click="onDelete" v-if="imageUrl" :disabled="syncing">
+                        <template v-if="deleting">
+                            Deleting
+                            <i class="fas fa-fw fa-spin fa-cog"></i>
+                        </template>
+                        <template v-else-if="deleteClicked">
+                            Yes Delete It
+                        </template>
+                        <template v-else>
+                            Delete
+                            <i class="fas fa-fw fa-trash"></i>
+                        </template>
+                    </button>
+                    <button class="btn btn-light" @click="onCancelDelete" v-if="deleteClicked">Cancel</button>
+                </div>
             </div>
         </div>
-
     </div>
 </template>
 <script>
-    import {mapImageGetters, mapTileProperties} from '../../data/mappers';
+    import {mapGetters} from 'vuex';
+    import BtnSave from '../btn-save';
 
     export default {
         name: 'file-upload',
+        components: {BtnSave},
         props: {
             label: null,
             imageUrl: null,
-            newImageData: null,
+            uploadAction: null,
+            deleteAction: null,
+            unsavedChanges: null,
         },
         watch: {
-            newImageData(value) {
-                if (!value) {
-                    this.clearImage();
-                }
+            imageUrl() {
+                this.clearUpload();
+            },
+        },
+        data() {
+            return {
+                newImageData: null,
+                deleteClicked: false,
+                deleteConfirmed: false,
+                uploading: false,
+                deleting: false,
+            };
+        },
+        computed: {
+            ...mapGetters([
+                'syncing',
+            ]),
+            newImageSrc() {
+                return this.newImageData || '/img/background-placeholder.png';
+            },
+            currentImageSrc() {
+                return this.imageUrl || '/img/background-placeholder.png';
             },
         },
         methods: {
+            clearUpload() {
+                this.newImageData           = null;
+                this.$refs.file_input.value = null;
+            },
             onFileChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -54,12 +134,35 @@
             createImage(file) {
                 let reader    = new FileReader();
                 reader.onload = (e) => {
-                    this.$emit('imageSet', e.target.result);
+                    this.newImageData = e.target.result;
                 };
                 reader.readAsDataURL(file);
             },
-            clearImage() {
-                this.$refs.file_input.value = null;
+
+            onUpload() {
+                this.uploading = true;
+                return this.$store.dispatch(this.uploadAction, this.newImageData)
+                    .then(() => {
+                        this.uploading = false;
+                    });
+            },
+            onCancelUpload() {
+                this.clearUpload();
+            },
+            onDelete() {
+                if (!this.deleteClicked) {
+                    this.deleteClicked = true;
+                    return;
+                }
+                this.deleteClicked = false;
+                this.deleting      = true;
+                this.$store.dispatch(this.deleteAction)
+                    .then(() => {
+                        this.deleting = false;
+                    });
+            },
+            onCancelDelete() {
+                this.deleteClicked = false;
             },
         },
     };

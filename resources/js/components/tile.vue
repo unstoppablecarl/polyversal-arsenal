@@ -40,7 +40,7 @@
                 Create New Tile
             </router-link>
         </template>
-        <template v-else-if="loading">
+        <template v-else-if="fetching">
             <h1 class="text-center">Loading Tile
                 <i class="fas fa-spin fa-cog"></i>
             </h1>
@@ -49,16 +49,7 @@
 
             <div class="no-print">
                 <div class="float-right">
-                    <button class="btn btn-primary" @click="save" :disabled="saving">
-                        <template v-if="saving">
-                            Saving
-                            <i class="fas fa-fw fa-spin fa-cog"></i>
-                        </template>
-                        <template v-else>
-                            Save
-                            <i class="fas fa-fw fa-save"></i>
-                        </template>
-                    </button>
+                    <btn-save/>
                 </div>
 
                 <h4>{{subTitle}}</h4>
@@ -85,10 +76,12 @@
     import TilePrint from './tile-print';
     import TileNotifications from './tile-notifications';
     import FileUpload from './tabs-info/file-upload';
+    import BtnSave from './btn-save';
 
     export default {
         name: 'tile',
         components: {
+            BtnSave,
             FileUpload,
             TileNotifications,
             TilePrint,
@@ -99,8 +92,6 @@
         },
         data() {
             return {
-                saving: false,
-                loading: false,
                 notFound: false,
             };
         },
@@ -112,6 +103,7 @@
                 'subTitle',
             ]),
             ...mapGetters([
+                'fetching',
                 'viewURL',
                 'editURL',
                 'deleteURL',
@@ -149,12 +141,9 @@
                     return;
                 }
                 if (this.tile_id != routeId) {
-                    this.loading = true;
                     this.$store.dispatch('fetch', routeId)
                         .then((result) => {
-                            this.loading = false;
                             if (result) {
-
                                 if (result.not_found || result.unauthorized) {
                                     this.notFound = true;
                                 }
@@ -167,13 +156,6 @@
                     name: this.$route.name,
                     params: {id: this.tile_id},
                 });
-            },
-            save() {
-                this.saving = true;
-                this.$store.dispatch('save')
-                    .then(() => {
-                        this.saving = false;
-                    });
             },
         },
     };

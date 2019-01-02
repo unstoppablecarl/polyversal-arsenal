@@ -62,8 +62,8 @@
         <g :class="{'printer-friendly': printerFriendly}">
 
             <image
-                v-if="frontSourceImageUrl"
-                :href="frontSourceImageUrl"
+                v-if="sourceImageUrl"
+                :href="sourceImageUrl"
                 width="100%"
                 height="100%"
                 clip-path="url(#tile-clip)"
@@ -153,7 +153,7 @@
 <script>
 
     import {
-        mapAbilityGetters,
+        mapAbilityGetters, mapFrontImageGetters,
         mapImageGetters,
         mapTileGetters,
         mapTileProperties,
@@ -187,8 +187,8 @@
                 'evasion',
                 'move',
             ]),
-            ...mapImageGetters([
-                'frontSourceImageUrl',
+            ...mapFrontImageGetters([
+                'sourceImageUrl',
             ]),
             ...mapAbilityGetters([
                 'abilityList',

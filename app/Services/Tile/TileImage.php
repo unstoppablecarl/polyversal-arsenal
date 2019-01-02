@@ -16,9 +16,7 @@ class TileImage
 
     public function saveFrontImage(Tile $tile, $data)
     {
-        Storage::disk('local')->delete($this->local($tile->front_image));
-        Storage::disk('local')->delete($this->local($tile->front_thumb));
-
+        $this->deleteFront($tile);
         $images = $this->saveImage($tile, 'front', $data);
 
         return [
@@ -29,9 +27,7 @@ class TileImage
 
     public function saveBackImage(Tile $tile, $data)
     {
-        Storage::disk('local')->delete($this->local($tile->back_image));
-        Storage::disk('local')->delete($this->local($tile->back_thumb));
-
+        $this->deleteBack($tile);
         $images = $this->saveImage($tile, 'back', $data);
 
         return [
@@ -42,7 +38,7 @@ class TileImage
 
     public function saveFrontSourceImage(Tile $tile, $data)
     {
-        Storage::disk('local')->delete($this->local($tile->front_source_image));
+        $this->deleteFrontSourceImage($tile);
         $image = $this->saveSourceImage($tile, 'front-source', $data);
 
         return [
@@ -52,7 +48,7 @@ class TileImage
 
     public function saveBackSourceImage(Tile $tile, $data)
     {
-        Storage::disk('local')->delete($this->local($tile->back_source_image));
+        $this->deleteBackSourceImage($tile);
         $image = $this->saveSourceImage($tile, 'back-source', $data);
 
         return [
@@ -65,7 +61,7 @@ class TileImage
         $timestamp = Carbon::now()->getTimestamp();
         $fileName  = 'front-' . $tile->id . '-' . $timestamp . '.svg';
 
-        Storage::disk('local')->delete($this->local($tile->front_svg));
+        $this->deleteFrontSvg($tile);
         Storage::disk('local')->put($this->local($fileName), $data);
 
         return [
@@ -78,7 +74,7 @@ class TileImage
         $timestamp = Carbon::now()->getTimestamp();
         $fileName  = 'back-' . $tile->id . '-' . $timestamp . '.svg';
 
-        Storage::disk('local')->delete($this->local($tile->back_svg));
+        $this->deleteBackSvg($tile);
         Storage::disk('local')->put($this->local($fileName), $data);
 
         return [
@@ -88,16 +84,53 @@ class TileImage
 
     public function deleteAllImages(Tile $tile)
     {
-        Storage::disk('local')->delete($this->local($tile->front_source_image));
-        Storage::disk('local')->delete($this->local($tile->front_image));
-        Storage::disk('local')->delete($this->local($tile->front_thumb));
+        $this->deleteFrontSourceImage($tile);
+        $this->deleteFront($tile);
 
-        Storage::disk('local')->delete($this->local($tile->back_source_image));
-        Storage::disk('local')->delete($this->local($tile->back_image));
-        Storage::disk('local')->delete($this->local($tile->back_thumb));
+        $this->deleteBackSourceImage($tile);
+        $this->deleteBack($tile);
 
-        Storage::disk('local')->delete($this->local($tile->front_svg));
-        Storage::disk('local')->delete($this->local($tile->back_svg));
+        $this->deleteFrontSvg($tile);
+        $this->deleteBackSvg($tile);
+    }
+
+    public function deleteFrontSvg(Tile $tile)
+    {
+        $this->deleteFile($tile->front_svg);
+    }
+
+    public function deleteBackSvg(Tile $tile)
+    {
+        $this->deleteFile($tile->back_svg);
+    }
+
+    public function deleteFront(Tile $tile)
+    {
+        $this->deleteFile($tile->front_image);
+        $this->deleteFile($tile->front_thumb);
+    }
+
+    public function deleteBack(Tile $tile)
+    {
+        $this->deleteFile($tile->back_image);
+        $this->deleteFile($tile->back_thumb);
+    }
+
+    public function deleteFrontSourceImage(Tile $tile)
+    {
+        $this->deleteFile($tile->front_source_image);
+    }
+
+    public function deleteBackSourceImage(Tile $tile)
+    {
+        $this->deleteFile($tile->back_source_image);
+    }
+
+    protected function deleteFile($file)
+    {
+        if ($file) {
+            Storage::disk('local')->delete($this->local($file));
+        }
     }
 
     protected function saveSourceImage(Tile $tile, $prefix, $data)

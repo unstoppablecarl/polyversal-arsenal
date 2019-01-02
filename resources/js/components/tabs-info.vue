@@ -22,15 +22,18 @@
         <file-upload
             label="Front Image"
             :image-url="frontSourceImageUrl"
-            :new-image-data="newFrontSourceImageBase64"
-            @imageSet="frontImageLoaded"
+            :unsaved-changes="frontUnsavedChanges"
+            upload-action="images/front/saveSourceImage"
+            delete-action="images/front/deleteSourceImage"
         />
 
+        <br>
         <file-upload
             label="Back Image"
             :image-url="backSourceImageUrl"
-            :new-image-data="newBackSourceImageBase64"
-            @imageSet="backImageLoaded"
+            :unsaved-changes="backUnsavedChanges"
+            upload-action="images/back/saveSourceImage"
+            delete-action="images/back/deleteSourceImage"
         />
 
     </div>
@@ -51,27 +54,25 @@
             TileTextInputRow,
             FileUpload,
         },
+        data() {
+            return {
+                frontUploading: false,
+                frontDeleting: false,
+            };
+        },
         computed: {
             ...mapTileProperties({
                 tile_name: 'name',
                 flavor_text: 'flavor_text',
             }),
-            ...mapImageGetters([
-                'frontSourceImageUrl',
-                'newFrontSourceImageBase64',
-
-                'backSourceImageUrl',
-                'newBackSourceImageBase64',
-            ]),
+            ...mapImageGetters({
+                'frontSourceImageUrl': 'front/sourceImageUrl',
+                'backSourceImageUrl': 'back/sourceImageUrl',
+                'frontUnsavedChanges': 'front/unsavedChanges',
+                'backUnsavedChanges': 'back/unsavedChanges',
+            }),
         },
-        methods: {
-            frontImageLoaded(value) {
-                this.$store.dispatch('images/setNewFrontSourceImageBase64', value);
-            },
-            backImageLoaded(value) {
-                this.$store.dispatch('images/setNewBackSourceImageBase64', value);
-            },
-        },
+        methods: {},
     };
 
 </script>

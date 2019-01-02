@@ -56,8 +56,18 @@ Route::group([
         Route::put('tiles/{tile}', 'TileController@update')
             ->name('tiles.update');
 
-        Route::post('tiles/{tile}/upload-image', 'TileController@updateImage')
-            ->name('tiles.upload-image');
+        Route::put('tiles/{tile}/front-source-image/update', 'TileSourceImageController@updateFront')
+            ->name('tiles.front-source-image.update');
+
+        Route::put('tiles/{tile}/back-source-image/update', 'TileSourceImageController@updateBack')
+            ->name('tiles.back-source-image.update');
+
+        Route::delete('tiles/{tile}/front-source-image/delete', 'TileSourceImageController@deleteFront')
+            ->name('tiles.front-source-image.delete');
+
+        Route::delete('tiles/{tile}/back-source-image/delete', 'TileSourceImageController@deleteBack')
+            ->name('tiles.back-source-image.delete');
+
     });
 
     Route::group([

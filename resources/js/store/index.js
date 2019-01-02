@@ -9,17 +9,21 @@ import {notificationFromErrorResponse, notificationSuccess} from './notification
 
 export default new Vuex.Store({
 
+    state: {
+        fetching: false,
+        saving: false,
+    },
     actions: {
         set({commit, dispatch}, data) {
             dispatch('tile/update', data.tile);
             dispatch('abilities/set', data.ability_ids);
             dispatch('tile_weapons/set', data.tile_weapons);
-            dispatch('images/setFrontSourceImageUrl', data.tile.front_source_image_url);
-            dispatch('images/setBackSourceImageUrl', data.tile.back_source_image_url);
-
+            dispatch('images/front/setSourceImageUrl', data.tile.front_source_image_url);
+            dispatch('images/back/setSourceImageUrl', data.tile.back_source_image_url);
         },
 
         fetch({commit, state, dispatch}, tileId) {
+            state.fetching = true;
             return server.fetch(tileId)
                 .then((response) => {
                     notificationSuccess({
@@ -44,10 +48,14 @@ export default new Vuex.Store({
                         };
                     }
                     notificationFromErrorResponse(error.response);
+                })
+                .finally(() => {
+                    state.fetching = false;
                 });
         },
         save({commit, state, getters, dispatch}) {
-            let data = _.pick(state.tile, [
+            state.saving = true;
+            let data     = _.pick(state.tile, [
                 'id',
                 'name',
                 'tile_type_id',
@@ -61,9 +69,6 @@ export default new Vuex.Store({
                 'anti_missile_system_id',
                 'flavor_text',
             ]);
-
-            data.new_front_source_image = getters['images/newFrontSourceImageBase64'];
-            data.new_back_source_image  = getters['images/newBackSourceImageBase64'];
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
             data.ability_ids  = state.abilities.ability_ids;
@@ -92,10 +97,10 @@ export default new Vuex.Store({
             };
 
             return Promise.all([
-                    dispatch('images/getFrontImageBase64'),
-                    dispatch('images/getFrontSvgString'),
-                    dispatch('images/getBackImageBase64'),
-                    dispatch('images/getBackSvgString'),
+                    dispatch('images/front/getImageBase64'),
+                    dispatch('images/front/getSvgString'),
+                    dispatch('images/back/getImageBase64'),
+                    dispatch('images/back/getSvgString'),
                 ])
                 .then((results) => {
                     data.new_front_image = results[0];
@@ -103,6 +108,11 @@ export default new Vuex.Store({
                     data.new_back_image  = results[2];
                     data.new_back_svg    = results[3];
                     return sendRequest();
+                })
+                .finally(() => {
+                    state.saving = false;
+                    state.images.front.unsavedChanges = false;
+                    state.images.back.unsavedChanges = false;
                 });
 
             function sendRequest() {
@@ -128,25 +138,6 @@ export default new Vuex.Store({
                 }
             }
         },
-        saveNewImage({commit, state, getters, dispatch}) {
-
-            let newImageData = state.tile.new_image_data;
-
-            const handleError = (error) => {
-                console.error(error);
-                notificationFromErrorResponse(error.response);
-            };
-
-            server.updateImage(state.tile.id, newImageData)
-                .then((response) => {
-                    notificationSuccess({
-                        title: 'Tile Image Updated',
-                    });
-                    let payload = response.data.data;
-                    return dispatch('set', {front_image_url: payload.front_image_url});
-                })
-                .catch(handleError);
-        },
     },
     getters: {
         totalCost(state, getters) {
@@ -162,6 +153,15 @@ export default new Vuex.Store({
         },
         deleteURL(state) {
             return server.deleteURL(state.tile.id);
+        },
+        syncing(state, getters) {
+            return state.saving || getters['images/front/syncing'] || getters['images/back/syncing'];
+        },
+        saving(state) {
+            return state.saving;
+        },
+        fetching(state) {
+            return state.fetching;
         },
     },
     modules: {

@@ -46,9 +46,6 @@ class TileService
         $tile['cached_cost'] = $this->costService->total($tile);
         $tile->save();
 
-        $tileInput = $this->saveImageData($tile, $input);
-
-        $tile->update($tileInput);
         return $tile;
     }
 
@@ -172,18 +169,7 @@ class TileService
 
     protected function saveImageData(Tile $tile, array $input): array
     {
-        $tileInput      = [];
-        $frontImageData = array_get($input, 'new_front_source_image');
-        if ($frontImageData) {
-            $images    = $this->tileImage->saveFrontSourceImage($tile, $frontImageData);
-            $tileInput = array_merge($tileInput, $images);
-        }
-
-        $backImageData = array_get($input, 'new_back_source_image');
-        if ($backImageData) {
-            $images    = $this->tileImage->saveBackSourceImage($tile, $backImageData);
-            $tileInput = array_merge($tileInput, $images);
-        }
+        $tileInput = [];
 
         $frontImageData = array_get($input, 'new_front_image');
         if ($frontImageData) {
@@ -212,4 +198,33 @@ class TileService
         return $tileInput;
     }
 
+    public function updateFrontSourceImage(Tile $tile, $data)
+    {
+        $tileInput = $this->tileImage->saveFrontSourceImage($tile, $data);
+        $tile->update($tileInput);
+        return $this->tileImage->url($tile->front_source_image);
+    }
+
+    public function updateBackSourceImage(Tile $tile, $data)
+    {
+        $tileInput = $this->tileImage->saveBackSourceImage($tile, $data);
+        $tile->update($tileInput);
+        return $this->tileImage->url($tile->back_source_image);
+    }
+
+    public function deleteFrontSourceImage(Tile $tile)
+    {
+        $this->tileImage->deleteFrontSourceImage($tile);
+        $tile->update([
+            'front_source_image' => null,
+        ]);
+    }
+
+    public function deleteBackSourceImage(Tile $tile)
+    {
+        $this->tileImage->deleteBackSourceImage($tile);
+        $tile->update([
+            'back_source_image' => null,
+        ]);
+    }
 }

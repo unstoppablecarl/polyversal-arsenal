@@ -1,5 +1,5 @@
-import frontSourceImages from './images/front-images';
-import backSourceImages from './images/back-images';
+import SourceImage from './images/source-image';
+import server from './server-repo';
 
 export default {
     namespaced: true,
@@ -8,25 +8,21 @@ export default {
 
     actions: {},
     getters: {
-        tileSize() {
-            let inchHeight = 3.25;
-            let inchWidth  = 3.71;
 
-            let width  = inchWidth * 300;
-            let height = inchHeight * 300;
-
-            return {
-                width,
-                height,
-            };
-        },
-        fileName(state, getters, rootState) {
-            return rootState.tile.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        },
     },
     modules: {
-        frontSourceImages,
-        backSourceImages,
+        front: SourceImage({
+            svgId: 'tile-front-svg',
+            fileNamePrefix: 'polyversal-tile-front-',
+            serverUpdate: server.frontSourceImageUpdate,
+            serverDelete: server.frontSourceImageDelete,
+        }),
+        back: SourceImage({
+            svgId: 'tile-back-svg',
+            fileNamePrefix: 'polyversal-tile-back-',
+            serverUpdate: server.backSourceImageUpdate,
+            serverDelete: server.backSourceImageDelete,
+        }),
     },
 };
 

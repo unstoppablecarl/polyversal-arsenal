@@ -13,40 +13,47 @@ function update(data) {
     return axios.put(url, data);
 }
 
-function updateImage(tileId, imageData) {
-    const url = updateImageURL(tileId);
-    return axios.post(url, {new_image_data: imageData});
+function frontSourceImageUpdate(tileId, data) {
+    const url = frontSourceImageUpdateURL(tileId);
+    return axios.put(url, {source_image: data});
 }
 
-function updateURL(tileId) {
-    return '/tiles/' + tileId;
+function backSourceImageUpdate(tileId, data) {
+    const url = backSourceImageUpdateURL(tileId);
+    return axios.put(url, {source_image: data});
 }
 
-function updateImageURL(tileId) {
-    return '/tiles/' + tileId + '/upload-image';
+function frontSourceImageDelete(tileId) {
+    const url = frontSourceImageDeleteURL(tileId);
+    return axios.delete(url);
 }
 
-
-function editURL(tileId) {
-    return '/app#/tile/' + tileId;
+function backSourceImageDelete(tileId) {
+    const url = backSourceImageDeleteURL(tileId);
+    return axios.delete(url);
 }
 
-function viewURL(tileId) {
-    return '/tiles/' + tileId;
-}
-
-function deleteURL(tileId) {
-    return '/tiles/' + tileId + '/delete';
-}
+const updateURL                 = (tileId) => '/tiles/' + tileId;
+const editURL                   = (tileId) => '/app#/tile/' + tileId;
+const viewURL                   = (tileId) => '/tiles/' + tileId;
+const deleteURL                 = (tileId) => '/tiles/' + tileId + '/delete';
+const frontSourceImageUpdateURL = (tileId) => '/tiles/' + tileId + '/front-source-image/update';
+const frontSourceImageDeleteURL = (tileId) => '/tiles/' + tileId + '/front-source-image/delete';
+const backSourceImageUpdateURL  = (tileId) => '/tiles/' + tileId + '/back-source-image/update';
+const backSourceImageDeleteURL  = (tileId) => '/tiles/' + tileId + '/back-source-image/delete';
 
 export default {
     fetch,
     create,
     update,
-    updateImage,
-    editURL,
-    updateURL,
+
+    frontSourceImageUpdate,
+    backSourceImageUpdate,
+
+    frontSourceImageDelete,
+    backSourceImageDelete,
+
     viewURL,
+    editURL,
     deleteURL,
-    updateImageURL,
 };
