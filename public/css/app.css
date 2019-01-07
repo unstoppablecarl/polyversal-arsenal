@@ -15635,6 +15635,10 @@ readers do not read off random characters that represent icons */
   opacity: 0;
 }
 
+.card-upload .figure {
+  margin: 0;
+}
+
 .figure-img {
   -webkit-transition: width 0.2s ease-out, height 0.2s ease-out;
   transition: width 0.2s ease-out, height 0.2s ease-out;

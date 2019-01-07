@@ -110,9 +110,9 @@ export default new Vuex.Store({
                     return sendRequest();
                 })
                 .finally(() => {
-                    state.saving = false;
+                    state.saving                      = false;
                     state.images.front.unsavedChanges = false;
-                    state.images.back.unsavedChanges = false;
+                    state.images.back.unsavedChanges  = false;
                 });
 
             function sendRequest() {
@@ -137,6 +137,12 @@ export default new Vuex.Store({
                         .catch(handleError);
                 }
             }
+        },
+        saveSourceImageFront({state, dispatch}, newImageData) {
+            return saveSourceImage({state, dispatch}, 'front', newImageData);
+        },
+        saveSourceImageBack({state, dispatch}, newImageData) {
+            return saveSourceImage({state, dispatch}, 'back', newImageData);
         },
     },
     getters: {
@@ -171,3 +177,15 @@ export default new Vuex.Store({
         images,
     },
 });
+
+function saveSourceImage({state, dispatch}, side, newImageData) {
+
+    let action          = 'images/' + side + '/saveSourceImage';
+    let saveSourceImage = () => dispatch(action, newImageData);
+
+    if (!state.tile.id) {
+        return dispatch('save')
+            .then(() => saveSourceImage());
+    }
+    return saveSourceImage();
+}

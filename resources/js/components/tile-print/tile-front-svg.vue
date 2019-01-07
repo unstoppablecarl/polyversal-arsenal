@@ -71,12 +71,11 @@
             />
 
             <polygon points="71.8,224.2 9.4,116.2 71.8,8.2 196.5,8.2 258.8,116.2 196.5,224.2 "
-                     :stroke="cutLineColor"
+                     :stroke="showCutLine ? cutLineColor : 'transparent'"
                      stroke-width="0.25"
                      fill="none"
                      stroke-miterlimit="10"
-                     class="no-print"
-                     v-if="showCutLine"
+                     class="cut-line"
             />
             <template v-if="stealth">
                 <g id="stealth">
@@ -99,7 +98,6 @@
                 <text id="evasion-number" x="30.3" y="116.65" class="icon-number">
                     {{evasion}}
                 </text>
-
             </g>
             <g id="assault">
                 <polygon id="assault-bg" :class="assaultIconCssClass"

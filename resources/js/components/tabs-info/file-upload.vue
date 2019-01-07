@@ -1,11 +1,11 @@
 <template>
-    <div class="card">
+    <div class="card card-upload">
         <div class="card-header">
             <h4>{{label}}</h4>
         </div>
         <div class="card-body">
 
-            <div class="form-group row">
+            <div class="row">
                 <div class="col-sm-4">
                     <input type="file" v-on:change="onFileChange" class="form-control-file" ref="file_input">
                     <br>

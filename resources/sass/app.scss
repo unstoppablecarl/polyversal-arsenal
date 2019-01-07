@@ -24,6 +24,12 @@ $scale: 1;
 @import 'tabs';
 
 
+.card-upload {
+    .figure {
+        margin: 0;
+    }
+}
+
 .figure-img {
     transition: width 0.2s ease-out, height 0.2s ease-out;
 }

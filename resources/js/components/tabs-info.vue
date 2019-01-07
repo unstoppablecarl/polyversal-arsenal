@@ -23,7 +23,7 @@
             label="Front Image"
             :image-url="frontSourceImageUrl"
             :unsaved-changes="frontUnsavedChanges"
-            upload-action="images/front/saveSourceImage"
+            upload-action="saveSourceImageFront"
             delete-action="images/front/deleteSourceImage"
         />
 
@@ -32,7 +32,7 @@
             label="Back Image"
             :image-url="backSourceImageUrl"
             :unsaved-changes="backUnsavedChanges"
-            upload-action="images/back/saveSourceImage"
+            upload-action="saveSourceImageBack"
             delete-action="images/back/deleteSourceImage"
         />
 
