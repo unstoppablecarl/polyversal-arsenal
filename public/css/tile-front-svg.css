@@ -163,6 +163,21 @@
   stroke-linejoin: miter;
 }
 
+.arc-circle,
+.arc-fov {
+  stroke: #000;
+  stroke-miterlimit: 10;
+  stroke-width: 0.5pt;
+}
+
+.arc-circle {
+  fill: #7f7f7f;
+}
+
+.arc-fov {
+  fill: #0da1bc;
+}
+
 .printer-friendly .title,
 .printer-friendly .subtitle,
 .printer-friendly .icon-number,
@@ -187,6 +202,14 @@
 .printer-friendly .fill-d10,
 .printer-friendly .fill-d12 {
   fill: #fff;
+}
+
+.printer-friendly .arc-circle {
+  fill: none;
+}
+
+.printer-friendly .arc-fov {
+  fill: #808080;
 }
 
 .printer-friendly .bg-image {

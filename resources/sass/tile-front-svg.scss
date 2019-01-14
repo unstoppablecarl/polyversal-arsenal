@@ -121,6 +121,21 @@
 }
 
 
+.arc-circle,
+.arc-fov {
+    stroke: #000;
+    stroke-miterlimit: 10;
+    stroke-width: 0.5pt;
+}
+
+.arc-circle {
+    fill: #7f7f7f;
+}
+
+.arc-fov {
+    fill: #0da1bc;
+}
+
 .printer-friendly {
     .title,
     .subtitle,
@@ -131,7 +146,7 @@
     .weapon-grid-heading,
     .weapon-grid-heading-left,
     .weapon-grid-row,
-    .icon-damage{
+    .icon-damage {
         fill: #000;
         stroke-width: 0;
     }
@@ -148,6 +163,14 @@
         fill: #fff;
     }
 
+    .arc-circle {
+        fill: none;
+    }
+
+    .arc-fov {
+        fill: #808080;
+    }
+
     .bg-image {
         visibility: hidden;
     }
@@ -157,5 +180,4 @@
             fill: none;
         }
     }
-
 }
