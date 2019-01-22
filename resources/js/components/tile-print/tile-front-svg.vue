@@ -59,8 +59,9 @@
         <clipPath id="tile-clip">
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
-        <g :class="{'printer-friendly': printerFriendly}">
 
+        <g id="tile-settings" :class="{'printer-friendly': printerFriendly, 'show-cut-line': showCutLine}">
+            <rect x="0" y="0" width="268" height="232" fill="#fff"  clip-path="url(#tile-clip)" />
             <image
                 v-if="sourceImageUrl"
                 :href="sourceImageUrl"
@@ -71,7 +72,7 @@
             />
 
             <polygon points="71.8,224.2 9.4,116.2 71.8,8.2 196.5,8.2 258.8,116.2 196.5,224.2 "
-                     :stroke="showCutLine ? cutLineColor : 'transparent'"
+                     :stroke="cutLineColor"
                      stroke-width="0.25"
                      fill="none"
                      stroke-miterlimit="10"
@@ -165,11 +166,6 @@
         name: 'tile-front-svg',
         components: {TileWeaponGridSvg, TileSvgDamageTrack},
         props: {
-            showCutLine: null,
-            printerFriendly: null,
-            cutLineColor: {
-                default: 'red',
-            },
         },
         data() {
             return {
@@ -187,6 +183,9 @@
             ]),
             ...mapFrontImageGetters([
                 'sourceImageUrl',
+                'showCutLine',
+                'printerFriendly',
+                'cutLineColor',
             ]),
             ...mapAbilityGetters([
                 'abilityList',

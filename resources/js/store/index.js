@@ -97,10 +97,10 @@ export default new Vuex.Store({
             };
 
             return Promise.all([
-                    dispatch('images/front/getImageBase64'),
-                    dispatch('images/front/getSvgString'),
-                    dispatch('images/back/getImageBase64'),
-                    dispatch('images/back/getSvgString'),
+                    dispatch('images/front/withoutDisplayOptions', 'getImageBase64'),
+                    dispatch('images/front/withoutDisplayOptions', 'getSvgString'),
+                    dispatch('images/back/withoutDisplayOptions', 'getImageBase64'),
+                    dispatch('images/back/withoutDisplayOptions', 'getSvgString'),
                 ])
                 .then((results) => {
                     data.new_front_image = results[0];

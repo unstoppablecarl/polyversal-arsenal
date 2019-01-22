@@ -213,7 +213,7 @@ class TileImage
     protected function prefix($file)
     {
         if ($file) {
-            $file = DIRECTORY_SEPARATOR . $file;
+            $file = str_start($file, DIRECTORY_SEPARATOR);
         }
         return $file;
     }

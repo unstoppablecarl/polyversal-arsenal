@@ -3,10 +3,14 @@ import svgToPngBase64 from '../../lib/svg-to-png-base64';
 import svgToString from '../../lib/svg-to-string';
 import svgToBase64 from '../../lib/svg-to-base64';
 import {notificationFromErrorResponse, notificationSuccess} from '../notification';
+import SourceImageDisplayOptions from './source-image-display-options';
 
 export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdate, serverDelete}) {
     return {
         namespaced: true,
+        modules: {
+            display_options: SourceImageDisplayOptions,
+        },
         state: {
             image_url: null,
             image_base64: null,
@@ -46,11 +50,12 @@ export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdat
                         return svgToString(svgId);
                     });
             },
-            getSvgBase64({dispatch}) {
+            getSvgBase64({dispatch, commit}) {
                 return dispatch('loadSourceImageBase64FromUrl')
                     .then(() => {
                         return svgToBase64(svgId);
                     });
+
             },
             getImageBase64({dispatch, getters}) {
                 return dispatch('loadSourceImageBase64FromUrl')
@@ -59,6 +64,15 @@ export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdat
                         let {width, height} = getters.tileSize;
 
                         return svgToPngBase64(svgId, width, height);
+                    });
+            },
+
+            withoutDisplayOptions({dispatch, commit}, action){
+                commit('clearDisplaySettings');
+
+                return dispatch(action)
+                    .finally(() => {
+                        commit('restoreDisplaySettings');
                     });
             },
             saveSourceImage({state, dispatch, rootState}, newImageData) {
@@ -135,6 +149,7 @@ export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdat
             unsavedChanges(state) {
                 return state.unsavedChanges;
             },
+
         },
     };
 }

@@ -1,0 +1,10 @@
+
+.cut-line {
+    visibility: hidden;
+}
+
+.show-cut-line {
+    .cut-line {
+        visibility: visible;
+    }
+}

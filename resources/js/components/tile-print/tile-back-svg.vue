@@ -21,7 +21,8 @@
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
 
-        <g :class="{'printer-friendly': printerFriendly}">
+        <g id="tile-settings" :class="{'printer-friendly': printerFriendly, 'show-cut-line': showCutLine}">
+            <rect x="0" y="0" width="268" height="232" fill="#fff"  clip-path="url(#tile-clip)" />
 
             <image
                 v-if="sourceImageUrl"
@@ -29,7 +30,6 @@
                 width="100%"
                 height="100%"
                 clip-path="url(#tile-clip)"
-                filter="url(#desaturate)"
                 class="bg-image"
             />
 
@@ -38,7 +38,7 @@
                      stroke-width="0.25"
                      fill="none"
                      stroke-miterlimit="10"
-                     v-if="showCutLine"
+                     class="cut-line"
             />
 
             <text :x="268.3 * 0.5" y="20" class="title">{{tile_name}}</text>
@@ -164,15 +164,7 @@
         name: 'tile-back-svg',
         components: {},
         props: {
-            showCutLine: {
-                //default: false,
-            },
-            cutLineColor: {
-                default: 'red',
-            },
-            printerFriendly: {
-                //default: true,
-            },
+
         },
         data() {
             return {
@@ -198,6 +190,9 @@
             ]),
             ...mapBackImageGetters([
                 'sourceImageUrl',
+                'showCutLine',
+                'printerFriendly',
+                'cutLineColor',
             ]),
             ...mapTileProperties({
                 tile_name: 'name',
