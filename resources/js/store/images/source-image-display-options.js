@@ -1,4 +1,4 @@
-import {mapActions, mapGetters, mapMutations} from '../helpers/store-mappers';
+import {defActions, defGetters, defMutations} from '../helpers/store-mappers';
 
 export default {
     namespaced: false,
@@ -19,7 +19,6 @@ export default {
         },
     },
     mutations: {
-
         clearDisplaySettings(state) {
             let {showCutLine, cutLineColor, printerFriendly} = state;
 
@@ -38,21 +37,21 @@ export default {
             state.cutLineColor    = state.prev.cutLineColor;
             state.printerFriendly = state.prev.printerFriendly;
         },
-        ...mapMutations([
+        ...defMutations([
             'printerFriendly',
             'cutLineColor',
             'showCutLine',
         ]),
     },
     actions: {
-        ...mapActions([
+        ...defActions([
             'printerFriendly',
             'cutLineColor',
             'showCutLine',
         ]),
     },
     getters: {
-        ...mapGetters([
+        ...defGetters([
             'printerFriendly',
             'cutLineColor',
             'showCutLine',

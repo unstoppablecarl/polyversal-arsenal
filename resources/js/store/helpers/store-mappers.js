@@ -1,31 +1,31 @@
-function mapActions(keys) {
-    return mapKeys(keys, mapAction);
+function defActions(keys) {
+    return defKeys(keys, defAction);
 }
 
-function mapAction(key) {
+function defAction(key) {
     return ({commit}, value) => {
         commit(key, value);
         return Promise.resolve();
     };
 }
 
-function mapMutations(keys) {
-    return mapKeys(keys, mapMutation);
+function defMutations(keys) {
+    return defKeys(keys, defMutation);
 }
 
-function mapMutation(key) {
-    return ({state}, value) => state[key] = value;
+function defMutation(key) {
+    return (state, value) => state[key] = value;
 }
 
-function mapGetters(keys) {
-    return mapKeys(keys, mapGetter);
+function defGetters(keys) {
+    return defKeys(keys, defGetter);
 }
 
-function mapGetter(key) {
+function defGetter(key) {
     return (state) => state[key];
 }
 
-function mapKeys(keys, callback) {
+function defKeys(keys, callback) {
     const result = {};
 
     keys.forEach((key) => {
@@ -36,12 +36,12 @@ function mapKeys(keys, callback) {
 }
 
 export {
-    mapGetter,
-    mapGetters,
+    defGetter,
+    defGetters,
 
-    mapMutation,
-    mapMutations,
+    defMutation,
+    defMutations,
 
-    mapAction,
-    mapActions,
+    defAction,
+    defActions,
 };
