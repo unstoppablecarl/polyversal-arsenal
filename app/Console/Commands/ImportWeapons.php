@@ -32,6 +32,7 @@ class ImportWeapons extends Command
             $slug        = str_replace('--', '-', $slug);
             $displayName = Str::replaceFirst('Inf. ', '', $displayName);
 
+
             $newRow = [
                 'id'           => $index,
                 'name'         => $slug,
@@ -41,7 +42,7 @@ class ImportWeapons extends Command
                 'at'           => $row['at'],
                 'aa'           => $row['aa'],
                 'damage'       => $row['damage'],
-
+                'class'        => substr($slug, -1),
                 'cost_d4'  => $row['cost_d4'],
                 'cost_d6'  => $row['cost_d6'],
                 'cost_d8'  => $row['cost_d8'],

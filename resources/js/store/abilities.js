@@ -94,8 +94,7 @@ export default {
         },
         cost(state, getters, rootState, rootGetters) {
             return (abilityId) => {
-                return abilityCost(abilityId, rootState.tile.tile_type_id, rootState.tile.tile_class_id, rootGetters['tile_weapons/warheadWeaponsTotalCost']);
-                ;
+                return abilityCost(abilityId, rootState.tile.tile_type_id, rootState.tile.tile_class_id, rootGetters['tile_weapons/tile_weapons']);
             };
         },
         hasJumpJets(state) {
@@ -108,10 +107,10 @@ export default {
             let sum           = 0;
             const tileTypeId  = rootState.tile.tile_type_id;
             const tileClassId = rootState.tile.tile_class_id;
-            const rootGetter  = rootGetters['tile_weapons/warheadWeaponsTotalCost'];
+            const tileWeapons  = rootGetters['tile_weapons/tile_weapons'];
 
             state.ability_ids.forEach((abilityId) => {
-                sum += abilityCost(abilityId, tileTypeId, tileClassId, rootGetter);
+                sum += abilityCost(abilityId, tileTypeId, tileClassId, tileWeapons);
             });
 
             let amaCost = amaById[rootState.tile.anti_missile_system_id].cost;

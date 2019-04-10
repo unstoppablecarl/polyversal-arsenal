@@ -13,14 +13,20 @@ function abilityValid(abilityId, tileTypeId) {
     return !!ability[tileTypeName + '_valid'];
 }
 
-function abilityCost(abilityId, tileTypeId, tileClassId, warheadWeaponsTotalCost) {
+function abilityCost(abilityId, tileTypeId, tileClassId, tileWeapons) {
     let ability = abilitiesById[abilityId];
     let tileTypeName = tileTypeById[tileTypeId].name;
     if (!abilityValid(abilityId, tileTypeId)) {
         throw new Error('invalid ability: ' + ability.display_name + ', for tile type: ' + tileTypeName);
     }
     if (ability.warhead_cost_multiplier) {
-        return ability.warhead_cost_multiplier * warheadWeaponsTotalCost;
+        let warheadCost = 0;
+        tileWeapons
+            .filter((tileWeapon) => tileWeapon.weapon.has_warheads)
+            .forEach((tileWeapon) => {
+                warheadCost += tileWeapon.quantity * tileWeapon.weapon.class * ability.warhead_cost_multiplier
+            })
+        return warheadCost;
     }
 
     if (ability.cost_static) {

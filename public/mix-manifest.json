@@ -1,14 +1,8 @@
 {
-    "/js/app.js": "/js/app.js?id=c5b1e809d23ce083071c",
-    "/css/app.css": "/css/app.css?id=bbe551e6b428f7d9ad46",
-    "/css/tile-front-svg.css": "/css/tile-front-svg.css?id=7cf8e00ac75e2b2ca16c",
-    "/css/tile-back-svg.css": "/css/tile-back-svg.css?id=f166c367855fa5e8e9ff",
-    "/js/app.js.map": "/js/app.js.map?id=6dce2595b82e512307d4",
-    "/css/app.css.map": "/css/app.css.map?id=f04d1d02cdf4c5d8bb6e",
-    "/css/tile-front-svg.css.map": "/css/tile-front-svg.css.map?id=6e237798b07db16237e9",
-    "/css/tile-back-svg.css.map": "/css/tile-back-svg.css.map?id=d4bcdb1c4b5920ca8a41",
-    "/js/vendor.js": "/js/vendor.js?id=8bae7f731f2536627ddc",
-    "/js/vendor.js.map": "/js/vendor.js.map?id=d9c89b50328cfe2fffc8",
-    "/js/manifest.js": "/js/manifest.js?id=d64713044d4b02b1808b",
-    "/js/manifest.js.map": "/js/manifest.js.map?id=bb048eb14907ef4d55f9"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/tile-front-svg.css": "/css/tile-front-svg.css",
+    "/css/tile-back-svg.css": "/css/tile-back-svg.css",
+    "/js/vendor.js": "/js/vendor.js",
+    "/js/manifest.js": "/js/manifest.js"
 }

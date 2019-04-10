@@ -93,21 +93,6 @@ export default {
             });
             return total;
         },
-        warheadWeaponsTotalCost(state, getters) {
-            let total = 0;
-            state.tile_weapons.forEach((tileWeapon) => {
-                let weaponItem = getters.weaponRepo.get(tileWeapon.weapon_id);
-                if (weaponItem.has_warheads) {
-                    let cost = getters.getWeaponCost(
-                        tileWeapon.weapon_id,
-                        tileWeapon.arc_size_id,
-                        tileWeapon.tile_weapon_type_id,
-                    );
-                    total += cost * tileWeapon.quantity;
-                }
-            });
-            return total;
-        },
         weaponRepo(state, getters, rootState) {
             return Weapons(rootState.tile.tile_type_id);
         },
