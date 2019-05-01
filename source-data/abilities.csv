@@ -8,7 +8,7 @@ id,name,display_name,icon,cost_static,cost_infantry,cost_cavalry,cost_vehicle_cl
 7,jump_jets,Jump Jets,,,1,2,3,4,6,12,18,1,1,1,,1,
 8,armor_energy,Ablative Armor,,,,,3,4,5,8,15,,,1,1,,
 9,armor_kinetic,KINDAM,,,,,1,2,3,5,9,,,1,1,,
-10,armor_exposive,Reactive Armor,,,,,1,2,3,5,9,,,1,1,,
+10,armor_explosive,Reactive Armor,,,,,1,2,3,5,9,,,1,1,,
 11,repair,Repair,,,,,1,2,3,4,5,,,1,,,
 12,repair_team,Repair Team,,,1,,,,,,,1,,,,1,
 13,transport,Transport,,,,,1,2,4,8,20,,,1,,,

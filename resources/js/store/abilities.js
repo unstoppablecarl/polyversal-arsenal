@@ -47,11 +47,11 @@ export default {
         },
         abilityList(state) {
             return abilityOptions
-                .filter((item) => {
-                    let active = state.ability_ids.indexOf(item.id) !== -1;
-                    return active;
-                })
-                .map((item) => item.display_name);
+              .filter((item) => {
+                  let active = state.ability_ids.indexOf(item.id) !== -1;
+                  return active;
+              })
+              .map((item) => item.display_name);
         },
         options(state, getters, rootState) {
             let isVehicle = rootState.tile.tile_type_id == TILE_TYPE_VEHICLE_ID;

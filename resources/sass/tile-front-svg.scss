@@ -137,6 +137,16 @@
     fill: #0da1bc;
 }
 
+
+.icon-ability {
+    fill: #ffffff;
+    paint-order: stroke;
+    stroke: #000000;
+    stroke-width: 0.5pt;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+}
+
 .printer-friendly {
     .title,
     .subtitle,
@@ -147,7 +157,8 @@
     .weapon-grid-heading,
     .weapon-grid-heading-left,
     .weapon-grid-row,
-    .icon-damage {
+    .icon-damage,
+    .icon-ability {
         fill: #000;
         stroke-width: 0;
     }

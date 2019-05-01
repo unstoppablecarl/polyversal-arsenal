@@ -1,9 +1,6 @@
 <template>
     <div>
-
         <h4>Abilities</h4>
-        <div v-for="ability in abilityList">{{ability}}</div>
-
         <div class="tile-print">
 
             <tile-print-card

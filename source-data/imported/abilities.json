@@ -172,7 +172,7 @@
     },
     {
         "id": 10,
-        "name": "armor_exposive",
+        "name": "armor_explosive",
         "display_name": "Reactive Armor",
         "icon": "",
         "display_order": 10,
