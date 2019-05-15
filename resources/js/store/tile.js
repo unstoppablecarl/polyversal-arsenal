@@ -243,7 +243,7 @@ export default {
                 }
 
                 if (isVehicle) {
-                    classDisplayName = vehiclePrefix + ' ' + state.tile_class_id + ' ' + vehicleClassById[state.tile_class_id].display_name;
+                    classDisplayName = vehiclePrefix + ' ' + state.tile_class_id;
                 }
 
                 if (!isInfantry) {
