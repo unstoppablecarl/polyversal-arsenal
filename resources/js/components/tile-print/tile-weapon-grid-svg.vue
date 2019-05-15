@@ -48,9 +48,9 @@
 
                     <g class="weapon-grid-row">
                         <text x="144.75" y="5.5">{{item.weapon.damage | format}}</text>
-                        <text x="130.75" y="5.5">{{item.weapon.aa | format}}</text>
-                        <text x="116.75" y="5.5">{{item.weapon.at | format}}</text>
-                        <text x="102.75" y="5.5">{{item.weapon.ap | format}}</text>
+                        <text x="130.75" y="5.5" :class="'weapon-grid-value-' + item.weapon.aa">{{item.weapon.aa | format}}</text>
+                        <text x="116.75" y="5.5" :class="'weapon-grid-value-' + item.weapon.at">{{item.weapon.at | format}}</text>
+                        <text x="102.75" y="5.5" :class="'weapon-grid-value-' + item.weapon.ap">{{item.weapon.ap | format}}</text>
                         <text x="88.75" y="5.5">{{item.weapon.range}}</text>
                         <g transform="translate(74.75,4.5)">
 
@@ -78,6 +78,12 @@
                         <!--<text x="74.75" y="5.5">ARC</text>-->
                         <text x="60.75" y="5.5">{{item.quantity}}</text>
                         <text x="1.5" y="5.5" class="weapon-grid-row-left">{{item.weapon.display_name | upper}}</text>
+
+                        <g transform="translate(46,0.75)" v-if="item.is_ama">
+                            <path class="icon-ama" d="M2.8,6.8L2.7,6.6H2V5.9l0.5-0.4V3.8l1.1,1.1v0.6l0.5,0.4v0.7H3.5L3.4,6.8H2.8z M1,1.9l0.4-0.4l1.1,1.1l0.1-0.1
+	h1l0.9,1.1L4.2,3.7H3.7l0,0l1.8,1.8L5.1,6L1,1.9z M2,3.7L1.7,3.6L2,3.2l0.5,0.5L2,3.7L2,3.7z M2.5,2.4V2.3C2.6,1.7,2.7,1,3.1,1
+	c0.3,0,0.5,0.7,0.6,1.3v0.1H2.5z"/>
+                        </g>
                     </g>
                 </g>
             </g>
@@ -113,26 +119,18 @@
             }),
             tileWeapons() {
 
+                let allWeapons = [];
+                if (this.hasAMA) {
+                    allWeapons.push(this.getAMAItem());
+                }
 
                 let weapons = this.base_tile_weapons.map((item) => {
                     return Object.assign({}, item, {
                         arc_rotation: arcRotation(item),
                         arc_size_name: arcSizeName(item),
+                        display_order: item.display_order + 1,
                     });
                 });
-                let allWeapons = [];
-
-                if(this.hasAMA){
-                    allWeapons.push({
-                        weapon: {
-                            display_name: 'foo'
-                        },
-
-
-                        arc_rotation: 0,
-                        arc_size_name: '360'
-                    });
-                }
                 return allWeapons.concat(weapons);
             },
             weaponGridY() {
@@ -151,6 +149,20 @@
             },
         },
         methods: {
+            getAMAItem() {
+                return {
+                    weapon: {
+                        display_name: 'Anti-Missile',
+                        range: 12,
+                        aa: amaById[this.tile_ama_id].display_name,
+                    },
+                    quantity: 1,
+                    display_order: 0,
+                    arc_rotation: 0,
+                    arc_size_name: '360',
+                    is_ama: true,
+                }
+            },
             weaponBlockClass(val) {
                 if (val === NONE) {
                     return;

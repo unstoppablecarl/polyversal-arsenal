@@ -58,6 +58,10 @@
     stroke-linejoin: miter;
 }
 
+.weapon-grid-value-D8 {
+    stroke-width: 0.75pt;
+}
+
 .weapon-grid-row,
 .weapon-grid-row-left {
     font-weight: normal;
@@ -138,7 +142,8 @@
 }
 
 
-.icon-ability {
+.icon-ability,
+.icon-ama {
     fill: #ffffff;
     paint-order: stroke;
     stroke: #000000;
@@ -158,7 +163,9 @@
     .weapon-grid-heading-left,
     .weapon-grid-row,
     .icon-damage,
-    .icon-ability {
+    .icon-ability,
+    .icon-ama,
+    .weapon-grid-value-D8 {
         fill: #000;
         stroke-width: 0;
     }
