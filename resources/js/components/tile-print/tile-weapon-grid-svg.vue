@@ -88,15 +88,16 @@
 <script>
 
     import {
+        mapTileProperties,
         mapTileWeaponGetters,
-    } from '../../data/mappers';
-    import {arcDirectionById, arcSizeById} from '../../data/options';
-    import {NONE} from '../../data/constants';
+    } from '../../data/mappers'
+    import { amaById, arcDirectionById, arcSizeById } from '../../data/options'
+    import { AMA_NONE_ID, NONE } from '../../data/constants'
     import TileSvgDamageTrack from './tile-svg-damge-track';
 
     export default {
         name: 'tile-weapon-grid-svg',
-        components: { TileAbilities, TileSvgDamageTrack },
+        components: { TileSvgDamageTrack },
         props: {
             showCutLine: true,
         },
@@ -111,16 +112,42 @@
                 base_tile_weapons: 'tile_weapons',
             }),
             tileWeapons() {
-                return this.base_tile_weapons.map((item) => {
 
+
+                let weapons = this.base_tile_weapons.map((item) => {
                     return Object.assign({}, item, {
                         arc_rotation: arcRotation(item),
                         arc_size_name: arcSizeName(item),
                     });
                 });
+                let allWeapons = [];
+
+                if(this.hasAMA){
+                    allWeapons.push({
+                        weapon: {
+                            display_name: 'foo'
+                        },
+
+
+                        arc_rotation: 0,
+                        arc_size_name: '360'
+                    });
+                }
+                return allWeapons.concat(weapons);
             },
             weaponGridY() {
                 return (177.949 - this.tileWeapons.length * 9);
+            },
+            ...mapTileProperties({
+                tile_ama_id: 'anti_missile_system_id',
+            }),
+            hasAMA() {
+                return this.tile_ama_id !== AMA_NONE_ID;
+            },
+            aaDisplay() {
+                if (this.tile_ama_id) {
+                    return amaById[this.tile_ama_id].display_name;
+                }
             },
         },
         methods: {
