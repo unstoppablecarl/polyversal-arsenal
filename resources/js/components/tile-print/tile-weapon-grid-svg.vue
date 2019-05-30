@@ -33,8 +33,8 @@
                 </g>
             </g>
 
-            <g v-for="item in tileWeapons" :key="item.display_order">
-                <g :transform="'translate(0,' + weaponGridRowY(item.display_order) + ')'">
+            <g v-for="(item, index) in tileWeapons" :key="item.display_order">
+                <g :transform="'translate(0,' + weaponGridRowY(index) + ')'">
                     <g class="weapon-grid-block">
                         <rect x="137.75" y="0.25" width="14" height="9"/>
                         <rect x="123.75" y="0.25" width="14" height="9" :class="weaponBlockClass(item.weapon.aa)"/>
@@ -75,7 +75,6 @@
                                 </template>
                             </g>
                         </g>
-                        <!--<text x="74.75" y="5.5">ARC</text>-->
                         <text x="60.75" y="5.5">{{item.quantity}}</text>
                         <text x="1.5" y="5.5" class="weapon-grid-row-left">{{item.weapon.display_name | upper}}</text>
 
@@ -100,10 +99,11 @@
     import { amaById, arcDirectionById, arcSizeById } from '../../data/options'
     import { AMA_NONE_ID, NONE } from '../../data/constants'
     import TileSvgDamageTrack from './tile-svg-damge-track';
+    import TileAbilities from './tile-abilities'
 
     export default {
         name: 'tile-weapon-grid-svg',
-        components: { TileSvgDamageTrack },
+        components: { TileAbilities, TileSvgDamageTrack },
         props: {
             showCutLine: true,
         },
@@ -141,11 +141,6 @@
             }),
             hasAMA() {
                 return this.tile_ama_id !== AMA_NONE_ID;
-            },
-            aaDisplay() {
-                if (this.tile_ama_id) {
-                    return amaById[this.tile_ama_id].display_name;
-                }
             },
         },
         methods: {

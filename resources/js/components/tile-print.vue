@@ -48,9 +48,6 @@
             };
         },
         computed: {
-            ...mapAbilityGetters([
-                'abilityList',
-            ]),
             ...mapImageGetters({
                 frontFileName: 'front/fileName',
                 backFileName: 'back/fileName',

@@ -187,9 +187,6 @@
                 'printerFriendly',
                 'cutLineColor',
             ]),
-            ...mapAbilityGetters([
-                'abilityList',
-            ]),
             targeting() {
                 return targetingById[this.tile_targeting_id].display_name;
             },
