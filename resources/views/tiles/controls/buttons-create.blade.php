@@ -10,7 +10,7 @@ if ($size) {
     $size = ' btn-' . $size;
 }
 
-$url = route('tiles.app');
+$url = route('tiles.create');
 $can = Gate::allows('create', Tile::class);
 
 $disabled = $can ? '' : ' disabled';
