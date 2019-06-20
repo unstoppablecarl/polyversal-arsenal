@@ -53,7 +53,6 @@ class CostServiceTest extends TestCase
         $tile    = $service->create($input, $user->id);
 
         $service = app(CostService::class);
-        $this->assertEquals(16, $service->chassisCost($tile));
         $this->assertEquals(493, $service->abilitiesCost($tile));
         $this->assertEquals(52, $service->weaponCost($tile));
         $this->assertEquals(48, $service->warheadWeaponCost($tile));
