@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h4>Abilities</h4>
         <div class="tile-print">
 
             <tile-print-card
@@ -32,7 +31,7 @@
 <script>
 
     import WeaponGrid from './weapon-grid';
-    import {mapAbilityGetters, mapImageGetters} from '../data/mappers';
+    import {mapImageGetters} from '../data/mappers';
     import TileFrontSvg from './tile-print/tile-front-svg';
     import downloadDataURL from '../lib/download-data-url';
     import TileBackSvg from './tile-print/tile-back-svg';
