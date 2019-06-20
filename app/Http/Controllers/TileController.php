@@ -64,7 +64,7 @@ class TileController extends Controller
 
     public function edit(Tile $tile)
     {
-        return view('tiles.app');
+        return view('tiles.edit');
     }
 
     public function update(TileSaveRequest $request, TileService $service, CostService $costService, Tile $tile)

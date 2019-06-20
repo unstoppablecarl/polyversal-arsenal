@@ -17,7 +17,7 @@
                         <a class="dropdown-item" href="{{route('tiles.index')}}">
                             <i class="fas fa-fw fa-th-list"></i> Manage
                         </a>
-                        <a class="dropdown-item" href="{{route('tiles.app')}}">
+                        <a class="dropdown-item" href="{{route('tiles.create')}}">
                             <i class="fas fa-fw fa-plus"></i> Create
                         </a>
                     </div>

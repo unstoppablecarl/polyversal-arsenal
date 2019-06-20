@@ -26,23 +26,23 @@ use App\Models\Tile;
 Route::group([
     'middleware' => 'auth',
 ], function () {
-
     Route::group([
-        'middleware' => 'can:view,' . Tile::class
+        'middleware' => 'can:view,' . Tile::class,
     ], function () {
+        Route::get('tiles', 'TileController@index')
+            ->name('tiles.index');
 
-    Route::get('tiles', 'TileController@index')
-        ->name('tiles.index');
-
-    Route::get('tiles-grid', 'TileController@grid')
-        ->name('tiles.grid');
+        Route::get('tiles-grid', 'TileController@grid')
+            ->name('tiles.grid');
     });
 
-    Route::view('app', 'app')->name('tiles.app');
 
     Route::group([
         'middleware' => 'can:create,' . Tile::class,
     ], function () {
+        Route::get('app', 'TileController@create')
+            ->name('tiles.create');
+
         Route::post('tiles', 'TileController@store')
             ->name('tiles.store');
     });
@@ -67,7 +67,6 @@ Route::group([
 
         Route::delete('tiles/{tile}/back-source-image/delete', 'TileSourceImageController@deleteBack')
             ->name('tiles.back-source-image.delete');
-
     });
 
     Route::group([
