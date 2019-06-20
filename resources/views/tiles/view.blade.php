@@ -16,7 +16,9 @@
 @endsection
 
 @section('form')
-
-
-    @include('tiles.partials.view-tile', ['item' => $item])
+    <div id="app-tile-view">
+        <app-tile-view
+            :tile-id="{{$item->id}}"
+        />
+    </div>
 @endsection

@@ -87,18 +87,10 @@ class TileController extends Controller
         if ($request->wantsJson()) {
             return new TileResource($tile);
         }
-        $urls = $tile->imageUrls();
 
         return view('tiles.view')
             ->with([
                 'item' => $tile,
-
-                'front_svg_url'   => $urls['front_svg_url'],
-                'front_image_url' => $urls['front_image_url'],
-
-                'back_svg_url'   => $urls['back_svg_url'],
-                'back_image_url' => $urls['back_image_url'],
-
             ]);
     }
 

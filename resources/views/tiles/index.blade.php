@@ -15,10 +15,6 @@
 
 @section('content-after')
     <div class="container-fluid">
-
-        <div id="app-tile-grid">
-            <tile-grid></tile-grid>
-        </div>
+        <div id="app-tile-grid"></div>
     </div>
-
 @endsection

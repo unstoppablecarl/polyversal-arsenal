@@ -2,9 +2,6 @@
 
 
 @section('content')
-
-    <div id="app-tile">
-        <router-view></router-view>
-    </div>
+    <div id="app-tile-edit"></div>
 @endsection
 

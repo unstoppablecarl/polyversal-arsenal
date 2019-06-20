@@ -53,7 +53,7 @@
     import TileGridPagination from './tile-grid-pagination';
 
     export default {
-        name: 'tile-grid',
+        name: 'app-tile-grid',
         components: {TileGridPagination},
         mounted() {
             this.loadItems();
