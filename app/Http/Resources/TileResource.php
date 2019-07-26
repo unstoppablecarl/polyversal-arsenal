@@ -7,8 +7,8 @@ use Illuminate\Http\Resources\Json\Resource;
 
 class TileResource extends Resource
 {
-
     protected $costDiff;
+
     /** @var TileImage */
     protected $tileImage;
 
@@ -52,6 +52,8 @@ class TileResource extends Resource
                 'front_svg_url'   => $this->url($this->front_svg),
                 'back_svg_url'    => $this->url($this->back_svg),
             ],
+
+            'tile_print_settings' => new TilePrintSettingsResource($this->tilePrintSettings),
 
             'ability_ids'  => $this->abilities()->pluck('abilities.id'),
             'tile_weapons' => TileWeaponResource::collection($this->tileWeapons),

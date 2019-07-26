@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Ability;
 use App\Models\Chassis;
 use App\Models\Tile;
+use App\Models\TilePrintSettings;
 use App\Models\TileWeapon;
 use App\Services\Exceptions\InvalidAbilityTileTypeException;
 use App\Services\Tile\TileImage;
@@ -46,6 +47,9 @@ class TileService
         $tile['cached_cost'] = $this->costService->total($tile);
         $tile->save();
 
+        $tilePrintSettings = array_get($input, 'tile_print_settings', []);
+        $tile->tilePrintSettings()->create($tilePrintSettings);
+
         return $tile;
     }
 
@@ -74,6 +78,10 @@ class TileService
 
         $this->syncAbilities($tile, $abilityIds);
         $this->syncTileWeapons($tile, $tileWeapons);
+
+        $tilePrintSettings = array_get($input, 'tile_print_settings', []);
+
+        $this->updateTilePrintSettings($tile, $tilePrintSettings);
 
         unset(
             $tile['attributes'],
@@ -226,5 +234,16 @@ class TileService
         $tile->update([
             'back_source_image' => null,
         ]);
+    }
+
+    public function updateTilePrintSettings(Tile $tile, array $input): TilePrintSettings
+    {
+        $where = [
+            'tile_id' => $tile->id,
+        ];
+
+        $tile->tilePrintSettings()->updateOrCreate($where, $input);
+
+        return $tile->tilePrintSettings;
     }
 }

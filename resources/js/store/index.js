@@ -2,6 +2,8 @@ import Vuex from 'vuex';
 import tile from './tile';
 import abilities from './abilities';
 import tile_weapons from './tile-weapons';
+import tile_print_settings from './tile-print-settings';
+
 import server from './server-repo';
 import images from './images';
 
@@ -20,6 +22,7 @@ export default new Vuex.Store({
             dispatch('tile_weapons/set', data.tile_weapons);
             dispatch('images/front/setSourceImageUrl', data.tile.front_source_image_url);
             dispatch('images/back/setSourceImageUrl', data.tile.back_source_image_url);
+            dispatch('setTilePrintSettings', data.tile_print_settings || {});
         },
 
         fetch({commit, state, dispatch}, tileId) {
@@ -80,6 +83,19 @@ export default new Vuex.Store({
                 abilities: getters['abilities/totalCost'],
             };
 
+            data.tile_print_settings = _.pick(state.tile_print_settings, [
+                'front_is_printer_friendly',
+                'front_invert_title',
+                'front_invert_abilities',
+                'front_cut_line_color',
+
+                'back_is_printer_friendly',
+                'back_invert_title',
+                'back_invert_bottom_headings',
+                'back_invert_flavor_text',
+                'back_cut_line_color',
+            ]);
+
             const handleError = (error) => {
                 console.error(error);
                 notificationFromErrorResponse(error.response);
@@ -97,11 +113,11 @@ export default new Vuex.Store({
             };
 
             return Promise.all([
-                    dispatch('images/front/withoutDisplayOptions', 'getImageBase64'),
-                    dispatch('images/front/withoutDisplayOptions', 'getSvgString'),
-                    dispatch('images/back/withoutDisplayOptions', 'getImageBase64'),
-                    dispatch('images/back/withoutDisplayOptions', 'getSvgString'),
-                ])
+                dispatch('images/front/getImageBase64'),
+                dispatch('images/front/getSvgString'),
+                dispatch('images/back/getImageBase64'),
+                dispatch('images/back/getSvgString'),
+            ])
                 .then((results) => {
                     data.new_front_image = results[0];
                     data.new_front_svg   = results[1];
@@ -175,6 +191,7 @@ export default new Vuex.Store({
         abilities,
         tile_weapons,
         images,
+        tile_print_settings
     },
 });
 

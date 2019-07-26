@@ -1,6 +1,5 @@
 @import 'tile-svg/font.scss';
 @import 'tile-svg/titles.scss';
-@import 'tile-svg/cut-line.scss';
 
 .fill-gray {
     fill: #666766;
@@ -150,6 +149,15 @@
     stroke-width: 0.5pt;
     stroke-linecap: butt;
     stroke-linejoin: miter;
+}
+
+.tile-svg {
+
+    .icon-inverted,
+    .text-invert {
+        fill: #000000;
+        stroke: #ffffff;
+    }
 }
 
 .printer-friendly {

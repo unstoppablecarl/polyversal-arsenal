@@ -69,6 +69,11 @@ class Tile extends Model
         return $this->belongsToMany(Ability::class, 'tile_abilities');
     }
 
+    public function tilePrintSettings()
+    {
+        return $this->hasOne(TilePrintSettings::class);
+    }
+
     public function weapons(): BelongsToMany
     {
         return $this->belongsToMany(Weapon::class, 'tile_weapons')

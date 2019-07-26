@@ -12,7 +12,6 @@ import {
     techLevelById,
     techLevelOptions,
     tileTypeById,
-    vehicleClassById,
 } from '../data/options';
 import {getMaxStealth, getStealthOptions} from '../data/options-stealth';
 

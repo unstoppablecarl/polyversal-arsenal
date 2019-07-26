@@ -1,7 +1,7 @@
 <template>
     <g>
         <g :transform="'translate(0,-'+ offsetY + ')'" v-for="(ability, index) in abilityList" :key="ability.id">
-            <g class="icon-ability" :transform="'translate(' + abilityX(index) + ',' + abilityY(index) + ')'">
+            <g :class="['icon-ability', {'icon-inverted': frontInvertAbilities}]" :transform="'translate(' + abilityX(index) + ',' + abilityY(index) + ')'">
                 <!--                <rect x="0" y="0" :width="size" :height="size" fill="#ff0000"/>-->
 
                 <template v-if="ability.name === 'transport'">
@@ -148,6 +148,7 @@
         mapAbilityGetters,
         mapTileProperties,
     } from '../../data/mappers'
+    import {mapGetters} from "vuex";
 
     export default {
         name: 'tile-abilities',
@@ -182,6 +183,9 @@
             ...mapTileProperties({
                 tile_class_id: 'tile_class_id',
             }),
+            ...mapGetters([
+               'frontInvertAbilities'
+            ]),
             ...mapAbilityGetters([
                 'abilityList',
             ]),

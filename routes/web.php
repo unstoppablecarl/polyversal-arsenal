@@ -82,6 +82,14 @@ Route::group([
     Route::get('tiles/{tile}', 'TileController@show')
         ->middleware('can:view,tile')
         ->name('tiles.view');
+
+    Route::get('tiles/{tile}/print-settings', 'TilePrintSettingsController@show')
+        ->middleware('can:view,tile')
+        ->name('tiles.print-settings.view');
+
+    Route::put('tiles/{tile}/print-settings', 'TilePrintSettingsController@update')
+        ->middleware('can:update,tile')
+        ->name('tiles.print-settings.update');
 });
 
 Auth::routes();

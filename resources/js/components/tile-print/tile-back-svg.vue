@@ -21,8 +21,8 @@
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
 
-        <g id="tile-settings" :class="{'printer-friendly': printerFriendly, 'show-cut-line': showCutLine}">
-            <rect x="0" y="0" width="268" height="232" fill="#fff"  clip-path="url(#tile-clip)" />
+        <g id="tile-settings" :class="{'printer-friendly': backIsPrinterFriendly}">
+            <rect x="0" y="0" width="268" height="232" fill="#fff" clip-path="url(#tile-clip)"/>
 
             <image
                 v-if="sourceImageUrl"
@@ -34,17 +34,19 @@
             />
 
             <polygon points="71.8,224.2 9.4,116.2 71.8,8.2 196.5,8.2 258.8,116.2 196.5,224.2 "
-                     :stroke="cutLineColor"
+                     v-if="backCutLineColor"
+                     :stroke="backCutLineColor"
                      stroke-width="0.25"
                      fill="none"
                      stroke-miterlimit="10"
                      class="cut-line"
             />
 
-            <text :x="268.3 * 0.5" y="20" class="title">{{tile_name}}</text>
-            <text :x="268.3 * 0.5" y="32" class="subtitle">{{printSubTitle}}</text>
+            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': backInvertTitle}]">{{tile_name}}</text>
+            <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': backInvertTitle}]">{{printSubTitle}}
+            </text>
 
-            <text :x="56" y="50.25" class="flavor-text">
+            <text :x="56" y="50.25" :class="['flavor-text', {'text-invert': backInvertFlavorText}]">
                 <tspan v-for="(row, index) in flavorTextArray" :x="56" :y="50.25 + (index + 1) * 10">{{row}}</tspan>
             </text>
 
@@ -126,7 +128,7 @@
             <polygon class="shape-fill" points="71.9,201.2 67.6,193.7 71.9,186.2 80.6,186.2 84.9,193.7 80.6,201.2 "/>
 
             <g transform="translate(76.233, 193.699)">
-                <text class="shape-header-value max-size" y="-13">
+                <text :class="['shape-header-value max-size', {'text-invert': backInvertBottomHeadings}]" y="-13">
                     MAX SIZE
                 </text>
                 <text class="shape-value" y="0.75">
@@ -135,7 +137,7 @@
             </g>
             <g transform="translate(190.552, 193.699)">
                 <circle class="shape-fill" cx="0" cy="0" r="7.48"/>
-                <text class="shape-header-value" y="-13">
+                <text :class="['shape-header-value', {'text-invert': backInvertBottomHeadings}]" y="-13">
                     COST
                 </text>
                 <text class="shape-value" y="0.75">
@@ -159,13 +161,12 @@
     import textWrap from 'svg-text-wrap';
     import {mapGetters} from 'vuex';
     import psychProfiles from '../../data/psych-profiles';
+    import {mapTilePrintSettingsProperties} from "../../store/tile-print-settings-mappers";
 
     export default {
         name: 'tile-back-svg',
         components: {},
-        props: {
-
-        },
+        props: {},
         data() {
             return {
                 svgCss: null,
@@ -183,6 +184,11 @@
         computed: {
             ...mapGetters([
                 'totalCost',
+                'backIsPrinterFriendly',
+                'backInvertTitle',
+                'backInvertBottomHeadings',
+                'backInvertFlavorText',
+                'backCutLineColor'
             ]),
             ...mapTileGetters([
                 'printSubTitle',
@@ -190,9 +196,6 @@
             ]),
             ...mapBackImageGetters([
                 'sourceImageUrl',
-                'showCutLine',
-                'printerFriendly',
-                'cutLineColor',
             ]),
             ...mapTileProperties({
                 tile_name: 'name',
@@ -200,7 +203,7 @@
                 flavor_text: 'flavor_text',
             }),
             flavorTextArray() {
-                if(this.flavor_text){
+                if (this.flavor_text) {
                     return textWrap(this.flavor_text + '', 200);
                 }
                 return '';

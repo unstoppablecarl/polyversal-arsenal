@@ -60,8 +60,8 @@
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
 
-        <g id="tile-settings" :class="{'printer-friendly': printerFriendly, 'show-cut-line': showCutLine}">
-            <rect x="0" y="0" width="268" height="232" fill="#fff"  clip-path="url(#tile-clip)" />
+        <g id="tile-settings" :class="{'printer-friendly': frontIsPrinterFriendly}">
+            <rect x="0" y="0" width="268" height="232" fill="#fff" clip-path="url(#tile-clip)"/>
             <image
                 v-if="sourceImageUrl"
                 :href="sourceImageUrl"
@@ -72,7 +72,8 @@
             />
 
             <polygon points="71.8,224.2 9.4,116.2 71.8,8.2 196.5,8.2 258.8,116.2 196.5,224.2 "
-                     :stroke="cutLineColor"
+                     v-if="frontCutLineColor"
+                     :stroke="frontCutLineColor"
                      stroke-width="0.25"
                      fill="none"
                      stroke-miterlimit="10"
@@ -136,8 +137,8 @@
                 </text>
             </g>
 
-            <text :x="268.3 * 0.5" y="20" class="title">{{tile_name}}</text>
-            <text :x="268.3 * 0.5" y="32" class="subtitle">{{printSubTitle}}</text>
+            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': frontInvertTitle}]">{{tile_name}}</text>
+            <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': frontInvertTitle}]">{{printSubTitle}}</text>
 
             <tile-weapon-grid-svg/>
 
@@ -152,8 +153,7 @@
 <script>
 
     import {
-        mapAbilityGetters, mapFrontImageGetters,
-        mapImageGetters,
+        mapFrontImageGetters,
         mapTileGetters,
         mapTileProperties,
     } from '../../data/mappers';
@@ -161,11 +161,13 @@
     import TileSvgDamageTrack from './tile-svg-damge-track';
     import TileWeaponGridSvg from './tile-weapon-grid-svg';
     import getTileSvgCss from '../../lib/get-tile-svg-css';
+    import {mapGetters} from "vuex";
 
     export default {
         name: 'tile-front-svg',
         components: {TileWeaponGridSvg, TileSvgDamageTrack},
         props: {
+            cutLineColor: null,
         },
         data() {
             return {
@@ -183,9 +185,19 @@
             ]),
             ...mapFrontImageGetters([
                 'sourceImageUrl',
-                'showCutLine',
-                'printerFriendly',
-                'cutLineColor',
+            ]),
+            ...mapTileProperties({
+                tile_targeting_id: 'targeting_id',
+                tile_assault_id: 'assault_id',
+                stealth: 'stealth',
+                tile_name: 'name',
+                tile_front_image_url: 'front_image_url',
+            }),
+            ...mapGetters([
+                'frontIsPrinterFriendly',
+                'frontCutLineColor',
+                'frontInvertTitle',
+                'frontInvertAbilities',
             ]),
             targeting() {
                 return targetingById[this.tile_targeting_id].display_name;
@@ -205,13 +217,6 @@
             targetingNumber() {
                 return this.targeting.split('D')[1];
             },
-            ...mapTileProperties({
-                tile_targeting_id: 'targeting_id',
-                tile_assault_id: 'assault_id',
-                stealth: 'stealth',
-                tile_name: 'name',
-                tile_front_image_url: 'front_image_url',
-            }),
         },
     };
 

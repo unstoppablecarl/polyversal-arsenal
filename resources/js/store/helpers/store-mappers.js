@@ -1,47 +1,30 @@
-function defActions(keys) {
-    return defKeys(keys, defAction);
-}
-
-function defAction(key) {
+export function defAction(method) {
     return ({commit}, value) => {
-        commit(key, value);
+        commit(method, value);
         return Promise.resolve();
     };
 }
 
-function defMutations(keys) {
-    return defKeys(keys, defMutation);
-}
-
-function defMutation(key) {
-    return (state, value) => state[key] = value;
-}
-
-function defGetters(keys) {
-    return defKeys(keys, defGetter);
-}
-
-function defGetter(key) {
-    return (state) => state[key];
-}
-
-function defKeys(keys, callback) {
-    const result = {};
-
-    keys.forEach((key) => {
-        result[key] = callback(key);
+export function defActions(methods) {
+    let out = {};
+    methods.forEach((method) => {
+        out[method] = defAction(method)
     });
-
-    return result;
+    return out;
 }
 
-export {
-    defGetter,
-    defGetters,
+export function defMutations(map) {
+    return _.mapValues(map, (stateKey) => defMutation(stateKey))
+}
 
-    defMutation,
-    defMutations,
+export function defMutation(stateKey) {
+    return (state, value) => state[stateKey] = value;
+}
 
-    defAction,
-    defActions,
-};
+export function defGetter(stateKey) {
+    return (state) => state[stateKey];
+}
+
+export function defGetters(map) {
+    return _.mapValues(map, (stateKey) => defGetter(stateKey))
+}

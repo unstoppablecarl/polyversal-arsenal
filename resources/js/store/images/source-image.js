@@ -3,14 +3,10 @@ import svgToPngBase64 from '../../lib/svg-to-png-base64';
 import svgToString from '../../lib/svg-to-string';
 import svgToBase64 from '../../lib/svg-to-base64';
 import {notificationFromErrorResponse, notificationSuccess} from '../notification';
-import SourceImageDisplayOptions from './source-image-display-options';
 
 export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdate, serverDelete}) {
     return {
         namespaced: true,
-        modules: {
-            display_options: SourceImageDisplayOptions,
-        },
         state: {
             image_url: null,
             image_base64: null,
@@ -67,14 +63,6 @@ export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdat
                     });
             },
 
-            withoutDisplayOptions({dispatch, commit}, action){
-                commit('clearDisplaySettings');
-
-                return dispatch(action)
-                    .finally(() => {
-                        commit('restoreDisplaySettings');
-                    });
-            },
             saveSourceImage({state, dispatch, rootState}, newImageData) {
 
                 const handleError = (error) => {
