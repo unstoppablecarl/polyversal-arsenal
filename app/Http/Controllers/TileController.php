@@ -69,10 +69,12 @@ class TileController extends Controller
 
     public function update(TileSaveRequest $request, TileService $service, CostService $costService, Tile $tile)
     {
+
         $service->update($tile, $request->all());
 
         $diff = $costService->getCostDiff($tile, $request->input('costs'));
 
+dd($diff);
         if ($request->wantsJson()) {
             $resource = new TileResource($tile);
             $resource->setCostDiff($diff);

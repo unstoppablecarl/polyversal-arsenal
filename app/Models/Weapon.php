@@ -10,6 +10,7 @@ class Weapon extends Model
         'user_id',
         'name',
         'display_name',
+        'class',
         'ap',
         'at',
         'aa',

@@ -44,26 +44,23 @@ class CostService
         return $weapons->sum(function (TileWeapon $tileWeapon) use ($targetingName) {
             $column = 'cost_' . $targetingName;
             $cost   = $tileWeapon->weapon[$column];
-
-            return $cost * $tileWeapon->quantity;
+            $arcMultiplier = $tileWeapon->arcSize->cost_multiplier;
+            return round($cost * $arcMultiplier * $tileWeapon->quantity);
         });
     }
 
     public function warheadWeaponCost(Tile $tile)
     {
-        $targetingName = $tile->targeting->name;
-
         $tile->loadMissing(['tileWeapons.weapon']);
 
         /** @var Collection $weapons */
         $weapons = $tile->tileWeapons;
-        return $weapons->sum(function (TileWeapon $tileWeapon) use ($targetingName) {
+        return $weapons->sum(function (TileWeapon $tileWeapon) {
             $weapon = $tileWeapon->weapon;
-            $column = 'cost_' . $targetingName;
-            $cost   = $tileWeapon->weapon[$column];
+            $class = $tileWeapon->weapon->class;
 
             if ($weapon->has_warheads) {
-                return $cost * (int)$tileWeapon->quantity;
+                return $class * (int)$tileWeapon->quantity;
             }
         });
     }

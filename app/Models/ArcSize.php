@@ -9,6 +9,7 @@ class ArcSize extends Model
     protected $fillable = [
         'name',
         'display_name',
+        'cost_multiplier'
     ];
 
     public $timestamps = false;
