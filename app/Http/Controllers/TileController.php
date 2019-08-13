@@ -74,7 +74,6 @@ class TileController extends Controller
 
         $diff = $costService->getCostDiff($tile, $request->input('costs'));
 
-dd($diff);
         if ($request->wantsJson()) {
             $resource = new TileResource($tile);
             $resource->setCostDiff($diff);
