@@ -52,6 +52,6 @@ class CopyTile extends Command
         $tile = Tile::find($tileId);
         $user = User::find($userId);
 
-        $service->copy($tile, $user->id);
+        $service->copy($tile, $user);
     }
 }
