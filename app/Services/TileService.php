@@ -7,6 +7,7 @@ use App\Models\Chassis;
 use App\Models\Tile;
 use App\Models\TilePrintSettings;
 use App\Models\TileWeapon;
+use App\Models\User;
 use App\Services\Exceptions\InvalidAbilityTileTypeException;
 use App\Services\Tile\TileImage;
 use Illuminate\Support\Collection;
@@ -160,7 +161,7 @@ class TileService
         return Chassis::query()->where($where)->first();
     }
 
-    protected function syncAbilities(Tile $tile, $abilityIds)
+    protected function syncAbilities(Tile $tile, array $abilityIds)
     {
         $abilities = Ability::query()
             ->whereIn('id', $abilityIds)
@@ -245,5 +246,57 @@ class TileService
         $tile->tilePrintSettings()->updateOrCreate($where, $input);
 
         return $tile->tilePrintSettings;
+    }
+
+    public function copy(Tile $sourceTile, User $newUser = null): Tile
+    {
+        $source = array_except($sourceTile->attributesToArray(), [
+            'id',
+            'created_at',
+            'updated_at',
+
+            'front_source_image',
+            'back_source_image',
+            'front_image',
+            'front_thumb',
+            'back_image',
+            'back_thumb',
+            'front_svg',
+            'back_svg',
+        ]);
+
+        if ($newUser) {
+            $source['user_id'] = $newUser->id;
+        }
+
+        /** @var Tile $tile */
+        $tile = Tile::query()->forceCreate($source);
+
+        $abilityIds = $sourceTile->abilities()->pluck('abilities.id')->toArray();
+
+        $this->syncAbilities($tile, $abilityIds);
+
+        $sourceTile->tileWeapons->each(function (TileWeapon $sourceTileWeapon) use ($tile) {
+            $attributes = array_except($sourceTileWeapon->attributesToArray(), [
+                'id',
+                'created_at',
+                'updated_at',
+            ]);
+
+            $attributes['tile_id'] = $tile->id;
+
+            TileWeapon::query()->forceCreate($attributes);
+        });
+
+        $sourceTilePrintSettings = $sourceTile->tilePrintSettings->toArray();
+
+        $tilePrintSettings = array_except($sourceTilePrintSettings, [
+            'id',
+            'created_at',
+            'updated_at',
+        ]);
+        $tilePrintSettings['tile_id'] = $tile->id;
+        $tile->tilePrintSettings()->forceCreate($tilePrintSettings);
+        return $tile;
     }
 }

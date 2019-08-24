@@ -35,21 +35,21 @@ trait RefreshAndSeedDatabase
      */
     protected function refreshTestDatabase()
     {
-        // if (!RefreshDatabaseState::$migrated) {
-        //     $this->artisan('migrate:fresh');
-        //
-        //     $this->app[Kernel::class]->setArtisan(null);
-        //
-        //     RefreshDatabaseState::$migrated = true;
-        // }
-        //
-        // if (!SeedDatabaseState::$seeded) {
-        //     $this->artisan('db:seed');
-        //
-        //     $this->app[Kernel::class]->setArtisan(null);
-        //
-        //     SeedDatabaseState::$seeded = true;
-        // }
+         if (!RefreshDatabaseState::$migrated) {
+             $this->artisan('migrate:fresh');
+
+             $this->app[Kernel::class]->setArtisan(null);
+
+             RefreshDatabaseState::$migrated = true;
+         }
+
+         if (!SeedDatabaseState::$seeded) {
+             $this->artisan('db:seed');
+
+             $this->app[Kernel::class]->setArtisan(null);
+
+             SeedDatabaseState::$seeded = true;
+         }
 
         $this->beginDatabaseTransaction();
     }

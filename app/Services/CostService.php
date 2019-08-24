@@ -57,7 +57,7 @@ class CostService
         $weapons = $tile->tileWeapons;
         return $weapons->sum(function (TileWeapon $tileWeapon) {
             $weapon = $tileWeapon->weapon;
-            $class = $tileWeapon->weapon->class;
+            $class = (int)$tileWeapon->weapon->class;
 
             if ($weapon->has_warheads) {
                 return $class * (int)$tileWeapon->quantity;
