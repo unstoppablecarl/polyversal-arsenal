@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\Exceptions\InvalidAbilityTileTypeException;
 use App\Services\Tile\TileImage;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class TileService
 {
@@ -31,65 +32,73 @@ class TileService
 
     public function create(array $input, $userId): Tile
     {
-        $chassis = $this->getChassis($input);
+        return DB::transaction(function () use ($input, $userId) {
 
-        $input['chassis_id'] = $chassis->id;
-        $input['user_id']    = $userId;
-        $abilityIds          = array_get($input, 'ability_ids', []);
-        $tileWeapons         = array_get($input, 'tile_weapons', []);
+            $chassis = $this->getChassis($input);
 
-        $input['cached_cost'] = 0;
+            $input['chassis_id'] = $chassis->id;
+            $input['user_id']    = $userId;
+            $abilityIds          = array_get($input, 'ability_ids', []);
+            $tileWeapons         = array_get($input, 'tile_weapons', []);
 
-        /** @var Tile $tile */
-        $tile = Tile::query()->create($input);
-        $this->syncAbilities($tile, $abilityIds);
-        $this->syncTileWeapons($tile, $tileWeapons);
+            $input['cached_cost'] = 0;
 
-        $tile['cached_cost'] = $this->costService->total($tile);
-        $tile->save();
+            /** @var Tile $tile */
+            $tile = Tile::query()->create($input);
+            $this->syncAbilities($tile, $abilityIds);
+            $this->syncTileWeapons($tile, $tileWeapons);
 
-        $tilePrintSettings = array_get($input, 'tile_print_settings', []);
-        $tile->tilePrintSettings()->create($tilePrintSettings);
+            $tile['cached_cost'] = $this->costService->total($tile);
+            $tile->save();
 
-        return $tile;
+            $tilePrintSettings = array_get($input, 'tile_print_settings', []);
+            $tile->tilePrintSettings()->create($tilePrintSettings);
+
+            return $tile;
+        });
     }
 
     public function update(Tile $tile, array $input): Tile
     {
-        $chassis = $this->getChassis($input);
-        $tile->chassis()->associate($chassis);
+        return DB::transaction(function () use ($tile, $input) {
 
-        $tileInput = array_only($input, [
-            'name',
-            'targeting_id',
-            'assault_id',
-            'anti_missile_system_id',
-            'armor',
-            'stealth',
-            'flavor_text',
-        ]);
+            $chassis = $this->getChassis($input);
+            $tile->chassis()->associate($chassis);
 
-        $imageInput = $this->saveImageData($tile, $input);
+            $tileInput = array_only($input, [
+                'name',
+                'targeting_id',
+                'assault_id',
+                'anti_missile_system_id',
+                'armor',
+                'stealth',
+                'flavor_text',
+            ]);
 
-        $tileInput = array_merge($tileInput, $imageInput);
+            $imageInput = $this->saveImageData($tile, $input);
 
-        $tile->update($tileInput);
-        $abilityIds  = array_get($input, 'ability_ids', []);
-        $tileWeapons = array_get($input, 'tile_weapons', []);
+            $tileInput = array_merge($tileInput, $imageInput);
 
-        $this->syncAbilities($tile, $abilityIds);
-        $this->syncTileWeapons($tile, $tileWeapons);
+            $tile->update($tileInput);
+            $abilityIds  = array_get($input, 'ability_ids', []);
+            $tileWeapons = array_get($input, 'tile_weapons', []);
 
-        $tilePrintSettings = array_get($input, 'tile_print_settings', []);
+            $tile['cached_cost'] = $this->costService->total($tile);
 
-        $this->updateTilePrintSettings($tile, $tilePrintSettings);
+            $this->syncAbilities($tile, $abilityIds);
+            $this->syncTileWeapons($tile, $tileWeapons);
 
-        unset(
-            $tile['attributes'],
-            $tile['chassis']
-        );
+            $tilePrintSettings = array_get($input, 'tile_print_settings', []);
 
-        return $tile;
+            $this->updateTilePrintSettings($tile, $tilePrintSettings);
+
+            unset(
+                $tile['attributes'],
+                $tile['chassis']
+            );
+
+            return $tile->fresh();
+        });
     }
 
     public function delete(Tile $tile)
@@ -250,53 +259,56 @@ class TileService
 
     public function copy(Tile $sourceTile, User $newUser = null): Tile
     {
-        $source = array_except($sourceTile->attributesToArray(), [
-            'id',
-            'created_at',
-            'updated_at',
+        return DB::transaction(function () use ($sourceTile, $newUser) {
 
-            'front_source_image',
-            'back_source_image',
-            'front_image',
-            'front_thumb',
-            'back_image',
-            'back_thumb',
-            'front_svg',
-            'back_svg',
-        ]);
+            $source = array_except($sourceTile->attributesToArray(), [
+                'id',
+                'created_at',
+                'updated_at',
 
-        if ($newUser) {
-            $source['user_id'] = $newUser->id;
-        }
+                'front_source_image',
+                'back_source_image',
+                'front_image',
+                'front_thumb',
+                'back_image',
+                'back_thumb',
+                'front_svg',
+                'back_svg',
+            ]);
 
-        /** @var Tile $tile */
-        $tile = Tile::query()->forceCreate($source);
+            if ($newUser) {
+                $source['user_id'] = $newUser->id;
+            }
 
-        $abilityIds = $sourceTile->abilities()->pluck('abilities.id')->toArray();
+            /** @var Tile $tile */
+            $tile = Tile::query()->forceCreate($source);
 
-        $this->syncAbilities($tile, $abilityIds);
+            $abilityIds = $sourceTile->abilities()->pluck('abilities.id')->toArray();
 
-        $sourceTile->tileWeapons->each(function (TileWeapon $sourceTileWeapon) use ($tile) {
-            $attributes = array_except($sourceTileWeapon->attributesToArray(), [
+            $this->syncAbilities($tile, $abilityIds);
+
+            $sourceTile->tileWeapons->each(function (TileWeapon $sourceTileWeapon) use ($tile) {
+                $attributes = array_except($sourceTileWeapon->attributesToArray(), [
+                    'id',
+                    'created_at',
+                    'updated_at',
+                ]);
+
+                $attributes['tile_id'] = $tile->id;
+
+                TileWeapon::query()->forceCreate($attributes);
+            });
+
+            $sourceTilePrintSettings = $sourceTile->tilePrintSettings->toArray();
+
+            $tilePrintSettings            = array_except($sourceTilePrintSettings, [
                 'id',
                 'created_at',
                 'updated_at',
             ]);
-
-            $attributes['tile_id'] = $tile->id;
-
-            TileWeapon::query()->forceCreate($attributes);
+            $tilePrintSettings['tile_id'] = $tile->id;
+            $tile->tilePrintSettings()->forceCreate($tilePrintSettings);
+            return $tile;
         });
-
-        $sourceTilePrintSettings = $sourceTile->tilePrintSettings->toArray();
-
-        $tilePrintSettings = array_except($sourceTilePrintSettings, [
-            'id',
-            'created_at',
-            'updated_at',
-        ]);
-        $tilePrintSettings['tile_id'] = $tile->id;
-        $tile->tilePrintSettings()->forceCreate($tilePrintSettings);
-        return $tile;
     }
 }
