@@ -112,9 +112,9 @@ class ImportChassis extends Command
         $vehicle  = $data['vehicle'];
 
 
-        file_put_contents('./source-data/imported/infantry-chassis.json', json_encode($infantry));
-        file_put_contents('./source-data/imported/cavalry-chassis.json', json_encode($cavalry));
-        file_put_contents('./source-data/imported/vehicle-chassis.json', json_encode($vehicle));
+        file_put_contents('./source-data/imported/infantry-chassis.json', json_encode($infantry, JSON_PRETTY_PRINT));
+        file_put_contents('./source-data/imported/cavalry-chassis.json', json_encode($cavalry, JSON_PRETTY_PRINT));
+        file_put_contents('./source-data/imported/vehicle-chassis.json', json_encode($vehicle, JSON_PRETTY_PRINT));
     }
 
 

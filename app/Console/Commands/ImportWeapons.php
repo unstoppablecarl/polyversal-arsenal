@@ -63,7 +63,7 @@ class ImportWeapons extends Command
         //
         // $writer->insertAll($data);
 
-        file_put_contents('source-data/imported/weapons.json', json_encode($data, JSON_NUMERIC_CHECK));
+        file_put_contents('source-data/imported/weapons.json', json_encode($data, JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT));
     }
 
     protected function normalizeNumbers($str)

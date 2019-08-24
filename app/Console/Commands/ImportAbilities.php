@@ -67,7 +67,8 @@ class ImportAbilities extends Command
             ];
         }
 
-        file_put_contents('source-data/imported/abilities.json', json_encode($data, JSON_NUMERIC_CHECK));
+        file_put_contents('source-data/imported/abilities.json', json_encode($data, JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT));
+
     }
 
 }
