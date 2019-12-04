@@ -38,18 +38,23 @@ class CostService
         $targetingName = $tile->targeting->name;
 
         $tile->loadMissing(['tileWeapons.weapon']);
+        $tile->load('tileWeapons.arcSize');
+        $tile->load('tileWeapons.tileWeaponType');
 
         /** @var Collection $weapons */
         $weapons = $tile->tileWeapons;
         return $weapons->sum(function (TileWeapon $tileWeapon) use ($targetingName) {
-            $column = 'cost_' . $targetingName;
-            $cost   = $tileWeapon->weapon[$column];
-            $arcMultiplier = $tileWeapon->arcSize->cost_multiplier;
-            return round($cost * $arcMultiplier * $tileWeapon->quantity);
+            $column        = 'cost_' . $targetingName;
+            $attackCost    = $tileWeapon->weapon[$column];
+            $arcMod        = $tileWeapon->arcSize->cost_multiplier;
+            $weaponTypeMod = $this->tileWeaponTypeCost($tileWeapon->tileWeaponType->name);
+            $baseCost      = round($attackCost * $arcMod);
+            $cost          = round($baseCost * $weaponTypeMod);
+            return max($cost, 1) * $tileWeapon->quantity;
         });
     }
 
-    public function warheadWeaponCost(Tile $tile)
+    protected function warheadWeaponCost(Tile $tile)
     {
         $tile->loadMissing(['tileWeapons.weapon']);
 
@@ -57,7 +62,7 @@ class CostService
         $weapons = $tile->tileWeapons;
         return $weapons->sum(function (TileWeapon $tileWeapon) {
             $weapon = $tileWeapon->weapon;
-            $class = $tileWeapon->weapon->class;
+            $class  = $tileWeapon->weapon->class;
 
             if ($weapon->has_warheads) {
                 return $class * (int)$tileWeapon->quantity;
@@ -122,7 +127,7 @@ class CostService
         return $cost;
     }
 
-    protected function abilityCost(Tile $tile, Ability $ability): int
+    public function abilityCost(Tile $tile, Ability $ability): int
     {
         $tileTypeId = $tile->chassis->tile_type_id;
 
@@ -149,8 +154,19 @@ class CostService
             }
 
             $tileClassId = $tile->chassis->tile_class_id;
-            $key = 'cost_vehicle_class_' . $tileClassId;
+            $key         = 'cost_vehicle_class_' . $tileClassId;
             return $ability[$key];
         }
+    }
+
+    public function tileWeaponTypeCost(string $tileWeaponTypeName)
+    {
+        $map = [
+            'ground'  => 5 / 6,
+            'with_aa' => 1,
+            'only_aa' => 1 / 6,
+        ];
+
+        return $map[$tileWeaponTypeName];
     }
 }

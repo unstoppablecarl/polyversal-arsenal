@@ -100,12 +100,14 @@ function Repo(data) {
     }
 
     function cost(attackStatId, weaponId, arcSizeId, weaponTypeId) {
-        let attackDie = targetingById[attackStatId].name;
-        let item    = toItem(weaponId);
-        let typeMod = WEAPON_TYPE_MOD[weaponTypeId];
-        let arcMod  = arcSizeById[arcSizeId].cost_multiplier;
-        let key = 'cost_' + attackDie.toLowerCase();
-        let cost = Math.round(item[key] * typeMod * arcMod);
+        let attackDie   = targetingById[attackStatId].name;
+        let item        = toItem(weaponId);
+        let typeMod     = WEAPON_TYPE_MOD[weaponTypeId];
+        let arcMod      = arcSizeById[arcSizeId].cost_multiplier;
+        let key         = 'cost_' + attackDie.toLowerCase();
+        let attackCost = item[key];
+        let baseCost = Math.round(attackCost * arcMod);
+        let cost = Math.round(baseCost * typeMod);
         return Math.max(1, cost);
     }
 
