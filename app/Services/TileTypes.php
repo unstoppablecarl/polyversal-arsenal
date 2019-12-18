@@ -9,8 +9,6 @@ class TileTypes extends StaticDBData
 {
     protected $modelClass = TileType::class;
 
-    const IDS = [1, 2, 3];
-
     const INFANTRY_ID = 1;
     const CAVALRY_ID = 2;
     const VEHICLE_ID = 3;

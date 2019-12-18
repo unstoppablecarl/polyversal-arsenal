@@ -33,9 +33,9 @@ class ChassisSeeder extends Seeder
         $chassisByKey = [];
 
         foreach ($records as $row) {
-            $row   = $this->mapRowIds($row);
-            $key   = $this->keyFromRow($row);
-            $row   = array_only($row, [
+            $row = $this->mapRowIds($row);
+            $key = $this->keyFromRow($row);
+            $row = array_only($row, [
                 'tile_type_id',
                 'tile_class_id',
                 'tech_level_id',
@@ -50,6 +50,7 @@ class ChassisSeeder extends Seeder
                 'damage_fuel_leak',
                 'damage_destroyed',
             ]);
+
             $where = array_only($row, [
                 'tile_type_id',
                 'tile_class_id',
@@ -72,13 +73,13 @@ class ChassisSeeder extends Seeder
 
             $chassis = $chassisByKey[$key];
 
-            $row               = array_only($row, [
+            $row = array_only($row, [
                 'armor',
                 'move',
                 'cost',
             ]);
-            $row['chassis_id'] = $chassis->id;
 
+            $row['chassis_id'] = $chassis->id;
 
             $where = array_only($row, [
                 'chassis_id',
