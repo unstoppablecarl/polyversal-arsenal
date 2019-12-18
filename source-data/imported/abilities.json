@@ -16,7 +16,8 @@
         "infantry_valid": 1,
         "cavalry_valid": 1,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 2,
@@ -35,7 +36,8 @@
         "infantry_valid": 1,
         "cavalry_valid": 1,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 3,
@@ -54,7 +56,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 4,
@@ -73,7 +76,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 5,
@@ -92,7 +96,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
     },
     {
         "id": 6,
@@ -111,7 +116,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 7,
@@ -130,7 +136,8 @@
         "infantry_valid": 1,
         "cavalry_valid": 1,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 8,
@@ -149,7 +156,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
     },
     {
         "id": 9,
@@ -168,7 +176,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
     },
     {
         "id": 10,
@@ -187,7 +196,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
     },
     {
         "id": 11,
@@ -206,7 +216,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 12,
@@ -225,7 +236,8 @@
         "infantry_valid": 1,
         "cavalry_valid": null,
         "vehicle_valid": null,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 13,
@@ -244,7 +256,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 14,
@@ -263,7 +276,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": null
+        "warhead_cost_multiplier": null,
+        "is_defensive": null
     },
     {
         "id": 15,
@@ -282,7 +296,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": 10
+        "warhead_cost_multiplier": 10,
+        "is_defensive": null
     },
     {
         "id": 16,
@@ -301,7 +316,8 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": 10
+        "warhead_cost_multiplier": 10,
+        "is_defensive": null
     },
     {
         "id": 17,
@@ -320,6 +336,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
-        "warhead_cost_multiplier": 20
+        "warhead_cost_multiplier": 20,
+        "is_defensive": null
     }
 ]
