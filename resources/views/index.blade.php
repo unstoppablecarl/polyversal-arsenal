@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-<h1>Polyversal Arsenal</h1>
-
+<div class="text-center">
+    <img src="/img/home.jpg">
+</div>
 @endsection

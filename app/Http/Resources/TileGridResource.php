@@ -5,11 +5,11 @@ namespace App\Http\Resources;
 use App\Models\CombatValue;
 use App\Models\Tile;
 use App\Services\CombatValues;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 
 class TileGridResource extends Resource
 {
-
     public function toArray($request)
     {
         $model     = new Tile((array)$this->resource);
@@ -32,15 +32,16 @@ class TileGridResource extends Resource
             // 'tech_level_id'          => $this->tech_level_id,
             // 'mobility_id'            => $this->mobility_id,
             'targeting_id'           => $this->targeting_id,
-            'targeting'              => $combatValues->idToDisplayName($this->targeting_id),
+            'targeting'              => $this->targeting,
             'assault_id'             => $this->assault_id,
-            'assault'                => $combatValues->idToDisplayName($this->assault_id),
+            'assault'                => $this->assault,
             'anti_missile_system_id' => $this->anti_missile_system_id,
             'anti_missile_system'    => $combatValues->idToDisplayName($this->anti_missile_system_id),
             'armor'                  => $this->armor,
             'stealth'                => $this->stealth,
             'cached_cost'            => $this->cached_cost,
             'image_url'              => $this->front_image,
+            'updated_at'             => $this->updated_at ? Carbon::make($this->updated_at)->format('n/j/Y H:i:s') : null,
             'buttons'                => view('tiles.controls.buttons', ['item' => $model, 'size' => 'sm'])->render(),
         ];
     }

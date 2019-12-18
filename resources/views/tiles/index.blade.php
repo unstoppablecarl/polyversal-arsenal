@@ -14,7 +14,5 @@
 @endsection
 
 @section('content-after')
-    <div class="container-fluid">
-        <div id="app-tile-grid"></div>
-    </div>
+    <div id="app-tile-grid"></div>
 @endsection

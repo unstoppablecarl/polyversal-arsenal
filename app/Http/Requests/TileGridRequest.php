@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\TileListService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,31 +16,21 @@ class TileGridRequest extends FormRequest
     public function rules()
     {
         return [
-            'per_page'   => Rule::in([10, 20]),
-            'page'       => 'integer',
-            'sort_field' => [
-                'sometimes',
-                Rule::in([
-                    'id',
-                    'tile_type',
-                    'tile_class',
-                    'tile_mobility',
-                    'tech_level',
-
-                    'armor',
-                    'move',
-                    'stealth',
-                    'evasion',
-
-                    'name',
-                    'targeting_id',
-                    'assault_id',
-                    'anti_missile_system_id',
-
-                    'cached_cost',
-                ]),
+            'search'         => [
+                'string',
+                'nullable',
+                'sometimes'
             ],
-            'sort_dir'   => [
+            'per_page'       => [
+                'integer',
+                Rule::in([10, 50, 100]),
+            ],
+            'page'           => 'integer',
+            'sort_field'     => [
+                'sometimes',
+                Rule::in(TileListService::SORTABLE_COLUMNS),
+            ],
+            'sort_direction' => [
                 'sometimes',
                 Rule::in([
                     'asc',
@@ -47,5 +38,30 @@ class TileGridRequest extends FormRequest
                 ]),
             ],
         ];
+    }
+
+    public function perPage()
+    {
+        return (int)$this->input('per_page', 10);
+    }
+
+    public function page()
+    {
+        return (int)$this->input('page', 1);
+    }
+
+    public function sortField()
+    {
+        return $this->input('sort_field');
+    }
+
+    public function sortDirection()
+    {
+        return $this->input('sort_direction');
+    }
+
+    public function search()
+    {
+        return $this->input('search');
     }
 }

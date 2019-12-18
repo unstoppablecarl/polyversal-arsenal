@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <tile-grid-pagination
             :loading="loading"
             :per-page="perPage"
@@ -8,7 +8,10 @@
             :to-record="toRecord"
             :total-records="totalRecords"
             :last-page="lastPage"
-            @change_page="loadItems"
+            :search="search"
+            @changePage="changePage"
+            @changePerPage="changePerPage"
+            @changeSearch="changeSearch"
         ></tile-grid-pagination>
 
         <table class="table table-striped table-bordered">
@@ -23,7 +26,6 @@
             </thead>
             <tbody>
 
-
             <tr v-for="row in rows">
                 <td v-for="column in columns" :class="{'text-right': column.type == 'number'}">{{row[column.field]}}
                 </td>
@@ -35,14 +37,16 @@
 
         <tile-grid-pagination
             :loading="loading"
-
             :per-page="perPage"
             :current-page="currentPage"
             :from-record="fromRecord"
             :to-record="toRecord"
             :total-records="totalRecords"
             :last-page="lastPage"
-            @changePage="loadItems"
+            :search="search"
+            @changePage="changePage"
+            @changePerPage="changePerPage"
+            @changeSearch="changeSearch"
         ></tile-grid-pagination>
     </div>
 </template>
@@ -56,7 +60,7 @@
         name: 'app-tile-grid',
         components: {TileGridPagination},
         mounted() {
-            this.loadItems();
+            this.loadItems({});
         },
         data() {
             return {
@@ -64,12 +68,13 @@
                 sortColumn: 'id',
                 sortDirection: 'asc',
 
-                perPage: 3,
+                search: null,
+                perPage: 10,
                 currentPage: 1,
 
                 fromRecord: 0,
                 toRecord: 0,
-                totalRecords: 10,
+                totalRecords: 0,
                 lastPage: 0,
                 rows: [],
 
@@ -128,6 +133,11 @@
                         label: 'Cost',
                         type: 'number',
                     },
+                    {
+                        field: 'updated_at',
+                        label: 'Updated',
+                        type: 'timestamp',
+                    },
                 ],
             };
         },
@@ -166,16 +176,36 @@
                         this.sortColumn = null;
                     }
                 }
-                this.loadItems();
+                this.loadItems({});
             },
-            loadItems(page = null) {
-                page = page || this.currentPage;
+            changePage(page) {
+                this.loadItems({page});
+            },
+            changePerPage(perPage) {
+                this.loadItems({
+                    page: 1,
+                    perPage
+                });
+            },
+            changeSearch(search) {
+                this.loadItems({
+                    page: 1,
+                    search
+                });
+            },
+            loadItems({
+                          page = this.currentPage,
+                          perPage = this.perPage,
+                          search = this.search
+                      }) {
 
                 let options  = {
                     params: {
                         sort_field: this.sortColumn,
-                        sort_dir: this.sortDirection,
+                        sort_direction: this.sortDirection,
+                        per_page: perPage,
                         page: page,
+                        search: search,
                     },
                 };
                 this.loading = true;
@@ -183,16 +213,18 @@
                     .then((response) => {
                         this.loading = false;
                         let result   = response.data;
-                        console.log(result);
 
-                        this.rows         = result.data;
-                        this.currentPage  = result.meta.current_page;
-                        this.perPage      = result.meta.per_page;
-                        this.lastPage     = result.meta.last_page;
-                        this.fromRecord   = result.meta.from;
-                        this.toRecord     = result.meta.to;
-                        this.totalRecords = result.meta.total;
-                        this.links        = result.links;
+                        this.rows          = result.data;
+                        this.currentPage   = result.meta.current_page;
+                        this.perPage       = result.meta.per_page;
+                        this.lastPage      = result.meta.last_page;
+                        this.fromRecord    = result.meta.from;
+                        this.toRecord      = result.meta.to;
+                        this.totalRecords  = result.meta.total;
+                        this.search        = result.meta.search;
+                        this.links         = result.links;
+                        this.sortColumn    = result.meta.sort_field;
+                        this.sortDirection = result.meta.sort_direction;
                     });
             },
         },

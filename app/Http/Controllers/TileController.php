@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TileGridRequest;
 use App\Http\Requests\TileSaveRequest;
 use App\Http\Resources\TileGridResource;
 use App\Http\Resources\TileResource;
@@ -19,28 +20,24 @@ class TileController extends Controller
         return view('tiles.index');
     }
 
-    public function grid(Request $request, TileListService $service)
+    public function grid(TileGridRequest $request, TileListService $service)
     {
-        $query   = $service->getQuery(Auth::user()->id);
-        $perPage = $request->input('per_page', 10);
+        $search        = $request->search();
+        $perPage       = $request->perPage();
+        $sortField     = $request->sortField();
+        $sortDirection = $request->sortDirection();
 
-        $sortField     = $request->input('sort_field', 'id');
-        $sortDirection = $request->input('sort_dir', 'asc');
+        $userId = Auth::user()->id;
+        $query  = $service->getQuery($userId, $sortField, $sortDirection, $search);
 
-        $sortFieldMap = [
-            'targeting'  => 'targeting_id',
-            'assault'    => 'assault_id',
-            'tech_level' => 'tech_level_id',
-            'mobility'   => 'mobility_id',
-            'tile_class' => 'tile_class_id',
-            'tile_type'  => 'tile_type_id',
-        ];
-
-        $sortField = array_get($sortFieldMap, $sortField, $sortField);
-
-        $query->orderBy($sortField, $sortDirection);
-
-        return TileGridResource::collection($query->paginate($perPage));
+        return TileGridResource::collection($query->paginate($perPage))
+            ->additional([
+                'meta' => [
+                    'search'         => $search,
+                    'sort_field'     => $sortField,
+                    'sort_direction' => $sortDirection,
+                ]
+            ]);
     }
 
     public function create()
