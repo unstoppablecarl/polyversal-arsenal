@@ -147,10 +147,10 @@
                 if (this.sortColumn == heading.field) {
 
                     if (this.sortDirection == 'asc') {
-                        return 'fa-sort-down';
+                        return 'fa-sort-up';
                     }
                     if (this.sortDirection == 'desc') {
-                        return 'fa-sort-up';
+                        return 'fa-sort-down';
                     }
                 }
 
