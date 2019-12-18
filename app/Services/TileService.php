@@ -83,13 +83,14 @@ class TileService
             $abilityIds  = array_get($input, 'ability_ids', []);
             $tileWeapons = array_get($input, 'tile_weapons', []);
 
-            $tile['cached_cost'] = $this->costService->total($tile);
 
             $this->syncAbilities($tile, $abilityIds);
             $this->syncTileWeapons($tile, $tileWeapons);
 
-            $tilePrintSettings = array_get($input, 'tile_print_settings', []);
+            $tile['cached_cost'] = $this->costService->total($tile);
+            $tile->save();
 
+            $tilePrintSettings = array_get($input, 'tile_print_settings', []);
             $this->updateTilePrintSettings($tile, $tilePrintSettings);
 
             unset(
