@@ -1,5 +1,5 @@
 import {
-    AMA_NONE_ID,
+    AMA_NONE_ID, TECH_LEVEL_ADVANCED_ID, TECH_LEVEL_PRIMITIVE_ID,
     TECH_LEVEL_TYPICAL_ID,
     TILE_TYPE_INFANTRY_ID,
     TILE_TYPE_VEHICLE_ID,
@@ -233,12 +233,17 @@ export default {
                 let classDisplayName = '';
                 let techLevel        = '';
 
-                let isTypical  = state.tech_level_id == TECH_LEVEL_TYPICAL_ID;
+                let isPrimitive = state.tech_level_id == TECH_LEVEL_PRIMITIVE_ID;
+                let isAdvanced  = state.tech_level_id == TECH_LEVEL_ADVANCED_ID;
+
                 let isVehicle  = state.tile_type_id == TILE_TYPE_VEHICLE_ID;
                 let isInfantry = state.tile_type_id == TILE_TYPE_INFANTRY_ID;
 
-                if (!isTypical) {
-                    techLevel = techLevelById[state.tech_level_id].display_name;
+                if (isPrimitive) {
+                    techLevel = 'Prim';
+                }
+                if (isAdvanced) {
+                    techLevel = 'Adv';
                 }
 
                 if (isVehicle) {
@@ -274,7 +279,7 @@ export default {
         //    }
         //    return state.front_image_url;
         //},
-        maxSize(state){
+        maxSize(state) {
             return getMaxSize(state.tile_type_id, state.tile_class_id);
         }
     },
