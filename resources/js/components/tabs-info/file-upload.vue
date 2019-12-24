@@ -11,10 +11,11 @@
                     <br>
 
                     <p :class="{'text-danger': fileTooBig}">
-                        <strong>File Size:</strong> {{newImageSizeDisplay}} <strong v-if="fileTooBig">Image too big</strong>
+                        <strong>File Size:</strong> {{newImageSizeDisplay}}
+                        <strong v-if="fileTooBig">(Too Big)</strong>
                     </p>
                     <p>
-                        <strong>Max Size:</strong> {{maxImageSizeMb}} mb
+                        <strong>Max Size:</strong> {{maxImageSizeMb}} MB
                     </p>
                     <p>
                         <strong>Note:</strong> Uploading images does not automatically save the finished tile.
@@ -118,6 +119,7 @@
                 deleteConfirmed: false,
                 uploading: false,
                 deleting: false,
+                maxImageSizeMb: APP_DATA.max_image_upload_size_mb
             };
         },
         computed: {
@@ -130,6 +132,9 @@
             currentImageSrc() {
                 return this.imageUrl || '/img/background-placeholder.png';
             },
+            fileTooBig() {
+                return this.newImageSizeMb > this.maxImageSizeMb;
+            }
         },
         methods: {
             clearUpload() {
@@ -143,7 +148,7 @@
                 }
                 let file                 = files[0];
                 this.newImageSizeDisplay = fileSize(file.size, {base: 10});
-                this.newImageSizeMb      = file.size * 1000000;
+                this.newImageSizeMb      = file.size / 1000000;
                 this.createImage(file);
             },
             createImage(file) {
