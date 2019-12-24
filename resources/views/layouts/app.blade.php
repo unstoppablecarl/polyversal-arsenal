@@ -8,9 +8,9 @@
 
     <title>Polyversal Arsenal</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/tile-front-svg.css') }}" rel="stylesheet" id="tile-front-svg-css">
-    <link href="{{ asset('css/tile-back-svg.css') }}" rel="stylesheet" id="tile-back-svg-css">
+    <link href="{{ asset('/build/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/build/css/tile-front-svg.css') }}" rel="stylesheet" id="tile-front-svg-css">
+    <link href="{{ asset('/build/css/tile-back-svg.css') }}" rel="stylesheet" id="tile-back-svg-css">
 
 </head>
 <body>
@@ -39,9 +39,9 @@
 
 @yield('pre-js')
 
-<script src="{{mix('/js/manifest.js')}}"></script>
-<script src="{{mix('/js/vendor.js')}}"></script>
-<script src="{{mix('/js/app.js')}}"></script>
+<script src="{{mix('/build/js/manifest.js')}}"></script>
+<script src="{{mix('/build/js/vendor.js')}}"></script>
+<script src="{{mix('/build/js/app.js')}}"></script>
 
 @yield('js')
 @stack('js')

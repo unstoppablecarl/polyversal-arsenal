@@ -17,13 +17,13 @@ const mix = require('laravel-mix');
 mix.autoload({});
 
 mix
-    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/app.js', 'public/build/js')
     .sourceMaps()
     .extract(['vue', 'vuex', 'axios'])
 
-    .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/tile-front-svg.scss', 'public/css')
-    .sass('resources/sass/tile-back-svg.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/build/css')
+    .sass('resources/sass/tile-front-svg.scss', 'public/build/css')
+    .sass('resources/sass/tile-back-svg.scss', 'public/build/css')
 
     .options({
         processCssUrls: false,
