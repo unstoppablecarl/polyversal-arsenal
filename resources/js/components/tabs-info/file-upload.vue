@@ -10,6 +10,12 @@
                     <input type="file" v-on:change="onFileChange" class="form-control-file" ref="file_input">
                     <br>
 
+                    <p :class="{'text-danger': fileTooBig}">
+                        <strong>File Size:</strong> {{newImageSizeDisplay}} <strong v-if="fileTooBig">Image too big</strong>
+                    </p>
+                    <p>
+                        <strong>Max Size:</strong> {{maxImageSizeMb}} mb
+                    </p>
                     <p>
                         <strong>Note:</strong> Uploading images does not automatically save the finished tile.
                     </p>
@@ -18,7 +24,9 @@
                         <p class="text-danger">
                             Changes to this background image have not been saved to the finished tile.
 
-                            Don't forget to <btn-save :inline="true"/> when you are done making changes.
+                            Don't forget to
+                            <btn-save :inline="true"/>
+                            when you are done making changes.
                         </p>
                     </template>
                 </div>
@@ -84,6 +92,7 @@
 <script>
     import {mapGetters} from 'vuex';
     import BtnSave from '../btn-save';
+    import fileSize from 'filesize';
 
     export default {
         name: 'file-upload',
@@ -103,6 +112,8 @@
         data() {
             return {
                 newImageData: null,
+                newImageSizeMb: null,
+                newImageSizeDisplay: null,
                 deleteClicked: false,
                 deleteConfirmed: false,
                 uploading: false,
@@ -127,9 +138,13 @@
             },
             onFileChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
-                if (!files.length)
+                if (!files.length) {
                     return;
-                this.createImage(files[0]);
+                }
+                let file                 = files[0];
+                this.newImageSizeDisplay = fileSize(file.size, {base: 10});
+                this.newImageSizeMb      = file.size * 1000000;
+                this.createImage(file);
             },
             createImage(file) {
                 let reader    = new FileReader();

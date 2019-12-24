@@ -39,7 +39,7 @@ class TileSourceImageController extends Controller
     {
         $this->validate($request, [
             'source_image' => [
-                new Base64ImageRule,
+                app(Base64ImageRule::class),
             ],
         ]);
 

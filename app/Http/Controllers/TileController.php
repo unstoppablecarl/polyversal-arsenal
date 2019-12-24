@@ -42,7 +42,11 @@ class TileController extends Controller
 
     public function create()
     {
-        return view('tiles.create');
+        return view('tiles.create')->with([
+            'JS_DATA' => [
+                'max_image_upload_size_mb' => config('image-uploads.max_file_size_mb')
+            ]
+        ]);
     }
 
     public function store(TileSaveRequest $request, TileService $service, CostService $costService)
@@ -61,7 +65,11 @@ class TileController extends Controller
 
     public function edit(Tile $tile)
     {
-        return view('tiles.edit');
+        return view('tiles.edit')->with([
+            'JS_DATA' => [
+                'max_image_upload_size_mb' => config('image-uploads.max_file_size_mb')
+            ]
+        ]);
     }
 
     public function update(TileSaveRequest $request, TileService $service, CostService $costService, Tile $tile)
