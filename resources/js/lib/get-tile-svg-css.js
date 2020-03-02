@@ -4,7 +4,7 @@ export default function getTileSvgCss(id) {
     let out   = '';
 
     rules.forEach(rule => {
-        out += ' ' + rule.selectorText + '{' + rule.style.cssText + '}';
+        out += ' ' + rule.cssText
     });
 
     return out;
