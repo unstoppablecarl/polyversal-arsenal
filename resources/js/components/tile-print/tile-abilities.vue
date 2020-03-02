@@ -2,8 +2,6 @@
     <g>
         <g :transform="'translate(0,-'+ offsetY + ')'" v-for="(ability, index) in abilityList" :key="ability.id">
             <g :class="['icon-ability', {'icon-inverted': frontInvertAbilities}]" :transform="'translate(' + abilityX(index) + ',' + abilityY(index) + ')'">
-                <!--                <rect x="0" y="0" :width="size" :height="size" fill="#ff0000"/>-->
-
                 <template v-if="ability.name === 'transport'">
                     <path d="M4.3,1.1V0.8l0,0c0-0.4,0.3-0.7,0.7-0.7s0.7,0.3,0.7,0.7l0,0v0.3L5.3,1.5H4.7L4.3,1.1z M8.5,1.5h0.6l0.4-0.4V0.8l0,0
 		c0-0.4-0.3-0.7-0.7-0.7S8,0.4,8,0.8l0,0v0.3L8.5,1.5z M1,1.5h0.6L2,1.1V0.8l0,0c0-0.4-0.3-0.7-0.7-0.7S0.5,0.4,0.5,0.8l0,0v0.3
