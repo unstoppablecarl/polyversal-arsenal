@@ -1,6 +1,6 @@
 <template>
-    <div class="row">
-        <div class="col-sm-4 col-md-2">
+    <div class="row no-gutters">
+        <div class="flex-sm-fill">
             <ul class="pagination">
                 <li class="page-item disabled">
                     <span class="page-link" v-show="!loading">
@@ -15,7 +15,7 @@
             </ul>
         </div>
 
-        <div class="col-sm-4 col-md">
+        <div class="px-2 flex-sm-fill">
             <h4 class="text-center" v-if="loading">
                 Loading Tiles
                 <i class="fas fa-spin fa-cog"></i>
@@ -58,12 +58,12 @@
             </ul>
         </div>
 
-        <div class="col-sm-4 col-md-3">
-            <div class="form-inline mb-3">
+        <div class="flex-sm-fill">
+            <div class="form-inline float-right mb-3">
                 <label class="mr-2" for="tiles-per-page">Per Page</label>
 
                 <select id="tiles-per-page"
-                        class="custom-select mr-2"
+                        class="custom-select mr-sm-2"
                         v-model="selectedPerPage"
                         @change="changePerPage"
                 >
@@ -72,7 +72,7 @@
                     <option value="100">100</option>
                 </select>
 
-                <div class="input-group mr-2">
+                <div class="input-group mr-sm-2">
                     <input type="text"
                            class="form-control"
                            placeholder="search tile name"
@@ -178,3 +178,15 @@
         return {startPage, endPage}
     }
 </script>
+<style lang="scss">
+    .no-gutters {
+        margin-right: 0;
+        margin-left: 0;
+
+        > .col,
+        > [class*="col-"] {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+</style>
