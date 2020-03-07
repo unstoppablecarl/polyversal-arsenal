@@ -42,7 +42,8 @@
                   :x="15 + (cellStressWidth) + (index * 10) + 5"
                   y="4.5"
             >
-                {{val}}<tspan v-if="index == headerColumns.length - 1" font-size="6">+</tspan>
+                {{val}}
+                <tspan v-if="index == headerColumns.length - 1" font-size="6">+</tspan>
             </text>
         </g>
 
@@ -65,7 +66,7 @@
 <script>
     import _ from 'lodash';
     import {mapAbilityGetters, mapTileGetters, mapTileProperties} from '../../data/mappers';
-
+    import {TILE_TYPE_VEHICLE_ID} from "../../data/constants";
 
     const columnKeyToSvgId = {
         stress: 'damage-stress',
@@ -95,7 +96,6 @@
         },
         watch: {},
         methods: {
-
             resultCenterX(item) {
                 let width = (item.range * 10);
                 return item.x + (width * 0.5);
@@ -122,12 +122,11 @@
                     return 20;
                 }
                 return 10;
-
             },
             damageTrack() {
                 let track = Object.assign({}, this.tileDamageTrack);
 
-                if (this.hasJumpJets) {
+                if (this.hasJumpJets && this.tile_type_id === TILE_TYPE_VEHICLE_ID) {
                     if (track.stress > 0) {
                         track.stress -= 1;
                         track.jump_jets_offline = track.stress + 1;
@@ -173,7 +172,7 @@
                 });
                 return total;
             },
-            resultColumns() {
+            resultColumns: function () {
 
                 let track = _.map(this.damageTrack, (value, key, index) => {
                     return {
@@ -187,7 +186,6 @@
 
 
                 let x = LABEL_CELL_WIDTH + this.cellStressWidth;
-
                 track.forEach((item, index) => {
 
                     if (index === 0) {
@@ -195,8 +193,7 @@
                     }
 
                     let prev   = track[index - 1];
-                    let range  = item.value - prev.value;
-                    item.range = range;
+                    item.range = item.value - prev.value;
 
                     if (item.key == 'destroyed') {
                         item.label = 'X';
