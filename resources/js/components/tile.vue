@@ -126,9 +126,11 @@
             },
         },
         watch: {
-            tile_id() {
-                this.setRoute();
-            },
+            // not sure why this is here so commenting for now
+            // causes duplicate route navigation
+            // tile_id() {
+            //     this.setRoute();
+            // },
             '$route'(to) {
                 this.fetchIfIdChanged();
             },
@@ -151,12 +153,14 @@
                         });
                 }
             },
-            setRoute() {
-                this.$router.push({
-                    name: this.$route.name,
-                    params: {id: this.tile_id},
-                });
-            },
+            // not sure why this is here so commenting for now
+            // causes duplicate route navigation
+            // setRoute() {
+            //     this.$router.push({
+            //         name: this.$route.name,
+            //         params: {id: this.tile_id},
+            //     });
+            // },
         },
     };
 
