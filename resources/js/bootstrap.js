@@ -1,15 +1,15 @@
-
 import Vuex from 'vuex';
 import Vue from 'vue';
-import { Dropdown } from 'bootstrap-vue/es/components';
+import {DropdownPlugin} from 'bootstrap-vue';
 import Notifications from 'vue-notification'
 
 window.Vue = Vue;
 Vue.use(Vuex);
-Vue.use(Dropdown);
+
+Vue.use(DropdownPlugin);
 Vue.use(Notifications);
 
-window._ = require('lodash');
+window._      = require('lodash');
 window.Popper = require('popper.js').default;
 
 /**
@@ -22,7 +22,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -33,7 +34,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Content-Type'] = 'application/json';
+window.axios.defaults.headers.common['Content-Type']     = 'application/json';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

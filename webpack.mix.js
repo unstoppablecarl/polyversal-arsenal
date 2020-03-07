@@ -18,20 +18,19 @@ mix.autoload({});
 
 mix
     .js('resources/js/app.js', 'public/build/js')
-    .sourceMaps()
+    // .sourceMaps()
     .extract(['vue', 'vuex', 'axios'])
 
     .sass('resources/sass/app.scss', 'public/build/css')
     .sass('resources/sass/tile-front-svg.scss', 'public/build/css')
     .sass('resources/sass/tile-back-svg.scss', 'public/build/css')
+    // .copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/fonts')
 
     .options({
         processCssUrls: false,
     });
 
-if (mix.inProduction()) {
     mix.version();
-}
 
 mix.webpackConfig({
     module: {
