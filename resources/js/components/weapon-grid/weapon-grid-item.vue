@@ -10,7 +10,7 @@
             <div class="label-quantity">{{currentQuantity}}</div>
         </div>
         <div class="col-arc">
-            <img :src="arcSvg" :class="arcDirectionClass" class="arc"/>
+            <div class="arc" :class="[arcDirectionClass, arcSizeClass]"></div>
         </div>
         <div class="col-arc-direction">
             <select class="form-control select-arc-direction" v-model="arcDirectionId"
@@ -33,7 +33,7 @@
         <div class="col-damage">{{weapon.damage | format}}</div>
         <div class="col-tile-weapon-type">
             <select class="form-control select-tile-weapon-type" v-model.number="tileWeaponTypeId">
-                <option v-for="(label, key) in tileWeaponTypes" v-bind:value="key">
+                <option v-for="(label, key) in tileWeaponTypes" :key="key" :value="key">
                     {{label}}
                 </option>
             </select>
@@ -89,10 +89,6 @@
         },
         data() {
             return {
-                currentQuantity: this.quantity,
-                arcDirectionId: this.arc_direction_id,
-                arcSizeId: this.arc_size_id,
-                tileWeaponTypeId: this.tile_weapon_type_id,
                 arcDirections: {
                     1: '&uparrow;',
                     2: '&leftarrow;',
@@ -110,53 +106,77 @@
         computed: {
             ...mapTileWeaponGetters({
                 tile_weapons: 'tile_weapons',
+                getWeapon: 'getWeapon'
             }),
+            currentQuantity: {
+                get() {
+                    return this.quantity
+                },
+                set(value) {
+                    this.update({quantity: value});
+                }
+            },
+            tileWeaponTypeId: {
+                get() {
+                    return this.tile_weapon_type_id;
+                },
+                set(value) {
+                    this.update({tile_weapon_type_id: value});
+                }
+            },
+            arcDirectionId: {
+                get() {
+                    return this.arc_direction_id;
+                },
+                set(value) {
+                    this.update({arc_direction_id: value});
+                }
+            },
+            arcSizeId: {
+                get() {
+                    return this.arc_size_id;
+                },
+                set(value) {
+                    value = parseInt(value, 10);
+
+                    const ARC_DIRECTION_UP_ID = 1;
+                    const ARC_SIZE_360_ID     = 4;
+                    if (value == ARC_SIZE_360_ID) {
+                        this.arcDirectionId = ARC_DIRECTION_UP_ID;
+                    }
+                    this.update({arc_size_id: value});
+                }
+            },
             arcDirectionClass() {
                 const direction = arcDirectionById[this.arcDirectionId];
                 return 'arc-' + direction.name.toLowerCase();
             },
-            arcSvg() {
-                const size = arcSizeById[this.arcSizeId];
-                return '/img/arc-' + size.name + '.svg';
+            arcSizeClass() {
+                return 'arc-' + this.arcSize.name
             },
             arcSize() {
                 return arcSizeById[this.arcSizeId];
             },
-            arcDirection() {
-                return arcDirectionById[this.arcDirectionId];
-            },
-        },
-        watch: {
-            tileWeaponTypeId(value) {
-                this.update({tile_weapon_type_id: value});
-            },
-            arcSizeId(value) {
-                value = parseInt(value, 10);
-
-                const ARC_DIRECTION_UP_ID = 1;
-                const ARC_SIZE_360_ID     = 4;
-                if (value == ARC_SIZE_360_ID) {
-                    this.arcDirectionId = ARC_DIRECTION_UP_ID;
-                }
-                this.update({arc_size_id: value});
-            },
-            arcDirectionId(value) {
-                this.update({arc_direction_id: value});
-            },
-            currentQuantity(value) {
-                this.update({quantity: value});
-            },
         },
         methods: {
             toModel() {
+                let {
+                        id,
+                        weapon_id,
+                        tile_weapon_type_id,
+                        quantity,
+                        arc_direction_id,
+                        arc_size_id,
+                        display_order,
+                    } = this;
                 return {
-                    id: this.id,
-                    weapon_id: this.weapon_id,
-                    tile_weapon_type_id: this.tileWeaponTypeId,
-                    quantity: this.currentQuantity,
-                    arc_direction_id: this.arcDirectionId,
-                    arc_size_id: this.arcSizeId,
-                    display_order: this.display_order,
+                    id,
+                    weapon_id,
+                    tile_weapon_type_id,
+                    quantity,
+                    arc_direction_id,
+                    arc_size_id,
+                    display_order,
                 };
             },
             update(data) {

@@ -44,7 +44,6 @@
                 let weapon = {
                     weapon_id: this.selectedWeaponId,
                     tile_weapon_type_id: tileWeaponTypeId,
-                    arc: 'UP_90',
                 };
 
                 this.$store.dispatch('tile_weapons/create', {weapon});

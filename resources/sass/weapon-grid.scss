@@ -43,6 +43,21 @@ $gray-bg: rgba(88, 89, 91, 0.9);
     .grid-header,
     .weapon-grid-item {
         background: $gray-bg;
+        &.sortable-ghost {
+            opacity: 1;
+            background: lighten($gray-bg, 24%);
+        }
+
+        &.sortable-drag {
+            // override vue-draggable inline style
+            opacity: 0.9 !important;
+            background: transparent;
+            .col-move,
+            .col-name {
+                background: opacify($gray-bg, 1);
+            }
+        }
+
         color: #fff;
 
         font-size: $font-size;
@@ -90,6 +105,23 @@ $gray-bg: rgba(88, 89, 91, 0.9);
     .col-damage {
         width: $cell-width;
         text-align: center;
+    }
+
+    .sortable-drag {
+        .col-quantity,
+        .col-arc,
+        .col-arc-direction,
+        .col-arc-size,
+        .col-range,
+        .col-ap,
+        .col-at,
+        .col-aa,
+        .col-damage,
+        .col-tile-weapon-type,
+        .col-cost,
+        .col-controls {
+            display: none !important;
+        }
     }
 
     .label-quantity {
@@ -142,12 +174,6 @@ $gray-bg: rgba(88, 89, 91, 0.9);
         }
     }
 
-    .arc {
-        height: $row-height * 0.8;
-        vertical-align: top;
-        margin-top: 1pt;
-    }
-
     .icon-indirect,
     .icon-ama {
         height: $row-height;
@@ -158,6 +184,25 @@ $gray-bg: rgba(88, 89, 91, 0.9);
     .is-indirect .icon-indirect,
     .icon-ama {
         display: inline;
+    }
+
+    .arc {
+        height: $row-height * 0.8;
+        vertical-align: top;
+        margin-top: 1pt;
+    }
+
+    .arc-90 {
+        background: url('/img/arc-90.svg') center center no-repeat;
+    }
+    .arc-180 {
+        background: url('/img/arc-180.svg') center center no-repeat;
+    }
+    .arc-270 {
+        background: url('/img/arc-270.svg') center center no-repeat;
+    }
+    .arc-360 {
+        background: url('/img/arc-360.svg') center center no-repeat;
     }
 
     .arc-up {
