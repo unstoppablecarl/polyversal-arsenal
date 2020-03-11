@@ -45,5 +45,27 @@
 
 @yield('js')
 @stack('js')
+<div class="footer text-center">
+    <h4>Polyversal Arsenal</h4>
+    <h5>
+        Created by
+        <a href="https://github.com/unstoppablecarl">UnstoppableCarl</a>
+    </h5>
+    <p>
+
+        <a href="https://polyversal-game.com/">Polyversal Site</a>
+        -
+        <a href="https://www.collinsepicwargames.com/privacy.html">Privacy Policy</a>
+        -
+        <a href="https://collinsepicwargames.com/sitepolicy.html">Site Policy</a>
+        -
+        <a href="https://github.com/unstoppablecarl/polyversal-arsenal">Github Project</a>
+
+    </p>
+
+
+    <p class="text-center">Polyversal Copyright &copy; 2019 Collins Epic Wargames, LLC. All Rights Reserved.</p>
+
+</div>
 </body>
 </html>
