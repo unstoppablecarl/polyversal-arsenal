@@ -52,12 +52,7 @@ class RegisterController extends Controller
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ])->after(function ($validator) {
-            $key = request()->input('alpha_invite_code');
-            if ($key != env('ALPHA_INVITE_CODE')) {
-                $validator->errors()->add('alpha_invite_code', 'invalid invite code');
-            }
-        });
+        ]);
     }
 
     /**
