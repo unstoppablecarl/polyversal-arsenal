@@ -62,7 +62,7 @@ class CostService
         $weapons = $tile->tileWeapons;
         return $weapons->sum(function (TileWeapon $tileWeapon) {
             $weapon = $tileWeapon->weapon;
-            $class = (int)$tileWeapon->weapon->class;
+            $class  = (int)$tileWeapon->weapon->class;
 
             if ($weapon->has_warheads) {
                 return $class * (int)$tileWeapon->quantity;
@@ -94,6 +94,7 @@ class CostService
                 'key' => 'abilities',
                 'vue' => $abilities,
                 'app' => $this->abilitiesCost($tile),
+                'app_breakdown' => $this->abilitiesCostBreakdown($tile),
             ],
             [
                 'key' => 'stats',
@@ -115,16 +116,35 @@ class CostService
 
     public function abilitiesCost(Tile $tile)
     {
-        $cost          = 0;
-        $abilitiesCost = $tile->abilities->sum(function (Ability $ability) use ($tile) {
-            return $this->abilityCost($tile, $ability);
+        return $this->abilitiesCostBreakdown($tile)->sum(function ($item) {
+            return $item['cost'];
+        });
+    }
+
+    public function abilitiesCostBreakdown(Tile $tile)
+    {
+        $results = $tile->abilities->map(function (Ability $ability) use ($tile) {
+            return [
+                'name' => $ability->display_name,
+                'cost' => $this->abilityCost($tile, $ability)
+            ];
         });
 
-        $cost += $abilitiesCost;
-        $cost += (int)$tile->stealth;
-        $cost += (int)$tile->antiMissileSystem->cost;
+        if ($tile->stealth) {
+            $results->push([
+                'name' => 'Stealth',
+                'cost' => (int)$tile->stealth,
+            ]);
+        }
 
-        return $cost;
+        if ($tile->antiMissileSystem->cost) {
+            $results->push([
+                'name' => 'Anti Missile System',
+                'cost' => (int)$tile->antiMissileSystem->cost
+            ]);
+        }
+
+        return $results;
     }
 
     public function abilityCost(Tile $tile, Ability $ability): int
