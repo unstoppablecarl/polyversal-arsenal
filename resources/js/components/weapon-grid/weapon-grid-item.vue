@@ -1,51 +1,49 @@
 <template>
-    <div class="weapon-grid-item list-item-sortable">
-        <div class="col-move">:::</div>
-        <div :class="['col-name', {'is-indirect': weapon.is_indirect}]">
+    <tr class="weapon-grid-item list-item-sortable">
+        <td class="col-move">:::</td>
+        <td :class="['col-name', {'is-indirect': weapon.is_indirect}]">
             <img src="/img/icon-indirect.svg" class="icon-indirect"/>
             {{weapon.display_name}}
-        </div>
-        <div class="col-quantity">
+        </td>
+        <td class="col-quantity">
             <input v-model.number="currentQuantity" class="form-control input-quantity" @blur="checkMinQuantity"/>
-            <div class="label-quantity">{{currentQuantity}}</div>
-        </div>
-        <div class="col-arc">
+        </td>
+        <td class="col-arc">
             <div class="arc" :class="[arcDirectionClass, arcSizeClass]"></div>
-        </div>
-        <div class="col-arc-direction">
+        </td>
+        <td class="col-arc-direction">
             <select class="form-control select-arc-direction" v-model="arcDirectionId"
                     :disabled="(arcSize.name == '360')">
                 <option v-for="(direction, key) in arcDirections" v-bind:value="key" v-html="direction">
                 </option>
             </select>
-        </div>
-        <div class="col-arc-size">
+        </td>
+        <td class="col-arc-size">
             <select class="form-control select-arc-size" v-model.number="arcSizeId">
                 <option v-for="size in arcSizeOptions" v-bind:value="size.id">
                     {{size.display_name}}
                 </option>
             </select>
-        </div>
-        <div class="col-range">{{weapon.range}}</div>
-        <div :class="['col-ap', weapon.ap + '-bg']">{{weapon.ap | format}}</div>
-        <div :class="['col-at', weapon.at + '-bg']">{{weapon.at | format}}</div>
-        <div :class="['col-aa', weapon.aa + '-bg']">{{weapon.aa | format}}</div>
-        <div class="col-damage">{{weapon.damage | format}}</div>
-        <div class="col-tile-weapon-type">
+        </td>
+        <td class="col-range">{{weapon.range}}</td>
+        <td :class="['col-ap', weapon.ap + '-bg']">{{weapon.ap | format}}</td>
+        <td :class="['col-at', weapon.at + '-bg']">{{weapon.at | format}}</td>
+        <td :class="['col-aa', weapon.aa + '-bg']">{{weapon.aa | format}}</td>
+        <td class="col-damage">{{weapon.damage | format}}</td>
+        <td class="col-tile-weapon-type">
             <select class="form-control select-tile-weapon-type" v-model.number="tileWeaponTypeId">
                 <option v-for="(label, key) in tileWeaponTypes" :key="key" :value="key">
                     {{label}}
                 </option>
             </select>
-        </div>
-        <div class="col-cost">
+        </td>
+        <td class="col-cost">
+            {{cost}}
+        </td>
+        <td class="col-total">
             {{total_cost}}
-            <template v-if="currentQuantity > 1">
-                =
-                ({{cost}} &times; Q{{currentQuantity}})
-            </template>
-        </div>
-        <div class="col-controls">
+        </td>
+        <td class="col-controls">
             <div class="btn-group no-print">
                 <button class="btn btn-sm btn-light" data-tooltip title="Copy" @click="onCopy">
                     <span class="fas fa-fw fa-copy"></span>
@@ -54,8 +52,8 @@
                     <span class="fas fa-fw fa-trash"></span>
                 </button>
             </div>
-        </div>
-    </div>
+        </td>
+    </tr>
 </template>
 
 <script>
@@ -65,8 +63,6 @@
         TILE_WEAPON_TYPE_ONLY_AA_ID,
         TILE_WEAPON_TYPE_WITH_AA_ID,
     } from '../../data/constants';
-
-    import {getWeaponCost} from '../../data/weapons';
 
     import {arcDirectionById, arcSizeById, arcSizeOptions} from '../../data/options';
     import {mapTileWeaponGetters} from '../../data/mappers';

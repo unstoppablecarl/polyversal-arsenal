@@ -1,29 +1,33 @@
 <template>
     <div :class="[{'scale-2': scale}]">
-        <div :class="['weapon-grid', {'no-select': dragging}]">
+        <div :class="[{'no-select': dragging}]">
 
-            <div class="container weapon-grid-list">
-                <div class="row grid-header">
-                    <div class="col-move"></div>
-                    <div class="col-name">Weapon</div>
-                    <div class="col-quantity">Qty</div>
-                    <div class="col-arc">Arc</div>
-                    <div class="col-arc-direction">Dir</div>
-                    <div class="col-arc-size">Size</div>
-                    <div class="col-range">RNG</div>
-                    <div class="col-ap">AP</div>
-                    <div class="col-at">AT</div>
-                    <div class="col-aa">AA</div>
-                    <div class="col-damage">DMG</div>
-                    <div class="col-tile-weapon-type">Type</div>
-                    <div class="col-cost">Cost</div>
-                    <div class="col-controls"></div>
-                </div>
+            <table class="table weapon-grid">
+                <thead>
+                <tr class="weapon-grid-header">
+                    <th class="col-move"></th>
+                    <th class="col-name">Weapon</th>
+                    <th class="col-quantity">Qty</th>
+                    <th class="col-arc">Arc</th>
+                    <th class="col-arc-direction">Dir</th>
+                    <th class="col-arc-size">Size</th>
+                    <th class="col-range">RNG</th>
+                    <th class="col-ap">AP</th>
+                    <th class="col-at">AT</th>
+                    <th class="col-aa">AA</th>
+                    <th class="col-damage">DMG</th>
+                    <th class="col-tile-weapon-type">Type</th>
+                    <th class="col-cost">Cost</th>
+                    <th class="col-total">Total</th>
+                    <th class="col-controls"></th>
+                </tr>
+                </thead>
 
                 <weapon-grid-ama/>
 
                 <draggable
-                    class="list-group"
+                    tag="tbody"
+                    class=""
                     :list="tile_weapons"
                     ghostClass="sortable-ghost"
                     chosenClass="sortable-chosen"
@@ -36,26 +40,23 @@
                     @start="dragging = true"
                     @end="dragging = false"
                 >
-                    <transition-group type="transition">
-
-                        <weapon-grid-item
-                            v-for="item in tile_weapons"
-                            :key="item.display_order"
-                            :id="item.id"
-                            :weapon_id="item.weapon_id"
-                            :quantity="item.quantity"
-                            :cost="item.cost"
-                            :weapon="item.weapon"
-                            :total_cost="item.total_cost"
-                            :tile_weapon_type_id="item.tile_weapon_type_id"
-                            :display_order="item.display_order"
-                            :arc_direction_id="item.arc_direction_id"
-                            :arc_size_id="item.arc_size_id"
-                            :tile_type_id="tile_type_id"
-                        />
-                    </transition-group>
+                    <weapon-grid-item
+                        v-for="item in tile_weapons"
+                        :key="item.display_order"
+                        :id="item.id"
+                        :weapon_id="item.weapon_id"
+                        :quantity="item.quantity"
+                        :cost="item.cost"
+                        :weapon="item.weapon"
+                        :total_cost="item.total_cost"
+                        :tile_weapon_type_id="item.tile_weapon_type_id"
+                        :display_order="item.display_order"
+                        :arc_direction_id="item.arc_direction_id"
+                        :arc_size_id="item.arc_size_id"
+                        :tile_type_id="tile_type_id"
+                    />
                 </draggable>
-            </div>
+            </table>
         </div>
     </div>
 </template>

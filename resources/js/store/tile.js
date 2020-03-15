@@ -9,7 +9,7 @@ import {firstMobilityIdForTileType, mobilityById, mobilityOptionsByTileTypeId} f
 import {armorOptionsByTileTypeId, maxArmorForTileType} from '../data/options-armor';
 import {
     amaById,
-    techLevelById,
+    targetingById,
     techLevelOptions,
     tileTypeById,
 } from '../data/options';
@@ -281,7 +281,16 @@ export default {
         //},
         maxSize(state) {
             return getMaxSize(state.tile_type_id, state.tile_class_id);
-        }
+        },
+        isCurrentTargetingDie(state) {
+            return (die) => {
+                let targeting = targetingById[state.targeting_id];
+                if (!targeting) {
+                    return false;
+                }
+                return targeting.name.toLowerCase() === die.toLowerCase();
+            }
+        },
     },
 };
 

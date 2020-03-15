@@ -1,0 +1,170 @@
+$gray-bg: rgba(88, 89, 91, 0.9);
+
+@import 'die-colors';
+
+.weapons-table {
+    background: $gray-bg;
+
+    border: 1px solid #000;
+
+    @each $key, $color in $die-color-map {
+        .#{$key}-bg, {
+            background-color: $color;
+        }
+    }
+
+    @each $key, $color in $die-color-map {
+
+        .col-cost-heading {
+            &.#{$key}-bg {
+                background-color: desaturate($color, 20%);
+            }
+
+            &.#{$key}-bg-current {
+                background-color: $color;
+            }
+        }
+
+        .col-cost {
+            &.#{$key}-bg {
+                background-color: desaturate($color, 70%);
+            }
+
+            &.#{$key}-bg-current {
+                background-color: $color;
+            }
+        }
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    thead th,
+    tbody td {
+        vertical-align: middle;
+        padding: 3px;
+        color: #fff;
+        $font-size: 6.75pt * 2;
+        border: 1px solid #000;
+        font-size: $font-size;
+
+        text-transform: uppercase;
+
+        $shadow-color: rgba(0, 0, 0, 0.5);
+
+        text-shadow: 0px 0px 1px $shadow-color,
+        -1px -1px 1.5px $shadow-color,
+        1px -1px 1.5px $shadow-color,
+        -1px 1px 1.5px $shadow-color,
+        1px 1px 1.5px $shadow-color;
+        text-align: center;
+    }
+
+    thead {
+        border-bottom: 2px solid #000;
+    }
+
+    > thead > tr > th,
+    > tbody > tr > td {
+        &.cost-left {
+            border-left: 5px solid #000;
+        }
+
+        &.cost-right {
+            border-right: 5px solid #000;
+        }
+    }
+
+    tr > th,
+    tr > td {
+        &.cost-current {
+            border-left: 3px solid #000;
+            border-right: 3px solid #000;
+        }
+
+        &.col-cost-heading {
+            border-top: 5px solid #000;
+        }
+    }
+
+
+    .col-name,
+    .col-controls {
+        text-align: left;
+        padding: 3px 8px;
+    }
+
+    td {
+        &.col-name {
+            font-weight: normal;
+        }
+    }
+
+    .col-range,
+    .col-cost {
+        text-align: right;
+        padding: 3px 8px;
+    }
+
+    td {
+        &.col-cost {
+            opacity: 0.5;
+        }
+
+        &.cost-current {
+            opacity: 1;
+        }
+    }
+
+    thead th {
+        &.col-range,
+        &.col-cost {
+            text-align: center;
+        }
+    }
+
+
+    tbody td {
+        input.form-control {
+
+            padding-left: 2px;
+            padding-right: 2px;
+            border: 0;
+            text-align: center;
+            margin-top: 1pt;
+
+            //height: $row-height - 2pt;
+            //line-height: $row-height - 2pt;
+        }
+
+        select.form-control {
+            //height: $row-height - 2pt;
+            border: 0;
+            margin-top: 1pt;
+
+            &[disabled] {
+                background-color: rgba(255, 255, 255, 0.66);
+            }
+        }
+    }
+
+    .icon-indirect,
+    .icon-ama {
+        //height: $row-height;
+        float: right;
+        display: none;
+    }
+
+    .is-indirect .icon-indirect,
+    .icon-ama {
+        display: inline;
+    }
+}
+
+
+.icon-indirect {
+    height: 24pt;
+    float: right;
+    display: inline;
+}

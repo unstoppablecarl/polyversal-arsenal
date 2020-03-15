@@ -1,26 +1,10 @@
-$font-size: 6.75pt * $scale;
-$row-height: 9pt * $scale;
-$row-height: 12pt * $scale;
-$cell-width: 14pt * $scale;
-
-$grid-width: 152pt * $scale;
-
-$col-name-width: 54pt * $scale;
-$col-move-width: 10pt * $scale;
-$col-controls-width: 50pt * $scale;
-$col-arc-settings-width: 20pt * $scale;
-$col-tile-weapon-type-width: 30pt * $scale;
-$col-cost-width: 40pt * $scale;
-
-$columns-edit-width: $col-controls-width + $col-move-width + ($col-arc-settings-width * 2) + $col-tile-weapon-type-width + $col-cost-width;
-
-
 $gray-bg: rgba(88, 89, 91, 0.9);
 
 @import 'die-colors';
 
 .weapon-grid {
     margin: 0 0 20px;
+    font-size: 13.5pt;
 
     @each $key, $color in $die-color-map {
         .#{$key}-bg {
@@ -28,21 +12,24 @@ $gray-bg: rgba(88, 89, 91, 0.9);
         }
     }
 
-    .controls {
-        margin: 20px 0;
-    }
-    .weapon-grid-list {
-        width: $grid-width + $columns-edit-width;
-        border: 0.5pt solid #000;
-    }
-
-    .grid-header {
-        font-weight: bold;
-    }
-
-    .grid-header,
+    .weapon-grid-header,
     .weapon-grid-item {
         background: $gray-bg;
+        color: #fff;
+        text-transform: uppercase;
+        $shadow-color: rgba(0, 0, 0, 0.5);
+
+        text-shadow: 0px 0px 1px $shadow-color,
+        -1px -1px 1.5px $shadow-color,
+        1px -1px 1.5px $shadow-color,
+        -1px 1px 1.5px $shadow-color,
+        1px 1px 1.5px $shadow-color;
+
+        th, td {
+            border: 0.25pt solid #000;
+            vertical-align: middle;
+        }
+
         &.sortable-ghost {
             opacity: 1;
             background: lighten($gray-bg, 24%);
@@ -52,59 +39,94 @@ $gray-bg: rgba(88, 89, 91, 0.9);
             // override vue-draggable inline style
             opacity: 0.9 !important;
             background: transparent;
+
             .col-move,
             .col-name {
                 background: opacify($gray-bg, 1);
             }
         }
-
-        color: #fff;
-
-        font-size: $font-size;
-        height: $row-height;
-        line-height: $row-height;
-
-        text-transform: uppercase;
-
-        $shadow-color: rgba(0, 0, 0, 0.5);
-
-        text-shadow: 0px 0px 1px $shadow-color,
-        -1px -1px 1.5px $shadow-color,
-        1px -1px 1.5px $shadow-color,
-        -1px 1px 1.5px $shadow-color,
-        1px 1px 1.5px $shadow-color;
-
-        [class^=col-] {
-            border: 0.25pt * $scale solid #000;
-        }
-
-        display: flex;
-        flex-wrap: nowrap;
-
-        margin-right: ($grid-gutter-width / -2);
-        margin-left: ($grid-gutter-width / -2);
     }
 
-    .col-name {
-        //flex: 2;
-        padding: 0 0 0 2pt;
-        width: $col-name-width;
-        font-weight: normal;
-    }
     .col-move {
-        width: $col-move-width;
         cursor: move;
         text-align: center;
     }
-    .col-quantity,
-    .col-arc,
-    .col-range,
-    .col-ap,
-    .col-at,
-    .col-aa,
-    .col-damage {
-        width: $cell-width;
-        text-align: center;
+
+    .weapon-grid-header {
+        font-weight: bold;
+    }
+
+    .weapon-grid-header,
+    .weapon-grid-item {
+
+        th, td {
+            padding: 3px 8px;
+
+            &.col-name {
+                font-weight: normal;
+            }
+
+            //&.col-name,
+            &.col-quantity,
+            &.col-arc,
+            &.col-arc-direction,
+            &.col-arc-size,
+                //&.col-range,
+            &.col-ap,
+            &.col-at,
+            &.col-aa,
+            &.col-damage,
+            &.col-tile-weapon-type,
+            &.col-cost,
+            &.col-total,
+            &.col-controls {
+                text-align: center;
+            }
+
+            &.col-name,
+                //&.col-quantity,
+                //&.col-arc,
+            &.col-arc-direction,
+            &.col-arc-size,
+                //&.col-range,
+                //&.col-ap,
+                //&.col-at,
+                //&.col-aa,
+                //&.col-damage,
+                //&.col-tile-weapon-type,
+            &.col-cost,
+            &.col-total,
+            &.col-controls {
+                font-weight: normal;
+            }
+
+
+            //&.col-name,
+            &.col-quantity,
+                //&.col-arc,
+            &.col-arc-direction,
+            &.col-arc-size,
+                //&.col-range,
+                //&.col-ap,
+                //&.col-at,
+                //&.col-aa,
+                //&.col-damage,
+            &.col-tile-weapon-type,
+                //&.col-cost,
+                //&.col-total
+            {
+                padding: 3px;
+            }
+        }
+
+        td {
+            &.col-range,
+            &.col-cost,
+            &.col-total {
+                text-align: right;
+                padding: 3px 8px;
+            }
+        }
     }
 
     .sortable-drag {
@@ -119,38 +141,18 @@ $gray-bg: rgba(88, 89, 91, 0.9);
         .col-damage,
         .col-tile-weapon-type,
         .col-cost,
+        .col-total,
         .col-controls {
             display: none !important;
         }
     }
 
-    .label-quantity {
-        display: none;
-    }
-
-    .col-arc-size,
-    .col-arc-direction {
-        text-align: center;
-        width: $col-arc-settings-width;
-    }
-
-    .col-tile-weapon-type {
-        text-align: center;
-        width: $col-tile-weapon-type-width;
-    }
-
-    .col-controls {
-        width: $col-controls-width;
-        line-height: inherit;
-    }
-
-    .col-cost {
-        width: $col-cost-width;
-        text-align: right;
-        padding: 0 3pt;
-    }
-
     .weapon-grid-item {
+        .input-quantity {
+            width: 50px;
+            display: inline-block;
+        }
+
         input.form-control {
 
             padding-left: 2px;
@@ -158,13 +160,9 @@ $gray-bg: rgba(88, 89, 91, 0.9);
             border: 0;
             text-align: center;
             margin-top: 1pt;
-
-            height: $row-height - 2pt;
-            line-height: $row-height - 2pt;
         }
 
         select.form-control {
-            height: $row-height - 2pt;
             border: 0;
             margin-top: 1pt;
 
@@ -176,7 +174,7 @@ $gray-bg: rgba(88, 89, 91, 0.9);
 
     .icon-indirect,
     .icon-ama {
-        height: $row-height;
+        //height: $row-height;
         float: right;
         display: none;
     }
@@ -187,7 +185,7 @@ $gray-bg: rgba(88, 89, 91, 0.9);
     }
 
     .arc {
-        height: $row-height * 0.8;
+        height: 34px;
         vertical-align: top;
         margin-top: 1pt;
     }
@@ -195,12 +193,15 @@ $gray-bg: rgba(88, 89, 91, 0.9);
     .arc-90 {
         background: url('/img/arc-90.svg') center center no-repeat;
     }
+
     .arc-180 {
         background: url('/img/arc-180.svg') center center no-repeat;
     }
+
     .arc-270 {
         background: url('/img/arc-270.svg') center center no-repeat;
     }
+
     .arc-360 {
         background: url('/img/arc-360.svg') center center no-repeat;
     }
@@ -221,24 +222,16 @@ $gray-bg: rgba(88, 89, 91, 0.9);
         transform: rotate(180deg);
     }
 
-    .grid-header {
-        .col-arc-size,
-        .col-arc-direction,
-        .col-tile-weapon-type,
-        .col-move,
-        .col-cost {
-            font-weight: normal;
-        }
-    }
-
-    .grid-header .col-cost {
-        text-align: center;
-    }
-
     .weapon-grid-item-new {
         margin: 20px;
     }
+}
 
+
+.icon-indirect {
+    height: 24pt;
+    float: right;
+    display: inline;
 }
 
 .number-cell {
@@ -256,46 +249,4 @@ $gray-bg: rgba(88, 89, 91, 0.9);
 
 .number-negative {
     color: $danger;
-}
-
-@mixin print() {
-
-}
-
-.print {
-    .col-arc-size,
-    .col-arc-direction,
-    .col-tile-weapon-type,
-    .col-controls,
-    .col-move,
-    .col-cost,
-    .input-quantity {
-        display: none;
-    }
-    .label-quantity {
-        display: block;
-    }
-
-    .weapon-grid .weapon-grid-list {
-        width: (152pt * $scale);
-    }
-}
-
-@media print {
-    .col-arc-size,
-    .col-arc-direction,
-    .col-tile-weapon-type,
-    .col-controls,
-    .col-move,
-    .col-cost,
-    .input-quantity {
-        display: none;
-    }
-    .label-quantity {
-        display: block;
-    }
-
-    .weapon-grid .weapon-grid-list {
-        width: (152pt * $scale);
-    }
 }

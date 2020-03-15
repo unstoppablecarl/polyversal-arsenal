@@ -1,6 +1,7 @@
 import {make as makeTileWeapon, sanitize as sanitizeTileWeapon} from './models/tile-weapon';
 import {copyItem, createItem, deleteItem, moveItem, updateItem} from '../lib/collection-helper';
 import Weapons from '../data/weapons';
+import {TILE_WEAPON_TYPE_GROUND_ID, TILE_WEAPON_TYPE_ONLY_AA_ID, TILE_WEAPON_TYPE_WITH_AA_ID} from "../data/constants";
 
 export default {
     namespaced: true,
@@ -13,9 +14,9 @@ export default {
                 return makeTileWeapon(tileWeapon);
             });
         },
-        create(state, {weapon, newIndex}) {
+        create(state, weapon) {
             weapon = makeTileWeapon(weapon);
-            createItem(state.tile_weapons, weapon, newIndex);
+            createItem(state.tile_weapons, weapon);
         },
         update(state, weapon) {
             weapon = sanitizeTileWeapon(weapon);
@@ -30,7 +31,7 @@ export default {
         move(state, {weapon, newIndex}) {
             moveItem(state.tile_weapons, weapon, newIndex);
         },
-        clear(state){
+        clear(state) {
             state.tile_weapons = [];
         }
     },
@@ -43,8 +44,11 @@ export default {
                 commit('update', weapon);
             });
         },
-        create({commit}, {weapon, newIndex}) {
-            commit('create', {weapon, newIndex});
+        create({commit}, {weaponId, tileWeaponTypeId}) {
+            commit('create', {
+                weapon_id: weaponId,
+                tile_weapon_type_id: tileWeaponTypeId,
+            });
         },
         update({commit, state, getters}, weapon) {
             commit('update', weapon);
@@ -58,9 +62,9 @@ export default {
         move({commit, state}, {weapon, newIndex}) {
             commit('move', {weapon, newIndex});
         },
-        clear({commit, state}){
+        clear({commit, state}) {
             commit('clear');
-        }
+        },
     },
     getters: {
         options(state, getters) {

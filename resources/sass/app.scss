@@ -10,19 +10,14 @@
 @import 'vue-notification.scss';
 @import "print";
 
-$scale: 1;
+@import 'weapons-table';
 @import 'weapon-grid';
-@import 'tile-print.scss';
-
-.scale-2 {
-    $scale: 2;
-    @import 'weapon-grid';
-    @import 'tile-print.scss';
-
-}
-
 @import 'tabs';
 
+
+.tile-svg {
+    width: 100%;
+}
 
 .card-upload {
     .figure {

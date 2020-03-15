@@ -1,31 +1,26 @@
 <template>
     <div class="container weapon-grid-item-new">
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Add Weapon</label>
+            <label class="col-sm-2 col-form-label">Quick Add Weapon</label>
             <div class="col-sm-4">
                 <select class="form-control" v-model="selectedWeaponId">
                     <option v-for="item in options" v-bind:value="item.id">{{ item.display_name }}</option>
                 </select>
             </div>
             <div class="col-sm-4">
-                <button class="btn btn-primary" v-on:click="addWeaponGround">Add</button>
-                <button class="btn btn-primary" v-on:click="addWeaponWithAA">Add With AA</button>
-                <button class="btn btn-primary" v-on:click="addWeaponOnlyAA">Add Only AA</button>
+                <weapon-grid-add-buttons :weapon-id="selectedWeaponId"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {
-        TILE_WEAPON_TYPE_GROUND_ID,
-        TILE_WEAPON_TYPE_ONLY_AA_ID,
-        TILE_WEAPON_TYPE_WITH_AA_ID,
-    } from '../../data/constants';
     import {mapTileProperties, mapTileWeaponGetters} from '../../data/mappers';
+    import WeaponGridAddButtons from "./weapon-grid-add-buttons";
 
     export default {
         name: 'weapon-grid-item-new',
+        components: {WeaponGridAddButtons},
         data() {
             return {
                 selectedWeaponId: null,
@@ -40,23 +35,6 @@
             },
         },
         methods: {
-            addWeapon(tileWeaponTypeId) {
-                let weapon = {
-                    weapon_id: this.selectedWeaponId,
-                    tile_weapon_type_id: tileWeaponTypeId,
-                };
-
-                this.$store.dispatch('tile_weapons/create', {weapon});
-            },
-            addWeaponGround() {
-                this.addWeapon(TILE_WEAPON_TYPE_GROUND_ID);
-            },
-            addWeaponWithAA() {
-                this.addWeapon(TILE_WEAPON_TYPE_WITH_AA_ID);
-            },
-            addWeaponOnlyAA() {
-                this.addWeapon(TILE_WEAPON_TYPE_ONLY_AA_ID);
-            },
             selectFirst() {
                 this.selectedWeaponId = this.firstValidWeaponId;
             },
