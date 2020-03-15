@@ -22,12 +22,16 @@ class TilePolicy
 
     public function update(User $user, Tile $tile)
     {
-        return $tile->user_id == $user->id;
+        return $this->userIsTileOwner($user, $tile);
     }
 
     public function delete(User $user, Tile $tile)
     {
-        return $tile->user_id == $user->id;
+        return $this->userIsTileOwner($user, $tile);
     }
 
+    protected function userIsTileOwner(User $user, Tile $tile)
+    {
+        return $tile->user_id == $user->id;
+    }
 }
