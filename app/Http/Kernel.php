@@ -6,6 +6,7 @@ use App\Http\Middleware\ActivateDebugBar;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\KickBannedUsers;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\VerifyCsrfToken;
 use Barryvdh\Debugbar\Middleware\InjectDebugbar;
@@ -39,11 +40,13 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
             ActivateDebugBar::class,
             InjectDebugbar::class,
+            KickBannedUsers::class,
         ],
 
         'api' => [
             'throttle:60,1',
             'bindings',
+            KickBannedUsers::class,
         ],
     ];
 
@@ -65,6 +68,7 @@ class Kernel extends HttpKernel
         AuthenticateSession::class,
         SubstituteBindings::class,
         Authorize::class,
+        KickBannedUsers::class,
         ActivateDebugBar::class,
         InjectDebugbar::class,
     ];
