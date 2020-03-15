@@ -59,7 +59,7 @@ class TileImage
     public function saveFrontSvg(Tile $tile, $data)
     {
         $timestamp = Carbon::now()->getTimestamp();
-        $fileName  = 'front-' . $tile->id . '-' . $timestamp . '.svg';
+        $fileName = 'front-' . $tile->id . '-' . $timestamp . '.svg';
 
         $this->deleteFrontSvg($tile);
         Storage::disk('local')->put($this->local($fileName), $data);
@@ -72,7 +72,7 @@ class TileImage
     public function saveBackSvg(Tile $tile, $data)
     {
         $timestamp = Carbon::now()->getTimestamp();
-        $fileName  = 'back-' . $tile->id . '-' . $timestamp . '.svg';
+        $fileName = 'back-' . $tile->id . '-' . $timestamp . '.svg';
 
         $this->deleteBackSvg($tile);
         Storage::disk('local')->put($this->local($fileName), $data);
@@ -136,10 +136,10 @@ class TileImage
     protected function saveSourceImage(Tile $tile, $prefix, $data)
     {
         $base64ImageParser = new Base64ImageParser;
-        $extension         = $base64ImageParser->extension($data);
-        $timestamp         = Carbon::now()->getTimestamp();
+        $extension = $base64ImageParser->extension($data);
+        $timestamp = Carbon::now()->getTimestamp();
 
-        $prefix   = Str::finish($prefix, '-');
+        $prefix = Str::finish($prefix, '-');
         $fileName = $prefix . $tile->id . '-' . $timestamp . '.' . $extension;
 
         $file = $this->path($fileName);
@@ -156,14 +156,14 @@ class TileImage
     protected function saveImage(Tile $tile, $prefix, $data)
     {
         $base64ImageParser = new Base64ImageParser;
-        $extension         = $base64ImageParser->extension($data);
-        $timestamp         = Carbon::now()->getTimestamp();
+        $extension = $base64ImageParser->extension($data);
+        $timestamp = Carbon::now()->getTimestamp();
 
-        $prefix        = Str::finish($prefix, '-');
-        $fileName      = $prefix . $tile->id . '-' . $timestamp . '.' . $extension;
-        $thumbFileName = $prefix . 'thumb-' . $tile->id . '-' . $timestamp . '.' . $extension;
+        $prefix = Str::finish($prefix, '-');
+        $fileName = $prefix . $tile->id . '-' . $timestamp . '.' . $extension;
+        $thumbFileName = $prefix . 'thumb-' . $tile->id . '-' . $timestamp . '.jpg';
 
-        $file      = $this->path($fileName);
+        $file = $this->path($fileName);
         $thumbFile = $this->path($thumbFileName);
 
         $img = Image::make($data)
@@ -174,7 +174,11 @@ class TileImage
 
         $img->fit(251, 218, function (Constraint $constraint) {
             $constraint->upsize();
-        })
+        });
+
+        Image::canvas(251, 218)
+            ->fill('#fff')
+            ->insert($img, 'center')
             ->save($thumbFile);
 
         return [
