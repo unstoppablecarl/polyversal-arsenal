@@ -6,19 +6,14 @@
             <img src="/img/icon-ama.svg" class="icon-ama"/>
             Anti-Missile
         </td>
-
         <td class="col-quantity">
             1
         </td>
         <td class="col-arc">
             <img src="/img/arc-360.svg" class="arc arc-x">
         </td>
-        <td class="col-arc-direction">
-
-        </td>
-        <td class="col-arc-size">
-
-        </td>
+        <td class="col-arc-direction"></td>
+        <td class="col-arc-size"></td>
         <td class="col-range">12</td>
         <td :class="['col-ap', 'NONE-bg']">-</td>
         <td :class="['col-at', 'NONE-bg']">-</td>
