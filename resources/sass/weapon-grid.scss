@@ -174,9 +174,10 @@ $gray-bg: rgba(88, 89, 91, 0.9);
 
     .icon-indirect,
     .icon-ama {
-        //height: $row-height;
+        height: 24pt;
         float: right;
         display: none;
+
     }
 
     .is-indirect .icon-indirect,

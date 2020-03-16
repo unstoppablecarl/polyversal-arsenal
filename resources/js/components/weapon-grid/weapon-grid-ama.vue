@@ -1,37 +1,34 @@
 <template>
-    <div class="weapon-grid-item" v-if="hasAMA">
-        <div class="col-move"></div>
-        <div class="col-name">
+    <tr class="weapon-grid-item" v-if="hasAMA">
+        <td class="col-move"></td>
+        <td class="col-name">
 
             <img src="/img/icon-ama.svg" class="icon-ama"/>
             Anti-Missile
-        </div>
+        </td>
 
-        <div class="col-quantity">
+        <td class="col-quantity">
             1
-        </div>
-        <div class="col-arc">
+        </td>
+        <td class="col-arc">
             <img src="/img/arc-360.svg" class="arc arc-x">
-        </div>
-        <div class="col-arc-direction">
+        </td>
+        <td class="col-arc-direction">
 
-        </div>
-        <div class="col-arc-size">
+        </td>
+        <td class="col-arc-size">
 
-        </div>
-        <div class="col-range">12</div>
-        <div :class="['col-ap', 'NONE-bg']">-</div>
-        <div :class="['col-at', 'NONE-bg']">-</div>
-        <div :class="['col-aa', aaDisplay + '-bg']">{{aaDisplay}}</div>
-        <div class="col-damage">-</div>
-        <div class="col-tile-weapon-type">
-
-        </div>
-        <div class="col-cost"></div>
-        <div class="col-controls">
-
-        </div>
-    </div>
+        </td>
+        <td class="col-range">12</td>
+        <td :class="['col-ap', 'NONE-bg']">-</td>
+        <td :class="['col-at', 'NONE-bg']">-</td>
+        <td :class="['col-aa', aaDisplay + '-bg']">{{aaDisplay}}</td>
+        <td class="col-damage">-</td>
+        <td class="col-tile-weapon-type"></td>
+        <td class="col-cost"></td>
+        <td class="col-total"></td>
+        <td class="col-controls"></td>
+    </tr>
 </template>
 
 <script>
