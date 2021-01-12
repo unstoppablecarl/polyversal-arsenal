@@ -34,11 +34,11 @@ export default {
             commit('remove', abilityId);
         },
         removeInvalid({commit, state, rootState}, newTileTypeId) {
-            state.ability_ids.forEach((abilityId) => {
-                if (!abilityValid(abilityId, newTileTypeId)) {
-                    commit('remove', abilityId);
-                }
+            let validIds = state.ability_ids.filter((abilityId) => {
+                return abilityValid(abilityId, newTileTypeId)
             });
+
+            commit('set', validIds)
         },
     },
     getters: {
@@ -56,7 +56,6 @@ export default {
             let isVehicle = rootState.tile.tile_type_id == TILE_TYPE_VEHICLE_ID;
 
             return abilityOptions
-
                 .map((item) => {
                     let active = state.ability_ids.indexOf(item.id) !== -1;
                     let valid  = getters.isValid(item.id);
@@ -72,7 +71,7 @@ export default {
                         active,
                         cost,
                         is_defensive: item.is_defensive && isVehicle,
-                        is_jumpjet:  item.is_jumpjet && isVehicle,
+                        is_jumpjet: item.is_jumpjet && isVehicle,
                     };
                 });
         },
@@ -106,7 +105,7 @@ export default {
             let sum           = 0;
             const tileTypeId  = rootState.tile.tile_type_id;
             const tileClassId = rootState.tile.tile_class_id;
-            const tileWeapons  = rootGetters['tile_weapons/tile_weapons'];
+            const tileWeapons = rootGetters['tile_weapons/tile_weapons'];
 
             state.ability_ids.forEach((abilityId) => {
                 sum += abilityCost(abilityId, tileTypeId, tileClassId, tileWeapons);
