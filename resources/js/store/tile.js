@@ -61,7 +61,7 @@ export default {
 
             let changed = tile.tile_type_id != state.tile_type_id;
             if (tile.tile_type_id !== undefined && changed) {
-                tile.mobility_id = firstMobilityIdForTileType(tile.tile_type_id);
+                tile.mobility_id = tile.mobility_id || firstMobilityIdForTileType(tile.tile_type_id);
 
                 let toVehicle   = tile.tile_type_id === TILE_TYPE_VEHICLE_ID;
                 let fromVehicle = state.tile_type_id === TILE_TYPE_VEHICLE_ID;
@@ -251,6 +251,10 @@ export default {
                 }
 
                 if (!isInfantry) {
+                    console.log('state.mobility_id', state.mobility_id)
+                    console.log(' mobilityById',  mobilityById)
+
+                    console.log(' mobilityById[state.mobility_id]', mobilityById[state.mobility_id])
                     mobility = mobilityById[state.mobility_id].display_name;
                 }
 
