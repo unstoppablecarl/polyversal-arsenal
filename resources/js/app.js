@@ -2,9 +2,12 @@ import './bootstrap'
 
 import Vue from 'vue'
 import store from './store'
+import tileSheetStore from './store/tile-sheet'
 import AppTileEdit from './components/app-tile-edit'
 import AppTileGrid from './components/app-tile-grid'
 import AppTileView from './components/app-tile-view'
+import AppTileSheet from './components/app-tile-sheet-create'
+
 import routes from './app-tile-edit-routes';
 import VueRouter from 'vue-router'
 
@@ -35,7 +38,15 @@ ifIdExists('app-tile-view', function (el) {
     })
 })
 
+ifIdExists('app-tile-sheet-create', function (el) {
+    new Vue({
+        store: tileSheetStore,
+        render: h => h(AppTileSheet),
+    }).$mount(el)
+})
+
 function ifIdExists(id, callback) {
+
     let el = document.getElementById(id)
     if (el) {
         callback(el)

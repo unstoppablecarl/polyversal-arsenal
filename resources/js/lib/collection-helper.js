@@ -4,6 +4,7 @@ import {make as makeTileWeapon} from '../store/models/tile-weapon';
 export {
     findItemById,
     findItemIndexById,
+    findItemIndexByIdOrFail,
     findItemIndex,
     createItem,
     copyItem,
@@ -34,7 +35,7 @@ function findItemIndex(items, item) {
     return findItemIndexById(items, item.id);
 }
 
-function findItemIndexOrFail(items, item) {
+function findItemIndexByIdOrFail(items, item) {
     let index = findItemIndex(items, item);
     if (index === false) {
         console.error('item not found', item);
@@ -44,14 +45,14 @@ function findItemIndexOrFail(items, item) {
 }
 
 function replaceItem(items, item) {
-    let index = findItemIndexOrFail(items, item);
+    let index = findItemIndexByIdOrFail(items, item);
 
     items.splice(index, 1, item);
 }
 
 function updateItem(items, item) {
 
-    let index   = findItemIndexOrFail(items, item);
+    let index   = findItemIndexByIdOrFail(items, item);
     let current = items[index];
     let updated = extend({}, current, item);
 
@@ -59,14 +60,14 @@ function updateItem(items, item) {
 }
 
 function deleteItem(items, item) {
-    let index = findItemIndexOrFail(items, item);
+    let index = findItemIndexByIdOrFail(items, item);
 
     items.splice(index, 1);
     setDisplayOrders(items);
 }
 
 function moveItem(items, item, toIndex) {
-    let index = findItemIndexOrFail(items, item);
+    let index = findItemIndexByIdOrFail(items, item);
     move(items, index, toIndex);
 }
 

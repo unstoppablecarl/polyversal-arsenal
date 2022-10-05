@@ -47,6 +47,9 @@ Route::group([
             ->name('tiles.store');
     });
 
+    Route::get('tile-sheets/create', 'TileSheetController@create')
+        ->name('tile-sheets.create');
+
     Route::group([
         'middleware' => 'can:update,tile',
     ], function () {
