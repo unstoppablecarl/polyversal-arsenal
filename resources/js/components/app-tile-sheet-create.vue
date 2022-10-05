@@ -101,15 +101,18 @@
 
 import TileSheetGrid from './tile-sheet/tile-sheet-grid';
 import TileSheetPrintBtn from './tile-sheet/tile-sheet-generate-btn';
-import {mapGetters} from "vuex";
+import TileFrontPrintCard from './tile-print/tile-front-print-card';
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'app-tile-sheet-create',
     components: {
         TileSheetGrid,
-        TileSheetPrintBtn
+        TileSheetPrintBtn,
+        TileFrontPrintCard
     },
     data() {
+
         return {
             iframeLoaded: false
         }

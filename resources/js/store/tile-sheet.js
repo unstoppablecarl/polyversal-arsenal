@@ -2,8 +2,12 @@ import Vuex from 'vuex';
 import {defActions, defGetters} from './helpers/store-mappers';
 import _ from 'lodash'
 import {makeBase64Pdf} from '../lib/tile-sheet-pdf';
+import tileCrud from './tile-crud'
+import {tileSlotStores} from './tile-sheet-slot-instances'
 
 const maxTileSlots = 5;
+
+// const tileCrudModule = Object.assign({}, tileCrud, {namespaced: true});
 
 export default new Vuex.Store({
     namespaced: false,
@@ -12,7 +16,6 @@ export default new Vuex.Store({
         return {
             tileSlots: [],
             tilesById: {},
-            tileSideCountsById: {},
             generating: false,
             pdfBase64: null,
         }
@@ -36,19 +39,20 @@ export default new Vuex.Store({
 
             state.tilesById[tile.id] = Object.freeze(tile)
 
-            cacheTileCounts(state, tile.id)
+
+            let lastIndex     = state.tileSlots.length - 1;
+            let tileSlotStore = tileSlotStores[lastIndex]
+
+            tileSlotStore.dispatch('fetch', tile.id)
         },
         setSide(state, {index, side}) {
             let tileSlot  = state.tileSlots[index];
             tileSlot.side = side;
 
-            cacheTileCounts(state, tileSlot.id)
         },
         deleteIndex(state, index) {
             let tileId = state.tileSlots[index].id
             state.tileSlots.splice(index, 1);
-
-            cacheTileCounts(state, tileId)
         },
         delete(state, {tile, side}) {
 
@@ -145,24 +149,3 @@ export default new Vuex.Store({
         }
     },
 })
-
-function cacheTileCounts(state, tileId) {
-
-    let front = 0;
-    let back  = 0;
-
-    state.tileSlots.forEach(({id, side}) => {
-
-        if (id !== tileId) {
-            return
-        }
-
-        if (side === 'front') {
-            front++
-        } else {
-            back++
-        }
-    })
-
-    state.tileSideCountsById[tileId] = {front, back}
-}

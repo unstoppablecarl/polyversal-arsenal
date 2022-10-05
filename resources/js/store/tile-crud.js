@@ -1,4 +1,3 @@
-import Vuex from 'vuex';
 import tile from './tile';
 import abilities from './abilities';
 import tile_weapons from './tile-weapons';
@@ -9,11 +8,12 @@ import images from './images';
 
 import {notificationFromErrorResponse, notificationSuccess} from './notification';
 
-export default new Vuex.Store({
-
-    state: {
-        fetching: false,
-        saving: false,
+export default {
+    state() {
+        return {
+            fetching: false,
+            saving: false,
+        }
     },
     actions: {
         set({commit, dispatch}, data) {
@@ -193,7 +193,7 @@ export default new Vuex.Store({
         images,
         tile_print_settings
     },
-});
+};
 
 function saveSourceImage({state, dispatch}, side, newImageData) {
 

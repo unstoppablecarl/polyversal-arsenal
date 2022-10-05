@@ -16,5 +16,11 @@
 
 @section('content-after')
     <div id="app-tile-sheet-create"></div>
+
+    <div id="app-tile-sheet-create-slot-1"></div>
+    <div id="app-tile-sheet-create-slot-2"></div>
+    <div id="app-tile-sheet-create-slot-3"></div>
+    <div id="app-tile-sheet-create-slot-4"></div>
+    <div id="app-tile-sheet-create-slot-5"></div>
 @endsection
 
