@@ -1,4 +1,5 @@
 import PDFDocument from 'pdfkit'
+import './tile-sheet-pdf-helpers';
 
 let blobStream = require('blob-stream');
 
@@ -137,7 +138,6 @@ function docToBase64URL(doc) {
         })
 
         doc.end();
-
     })
 }
 

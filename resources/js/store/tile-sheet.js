@@ -58,8 +58,6 @@ export default new Vuex.Store({
             })
 
             state.tileSlots.splice(index, 1);
-
-            cacheTileCounts(state, tile.id)
         },
     },
     actions: {

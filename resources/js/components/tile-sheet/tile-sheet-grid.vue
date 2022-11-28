@@ -8,41 +8,41 @@
         <template v-slot:after-cells="{row}">
             <td>
                 <div class="btn-group btn-group-sm">
-
-                    <button class="btn btn-light btn-group-sm">
+                    <span class="btn btn-light btn-group-sm">
                         Front
+                    </span>
+                    <button class="btn btn-light btn-group-sm"
+                            @click="remove({tile:row, side:'front'})"
+                    >
+                        &minus;
                     </button>
                     <button class="btn btn-light btn-group-sm"
                             @click="add({tile:row, side:'front'})"
                             :disabled="tileSlotsFull">
-                        +
+                        &plus;
                     </button>
-                    <button class="btn btn-light btn-group-sm"
-                            @click="remove({tile:row, side:'front'})"
-                            :disabled="tileSlotsFull">
-                        -
-                    </button>
-                    <button class="btn btn-secondary btn-group-sm"
-                            @click="remove(row, 'front')"
-                            :disabled="!getFrontCounts(row)"
-                    >
+                    <span class="btn btn-secondary btn-group-sm">
                         {{ getFrontCounts(row) }}
-                    </button>
+                    </span>
                 </div>
 
                 <div class="btn-group btn-group-sm">
+                    <span class="btn btn-light btn-group-sm">
+                        Back
+                    </span>
+                    <button class="btn btn-light btn-group-sm"
+                            @click="remove({tile:row, side:'back'})"
+                    >
+                        &minus;
+                    </button>
                     <button class="btn btn-light btn-group-sm"
                             @click="add({tile:row, side:'back'})"
-                            :disabled="tileSlotsFull"
-                    >
-                        Back
+                            :disabled="tileSlotsFull">
+                        &plus;
                     </button>
-                    <button class="btn btn-secondary btn-group-sm"
-                            @click="remove(row, 'back')"
-                            :disabled="!getBackCounts(row)"
-                    >
+                    <span class="btn btn-secondary btn-group-sm">
                         {{ getBackCounts(row) }}
-                    </button>
+                    </span>
                 </div>
             </td>
 
@@ -54,7 +54,7 @@
 <script>
 
 import TileGrid from '../tile-grid/tile-grid';
-import {mapGetters} from "vuex";
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'app-tile-sheet-grid',
@@ -96,8 +96,8 @@ export default {
         };
     },
     methods: {
-        add(tileRow) {
-            this.$store.dispatch('add', tileRow)
+        add({tile, side}) {
+            this.$store.dispatch('add', {tile, side})
         },
         getFrontCounts(tile) {
             return this.$store.getters.getCounts(tile).front || null
@@ -111,7 +111,10 @@ export default {
         addedToSheet(tile) {
             return this.$store.getters.addedToSheet(tile)
         },
-        remove(tile, side){
+        remove({tile, side}) {
+            if (!this.getFrontCounts(tile)) {
+                return
+            }
             this.$store.dispatch('delete', {tile, side})
         }
     },

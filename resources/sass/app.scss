@@ -107,6 +107,13 @@
                                      supported by Chrome and Opera */
 }
 
+.btn-group {
+    .btn-light.disabled, .btn-light:disabled {
+        border-color: #ced4da;
+        opacity: 1;
+        color: #808080;
+    }
+}
 
 .footer {
     background: #fff;
