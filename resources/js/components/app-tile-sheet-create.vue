@@ -27,7 +27,13 @@
 
         <tile-sheet-configure/>
 
+        <p class="text-center no-print">
+            <button class="btn btn-primary btn-lg btn-print" @click="print" :disabled="tileSlotsEmpty">
+                Print Tile Sheet <i class="fas fa-print"></i>
+            </button>
+        </p>
         <tile-sheet-print/>
+
     </div>
 </template>
 
@@ -50,9 +56,7 @@ export default {
         TileFrontPrintCard
     },
     data() {
-        return {
-            iframeLoaded: false
-        }
+        return {}
     },
     methods: {
         setFront(index) {
@@ -64,27 +68,17 @@ export default {
         removeIndex(index) {
             this.$store.dispatch('deleteIndex', index)
         },
-        onIframeLoad: function () {
-            if (!this.pdfBase64) {
-                return
-            }
-            this.iframeLoaded = true;
+        print() {
+            window.print()
         }
     },
     computed: {
         ...mapGetters([
             'tileSlots',
             'generating',
-            'pdfBase64'
+            'tileSlotsEmpty'
         ])
     },
-    watch: {
-        generating(newValue, prevValue) {
-            if (newValue && !prevValue) {
-                this.iframeLoaded = false;
-            }
-        }
-    }
 };
 
 </script>

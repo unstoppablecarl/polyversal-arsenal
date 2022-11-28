@@ -4,7 +4,13 @@
     -webkit-print-color-adjust: exact;
 }
 
+.tile-sheet-page {
+    display: none;
+}
 
+.btn-print {
+    font-size: 24px;
+}
 @media print {
 
     .tile-svg {
@@ -33,19 +39,9 @@
         background-color: gray;
     }
 
-    .body-tile-sheet-print {
-        //width: 8.5 * 72pt;
-        //height: 11 * 72pt;
-    }
-
-    //.body-tile-sheet-print .app,
-    //.body-tile-sheet-print .app .tile-sheet-create {
-    //    width: 8.5 * 72pt;
-    //    height: 11 * 72pt;
-    //}
-
-    body .tile-sheet-page {
+    .tile-sheet-page {
         page-break-after: always;
+        display: block;
 
         width: 8.5 * 72pt;
         height: 11 * 72pt;

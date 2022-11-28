@@ -95,8 +95,6 @@ Route::group([
         ->name('tiles.print-settings.update');
 });
 
-Route::view('test', 'test');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
