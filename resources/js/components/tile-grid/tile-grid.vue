@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid no-print">
         <tile-grid-pagination
             :loading="loading"
             :per-page="perPage"
@@ -57,20 +57,20 @@
 
 <script>
 
-    import axios from 'axios';
-    import TileGridPagination from './tile-grid-pagination';
+import axios from 'axios';
+import TileGridPagination from './tile-grid-pagination';
 
-    export default {
-        name: 'tile-grid',
-        components: {TileGridPagination},
-        mounted() {
-            this.loadItems({});
-        },
-        props: {
-            columns: Array
-        },
-        data() {
-            return {
+export default {
+    name: 'tile-grid',
+    components: {TileGridPagination},
+    mounted() {
+        this.loadItems({});
+    },
+    props: {
+        columns: Array
+    },
+    data() {
+        return {
                 loading: false,
                 sortColumn: 'id',
                 sortDirection: 'asc',

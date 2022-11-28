@@ -13,7 +13,7 @@
 @import 'weapons-table';
 @import 'weapon-grid';
 @import 'tabs';
-
+@import 'tile-sheet-print';
 
 .tile-svg {
     width: 100%;
@@ -94,6 +94,26 @@
 
 .navigation {
     margin: 0 0 20px;
+}
+
+.btn-group {
+    .btn-cosmetic {
+        &.btn-light.disabled,
+        &.btn-light.disabled:hover {
+            color: #212529;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            opacity: 1;
+        }
+
+        &.btn-secondary.disabled,
+        &.btn-secondary.disabled:hover {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+            opacity: 1;
+        }
+    }
 }
 
 .no-select {

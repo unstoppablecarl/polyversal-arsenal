@@ -4,12 +4,11 @@ import server from './server-repo';
 export default {
     namespaced: true,
 
-    state: {},
-
-    actions: {},
-    getters: {
-
+    state() {
+        return {}
     },
+    actions: {},
+    getters: {},
     modules: {
         front: SourceImage({
             svgId: 'tile-front-svg',

@@ -8,40 +8,53 @@
         <template v-slot:after-cells="{row}">
             <td>
                 <div class="btn-group btn-group-sm">
-                    <span class="btn btn-light btn-group-sm">
+                    <span class="btn btn-light btn-group-sm btn-cosmetic disabled">
                         Front
                     </span>
                     <button class="btn btn-light btn-group-sm"
-                            @click="remove({tile:row, side:'front'})"
+                            @click="remove({tileId: row.id, side:'front'})"
+                            :disabled="!getFrontAddedToSheet(row.id)"
                     >
                         &minus;
                     </button>
                     <button class="btn btn-light btn-group-sm"
-                            @click="add({tile:row, side:'front'})"
-                            :disabled="tileSlotsFull">
-                        &plus;
+                            @click="add({tileId: row.id, side:'front'})"
+                            :disabled="tileSlotsFull || adding">
+                        <template v-if="adding">
+                            <i class="fas fa-spin fa-cog"></i>
+                        </template>
+                        <template v-else>
+                            &plus;
+                        </template>
                     </button>
-                    <span class="btn btn-secondary btn-group-sm">
-                        {{ getFrontCounts(row) }}
+                    <span class="btn btn-secondary btn-group-sm btn-cosmetic disabled">
+
+                        {{ getFrontCounts(row.id) }}
                     </span>
                 </div>
 
                 <div class="btn-group btn-group-sm">
-                    <span class="btn btn-light btn-group-sm">
+                    <span class="btn btn-light btn-group-sm btn-cosmetic disabled">
                         Back
                     </span>
                     <button class="btn btn-light btn-group-sm"
-                            @click="remove({tile:row, side:'back'})"
+                            @click="remove({tileId: row.id, side:'back'})"
+                            :disabled="!getBackAddedToSheet(row.id)"
                     >
                         &minus;
                     </button>
                     <button class="btn btn-light btn-group-sm"
-                            @click="add({tile:row, side:'back'})"
-                            :disabled="tileSlotsFull">
-                        &plus;
+                            @click="add({tileId: row.id, side:'back'})"
+                            :disabled="tileSlotsFull || adding">
+                        <template v-if="adding">
+                            <i class="fas fa-spin fa-cog"></i>
+                        </template>
+                        <template v-else>
+                            &plus;
+                        </template>
                     </button>
-                    <span class="btn btn-secondary btn-group-sm">
-                        {{ getBackCounts(row) }}
+                    <span class="btn btn-secondary btn-group-sm btn-cosmetic disabled">
+                        {{ getBackCounts(row.id) }}
                     </span>
                 </div>
             </td>
@@ -93,35 +106,36 @@ export default {
                     type: 'number',
                 },
             ],
+
+            adding: false
         };
     },
     methods: {
-        add({tile, side}) {
-            this.$store.dispatch('add', {tile, side})
+        add({tileId, side}) {
+            this.adding = true
+
+            this.$store.dispatch('add', {tileId, side})
+                .then(() => {
+                    this.adding = false
+                })
         },
-        getFrontCounts(tile) {
-            return this.$store.getters.getCounts(tile).front || null
+        getFrontCounts(tileId) {
+            return this.$store.getters.getCounts(tileId).front || null
         },
-        getBackCounts(tile) {
-            return this.$store.getters.getCounts(tile).back || null
+        getBackCounts(tileId) {
+            return this.$store.getters.getCounts(tileId).back || null
         },
-        getCounts(tile) {
-            return this.$store.getters.getCounts(tile)
-        },
-        addedToSheet(tile) {
-            return this.$store.getters.addedToSheet(tile)
-        },
-        remove({tile, side}) {
-            if (!this.getFrontCounts(tile)) {
-                return
-            }
-            this.$store.dispatch('delete', {tile, side})
+        remove({tileId, side}) {
+            this.$store.dispatch('delete', {tileId, side})
         }
     },
     computed: {
         ...mapGetters([
-            'tileSlotsFull'
-        ])
+            'tileSlotsFull',
+            'addedToSheet',
+            'getFrontAddedToSheet',
+            'getBackAddedToSheet'
+        ]),
     }
 }
 </script>

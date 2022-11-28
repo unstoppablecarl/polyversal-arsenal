@@ -1,7 +1,7 @@
 <template>
     <div class="tile-sheet-create">
 
-        <div class="container">
+        <div class="container no-print">
             <div class="row">
                 <div class="col-sm-12">
                     <h4>
@@ -13,8 +13,9 @@
 
         <tile-sheet-grid/>
 
-        <hr>
-        <div class="container">
+        <hr class="no-print">
+
+        <div class="container no-print">
             <div class="row">
                 <div class="col-sm-12">
                     <h4>
@@ -24,93 +25,28 @@
             </div>
         </div>
 
-        <div class="container-fluid">
+        <tile-sheet-configure/>
 
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Slot</th>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Preview</th>
-                    <th></th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr v-for="({tile, side}, index) in tileSlots">
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ tile.id }}</td>
-                    <td>
-                        {{ tile.name }}
-                    </td>
-                    <td>
-
-                        <tile-sheet-print-item
-                            :tileId="tile.id"
-                            :side="side"
-                            :tileSlotIndex="index"
-                        />
-                    </td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                            <button class="btn btn-light btn-group-sm"
-                                    :disabled="side === 'front'"
-                                    @click="setFront(index)"
-                            >
-                                Front
-                            </button>
-                            <button class="btn btn-light btn-group-sm"
-                                    :disabled="side === 'back'"
-                                    @click="setBack(index)"
-                            >
-                                Back
-                            </button>
-                        </div>
-
-                        <button class="btn btn-danger btn-sm"
-                                @click="removeIndex(index)"
-                        >
-                            <i class="fa fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <tile-sheet-generate-btn/>
-
-                        <hr/>
-
-                    </div>
-                </div>
-            </div>
-            <iframe width="100%" height="1000"
-                    :src="pdfBase64"
-                    @load="onIframeLoad"
-                    v-show="iframeLoaded"
-            />
-        </div>
+        <tile-sheet-print/>
     </div>
 </template>
 
 <script>
 
 import TileSheetGrid from './tile-sheet/tile-sheet-grid';
-import TileSheetGenerateBtn from './tile-sheet/tile-sheet-generate-btn';
 import TileFrontPrintCard from './tile-print/tile-front-print-card';
 import {mapGetters} from 'vuex';
-import TileSheetPrintItem from "./tile-sheet/tile-sheet-print-item";
+import TileSheetConfigureItem from './tile-sheet/tile-sheet-configure-item';
+import TileSheetPrint from './tile-sheet/tile-sheet-print';
+import TileSheetConfigure from './tile-sheet/tile-sheet-configure';
 
 export default {
     name: 'app-tile-sheet-create',
     components: {
-        TileSheetPrintItem,
+        TileSheetConfigure,
+        TileSheetPrint,
+        TileSheetConfigureItem,
         TileSheetGrid,
-        TileSheetGenerateBtn,
         TileFrontPrintCard
     },
     data() {

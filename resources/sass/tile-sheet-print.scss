@@ -1,0 +1,107 @@
+@page {
+    margin: 0;
+    size: letter portrait;
+    -webkit-print-color-adjust: exact;
+}
+
+
+@media print {
+
+    .tile-svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .no-print {
+        visibility: hidden;
+        display: none;
+    }
+
+    .container-breadcrumbs,
+    .app-wrapper,
+    .navigation,
+    .footer {
+        visibility: hidden;
+        display: none;
+    }
+
+    .body-tile-sheet-print {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+        background-color: gray;
+    }
+
+    .body-tile-sheet-print {
+        //width: 8.5 * 72pt;
+        //height: 11 * 72pt;
+    }
+
+    //.body-tile-sheet-print .app,
+    //.body-tile-sheet-print .app .tile-sheet-create {
+    //    width: 8.5 * 72pt;
+    //    height: 11 * 72pt;
+    //}
+
+    body .tile-sheet-page {
+        page-break-after: always;
+
+        width: 8.5 * 72pt;
+        height: 11 * 72pt;
+        position: relative;
+
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+    }
+
+    $pageHeight: 792pt;
+    $pageWidth: 612pt;
+
+    $top: 39.0024pt;
+    $right: 69.0448pt;
+    $left: $right;
+
+    $tileWidth: 265.9785pt;
+    $tileHeight: 233pt;
+
+    $verticalSpacing: 6.976pt;
+
+    .tile-sheet-print-item {
+        position: absolute;
+        width: $tileWidth;
+        height: $tileHeight;
+
+        page-break-after: avoid;
+
+        &.slot-0 {
+            left: $left;
+            top: $top;
+        }
+
+        &.slot-1 {
+            left: $left;
+            top: $top + $tileHeight + $verticalSpacing;
+        }
+
+        &.slot-2 {
+            left: $left;
+            top: $top + (($tileHeight + $verticalSpacing) * 2);
+        }
+
+        $left3: $pageWidth - $right - $tileWidth;
+        $top3: $top + ($tileHeight * 0.5) + ($verticalSpacing * 0.5);
+
+        &.slot-3 {
+            left: $left3;
+            top: $top3;
+        }
+
+        &.slot-4 {
+            left: $left3;
+            top: $top3 + $tileHeight + $verticalSpacing
+        }
+    }
+}

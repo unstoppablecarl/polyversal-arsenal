@@ -23,6 +23,8 @@ export default {
             dispatch('images/front/setSourceImageUrl', data.tile.front_source_image_url);
             dispatch('images/back/setSourceImageUrl', data.tile.back_source_image_url);
             dispatch('setTilePrintSettings', data.tile_print_settings || {});
+
+            return data
         },
 
         fetch({commit, state, dispatch}, tileId) {
