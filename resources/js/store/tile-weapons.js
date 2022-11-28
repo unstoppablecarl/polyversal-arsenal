@@ -1,12 +1,13 @@
 import {make as makeTileWeapon, sanitize as sanitizeTileWeapon} from './models/tile-weapon';
 import {copyItem, createItem, deleteItem, moveItem, updateItem} from '../lib/collection-helper';
 import Weapons from '../data/weapons';
-import {TILE_WEAPON_TYPE_GROUND_ID, TILE_WEAPON_TYPE_ONLY_AA_ID, TILE_WEAPON_TYPE_WITH_AA_ID} from "../data/constants";
 
 export default {
     namespaced: true,
-    state: {
-        tile_weapons: [],
+    state() {
+        return {
+            tile_weapons: [],
+        }
     },
     mutations: {
         set(state, tileWeapons) {

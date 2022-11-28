@@ -1,24 +1,22 @@
 <template>
     <div>
-        <tile-print v-if="tileLoaded"/>
+        <tile-print/>
     </div>
 </template>
 
 <script>
 
 import TilePrint from './tile-print'
+
 export default {
     name: 'app-tile-view',
     components: {TilePrint},
     props: {
         tileId: {
-            // required: true,
+            required: true,
         },
     },
     mounted() {
-        if (!this.tileId) {
-            return
-        }
         this.$store.dispatch('fetch', this.tileId)
             .then((result) => {
                 if (result) {
@@ -27,12 +25,7 @@ export default {
                     }
                 }
             })
-    },
-    computed:{
-        tileLoaded(){
-            return this.$store.getters['tile/id']
-        },
-    },
+    }
 }
 
 </script>

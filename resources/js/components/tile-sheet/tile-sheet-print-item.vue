@@ -1,36 +1,49 @@
 <template>
     <div>
-        <div class="tile-print">
-
-            <tile-front-print-card>
-                <template>
-                    <tile-front-svg/>
-                </template>
-            </tile-front-print-card>
-
-            <br>
-
-            <tile-back-print-card>
-                <template>
-                    <tile-back-svg/>
-                </template>
-            </tile-back-print-card>
+        <div class="row">
+            <div class="col-sm-6">
+                <tile-front-print-card-body v-if="side === 'front'"/>
+                <tile-back-print-card-body v-else/>
+            </div>
+            <div class="col-sm-6">
+                <tile-front-svg v-if="side === 'front'"/>
+                <tile-back-svg v-else/>
+            </div>
         </div>
-        <br>
     </div>
 </template>
 
 <script>
 
-    import WeaponGrid from './weapon-grid';
-    import TileFrontSvg from './tile-print/tile-front-svg';
-    import TileBackSvg from './tile-print/tile-back-svg';
-    import TileFrontPrintCard from "./tile-print/tile-front-print-card";
-    import TileBackPrintCard from "./tile-print/tile-back-print-card";
+import TileFrontSvg from '../tile-print/tile-front-svg';
+import TileBackSvg from '../tile-print/tile-back-svg';
+import TileFrontPrintCardBody from "../tile-print/tile-front-print-card-body";
+import TileBackPrintCardBody from "../tile-print/tile-back-print-card-body";
+import {tileSlotStores} from '../../store/tile-sheet-slot-instances'
 
-    export default {
-        name: 'tile-sheet-print-item',
-        components: {TileBackPrintCard, TileFrontPrintCard, TileBackSvg, TileFrontSvg, WeaponGrid},
-    };
+export default {
+    name: 'tile-sheet-print-item',
+    components: {
+        TileBackPrintCardBody,
+        TileFrontPrintCardBody,
+        TileBackSvg,
+        TileFrontSvg,
+    },
+    beforeCreate() {
+        let tileSlotIndex = this.$options.propsData.tileSlotIndex;
+        this.$store       = tileSlotStores[tileSlotIndex];
+    },
+    props: {
+        tileSlotIndex: {
+            required: true
+        },
+        tileId: {
+            required: true
+        },
+        side: {
+            required: true
+        }
+    }
+};
 
 </script>

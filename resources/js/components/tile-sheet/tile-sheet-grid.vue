@@ -7,16 +7,20 @@
         </template>
         <template v-slot:after-cells="{row}">
             <td>
-
-                <strong>Add</strong> &nbsp;
-
                 <div class="btn-group btn-group-sm">
 
+                    <button class="btn btn-light btn-group-sm">
+                        Front
+                    </button>
                     <button class="btn btn-light btn-group-sm"
                             @click="add({tile:row, side:'front'})"
-                            :disabled="tileSlotsFull"
-                    >
-                        Front
+                            :disabled="tileSlotsFull">
+                        +
+                    </button>
+                    <button class="btn btn-light btn-group-sm"
+                            @click="remove({tile:row, side:'front'})"
+                            :disabled="tileSlotsFull">
+                        -
                     </button>
                     <button class="btn btn-secondary btn-group-sm"
                             @click="remove(row, 'front')"

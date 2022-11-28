@@ -2,12 +2,9 @@ import Vuex from 'vuex';
 import {defActions, defGetters} from './helpers/store-mappers';
 import _ from 'lodash'
 import {makeBase64Pdf} from '../lib/tile-sheet-pdf';
-import tileCrud from './tile-crud'
 import {tileSlotStores} from './tile-sheet-slot-instances'
 
 const maxTileSlots = 5;
-
-// const tileCrudModule = Object.assign({}, tileCrud, {namespaced: true});
 
 export default new Vuex.Store({
     namespaced: false,
@@ -72,20 +69,33 @@ export default new Vuex.Store({
             'delete',
             'deleteIndex'
         ]),
-        generate({commit, getters}) {
+        generate({commit, state, getters}, {manualOffsetX, margin}) {
 
             commit('setGenerating', true)
 
-            return makeBase64Pdf(getters.images)
-                .then((url) => {
-                    commit('setPdfBase64', url)
-                    commit('setGenerating', false)
-                    return url
+            let promises = state.tileSlots.map((tileSlot, index) => {
+
+                let namespace = tileSlot.side;
+                let store     = tileSlotStores[index];
+
+                return store.dispatch('images/' + namespace + '/getImageBase64');
+            })
+
+            Promise.all(promises)
+                .then((base64Images) => {
+                    return makeBase64Pdf(base64Images, manualOffsetX, margin)
+                        .then((url) => {
+                            commit('setPdfBase64', url)
+                            commit('setGenerating', false)
+                            return url
+                        })
+                        .catch((err) => {
+                            commit('setGenerating', false)
+                            throw err
+                        })
                 })
-                .catch((err) => {
-                    commit('setGenerating', false)
-                    throw err
-                })
+
+
         }
     },
     getters: {

@@ -4,8 +4,10 @@ import {abilityCost, abilityValid, hasDefensiveAbility} from '../data/abilities'
 
 export default {
     namespaced: true,
-    state: {
-        ability_ids: [],
+    state() {
+        return {
+            ability_ids: [],
+        }
     },
     mutations: {
         set(state, abilityIds) {
@@ -47,10 +49,10 @@ export default {
         },
         abilityList(state) {
             return abilityOptions
-              .filter((item) => {
-                  let active = state.ability_ids.indexOf(item.id) !== -1;
-                  return active;
-              })
+                .filter((item) => {
+                    let active = state.ability_ids.indexOf(item.id) !== -1;
+                    return active;
+                })
         },
         options(state, getters, rootState) {
             let isVehicle = rootState.tile.tile_type_id == TILE_TYPE_VEHICLE_ID;

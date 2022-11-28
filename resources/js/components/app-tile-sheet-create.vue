@@ -33,7 +33,7 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Preview</th>
-                    <th>Side</th>
+                    <th></th>
                 </tr>
                 </thead>
 
@@ -46,12 +46,11 @@
                     </td>
                     <td>
 
-                        <template v-if="side === 'front'">
-                            <img :src="tile.front_thumb_url"/>
-                        </template>
-                        <template v-else>
-                            <img :src="tile.back_thumb_url"/>
-                        </template>
+                        <tile-sheet-print-item
+                            :tileId="tile.id"
+                            :side="side"
+                            :tileSlotIndex="index"
+                        />
                     </td>
                     <td>
                         <div class="btn-group btn-group-sm">
@@ -69,7 +68,7 @@
                             </button>
                         </div>
 
-                        <button class="btn btn-danger btn-group-sm"
+                        <button class="btn btn-danger btn-sm"
                                 @click="removeIndex(index)"
                         >
                             <i class="fa fa-trash-can"></i>
@@ -82,17 +81,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <tile-sheet-print-btn/>
+                        <tile-sheet-generate-btn/>
 
                         <hr/>
-                        <iframe width="100%" height="1000"
-                                :src="pdfBase64"
-                                @load="onIframeLoad"
-                                v-show="iframeLoaded"
-                        />
+
                     </div>
                 </div>
             </div>
+            <iframe width="100%" height="1000"
+                    :src="pdfBase64"
+                    @load="onIframeLoad"
+                    v-show="iframeLoaded"
+            />
         </div>
     </div>
 </template>
@@ -100,19 +100,20 @@
 <script>
 
 import TileSheetGrid from './tile-sheet/tile-sheet-grid';
-import TileSheetPrintBtn from './tile-sheet/tile-sheet-generate-btn';
+import TileSheetGenerateBtn from './tile-sheet/tile-sheet-generate-btn';
 import TileFrontPrintCard from './tile-print/tile-front-print-card';
 import {mapGetters} from 'vuex';
+import TileSheetPrintItem from "./tile-sheet/tile-sheet-print-item";
 
 export default {
     name: 'app-tile-sheet-create',
     components: {
+        TileSheetPrintItem,
         TileSheetGrid,
-        TileSheetPrintBtn,
+        TileSheetGenerateBtn,
         TileFrontPrintCard
     },
     data() {
-
         return {
             iframeLoaded: false
         }
@@ -128,6 +129,9 @@ export default {
             this.$store.dispatch('deleteIndex', index)
         },
         onIframeLoad: function () {
+            if (!this.pdfBase64) {
+                return
+            }
             this.iframeLoaded = true;
         }
     },

@@ -1,8 +1,6 @@
-import fs from 'fs';
 import PDFDocument from 'pdfkit'
 
 let blobStream = require('blob-stream');
-import {fetchFile} from './tile-sheet-pdf-helpers';
 
 // units are in pdf points 1 inch = 72 pdf points
 const pageHeight = 792;
@@ -60,54 +58,56 @@ const hexCoords = [
     [0, 108],
 ];
 
+export function makeBase64Pdf(images, manualOffsetX, margin) {
+    // images.forEach((image, index) => {
+    //     fs.writeFileSync(index, image);
+    // })
 
-export function makeBase64Pdf(images) {
+    // return loadImages(images)
+    //     .then(() => {
 
-    return loadImages(images)
-        .then(() => {
+    const doc = new PDFDocument({size: 'LETTER'});
 
-            const doc = new PDFDocument({size: 'LETTER'});
+    drawImages(doc, images, manualOffsetX, margin)
 
-            drawImages(doc, images)
+    return docToBase64URL(doc)
 
-            return docToBase64URL(doc)
-
-        })
-        .catch((err) => {
-            throw err
-        })
+    // })
+    // .catch((err) => {
+    //     throw err
+    // })
 }
 
-function drawImages(doc, images) {
+function drawImages(doc, images, manualOffsetX, margin) {
 
-    doc.moveTo(0, top)
-        .lineTo(pageWidth, top)
-        .stroke()
-
-    doc.moveTo(left, 0)
-        .lineTo(left, pageHeight)
-        .stroke()
-
-    doc.moveTo(pageWidth - right, 0)
-        .lineTo(pageWidth - right, pageHeight)
-        .stroke()
-
-    doc.moveTo(0, pageHeight - bottom)
-        .lineTo(pageWidth, pageHeight - bottom)
-        .stroke()
+    // doc.moveTo(0, top)
+    //     .lineTo(pageWidth, top)
+    //     .stroke()
+    //
+    // doc.moveTo(left, 0)
+    //     .lineTo(left, pageHeight)
+    //     .stroke()
+    //
+    // doc.moveTo(pageWidth - right, 0)
+    //     .lineTo(pageWidth - right, pageHeight)
+    //     .stroke()
+    //
+    // doc.moveTo(0, pageHeight - bottom)
+    //     .lineTo(pageWidth, pageHeight - bottom)
+    //     .stroke()
 
     images.forEach((image, index) => {
         let pos = coords[index];
 
-        let marginX = (72 * .2);
-        let marginY = (72 * .2);
+        let marginX = (72 * margin);
+        let marginY = (72 * margin);
 
         let offsetX = (marginX * 0.5);
         let offsetY = (marginY * 0.5);
 
         let absoluteTileHeight = 215
 
-        let manualOffsetX = 0.4
+        // let manualOffsetX = 0.4
         offsetX += manualOffsetX;
 
         doc.image(
@@ -117,7 +117,7 @@ function drawImages(doc, images) {
             {height: absoluteTileHeight + marginY}
         );
 
-        drawHex(doc, pos.x, pos.y);
+        // drawHex(doc, pos.x, pos.y);
     })
 }
 
@@ -154,19 +154,4 @@ function drawHex(doc, x, y) {
         .strokeColor('#0000ff')
         .strokeOpacity(0.4)
         .stroke()
-}
-
-function loadImages(images) {
-
-    let promises = images.map((image) => {
-        return fetchFile(image)
-            .then(imageData => {
-                fs.writeFileSync(image, imageData);
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    })
-
-    return Promise.all(promises)
 }

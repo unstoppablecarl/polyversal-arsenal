@@ -1,30 +1,38 @@
 <template>
+    <div>
+        <input v-model="manualOffsetX"/>
+        <input v-model="margin"/>
+        <button class="btn btn-primary btn-lg" :disabled="disabled" @click="print">
 
-    <button class="btn btn-primary btn-lg" :disabled="disabled" @click="print">
 
-        <template v-if="generating">
-            Generating Tile Sheet
-            <i class="fas fa-spin fa-cog"></i>
-        </template>
-        <template v-else>
-            Generate Tile Sheet
-        </template>
-    </button>
-
+            <template v-if="generating">
+                Generating Tile Sheet
+                <i class="fas fa-spin fa-cog"></i>
+            </template>
+            <template v-else>
+                Generate Tile Sheet
+            </template>
+        </button>
+    </div>
 </template>
 <script>
 
 import {mapGetters} from 'vuex';
-import {makePdf} from '../../lib/tile-sheet-pdf'
 
 export default {
-    name: 'tile-sheet-print-btn',
+    name: 'tile-sheet-generate-btn',
     data() {
-        return {};
+        return {
+            manualOffsetX: -0.4,
+            margin: 0.25
+        };
     },
     methods: {
         print() {
-            this.$store.dispatch('generate')
+            this.$store.dispatch('generate', {
+                manualOffsetX: parseFloat(this.manualOffsetX),
+                margin: parseFloat(this.margin)
+            })
         }
     },
     computed: {

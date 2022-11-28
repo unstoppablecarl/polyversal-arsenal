@@ -1,5 +1,7 @@
 import {
-    AMA_NONE_ID, TECH_LEVEL_ADVANCED_ID, TECH_LEVEL_PRIMITIVE_ID,
+    AMA_NONE_ID,
+    TECH_LEVEL_ADVANCED_ID,
+    TECH_LEVEL_PRIMITIVE_ID,
     TECH_LEVEL_TYPICAL_ID,
     TILE_TYPE_INFANTRY_ID,
     TILE_TYPE_VEHICLE_ID,
@@ -7,40 +9,33 @@ import {
 import {getChassis} from '../data/chassis';
 import {firstMobilityIdForTileType, mobilityById, mobilityOptionsByTileTypeId} from '../data/options-mobility';
 import {armorOptionsByTileTypeId, maxArmorForTileType} from '../data/options-armor';
-import {
-    amaById,
-    targetingById,
-    techLevelOptions,
-    tileTypeById,
-} from '../data/options';
+import {amaById, targetingById, techLevelOptions, tileTypeById,} from '../data/options';
 import {getMaxStealth, getStealthOptions} from '../data/options-stealth';
 
-import {
-    sanitize as sanitizeTile,
-} from './models/tile';
+import {sanitize as sanitizeTile,} from './models/tile';
 import getMaxSize from '../data/combatant-max-sizes';
 
 export default {
     namespaced: true,
-    state: {
-
-        id: null,
-        name: 'New Tile Name',
-        tile_type_id: TILE_TYPE_VEHICLE_ID,
-        tile_class_id: 3,
-        armor: 0,
-        tech_level_id: 2,
-        mobility_id: 10,
-        targeting_id: 1,
-        assault_id: 1,
-        stealth: 0,
-        anti_missile_system_id: 6,
-        flavor_text: '',
-        //front_image_url: null,
-        //front_thumb_url: null,
-        //back_image_url: null,
-        //back_thumb_url: null,
-
+    state() {
+        return {
+            id: null,
+            name: 'New Tile Name',
+            tile_type_id: TILE_TYPE_VEHICLE_ID,
+            tile_class_id: 3,
+            armor: 0,
+            tech_level_id: 2,
+            mobility_id: 10,
+            targeting_id: 1,
+            assault_id: 1,
+            stealth: 0,
+            anti_missile_system_id: 6,
+            flavor_text: '',
+            //front_image_url: null,
+            //front_thumb_url: null,
+            //back_image_url: null,
+            //back_thumb_url: null,
+        }
     },
     mutations: {
         update(state, data) {

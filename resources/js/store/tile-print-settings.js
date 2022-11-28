@@ -3,17 +3,19 @@ import {actions, getters, mutations} from "./tile-print-settings-mappers";
 export default {
     namespaced: false,
 
-    state: {
-        front_is_printer_friendly: false,
-        front_invert_title: false,
-        front_invert_abilities: false,
-        front_cut_line_color: 'transparent',
+    state() {
+        return {
+            front_is_printer_friendly: false,
+            front_invert_title: false,
+            front_invert_abilities: false,
+            front_cut_line_color: 'transparent',
 
-        back_is_printer_friendly: false,
-        back_invert_title: false,
-        back_invert_bottom_headings: false,
-        back_invert_flavor_text: false,
-        back_cut_line_color: 'transparent',
+            back_is_printer_friendly: false,
+            back_invert_title: false,
+            back_invert_bottom_headings: false,
+            back_invert_flavor_text: false,
+            back_cut_line_color: 'transparent',
+        }
     },
 
     mutations: {
