@@ -17,19 +17,19 @@
             </filter>
         </defs>
 
-        <clipPath id="tile-clip">
+        <clipPath :id="`${prefix}-back-tile-clip`">
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
 
         <g id="tile-settings" :class="{'printer-friendly': backIsPrinterFriendly}">
-            <rect x="0" y="0" width="268" height="232" fill="#fff" clip-path="url(#tile-clip)"/>
+            <rect x="0" y="0" width="268" height="232" fill="#fff" :clip-path="`url(#${prefix}-back-tile-clip)`"/>
 
             <image
                 v-if="sourceImageUrl"
                 :href="sourceImageUrl"
                 width="100%"
                 height="100%"
-                clip-path="url(#tile-clip)"
+                :clip-path="`url(#${prefix}-back-tile-clip)`"
                 class="bg-image"
             />
 
@@ -42,12 +42,12 @@
                      class="cut-line"
             />
 
-            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': backInvertTitle}]">{{tile_name}}</text>
-            <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': backInvertTitle}]">{{printSubTitle}}
+            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': backInvertTitle}]">{{ tile_name }}</text>
+            <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': backInvertTitle}]">{{ printSubTitle }}
             </text>
 
             <text :x="56" y="50.25" :class="['flavor-text', {'text-invert': backInvertFlavorText}]">
-                <tspan v-for="(row, index) in flavorTextArray" :x="56" :y="50.25 + (index + 1) * 10">{{row}}</tspan>
+                <tspan v-for="(row, index) in flavorTextArray" :x="56" :y="50.25 + (index + 1) * 10">{{ row }}</tspan>
             </text>
 
             <g class="cost-header-box" :transform.once="costBoxTransform">
@@ -106,20 +106,20 @@
             <g :transform.once="costBoxTextTransform">
                 <g v-for="(item, index) in psychProfiles">
 
-                    <text :x="2" :y="(index + 1) * 8" class="cost-row-left">{{item.label}}</text>
+                    <text :x="2" :y="(index + 1) * 8" class="cost-row-left">{{ item.label }}</text>
                     <template v-if="index == 0">
                         <text :x="col1Width + col2Width * 0.5" :y="(index + 1) * 8"
-                              class="cost-row-center">{{item.percent_label}}
+                              class="cost-row-center">{{ item.percent_label }}
                         </text>
                     </template>
                     <template v-else>
                         <text :x="col1Width + col2Width - 2" :y="(index + 1) * 8"
-                              class="cost-row-right">{{item.percent_label}}
+                              class="cost-row-right">{{ item.percent_label }}
                         </text>
 
                     </template>
                     <text :x="col1Width + col2Width + col3Width - 2" :y="(index + 1) * 8"
-                          class="cost-row-right">{{item.cost}}
+                          class="cost-row-right">{{ item.cost }}
                     </text>
                 </g>
             </g>
@@ -132,7 +132,7 @@
                     MAX SIZE
                 </text>
                 <text class="shape-value" y="0.75">
-                    {{maxSize}}
+                    {{ maxSize }}
                 </text>
             </g>
             <g transform="translate(190.552, 193.699)">
@@ -141,7 +141,7 @@
                     COST
                 </text>
                 <text class="shape-value" y="0.75">
-                    {{totalCost}}
+                    {{ totalCost }}
                 </text>
             </g>
         </g>
@@ -151,81 +151,80 @@
 
 <script>
 
-    import {
-        mapBackImageGetters,
-        mapImageGetters,
-        mapTileGetters,
-        mapTileProperties,
-    } from '../../data/mappers';
-    import getTileSvgCss from '../../lib/get-tile-svg-css';
-    import textWrap from 'svg-text-wrap';
-    import {mapGetters} from 'vuex';
-    import psychProfiles from '../../data/psych-profiles';
-    import {mapTilePrintSettingsProperties} from "../../store/tile-print-settings-mappers";
+import {mapBackImageGetters, mapTileGetters, mapTileProperties,} from '../../data/mappers';
+import getTileSvgCss from '../../lib/get-tile-svg-css';
+import textWrap from 'svg-text-wrap';
+import {mapGetters} from 'vuex';
+import psychProfiles from '../../data/psych-profiles';
 
-    export default {
-        name: 'tile-back-svg',
-        components: {},
-        props: {},
-        data() {
-            return {
-                svgCss: null,
-                costBoxTransform: 'translate(92.65, 133.198)',
-                costBoxTextTransform: 'translate(92.65, ' + (133.198 + 4.75) + ')',
+let prefix = 0;
 
-                col1Width: 44.25,
-                col2Width: 19.38,
-                col3Width: 19.38,
-            };
+export default {
+    name: 'tile-back-svg',
+    components: {},
+    props: {},
+    data() {
+        prefix++;
+
+        return {
+            svgCss: null,
+            costBoxTransform: 'translate(92.65, 133.198)',
+            costBoxTextTransform: 'translate(92.65, ' + (133.198 + 4.75) + ')',
+
+            col1Width: 44.25,
+            col2Width: 19.38,
+            col3Width: 19.38,
+            prefix
+        };
+    },
+    mounted() {
+        this.svgCss = getTileSvgCss('tile-back-svg-css');
+    },
+    computed: {
+        ...mapGetters([
+            'totalCost',
+            'backIsPrinterFriendly',
+            'backInvertTitle',
+            'backInvertBottomHeadings',
+            'backInvertFlavorText',
+            'backCutLineColor'
+        ]),
+        ...mapTileGetters([
+            'printSubTitle',
+            'maxSize',
+        ]),
+        ...mapBackImageGetters([
+            'sourceImageUrl',
+        ]),
+        ...mapTileProperties({
+            tile_name: 'name',
+            tile_back_image_url: 'back_image_url',
+            flavor_text: 'flavor_text',
+        }),
+        flavorTextArray() {
+            if (this.flavor_text) {
+                return textWrap(this.flavor_text + '', 190);
+            }
+            return '';
         },
-        mounted() {
-            this.svgCss = getTileSvgCss('tile-back-svg-css');
-        },
-        computed: {
-            ...mapGetters([
-                'totalCost',
-                'backIsPrinterFriendly',
-                'backInvertTitle',
-                'backInvertBottomHeadings',
-                'backInvertFlavorText',
-                'backCutLineColor'
-            ]),
-            ...mapTileGetters([
-                'printSubTitle',
-                'maxSize',
-            ]),
-            ...mapBackImageGetters([
-                'sourceImageUrl',
-            ]),
-            ...mapTileProperties({
-                tile_name: 'name',
-                tile_back_image_url: 'back_image_url',
-                flavor_text: 'flavor_text',
-            }),
-            flavorTextArray() {
-                if (this.flavor_text) {
-                    return textWrap(this.flavor_text + '', 200);
-                }
-                return '';
-            },
-            psychProfiles() {
-                return psychProfiles.map(item => {
-                    let percent_label = item.percent_label;
-                    let percent       = item.percent;
-                    let label         = item.label;
+        psychProfiles() {
+            return psychProfiles.map(item => {
+                let percent_label = item.percent_label;
+                let percent       = item.percent;
+                let label         = item.label;
 
-                    let cost = this.totalCost + (percent * this.totalCost);
-                    cost     = Math.ceil(cost);
+                let cost = this.totalCost + (percent * this.totalCost);
+                cost     = Math.ceil(cost);
 
-                    return {
-                        label,
-                        percent_label,
-                        percent,
-                        cost,
-                    };
-                });
-            },
+                return {
+                    label,
+                    percent_label,
+                    percent,
+                    cost,
+                };
+            });
         },
-    };
+    },
+};
 
 </script>

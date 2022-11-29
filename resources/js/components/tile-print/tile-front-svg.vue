@@ -56,18 +56,18 @@
                 <polygon points="7.5,1.5 5,3.2 2.5,1.5 4.2,4 2.5,6.5 5,4.8 7.5,6.5 5.8,4 "/>
             </g>
         </defs>
-        <clipPath :id="`${prefix}-tile-clip`">
+        <clipPath :id="`${prefix}-front-tile-clip`">
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
 
         <g id="tile-settings" :class="{'printer-friendly': frontIsPrinterFriendly}">
-            <rect x="0" y="0" width="268" height="232" fill="#fff" :clip-path="`url(#${prefix}-tile-clip)`"/>
+            <rect x="0" y="0" width="268" height="232" fill="#fff" :clip-path="`url(#${prefix}-front-tile-clip)`"/>
             <image
                 v-if="sourceImageUrl"
                 :href="sourceImageUrl"
                 width="100%"
                 height="100%"
-                :clip-path="`url(#${prefix}-tile-clip)`"
+                :clip-path="`url(#${prefix}-front-tile-clip)`"
                 class="bg-image"
             />
 
