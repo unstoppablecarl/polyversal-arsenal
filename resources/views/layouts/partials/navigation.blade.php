@@ -21,6 +21,16 @@
                             <i class="fas fa-fw fa-plus"></i> Create
                         </a>
                     </div>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        Tile Sheets
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{route('tile-sheets.create')}}">
+                            <i class="fas fa-fw fa-plus"></i> Create
+                        </a>
+                    </div>
             @endauth
         </ul>
         <ul class="navbar-nav ml-auto">

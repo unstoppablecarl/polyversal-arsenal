@@ -5,15 +5,15 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
+@import './fontawesome/fontawesome';
+@import './fontawesome/solid';
 @import 'vue-notification.scss';
 @import "print";
 
 @import 'weapons-table';
 @import 'weapon-grid';
 @import 'tabs';
-
+@import 'tile-sheet-print';
 
 .tile-svg {
     width: 100%;
@@ -96,6 +96,26 @@
     margin: 0 0 20px;
 }
 
+.btn-group {
+    .btn-cosmetic {
+        &.btn-light.disabled,
+        &.btn-light.disabled:hover {
+            color: #212529;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            opacity: 1;
+        }
+
+        &.btn-secondary.disabled,
+        &.btn-secondary.disabled:hover {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+            opacity: 1;
+        }
+    }
+}
+
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -107,6 +127,13 @@
                                      supported by Chrome and Opera */
 }
 
+.btn-group {
+    .btn-light.disabled, .btn-light:disabled {
+        border-color: #ced4da;
+        opacity: 1;
+        color: #808080;
+    }
+}
 
 .footer {
     background: #fff;

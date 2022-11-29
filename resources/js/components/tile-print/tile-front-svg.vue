@@ -11,7 +11,7 @@
         <defs>
             <svg:style type="text/css" v-html="svgCss"></svg:style>
 
-            <g id="damage-defense" transform="translate(-5, 0)">
+            <g :id="`damage-defense-${tile_id}`" transform="translate(-5, 0)">
                 <polygon points="3.3,1.5 2.5,2.2 2.5,5.1 5,6.5 7.5,5.1 7.5,2.2 6.7,1.5 "/>
             </g>
 
@@ -56,18 +56,18 @@
                 <polygon points="7.5,1.5 5,3.2 2.5,1.5 4.2,4 2.5,6.5 5,4.8 7.5,6.5 5.8,4 "/>
             </g>
         </defs>
-        <clipPath id="tile-clip">
+        <clipPath :id="`${prefix}-front-tile-clip`">
             <polygon points="67.4,231.8 0.6,116.2 67.4,0.5 200.9,0.5 267.7,116.2 200.9,231.8 "/>
         </clipPath>
 
         <g id="tile-settings" :class="{'printer-friendly': frontIsPrinterFriendly}">
-            <rect x="0" y="0" width="268" height="232" fill="#fff" clip-path="url(#tile-clip)"/>
+            <rect x="0" y="0" width="268" height="232" fill="#fff" :clip-path="`url(#${prefix}-front-tile-clip)`"/>
             <image
                 v-if="sourceImageUrl"
                 :href="sourceImageUrl"
                 width="100%"
                 height="100%"
-                clip-path="url(#tile-clip)"
+                :clip-path="`url(#${prefix}-front-tile-clip)`"
                 class="bg-image"
             />
 
@@ -152,27 +152,27 @@
 
 <script>
 
-    import {
-        mapFrontImageGetters,
-        mapTileGetters,
-        mapTileProperties,
-    } from '../../data/mappers';
-    import {targetingById} from '../../data/options';
-    import TileSvgDamageTrack from './tile-svg-damge-track';
-    import TileWeaponGridSvg from './tile-weapon-grid-svg';
-    import getTileSvgCss from '../../lib/get-tile-svg-css';
-    import {mapGetters} from "vuex";
+import {mapFrontImageGetters, mapTileGetters, mapTileProperties,} from '../../data/mappers';
+import {targetingById} from '../../data/options';
+import TileSvgDamageTrack from './tile-svg-damge-track';
+import TileWeaponGridSvg from './tile-weapon-grid-svg';
+import getTileSvgCss from '../../lib/get-tile-svg-css';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'tile-front-svg',
-        components: {TileWeaponGridSvg, TileSvgDamageTrack},
-        props: {
-            cutLineColor: null,
-        },
-        data() {
-            return {
-                svgCss: null,
-            };
+let prefix = 0;
+
+export default {
+    name: 'tile-front-svg',
+    components: {TileWeaponGridSvg, TileSvgDamageTrack},
+    props: {
+        cutLineColor: null,
+    },
+    data() {
+        prefix++
+        return {
+            prefix,
+            svgCss: null,
+        };
         },
         mounted() {
             this.svgCss = getTileSvgCss('tile-front-svg-css');
@@ -187,6 +187,7 @@
                 'sourceImageUrl',
             ]),
             ...mapTileProperties({
+                tile_id: 'id',
                 tile_targeting_id: 'targeting_id',
                 tile_assault_id: 'assault_id',
                 stealth: 'stealth',

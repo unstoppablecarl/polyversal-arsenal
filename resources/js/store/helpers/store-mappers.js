@@ -26,5 +26,9 @@ export function defGetter(stateKey) {
 }
 
 export function defGetters(map) {
-    return _.mapValues(map, (stateKey) => defGetter(stateKey))
+    let out = {};
+    map.forEach((stateKey) => {
+        out[stateKey] = defGetter(stateKey)
+    });
+    return out;
 }

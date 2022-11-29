@@ -18,13 +18,14 @@ mix.autoload({});
 
 mix
     .js('resources/js/app.js', 'public/build/js')
+    .vue({ version: 2 });
+mix
     // .sourceMaps()
     .extract(['vue', 'vuex', 'axios'])
 
     .sass('resources/sass/app.scss', 'public/build/css')
     .sass('resources/sass/tile-front-svg.scss', 'public/build/css')
     .sass('resources/sass/tile-back-svg.scss', 'public/build/css')
-    // .copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/fonts')
 
     .options({
         processCssUrls: false,
@@ -33,6 +34,24 @@ mix
     mix.version();
 
 mix.webpackConfig({
+    resolve: {
+        alias: {
+            // maps fs to a virtual one allowing to register file content dynamically
+            fs: 'pdfkit/js/virtual-fs.js',
+            // iconv-lite is used to load cid less fonts (not spec compliant)
+            'iconv-lite': false
+        },
+        fallback: {
+            // crypto module is not necessary at browser
+            crypto: false,
+            // fallbacks for native node libraries
+            buffer: require.resolve('buffer/'),
+            stream: require.resolve('readable-stream'),
+            zlib: require.resolve('browserify-zlib'),
+            util: require.resolve('util/'),
+            assert: require.resolve('assert/')
+        }
+    },
     module: {
         rules: [
             {
@@ -43,6 +62,22 @@ mix.webpackConfig({
                         name: '../fonts/[name].[ext]',
                     },
                 },
+            },
+            { test: /\.afm$/, type: 'asset/source' },
+            // bundle and load binary files inside static-assets folder as base64
+            {
+                test: /src[/\\]static-assets/,
+                type: 'asset/inline',
+                generator: {
+                    dataUrl: content => {
+                        return content.toString('base64');
+                    }
+                }
+            },
+            // load binary files inside lazy-assets folder as an URL
+            {
+                test: /src[/\\]lazy-assets/,
+                type: 'asset/resource'
             },
         ],
     },

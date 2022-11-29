@@ -8,16 +8,23 @@
 
     <title>Polyversal Arsenal</title>
 
-    <link href="{{ asset('/build/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('/build/css/tile-front-svg.css') }}" rel="stylesheet" id="tile-front-svg-css">
-    <link href="{{ asset('/build/css/tile-back-svg.css') }}" rel="stylesheet" id="tile-back-svg-css">
+    <link href="{{ mix('/build/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/build/css/tile-front-svg.css') }}" rel="stylesheet" id="tile-front-svg-css">
+    <link href="{{ mix('/build/css/tile-back-svg.css') }}" rel="stylesheet" id="tile-back-svg-css">
 
+    @yield('head-end')
 </head>
-<body>
-<div id="app">
+<?php
+if (empty($bodyClass)) {
+    $bodyClass = '';
+}
+?>
+<body class="{{$bodyClass}}">
+
+<div id="app" class="app">
     @include('layouts.partials.navigation')
 
-    <div class="container">
+    <div class="container container-breadcrumbs">
         @yield('breadcrumbs')
 
         @include('layouts.partials.errors')

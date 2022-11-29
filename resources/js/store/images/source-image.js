@@ -7,12 +7,14 @@ import {notificationFromErrorResponse, notificationSuccess} from '../notificatio
 export default function makeSourceImageStore({svgId, fileNamePrefix, serverUpdate, serverDelete}) {
     return {
         namespaced: true,
-        state: {
-            image_url: null,
-            image_base64: null,
-            uploading: false,
-            deleting: false,
-            unsavedChanges: false,
+        state() {
+            return {
+                image_url: null,
+                image_base64: null,
+                uploading: false,
+                deleting: false,
+                unsavedChanges: false,
+            }
         },
         mutations: {
             setSourceImageBase64(state, value) {
