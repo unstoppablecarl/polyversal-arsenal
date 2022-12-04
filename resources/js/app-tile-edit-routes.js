@@ -13,7 +13,7 @@ export default [
         path: '/tile/:id',
         component: Tile,
         name: 'tile',
-        redirect: { name: 'tile-stats' },
+        redirect: {name: 'tile-info'},
 
         children: [
             {

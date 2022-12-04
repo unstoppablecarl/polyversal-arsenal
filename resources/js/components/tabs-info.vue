@@ -9,8 +9,9 @@
 
         <div class="tab-content-divider"></div>
 
-        <tile-text-input-row
+        <tile-textarea-row
             label="Name"
+            desc="Linebreaks will be used on the tile"
             v-model="tile_name"
         />
 
@@ -41,23 +42,23 @@
 </template>
 
 <script>
-    import {mapImageGetters, mapTileProperties} from '../data/mappers';
+import {mapImageGetters, mapTileProperties} from '../data/mappers';
 
-    import FileUpload from './tabs-info/file-upload';
-    import TileTextInputRow from './tabs-info/tile-text-input-row';
-    import TileTextareaRow from './tabs-info/tile-textarea-row';
+import FileUpload from './tabs-info/file-upload';
+import TileTextInputRow from './tabs-info/tile-text-input-row';
+import TileTextareaRow from './tabs-info/tile-textarea-row';
 
-    export default {
-        name: 'tabs-info',
-        components: {
-            TileTextareaRow,
-            TileTextInputRow,
-            FileUpload,
-        },
-        data() {
-            return {
-                frontUploading: false,
-                frontDeleting: false,
+export default {
+    name: 'tabs-info',
+    components: {
+        TileTextareaRow,
+        TileTextInputRow,
+        FileUpload,
+    },
+    data() {
+        return {
+            frontUploading: false,
+            frontDeleting: false,
             };
         },
         computed: {

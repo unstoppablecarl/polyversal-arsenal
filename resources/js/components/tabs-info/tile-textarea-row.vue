@@ -1,8 +1,11 @@
 <template>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">{{label}}</label>
+        <label class="col-sm-2 col-form-label">{{ label }}</label>
         <div class="col-sm-4">
             <textarea @input="input" class="form-control">{{value}}</textarea>
+        </div>
+        <div class="col-sm-6">
+            <p>{{ desc }}</p>
         </div>
     </div>
 </template>
@@ -17,6 +20,7 @@
         props: {
             label: null,
             value: null,
+            desc: null,
         },
         methods: {
             input(event) {

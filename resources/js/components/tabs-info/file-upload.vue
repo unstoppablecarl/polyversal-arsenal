@@ -1,21 +1,26 @@
 <template>
     <div class="card card-upload">
         <div class="card-header">
-            <h4>{{label}}</h4>
+            <div class="float-right">
+                <button class="btn btn-secondary btn-sm" type="button" @click="toggleCollapse">
+                    <i class="fa fa-caret-up" v-show="!collapsed"></i>
+                    <i class="fa fa-caret-down" v-show="collapsed"></i>
+                </button>
+            </div>
+            <h4>{{ label }}</h4>
         </div>
-        <div class="card-body">
-
+        <div class="card-body" v-show="!collapsed">
             <div class="row">
                 <div class="col-sm-4">
                     <input type="file" v-on:change="onFileChange" class="form-control-file" ref="file_input">
                     <br>
 
                     <p :class="{'text-danger': fileTooBig}">
-                        <strong>File Size:</strong> {{newImageSizeDisplay}}
+                        <strong>File Size:</strong> {{ newImageSizeDisplay }}
                         <strong v-if="fileTooBig">(Too Big)</strong>
                     </p>
                     <p>
-                        <strong>Max Size:</strong> {{maxImageSizeMb}} MB
+                        <strong>Max Size:</strong> {{ maxImageSizeMb }} MB
                     </p>
                     <p>
                         <strong>Note:</strong> Uploading images does not automatically save the finished tile.
@@ -91,99 +96,104 @@
     </div>
 </template>
 <script>
-    import {mapGetters} from 'vuex';
-    import BtnSave from '../btn-save';
-    import fileSize from 'filesize';
+import {mapGetters} from 'vuex';
+import BtnSave from '../btn-save';
+import fileSize from 'filesize';
 
-    export default {
-        name: 'file-upload',
-        components: {BtnSave},
-        props: {
-            label: null,
-            imageUrl: null,
-            uploadAction: null,
-            deleteAction: null,
-            unsavedChanges: null,
+export default {
+    name: 'file-upload',
+    components: {BtnSave},
+    props: {
+        label: null,
+        imageUrl: null,
+        uploadAction: null,
+        deleteAction: null,
+        unsavedChanges: null,
+
+    },
+    watch: {
+        imageUrl() {
+            this.clearUpload();
         },
-        watch: {
-            imageUrl() {
-                this.clearUpload();
-            },
+    },
+    data() {
+        return {
+            newImageData: null,
+            newImageSizeMb: null,
+            newImageSizeDisplay: null,
+            deleteClicked: false,
+            deleteConfirmed: false,
+            uploading: false,
+            deleting: false,
+            collapsed: false,
+            maxImageSizeMb: APP_DATA.max_image_upload_size_mb
+        };
+    },
+    computed: {
+        ...mapGetters([
+            'syncing',
+        ]),
+        newImageSrc() {
+            return this.newImageData || '/img/background-placeholder.png';
         },
-        data() {
-            return {
-                newImageData: null,
-                newImageSizeMb: null,
-                newImageSizeDisplay: null,
-                deleteClicked: false,
-                deleteConfirmed: false,
-                uploading: false,
-                deleting: false,
-                maxImageSizeMb: APP_DATA.max_image_upload_size_mb
-            };
+        currentImageSrc() {
+            return this.imageUrl || '/img/background-placeholder.png';
         },
-        computed: {
-            ...mapGetters([
-                'syncing',
-            ]),
-            newImageSrc() {
-                return this.newImageData || '/img/background-placeholder.png';
-            },
-            currentImageSrc() {
-                return this.imageUrl || '/img/background-placeholder.png';
-            },
-            fileTooBig() {
-                return this.newImageSizeMb > this.maxImageSizeMb;
+        fileTooBig() {
+            return this.newImageSizeMb > this.maxImageSizeMb;
+        }
+    },
+    methods: {
+        toggleCollapse() {
+            this.collapsed = !this.collapsed
+        },
+        clearUpload() {
+            this.newImageData           = null;
+            this.$refs.file_input.value = null;
+        },
+        onFileChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length) {
+                return;
             }
+            let file                 = files[0];
+            this.newImageSizeDisplay = fileSize(file.size, {base: 10});
+            this.newImageSizeMb      = file.size / 1000000;
+            this.createImage(file);
         },
-        methods: {
-            clearUpload() {
-                this.newImageData           = null;
-                this.$refs.file_input.value = null;
-            },
-            onFileChange(e) {
-                let files = e.target.files || e.dataTransfer.files;
-                if (!files.length) {
-                    return;
-                }
-                let file                 = files[0];
-                this.newImageSizeDisplay = fileSize(file.size, {base: 10});
-                this.newImageSizeMb      = file.size / 1000000;
-                this.createImage(file);
-            },
-            createImage(file) {
-                let reader    = new FileReader();
-                reader.onload = (e) => {
-                    this.newImageData = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            },
+        createImage(file) {
+            let reader    = new FileReader();
+            reader.onload = (e) => {
+                this.newImageData = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
 
-            onUpload() {
-                this.uploading = true;
-                return this.$store.dispatch(this.uploadAction, this.newImageData)
-                    .then(() => {
-                        this.uploading = false;
-                    });
-            },
-            onCancelUpload() {
-                this.clearUpload();
-            },
-            onDelete() {
-                if (!this.deleteClicked) {
-                    this.deleteClicked = true;
-                    return;
-                }
-                this.deleteClicked = false;
-                this.deleting      = true;
-                this.$store.dispatch(this.deleteAction)
-                    .then(() => {
-                        this.deleting = false;
-                    });
-            },
-            onCancelDelete() {
-                this.deleteClicked = false;
-            },
+        onUpload() {
+            this.uploading = true;
+            return this.$store.dispatch(this.uploadAction, this.newImageData)
+                .then(() => {
+                    this.uploading = false;
+                });
         },
-    };
+        onCancelUpload() {
+            this.clearUpload();
+        },
+        onDelete() {
+            if (!this.deleteClicked) {
+                this.deleteClicked = true;
+                return;
+            }
+            this.deleteClicked = false;
+            this.deleting      = true;
+            this.$store.dispatch(this.deleteAction)
+                .then(() => {
+                    this.deleting = false;
+                });
+        },
+        onCancelDelete() {
+            this.deleteClicked = false;
+        },
+    },
+};
 </script>

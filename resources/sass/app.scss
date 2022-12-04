@@ -127,6 +127,10 @@
                                      supported by Chrome and Opera */
 }
 
+.card .card-header h4 {
+    margin: 0;
+}
+
 .btn-group {
     .btn-light.disabled, .btn-light:disabled {
         border-color: #ced4da;

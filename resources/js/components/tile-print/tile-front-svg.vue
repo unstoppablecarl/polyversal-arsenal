@@ -87,7 +87,7 @@
 		h0.8L38.7,133.7z M52.5,138.9h0.8V135L50,133l-0.4,0.7L52.5,138.9z M49.5,146.8l0.4,0.7l3.4-1.9v-3.9h-0.8L49.5,146.8z M35.8,141.7
 		h-0.8v3.9l3.4,1.9l0.4-0.7L35.8,141.7z M41.2,148.2l-0.4,0.7l3.4,1.9l3.4-1.9l-0.4-0.7H41.2z"/>
                     <text id="stealth-number" x="44.1" y="140.8" class="icon-number">
-                        {{stealth}}
+                        {{ stealth }}
                     </text>
                 </g>
             </template>
@@ -98,7 +98,7 @@
 		h0.8L24.8,109.6z M38.6,114.7h0.8v-3.9l-3.4-1.9l-0.4,0.7L38.6,114.7z M35.6,122.7l0.4,0.7l3.4-1.9v-3.9h-0.8L35.6,122.7z
 		 M21.8,117.6H21v3.9l3.4,1.9l0.4-0.7L21.8,117.6z M27.3,124.1l-0.4,0.7l3.4,1.9l3.4-1.9l-0.4-0.7H27.3z"/>
                 <text id="evasion-number" x="30.3" y="116.65" class="icon-number">
-                    {{evasion}}
+                    {{ evasion }}
                 </text>
             </g>
             <g id="assault">
@@ -110,7 +110,7 @@
 		l0-0.7l-5.5,3.2v1.8L36.1,88.7z M40.7,99.7l0-0.3l-4.7-2.7v-1.3l-0.9,0v1.8l5.5,3.2L40.7,99.7z M38,92.1l-1.5-2.5l-3.3,0l1.5,2.5
 		l-1.5,2.5l3.3,0L38,92.1z"/>
                 <text id="assault-number" x="44.1" y="92.6" class="icon-number">
-                    {{assaultNumber}}
+                    {{ assaultNumber }}
                 </text>
 
             </g>
@@ -123,7 +123,7 @@
 		l-6.5-3.8L60.2,59.9z M55.9,76L50,72.6v-2.5l-0.9,0.3v2.7l6.5,3.8L55.9,76z M66.1,70.1v2.5L60.2,76l0.3,0.8l6.5-3.8v-2.7L66.1,70.1
 		z M50,65.8v-2.5l5.9-3.4l-0.3-0.8l-6.5,3.8v2.7L50,65.8z"/>
                 <text id="targeting-number" x="58" y="68.5" class="icon-number">
-                    {{targetingNumber}}
+                    {{ targetingNumber }}
                 </text>
 
             </g>
@@ -133,12 +133,17 @@
                 <path id="move-icon" class="icon-white" d="M72,56.8l-3.5-6.1v-0.8l3.5,2l3.5-2v0.8L72,56.8z M72,30.9l3.5,6.1v0.8l-3.5-2l-3.5,2V37
 		L72,30.9z M59,43.8l6.1-3.5H66l-2,3.5l2,3.5h-0.8L59,43.8z M84.9,43.8l-6.1,3.5H78l2-3.5l-2-3.5h0.8L84.9,43.8z"/>
                 <text id="move-number" x="71.973" y="45" class="icon-number icon-number-move">
-                    {{move}}
+                    {{ move }}
                 </text>
             </g>
 
-            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': frontInvertTitle}]">{{tile_name}}</text>
-            <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': frontInvertTitle}]">{{printSubTitle}}</text>
+            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': frontInvertTitle}]">
+                <tspan v-for="(row, index) in tileNameArray" :x="268.3 * 0.5" :y="20 + (index) * nameLineHeight"
+                       v-html="row"></tspan>
+            </text>
+            <text :x="268.3 * 0.5" :y="32 + ((tileNameArray.length - 1) * nameLineHeight)"
+                  :class="['subtitle', {'text-invert': frontInvertTitle}]">{{ printSubTitle }}
+            </text>
 
             <tile-weapon-grid-svg/>
 
@@ -158,6 +163,7 @@ import TileSvgDamageTrack from './tile-svg-damge-track';
 import TileWeaponGridSvg from './tile-weapon-grid-svg';
 import getTileSvgCss from '../../lib/get-tile-svg-css';
 import {mapGetters} from 'vuex';
+import textWrap from 'svg-text-wrap';
 
 let prefix = 0;
 
@@ -172,53 +178,70 @@ export default {
         return {
             prefix,
             svgCss: null,
+            nameLineHeight: 12,
         };
+    },
+    mounted() {
+        this.svgCss = getTileSvgCss('tile-front-svg-css');
+    },
+    computed: {
+        ...mapTileGetters([
+            'printSubTitle',
+            'evasion',
+            'move',
+        ]),
+        tileNameArray() {
+            if (this.tile_name) {
+
+                let result = [];
+                this.tile_name.split('\n')
+                    .map((str) => {
+                        return textWrap(str + '', 140);
+                    })
+                    .forEach((arr) => {
+                        result = result.concat(arr)
+                    })
+
+                return result;
+            }
+            return '';
         },
-        mounted() {
-            this.svgCss = getTileSvgCss('tile-front-svg-css');
+        ...mapFrontImageGetters([
+            'sourceImageUrl',
+        ]),
+        ...mapTileProperties({
+            tile_id: 'id',
+            tile_targeting_id: 'targeting_id',
+            tile_assault_id: 'assault_id',
+            stealth: 'stealth',
+            tile_name: 'name',
+            tile_front_image_url: 'front_image_url',
+        }),
+        ...mapGetters([
+            'frontIsPrinterFriendly',
+            'frontCutLineColor',
+            'frontInvertTitle',
+            'frontInvertAbilities',
+        ]),
+        targeting() {
+            return targetingById[this.tile_targeting_id].display_name;
         },
-        computed: {
-            ...mapTileGetters([
-                'printSubTitle',
-                'evasion',
-                'move',
-            ]),
-            ...mapFrontImageGetters([
-                'sourceImageUrl',
-            ]),
-            ...mapTileProperties({
-                tile_id: 'id',
-                tile_targeting_id: 'targeting_id',
-                tile_assault_id: 'assault_id',
-                stealth: 'stealth',
-                tile_name: 'name',
-                tile_front_image_url: 'front_image_url',
-            }),
-            ...mapGetters([
-                'frontIsPrinterFriendly',
-                'frontCutLineColor',
-                'frontInvertTitle',
-                'frontInvertAbilities',
-            ]),
-            targeting() {
-                return targetingById[this.tile_targeting_id].display_name;
-            },
-            assault() {
-                return targetingById[this.tile_assault_id].display_name;
-            },
-            assaultIconCssClass() {
-                return targetingById[this.tile_assault_id].display_name + '-bg';
-            },
-            targetingIconCssClass() {
-                return targetingById[this.tile_targeting_id].display_name + '-bg';
-            },
-            assaultNumber() {
-                return this.assault.split('D')[1];
-            },
-            targetingNumber() {
-                return this.targeting.split('D')[1];
-            },
+        assault() {
+            return targetingById[this.tile_assault_id].display_name;
         },
-    };
+        assaultIconCssClass() {
+            return targetingById[this.tile_assault_id].display_name + '-bg';
+        },
+        targetingIconCssClass() {
+            return targetingById[this.tile_targeting_id].display_name + '-bg';
+        },
+        assaultNumber() {
+            return this.assault.split('D')[1];
+        },
+        targetingNumber() {
+            return this.targeting.split('D')[1];
+        },
+    },
+};
 
 </script>
