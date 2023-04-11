@@ -11,7 +11,7 @@
         <defs>
             <svg:style type="text/css" v-html="svgCss"></svg:style>
 
-            <g :id="`damage-defense-${tile_id}`" transform="translate(-5, 0)">
+            <g id="damage-defense" transform="translate(-5, 0)">
                 <polygon points="3.3,1.5 2.5,2.2 2.5,5.1 5,6.5 7.5,5.1 7.5,2.2 6.7,1.5 "/>
             </g>
 
