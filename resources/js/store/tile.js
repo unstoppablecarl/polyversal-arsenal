@@ -1,18 +1,27 @@
 import {
     AMA_NONE_ID,
+    COMBAT_VALUE_D4_ID, COMBAT_VALUE_NONE_ID,
     TECH_LEVEL_ADVANCED_ID,
     TECH_LEVEL_PRIMITIVE_ID,
     TECH_LEVEL_TYPICAL_ID,
+    TILE_TYPE_BUILDING_ID, TILE_TYPE_CAVALRY_ID,
     TILE_TYPE_INFANTRY_ID,
     TILE_TYPE_VEHICLE_ID,
 } from '../data/constants';
 import {getChassis} from '../data/chassis';
 import {firstMobilityIdForTileType, mobilityById, mobilityOptionsByTileTypeId} from '../data/options-mobility';
-import {armorOptionsByTileTypeId, maxArmorForTileType} from '../data/options-armor';
-import {amaById, targetingById, techLevelOptions, tileTypeById,} from '../data/options';
+import {getArmorOptions, normalizeArmor} from '../data/options-armor';
+import {
+    amaById, assaultOptions, buildingAssaultOptions,
+    buildingTargetingOptions,
+    targetingById,
+    targetingOptions,
+    techLevelOptions,
+    tileTypeById,
+} from '../data/options';
 import {getMaxStealth, getStealthOptions} from '../data/options-stealth';
 
-import {sanitize as sanitizeTile,} from './models/tile';
+import {sanitize as sanitizeTile} from './models/tile';
 import getMaxSize from '../data/combatant-max-sizes';
 
 export default {
@@ -35,7 +44,7 @@ export default {
             //front_thumb_url: null,
             //back_image_url: null,
             //back_thumb_url: null,
-        }
+        };
     },
     mutations: {
         update(state, data) {
@@ -58,36 +67,42 @@ export default {
             if (tile.tile_type_id !== undefined && changed) {
                 tile.mobility_id = tile.mobility_id || firstMobilityIdForTileType(tile.tile_type_id);
 
-                let toVehicle   = tile.tile_type_id === TILE_TYPE_VEHICLE_ID;
+                let toCavalry = tile.tile_type_id === TILE_TYPE_CAVALRY_ID;
+                let toInfantry = tile.tile_type_id === TILE_TYPE_INFANTRY_ID;
+                let toVehicle = tile.tile_type_id === TILE_TYPE_VEHICLE_ID;
                 let fromVehicle = state.tile_type_id === TILE_TYPE_VEHICLE_ID;
+                let toBuilding = tile.tile_type_id === TILE_TYPE_BUILDING_ID;
+                let fromBuilding = state.tile_type_id === TILE_TYPE_BUILDING_ID;
 
-                if (!toVehicle) {
-                    tile.tile_class_id          = 1;
+                if (toInfantry || toCavalry) {
+                    tile.tile_class_id = 1;
                     tile.anti_missile_system_id = AMA_NONE_ID;
                 }
 
-                if (fromVehicle || toVehicle) {
+                if (fromVehicle || toVehicle || fromBuilding || toBuilding) {
                     commit('tile_weapons/clear', null, {root: true});
                 }
-
-                let {armor, stealth} = Object.assign({}, state, tile);
-
-                let maxArmor = maxArmorForTileType(tile.tile_type_id);
-                if (armor > maxArmor) {
-                    armor = maxArmor;
-                }
-                tile.armor = armor;
-
-                let maxStealth = getMaxStealth(tile.tile_type_id, tile.tile_class_id);
+                let {tile_type_id, tile_class_id, stealth} = Object.assign({}, state, tile);
+                let maxStealth = getMaxStealth(tile_type_id, tile_class_id);
                 if (stealth > maxStealth) {
                     stealth = maxStealth;
                 }
                 tile.stealth = stealth;
 
-            }
-            let tileTypeId = tile.tile_type_id || state.tile_type_id;
+                if (toBuilding) {
+                    tile.assault_id = COMBAT_VALUE_NONE_ID;
+                }
 
-            dispatch('abilities/removeInvalid', tileTypeId, {root: true});
+                if (fromBuilding) {
+                    tile.assault_id = COMBAT_VALUE_D4_ID;
+                }
+            }
+
+            let {tile_type_id, tile_class_id, armor} = Object.assign({}, state, tile);
+
+            tile.armor = normalizeArmor(tile_type_id, tile_class_id, armor);
+
+            dispatch('abilities/removeInvalid', tile_type_id, {root: true});
 
             commit('update', tile);
         },
@@ -131,7 +146,7 @@ export default {
             return amaById[state.anti_missile_system_id].cost;
         },
         statsTotalCost(state, getters) {
-            let chassis     = getters.chassis;
+            let chassis = getters.chassis;
             let chassisCost = 0;
             if (chassis) {
                 chassisCost = chassis.cost;
@@ -142,14 +157,14 @@ export default {
                 state.assault_id;
         },
         hasTileClass(state) {
-            return state.tile_type_id == TILE_TYPE_VEHICLE_ID;
+            return state.tile_type_id == TILE_TYPE_VEHICLE_ID || state.tile_type_id == TILE_TYPE_BUILDING_ID;
         },
         hasAMAOption(state) {
             return state.tile_type_id == TILE_TYPE_VEHICLE_ID;
         },
         hasDefensiveSystems(state, getters, rootState, rootGetters) {
             const isInfantry = state.tile_type_id === TILE_TYPE_INFANTRY_ID;
-            const isVehicle  = state.tile_type_id === TILE_TYPE_VEHICLE_ID;
+            const isVehicle = state.tile_type_id === TILE_TYPE_VEHICLE_ID;
 
             if (isInfantry) {
                 return false;
@@ -164,6 +179,14 @@ export default {
         },
         techLevelOptions(state, getters) {
             return makeOptions(techLevelOptions, (id) => {
+                if (state.tile_type_id === TILE_TYPE_BUILDING_ID) {
+                    return {
+                        id,
+                        cost: 0,
+                        move: 0,
+                        evasion: 0,
+                    };
+                }
                 return getTypicalChassisDiff({
                     tech_level_id: id,
                 });
@@ -175,9 +198,9 @@ export default {
                     mobility_id: state.mobility_id,
                     tech_level_id: TECH_LEVEL_TYPICAL_ID,
                 });
-                let result  = getters.getChassis(settings);
-                let cost    = result.cost - typical.cost;
-                let move    = result.move - typical.move;
+                let result = getters.getChassis(settings);
+                let cost = result.cost - typical.cost;
+                let move = result.move - typical.move;
                 let evasion = result.evasion - typical.evasion;
                 return {
                     id: result.id,
@@ -198,18 +221,30 @@ export default {
             });
         },
         armorOptions(state, getters) {
-            let armorOptions = armorOptionsByTileTypeId[state.tile_type_id];
 
-            return makeOptions(armorOptions, (tile_armor) => {
+            let armorOptions = getArmorOptions(state.tile_type_id, state.tile_class_id);
+
+            let x = makeOptions(armorOptions, (tile_armor) => {
+                if (state.tile_type_id === TILE_TYPE_BUILDING_ID) {
+                    return {
+                        id: tile_armor,
+                        display_name: 'Armor ' + tile_armor,
+                        cost: 0,
+                        move: 0,
+                        evasion: 0,
+                    };
+                }
                 return getZeroArmorChassisMod(tile_armor);
             });
+            console.log('x', x);
+            return x;
 
             function getZeroArmorChassisMod(armor) {
                 let current = getters.getChassis({
                     armor: 0,
                 });
-                let result  = getters.getChassis({armor});
-                let move    = result.move - current.move;
+                let result = getters.getChassis({armor});
+                let move = result.move - current.move;
                 let evasion = result.evasion - current.evasion;
                 return {
                     id: result.id,
@@ -219,19 +254,37 @@ export default {
                 };
             }
         },
+        hasStealthAbility(state) {
+            return state.tile_type_id !== TILE_TYPE_BUILDING_ID;
+        },
         stealthOptions(state) {
             return getStealthOptions(state.tile_type_id, state.tile_class_id);
         },
+        targetingOptions(state) {
+            if (state.tile_type_id === TILE_TYPE_BUILDING_ID) {
+                return buildingTargetingOptions;
+            }
+            return targetingOptions;
+        },
+        hasAssaultStat(state) {
+            return state.tile_type_id !== TILE_TYPE_BUILDING_ID;
+        },
+        assaultOptions(state) {
+            if (state.tile_type_id === TILE_TYPE_BUILDING_ID) {
+                return buildingAssaultOptions;
+            }
+            return assaultOptions;
+        },
         makeSubtitle(state) {
             return (vehiclePrefix) => {
-                let mobility         = '';
+                let mobility = '';
                 let classDisplayName = '';
-                let techLevel        = '';
+                let techLevel = '';
 
                 let isPrimitive = state.tech_level_id == TECH_LEVEL_PRIMITIVE_ID;
-                let isAdvanced  = state.tech_level_id == TECH_LEVEL_ADVANCED_ID;
+                let isAdvanced = state.tech_level_id == TECH_LEVEL_ADVANCED_ID;
 
-                let isVehicle  = state.tile_type_id == TILE_TYPE_VEHICLE_ID;
+                let isVehicle = state.tile_type_id == TILE_TYPE_VEHICLE_ID;
                 let isInfantry = state.tile_type_id == TILE_TYPE_INFANTRY_ID;
 
                 if (isPrimitive) {
@@ -246,14 +299,10 @@ export default {
                 }
 
                 if (!isInfantry) {
-                    console.log('state.mobility_id', state.mobility_id)
-                    console.log(' mobilityById',  mobilityById)
-
-                    console.log(' mobilityById[state.mobility_id]', mobilityById[state.mobility_id])
                     mobility = mobilityById[state.mobility_id].display_name;
                 }
 
-                let type  = tileTypeById[state.tile_type_id].display_name;
+                let type = tileTypeById[state.tile_type_id].display_name;
                 let items = [
                     techLevel,
                     classDisplayName,
@@ -288,15 +337,14 @@ export default {
                     return false;
                 }
                 return targeting.name.toLowerCase() === die.toLowerCase();
-            }
+            };
         },
     },
 };
 
-
 function makeOptions(options, getStats) {
     return options.map((item) => {
-        let {id, display_name}    = item;
+        let {id, display_name} = item;
         let {cost, move, evasion} = getStats(id);
         return {
             id,

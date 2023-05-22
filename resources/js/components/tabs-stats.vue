@@ -87,7 +87,7 @@
     import TileStatSelect from './tabs-stats/tile-stat-select';
     import TileClassRow from './tabs-stats/tile-class-row';
     import TileClassificationRow from './tabs-stats/tile-classification-row';
-    import {amaOptions, assaultOptions, targetingOptions} from '../data/options';
+    import {amaOptions, targetingOptions} from '../data/options';
     import {mapTileGetters, mapTileProperties} from '../data/mappers';
 
     export default {
@@ -98,8 +98,6 @@
         },
         data() {
             return {
-                targetingOptions: targetingOptions,
-                assaultOptions: assaultOptions,
                 amaOptions: amaOptions,
             };
         },
@@ -113,7 +111,9 @@
                 'techLevelOptions',
                 'stealthOptions',
                 'armorOptions',
+                'targetingOptions',
                 'statsTotalCost',
+                'assaultOptions',
             ]),
             ...mapTileProperties({
                 tile_type_id: 'tile_type_id',

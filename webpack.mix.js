@@ -20,7 +20,7 @@ mix
     .js('resources/js/app.js', 'public/build/js')
     .vue({ version: 2 });
 mix
-    // .sourceMaps()
+    .sourceMaps()
     .extract(['vue', 'vuex', 'axios'])
 
     .sass('resources/sass/app.scss', 'public/build/css')

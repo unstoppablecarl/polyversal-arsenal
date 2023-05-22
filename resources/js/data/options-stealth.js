@@ -1,5 +1,4 @@
-import {TILE_TYPE_CAVALRY_ID, TILE_TYPE_INFANTRY_ID, TILE_TYPE_VEHICLE_ID} from './constants';
-import {armorOptionsByTileTypeId} from './options-armor';
+import {TILE_TYPE_BUILDING_ID, TILE_TYPE_CAVALRY_ID, TILE_TYPE_INFANTRY_ID, TILE_TYPE_VEHICLE_ID} from './constants'
 
 function makeOptions(maxStealth) {
     let options = [{
@@ -30,6 +29,9 @@ function getStealthOptions(tileTypeId, tileClassId) {
     if (tileTypeId == TILE_TYPE_CAVALRY_ID) {
         return makeOptions(3);
     }
+    if (tileTypeId == TILE_TYPE_BUILDING_ID) {
+        return makeOptions(0);
+    }
 }
 
 function getMaxStealth(tileTypeId, tileClassId) {
@@ -42,6 +44,10 @@ function getMaxStealth(tileTypeId, tileClassId) {
 
     if (tileTypeId == TILE_TYPE_CAVALRY_ID) {
         return 3;
+    }
+
+    if (tileTypeId == TILE_TYPE_BUILDING_ID) {
+        return 0;
     }
 }
 

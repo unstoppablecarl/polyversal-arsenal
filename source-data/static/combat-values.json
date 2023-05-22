@@ -28,5 +28,11 @@
         "cost": 5,
         "name": "d12",
         "display_name": "D12"
+    },
+    {
+        "id": 6,
+        "cost": 0,
+        "name": "none",
+        "display_name": "None"
     }
 ]

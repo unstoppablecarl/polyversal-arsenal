@@ -16,5 +16,11 @@
         "cost": 3,
         "name": "vehicle",
         "display_name": "Vehicle"
+    },
+    {
+        "id": 4,
+        "cost": 3,
+        "name": "building",
+        "display_name": "Building"
     }
 ]

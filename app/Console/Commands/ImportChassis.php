@@ -34,7 +34,7 @@ class ImportChassis extends Command
 
     public function handle()
     {
-        $chassisRecords      = $this->load('source-data/chassis.csv');
+        $chassisRecords = $this->load('source-data/chassis.csv');
         $chassisArmorRecords = $this->load('source-data/chassis-armor-stats.csv');
 
 
@@ -44,22 +44,22 @@ class ImportChassis extends Command
 
         $data = [];
         foreach ($chassisRecords as $row) {
-            $key       = $this->chassisKey($row);
+            $key = $this->chassisKey($row);
             $armorRows = $chassisArmorRecords[$key];
 
             foreach ($armorRows as $armorRow) {
                 $armorRow = array_except($armorRow, ['cost']);
-                $row      = array_merge($row, $armorRow);
+                $row = array_merge($row, $armorRow);
 
-                $row['armor']   = (int)$row['armor'];
-                $row['move']    = (int)$row['move'];
+                $row['armor'] = (int)$row['armor'];
+                $row['move'] = (int)$row['move'];
                 $row['evasion'] = (int)$row['evasion'];
-                $row['cost']    = (int)$row['cost'];
+                $row['cost'] = (int)$row['cost'];
 
                 $rules = [
-                    'armor'      => 'integer',
-                    'move'       => 'integer',
-                    'evasion'    => 'integer',
+                    'armor' => 'integer',
+                    'move' => 'integer',
+                    'evasion' => 'integer',
                     'tech_level' => Rule::in([
                         'primitive',
                         'typical',
@@ -71,28 +71,28 @@ class ImportChassis extends Command
                 $this->validate($row, $rules);
 
                 $damageTrack = [
-                    'stress'              => (int)$row['damage_stress'],
-                    'immobilized'         => (int)$row['damage_immobilized'],
-                    'weapon_destroyed'    => (int)$row['damage_weapon_destroyed'],
+                    'stress' => (int)$row['damage_stress'],
+                    'immobilized' => (int)$row['damage_immobilized'],
+                    'weapon_destroyed' => (int)$row['damage_weapon_destroyed'],
                     'targeting_destroyed' => (int)$row['damage_targeting_destroyed'],
-                    'fuel_leak'           => (int)$row['damage_fuel_leak'],
-                    'hull_breach'         => (int)$row['damage_hull_breach'],
-                    'destroyed'           => (int)$row['damage_destroyed'],
+                    'fuel_leak' => (int)$row['damage_fuel_leak'],
+                    'hull_breach' => (int)$row['damage_hull_breach'],
+                    'destroyed' => (int)$row['damage_destroyed'],
                 ];
 
                 $damageTrack = array_filter($damageTrack);
-                $newRow      = [
-                    'tile_type'     => $row['tile_type'],
+                $newRow = [
+                    'tile_type' => $row['tile_type'],
                     'tile_class_id' => (int)$row['tile_class_id'],
-                    'mobility'      => $row['mobility'],
-                    'tech_level'    => $row['tech_level'],
-                    'armor'         => $row['armor'],
-                    'move'          => $row['move'],
-                    'evasion'       => $row['evasion'],
-                    'cost'          => $row['cost'],
-                    'damage_track'  => $damageTrack,
+                    'mobility' => $row['mobility'],
+                    'tech_level' => $row['tech_level'],
+                    'armor' => $row['armor'],
+                    'move' => $row['move'],
+                    'evasion' => $row['evasion'],
+                    'cost' => $row['cost'],
+                    'damage_track' => $damageTrack,
                 ];
-                $data[]      = $newRow;
+                $data[] = $newRow;
             }
         }
 
@@ -108,13 +108,15 @@ class ImportChassis extends Command
         // $data = $this->copyMobilityCost($data);
 
         $infantry = $data['infantry'];
-        $cavalry  = $data['cavalry'];
-        $vehicle  = $data['vehicle'];
-
+        $cavalry = $data['cavalry'];
+        $vehicle = $data['vehicle'];
+        $building = $data['building'];
 
         file_put_contents('./source-data/imported/infantry-chassis.json', json_encode($infantry, JSON_PRETTY_PRINT));
         file_put_contents('./source-data/imported/cavalry-chassis.json', json_encode($cavalry, JSON_PRETTY_PRINT));
         file_put_contents('./source-data/imported/vehicle-chassis.json', json_encode($vehicle, JSON_PRETTY_PRINT));
+        file_put_contents('./source-data/imported/building-chassis.json', json_encode($building, JSON_PRETTY_PRINT));
+
     }
 
 
@@ -147,7 +149,7 @@ class ImportChassis extends Command
                 'hoverbike',
                 'trike',
             ];
-        } else {
+        } else if ($class == 'vehicle') {
             $validValues = [
                 'stationary',
                 'wheeled',
@@ -160,6 +162,10 @@ class ImportChassis extends Command
                 'turbofan',
                 'aerojet',
                 'naval',
+            ];
+        } else if ($class == 'building') {
+            $validValues = [
+                'stationary_building',
             ];
         }
         $this->validateMobility($row, $validValues);

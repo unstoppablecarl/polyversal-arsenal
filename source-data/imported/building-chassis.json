@@ -1,0 +1,1312 @@
+{
+    "1": {
+        "stationary_building": {
+            "primitive": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "typical": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "advanced": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 1,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ]
+        }
+    },
+    "2": {
+        "stationary_building": {
+            "primitive": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "typical": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "advanced": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 2,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ]
+        }
+    },
+    "3": {
+        "stationary_building": {
+            "primitive": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "typical": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "advanced": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 3,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ]
+        }
+    },
+    "4": {
+        "stationary_building": {
+            "primitive": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "typical": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "advanced": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 4,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ]
+        }
+    },
+    "5": {
+        "stationary_building": {
+            "primitive": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "primitive",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "typical": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "typical",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ],
+            "advanced": [
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 0,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 1,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 2,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 3,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 4,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                },
+                {
+                    "tile_type": "building",
+                    "tile_class_id": 5,
+                    "mobility": "stationary_building",
+                    "tech_level": "advanced",
+                    "armor": 5,
+                    "move": 0,
+                    "evasion": 5,
+                    "cost": 0,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 5
+                    }
+                }
+            ]
+        }
+    }
+}

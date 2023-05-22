@@ -4,7 +4,7 @@ import {
     TILE_WEAPON_TYPE_ONLY_AA_ID,
     TILE_WEAPON_TYPE_WITH_AA_ID,
     TILE_TYPE_INFANTRY_ID,
-    TILE_TYPE_CAVALRY_ID, TILE_TYPE_VEHICLE_ID,
+    TILE_TYPE_CAVALRY_ID, TILE_TYPE_VEHICLE_ID, TILE_TYPE_BUILDING_ID,
 } from './constants';
 
 import weaponData from '../../../source-data/imported/weapons.json';
@@ -17,15 +17,19 @@ const WEAPON_TYPE_MOD = {
 };
 
 let infantryData = weaponData.filter(item => item.is_infantry);
-let vehicleData  = weaponData.filter(item => !item.is_infantry);
+let vehicleData  = weaponData.filter(item => !item.is_infantry && !item.is_building);
+let buildingData  = weaponData.filter(item => item.is_building);
 
 const infantry = Repo(infantryData);
 const vehicle  = Repo(vehicleData);
+const building = Repo(buildingData)
 
+console.log(buildingData)
 const map = {
     [TILE_TYPE_INFANTRY_ID]: infantry,
     [TILE_TYPE_CAVALRY_ID]: infantry,
     [TILE_TYPE_VEHICLE_ID]: vehicle,
+    [TILE_TYPE_BUILDING_ID]: building,
 };
 
 export default function (tileTypeId) {

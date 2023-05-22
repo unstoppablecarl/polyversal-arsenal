@@ -1,1 +1,180 @@
-{"1":{"infantry":{"primitive":[{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"primitive","armor":0,"move":5,"evasion":14,"cost":1,"damage_track":{"stress":1,"destroyed":2}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"primitive","armor":1,"move":4,"evasion":14,"cost":1,"damage_track":{"stress":1,"destroyed":2}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"primitive","armor":2,"move":3,"evasion":14,"cost":1,"damage_track":{"stress":1,"destroyed":2}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"primitive","armor":3,"move":2,"evasion":14,"cost":1,"damage_track":{"stress":1,"destroyed":2}}],"typical":[{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"typical","armor":0,"move":7,"evasion":15,"cost":2,"damage_track":{"stress":1,"destroyed":2}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"typical","armor":1,"move":6,"evasion":15,"cost":2,"damage_track":{"stress":1,"destroyed":2}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"typical","armor":2,"move":5,"evasion":15,"cost":2,"damage_track":{"stress":1,"destroyed":2}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"typical","armor":3,"move":4,"evasion":15,"cost":2,"damage_track":{"stress":1,"destroyed":2}}],"advanced":[{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"advanced","armor":0,"move":9,"evasion":16,"cost":3,"damage_track":{"stress":2,"destroyed":3}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"advanced","armor":1,"move":8,"evasion":16,"cost":3,"damage_track":{"stress":2,"destroyed":3}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"advanced","armor":2,"move":7,"evasion":16,"cost":3,"damage_track":{"stress":2,"destroyed":3}},{"tile_type":"infantry","tile_class_id":1,"mobility":"infantry","tech_level":"advanced","armor":3,"move":6,"evasion":16,"cost":3,"damage_track":{"stress":2,"destroyed":3}}]}}}
+{
+    "1": {
+        "infantry": {
+            "primitive": [
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "primitive",
+                    "armor": 0,
+                    "move": 5,
+                    "evasion": 14,
+                    "cost": 1,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "primitive",
+                    "armor": 1,
+                    "move": 4,
+                    "evasion": 14,
+                    "cost": 1,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "primitive",
+                    "armor": 2,
+                    "move": 3,
+                    "evasion": 14,
+                    "cost": 1,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "primitive",
+                    "armor": 3,
+                    "move": 2,
+                    "evasion": 14,
+                    "cost": 1,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                }
+            ],
+            "typical": [
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "typical",
+                    "armor": 0,
+                    "move": 7,
+                    "evasion": 15,
+                    "cost": 2,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "typical",
+                    "armor": 1,
+                    "move": 6,
+                    "evasion": 15,
+                    "cost": 2,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "typical",
+                    "armor": 2,
+                    "move": 5,
+                    "evasion": 15,
+                    "cost": 2,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "typical",
+                    "armor": 3,
+                    "move": 4,
+                    "evasion": 15,
+                    "cost": 2,
+                    "damage_track": {
+                        "stress": 1,
+                        "destroyed": 2
+                    }
+                }
+            ],
+            "advanced": [
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "advanced",
+                    "armor": 0,
+                    "move": 9,
+                    "evasion": 16,
+                    "cost": 3,
+                    "damage_track": {
+                        "stress": 2,
+                        "destroyed": 3
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "advanced",
+                    "armor": 1,
+                    "move": 8,
+                    "evasion": 16,
+                    "cost": 3,
+                    "damage_track": {
+                        "stress": 2,
+                        "destroyed": 3
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "advanced",
+                    "armor": 2,
+                    "move": 7,
+                    "evasion": 16,
+                    "cost": 3,
+                    "damage_track": {
+                        "stress": 2,
+                        "destroyed": 3
+                    }
+                },
+                {
+                    "tile_type": "infantry",
+                    "tile_class_id": 1,
+                    "mobility": "infantry",
+                    "tech_level": "advanced",
+                    "armor": 3,
+                    "move": 6,
+                    "evasion": 16,
+                    "cost": 3,
+                    "damage_track": {
+                        "stress": 2,
+                        "destroyed": 3
+                    }
+                }
+            ]
+        }
+    }
+}

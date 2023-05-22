@@ -14,12 +14,14 @@ class CombatValues extends StaticDBData
     public const D8_ID = 3;
     public const D10_ID = 4;
     public const D12_ID = 5;
+    public const NONE_ID = 6;
 
     public const D4 = 'd4';
     public const D6 = 'd6';
     public const D8 = 'd8';
     public const D10 = 'd10';
     public const D12 = 'd12';
+    public const NONE = 'none';
 
     protected $data = [
         self::D4_ID  => [
@@ -46,6 +48,11 @@ class CombatValues extends StaticDBData
             'id'           => self::D12_ID,
             'name'         => self::D12,
             'display_name' => 'D12',
+        ],
+        self::NONE_ID => [
+            'id'           => self::NONE_ID,
+            'name'         => self::NONE,
+            'display_name' => 'none',
         ],
     ];
 }

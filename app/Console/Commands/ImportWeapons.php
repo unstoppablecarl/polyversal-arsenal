@@ -50,6 +50,7 @@ class ImportWeapons extends Command
                 'cost_d12' => $row['cost_d12'],
                 'is_infantry' => $row['is_infantry'] ?: null,
                 'is_indirect' => $row['is_indirect'] ?: null,
+                'is_building' => $row['is_building'] ?: null,
                 'has_warheads' => $row['has_warheads'] ?: null,
             ];
 

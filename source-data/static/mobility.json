@@ -94,6 +94,12 @@
         "name": "naval",
         "display_name": "Naval",
         "tile_type_id": 3
+    },
+    {
+        "id": 17,
+        "name": "stationary_building",
+        "display_name": "Building",
+        "tile_type_id": 4
     }
 ]
 

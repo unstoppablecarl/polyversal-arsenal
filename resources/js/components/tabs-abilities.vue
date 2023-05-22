@@ -20,6 +20,7 @@
             title="Stealth / Active Camo"
             v-model="tile_stealth"
             :options="stealthOptions"
+            :disabled="!hasStealthAbility"
             :is-defensive="true"
             :show-move="false"
             :show-evasion="false"
@@ -68,6 +69,7 @@
             ...mapTileGetters([
                 'hasAMAOption',
                 'stealthOptions',
+                'hasStealthAbility'
             ]),
         },
     }
