@@ -46,103 +46,109 @@
             <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': backInvertTitle}]">{{ printSubTitle }}
             </text>
 
-            <text :x="56" y="50.25" :class="['flavor-text', {'text-invert': backInvertFlavorText}]">
-                <tspan v-for="(row, index) in flavorTextArray" :x="56" :y="50.25 + (index + 1) * 10">{{ row }}</tspan>
-            </text>
+            <g v-if="!isBuilding">
+                <text :x="56" y="50.25" :class="['flavor-text', {'text-invert': backInvertFlavorText}]">
+                    <tspan v-for="(row, index) in flavorTextArray" :x="56" :y="50.25 + (index + 1) * 10">{{
+                            row
+                        }}
+                    </tspan>
+                </text>
 
-            <g class="cost-header-box" :transform.once="costBoxTransform">
-                <rect
-                    x="0"
-                    y="0"
-                    :width.once="col1Width"
-                    height="8"
-                />
-                <rect
-                    :x.once="col1Width"
-                    y="0"
-                    :width.once="col2Width"
-                    height="8"
-                />
-                <rect
-                    :x="col1Width + col2Width"
-                    y="0"
-                    :width.once="col3Width"
-                    height="8"
-                />
-            </g>
-
-            <g :transform.once="costBoxTransform">
-                <text :x="2" y="4.75" class="cost-header-left">PSYCH PROFILE</text>
-                <text :x="col1Width + col2Width * 0.5" y="4.75" class="cost-header-center">MOD</text>
-                <text :x="col1Width + col2Width + col3Width * 0.5" y="4.75" class="cost-header-center">COST</text>
-            </g>
-
-            <g class="cost-row-box" :transform.once="costBoxTransform">
-
-                <g v-for="i in [0,1,2,3,4,5,6,7]">
-
-                    <rect x="0"
-                          :y.once="8 + i * 8"
-                          :width.once="col1Width"
-                          height="8"
+                <g class="cost-header-box" :transform.once="costBoxTransform">
+                    <rect
+                        x="0"
+                        y="0"
+                        :width.once="col1Width"
+                        height="8"
                     />
-
                     <rect
                         :x.once="col1Width"
-                        :y.once="8 + i * 8"
+                        y="0"
                         :width.once="col2Width"
                         height="8"
                     />
-
                     <rect
-                        :x.once="col1Width + col2Width"
-                        :y.once="8 + i * 8"
+                        :x="col1Width + col2Width"
+                        y="0"
                         :width.once="col3Width"
                         height="8"
                     />
                 </g>
-            </g>
 
-            <g :transform.once="costBoxTextTransform">
-                <g v-for="(item, index) in psychProfiles">
+                <g :transform.once="costBoxTransform">
+                    <text :x="2" y="4.75" class="cost-header-left">PSYCH PROFILE</text>
+                    <text :x="col1Width + col2Width * 0.5" y="4.75" class="cost-header-center">MOD</text>
+                    <text :x="col1Width + col2Width + col3Width * 0.5" y="4.75" class="cost-header-center">COST</text>
+                </g>
 
-                    <text :x="2" :y="(index + 1) * 8" class="cost-row-left">{{ item.label }}</text>
-                    <template v-if="index == 0">
-                        <text :x="col1Width + col2Width * 0.5" :y="(index + 1) * 8"
-                              class="cost-row-center">{{ item.percent_label }}
+                <g class="cost-row-box" :transform.once="costBoxTransform">
+
+                    <g v-for="i in [0,1,2,3,4,5,6,7]">
+
+                        <rect x="0"
+                              :y.once="8 + i * 8"
+                              :width.once="col1Width"
+                              height="8"
+                        />
+
+                        <rect
+                            :x.once="col1Width"
+                            :y.once="8 + i * 8"
+                            :width.once="col2Width"
+                            height="8"
+                        />
+
+                        <rect
+                            :x.once="col1Width + col2Width"
+                            :y.once="8 + i * 8"
+                            :width.once="col3Width"
+                            height="8"
+                        />
+                    </g>
+                </g>
+
+                <g :transform.once="costBoxTextTransform">
+                    <g v-for="(item, index) in psychProfiles">
+
+                        <text :x="2" :y="(index + 1) * 8" class="cost-row-left">{{ item.label }}</text>
+                        <template v-if="index == 0">
+                            <text :x="col1Width + col2Width * 0.5" :y="(index + 1) * 8"
+                                  class="cost-row-center">{{ item.percent_label }}
+                            </text>
+                        </template>
+                        <template v-else>
+                            <text :x="col1Width + col2Width - 2" :y="(index + 1) * 8"
+                                  class="cost-row-right">{{ item.percent_label }}
+                            </text>
+
+                        </template>
+                        <text :x="col1Width + col2Width + col3Width - 2" :y="(index + 1) * 8"
+                              class="cost-row-right">{{ item.cost }}
                         </text>
-                    </template>
-                    <template v-else>
-                        <text :x="col1Width + col2Width - 2" :y="(index + 1) * 8"
-                              class="cost-row-right">{{ item.percent_label }}
-                        </text>
+                    </g>
+                </g>
 
-                    </template>
-                    <text :x="col1Width + col2Width + col3Width - 2" :y="(index + 1) * 8"
-                          class="cost-row-right">{{ item.cost }}
+
+                <polygon class="shape-fill"
+                         points="71.9,201.2 67.6,193.7 71.9,186.2 80.6,186.2 84.9,193.7 80.6,201.2 "/>
+
+                <g transform="translate(76.233, 193.699)">
+                    <text :class="['shape-header-value max-size', {'text-invert': backInvertBottomHeadings}]" y="-13">
+                        MAX SIZE
+                    </text>
+                    <text class="shape-value" y="0.75">
+                        {{ maxSize }}
                     </text>
                 </g>
-            </g>
-
-
-            <polygon class="shape-fill" points="71.9,201.2 67.6,193.7 71.9,186.2 80.6,186.2 84.9,193.7 80.6,201.2 "/>
-
-            <g transform="translate(76.233, 193.699)">
-                <text :class="['shape-header-value max-size', {'text-invert': backInvertBottomHeadings}]" y="-13">
-                    MAX SIZE
-                </text>
-                <text class="shape-value" y="0.75">
-                    {{ maxSize }}
-                </text>
-            </g>
-            <g transform="translate(190.552, 193.699)">
-                <circle class="shape-fill" cx="0" cy="0" r="7.48"/>
-                <text :class="['shape-header-value', {'text-invert': backInvertBottomHeadings}]" y="-13">
-                    COST
-                </text>
-                <text class="shape-value" y="0.75">
-                    {{ totalCost }}
-                </text>
+                <g transform="translate(190.552, 193.699)">
+                    <circle class="shape-fill" cx="0" cy="0" r="7.48"/>
+                    <text :class="['shape-header-value', {'text-invert': backInvertBottomHeadings}]" y="-13">
+                        COST
+                    </text>
+                    <text class="shape-value" y="0.75">
+                        {{ totalCost }}
+                    </text>
+                </g>
             </g>
         </g>
     </svg>
@@ -151,11 +157,12 @@
 
 <script>
 
-import {mapBackImageGetters, mapTileGetters, mapTileProperties,} from '../../data/mappers';
+import {mapBackImageGetters, mapTileGetters, mapTileProperties} from '../../data/mappers';
 import getTileSvgCss from '../../lib/get-tile-svg-css';
 import textWrap from 'svg-text-wrap';
 import {mapGetters} from 'vuex';
 import psychProfiles from '../../data/psych-profiles';
+import {TILE_TYPE_BUILDING_ID} from '../../data/constants';
 
 let prefix = 0;
 
@@ -174,7 +181,7 @@ export default {
             col1Width: 44.25,
             col2Width: 19.38,
             col3Width: 19.38,
-            prefix
+            prefix,
         };
     },
     mounted() {
@@ -187,16 +194,18 @@ export default {
             'backInvertTitle',
             'backInvertBottomHeadings',
             'backInvertFlavorText',
-            'backCutLineColor'
+            'backCutLineColor',
         ]),
         ...mapTileGetters([
             'printSubTitle',
             'maxSize',
+            'isBuilding',
         ]),
         ...mapBackImageGetters([
             'sourceImageUrl',
         ]),
         ...mapTileProperties({
+            tile_type_id: 'tile_type_id',
             tile_name: 'name',
             tile_back_image_url: 'back_image_url',
             flavor_text: 'flavor_text',
@@ -210,11 +219,11 @@ export default {
         psychProfiles() {
             return psychProfiles.map(item => {
                 let percent_label = item.percent_label;
-                let percent       = item.percent;
-                let label         = item.label;
+                let percent = item.percent;
+                let label = item.label;
 
                 let cost = this.totalCost + (percent * this.totalCost);
-                cost     = Math.ceil(cost);
+                cost = Math.ceil(cost);
 
                 return {
                     label,

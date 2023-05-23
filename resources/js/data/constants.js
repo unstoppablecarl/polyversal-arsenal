@@ -30,8 +30,15 @@ const TECH_LEVEL_ADVANCED_ID = 3;
 const ABILITY_JUMP_JETS_ID = 7;
 
 const COMBAT_VALUE_D4_ID = 1;
-
 const COMBAT_VALUE_NONE_ID = 6;
+
+const BUILDING_CAPACITY_BY_CLASS = {
+    1: 4,
+    2: 10,
+    3: 20,
+    4: 50,
+    5: 100
+}
 
 export {
 
@@ -63,5 +70,7 @@ export {
 
     COMBAT_VALUE_NONE_ID,
     COMBAT_VALUE_D4_ID,
+
+    BUILDING_CAPACITY_BY_CLASS,
 };
 

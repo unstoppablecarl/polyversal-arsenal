@@ -1,5 +1,6 @@
 import {
     AMA_NONE_ID,
+    BUILDING_CAPACITY_BY_CLASS,
     COMBAT_VALUE_D4_ID,
     COMBAT_VALUE_NONE_ID,
     TECH_LEVEL_ADVANCED_ID,
@@ -288,6 +289,16 @@ export default {
             }
             return assaultOptions;
         },
+        isBuilding(state) {
+            return state.tile_type_id == TILE_TYPE_BUILDING_ID;
+        },
+        buildingCapacity(state) {
+            if (state.tile_type_id != TILE_TYPE_BUILDING_ID) {
+                return 0;
+            }
+
+            return BUILDING_CAPACITY_BY_CLASS[state.tile_class_id]
+        },
         makeSubtitle(state) {
             return (vehiclePrefix) => {
                 let mobility = '';
@@ -298,6 +309,8 @@ export default {
                 let isAdvanced = state.tech_level_id == TECH_LEVEL_ADVANCED_ID;
 
                 let isVehicle = state.tile_type_id == TILE_TYPE_VEHICLE_ID;
+                let isBuilding = state.tile_type_id == TILE_TYPE_BUILDING_ID;
+
                 let isInfantry = state.tile_type_id == TILE_TYPE_INFANTRY_ID;
 
                 if (isPrimitive) {
@@ -307,11 +320,11 @@ export default {
                     techLevel = 'Adv';
                 }
 
-                if (isVehicle) {
+                if (isVehicle || isBuilding) {
                     classDisplayName = vehiclePrefix + ' ' + state.tile_class_id;
                 }
 
-                if (!isInfantry) {
+                if (!isInfantry && !isBuilding) {
                     mobility = mobilityById[state.mobility_id].display_name;
                 }
 
@@ -322,7 +335,13 @@ export default {
                     mobility,
                     type,
                 ].filter(s => s);
-                return items.join(' ');
+                let result = items.join(' ');
+
+                if(isBuilding){
+                    result += ', Cap. ' + BUILDING_CAPACITY_BY_CLASS[state.tile_class_id]
+                }
+
+                return result
             };
         },
         subTitle(state, getters) {
