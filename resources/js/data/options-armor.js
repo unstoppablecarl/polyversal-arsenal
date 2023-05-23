@@ -46,29 +46,13 @@ function makeBuildingArmorOptions(values) {
 function getMaxArmor(tile_type_id, tile_class_id) {
     let options = getArmorOptions(tile_type_id, tile_class_id)
 
-    let max = 0
-
-    options.forEach(({id}) => {
-        if (id > max) {
-            max = id
-        }
-    })
-
-    return max
+    return _.maxBy(options, 'id').id
 }
 
 function getMinArmor(tile_type_id, tile_class_id) {
     let options = getArmorOptions(tile_type_id, tile_class_id)
 
-    let min = Infinity
-
-    options.forEach(({id}) => {
-        if (id < min) {
-            min = id
-        }
-    })
-
-    return min
+    return _.minBy(options, 'id').id
 }
 
 function normalizeArmor(tile_type_id, tile_class_id, armor) {
@@ -83,6 +67,7 @@ function normalizeArmor(tile_type_id, tile_class_id, armor) {
     if (armor > max) {
         return max
     }
+
     return armor
 }
 

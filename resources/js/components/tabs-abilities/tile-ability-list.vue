@@ -2,7 +2,7 @@
     <div>
 
         <div :class="['form-group row', {'ability-disabled': !item.valid}]" v-for="item in options"
-             :key="item.id" v-if="item.valid">
+             :key="item.id" v-if="item.tileTypeValid">
             <label class="col-sm-2 col-form-label">
 
                 {{item.display_name}}
@@ -32,11 +32,10 @@
 
             <div class="col-sm col-form-label">
                 <span class="text-primary" data-tooltip :title.once="defensiveSystemTooltip" v-if="item.is_defensive">
-                    Defensive System
+                    Defensive System<span v-if="item.tooltip_title">,</span>
                 </span>
-                <span class="text-primary" data-tooltip :title.once="jumpJetSystemTooltip"
-                      v-if="item.is_jumpjet">
-                    Jump System
+                <span class="text-primary" data-tooltip :title.once="item.tooltip_content" v-if="item.tooltip_title">
+                    {{item.tooltip_title}}
                 </span>
             </div>
         </div>
@@ -46,7 +45,7 @@
 <script>
     import Number from '../functional/number';
     import {mapAbilityGetters, mapTileProperties} from '../../data/mappers';
-    import {defensiveSystemTooltip, jumpJetSystemTooltip} from '../../content/tooltips';
+    import {defensiveSystemTooltip} from '../../content/tooltips';
 
     export default {
         name: 'tile-ability-list',
@@ -54,8 +53,7 @@
         props: {},
         data() {
             return {
-                defensiveSystemTooltip,
-                jumpJetSystemTooltip
+                defensiveSystemTooltip
             };
         },
         computed: {

@@ -104,9 +104,9 @@ id,name,display_name,class,range,ap,at,aa,damage,cost_d4,cost_d6,cost_d8,cost_d1
 103,rockets-3,Rockets III,3,28,D6,D6,D6,ML,2,4,6,7,9,,1,,
 104,rockets-4,Rockets IV,4,32,D8,D8,D8,ML,5,7,9,11,12,,1,,
 105,rockets-5,Rockets V,5,36,D10,D10,D10,ML,8,11,13,15,17,,1,,
-106,building-automated-laser-1,Automated Pulse Laser I,1,6,D4,D4,D4,L,0,0,0,0,0,,,,1
-107,building-automated-laser-2,Automated Pulse Laser II,2,10,D4,D6,D4,L,0,0,0,0,0,,,,1
-108,building-automated-laser-3,Automated Pulse Laser III,3,14,D6,D8,D4,L,0,0,0,0,0,,,,1
+106,building-automated-laser-1,Pulse Laser I,1,6,D4,D4,D4,L,0,0,0,0,0,,,,1
+107,building-automated-laser-2,Pulse Laser II,2,10,D4,D6,D4,L,0,0,0,0,0,,,,1
+108,building-automated-laser-3,Pulse Laser III,3,14,D6,D8,D4,L,0,0,0,0,0,,,,1
 109,building-autocannon-1,Autocannon I,1,8,D4,D4,D4,L,0,0,0,0,0,,,,1
 110,building-autocannon-2,Autocannon II,2,12,D6,D6,D6,ML,0,0,0,0,0,,,,1
 111,building-autocannon-3,Autocannon III,3,16,D8,D8,D8,ML,0,0,0,0,0,,,,1

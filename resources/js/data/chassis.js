@@ -21,21 +21,11 @@ function getChassis({
                         tech_level_id,
                         mobility_id,
                     }) {
-    //
-    // console.log('getChassis 1', {
-    //     tile_type_id,
-    //     tile_class_id,
-    //     armor,
-    //     tech_level_id,
-    //     mobility_id,
-    // })
     let data = map[tile_type_id]
     let mobility = mobilityById[mobility_id].name
     let techLevel = techLevelById[tech_level_id].name
 
-    // console.log('z', data[tile_type_id][mobility][techLevel], armor)
-// console.log('getChassis 2', data[tile_class_id][mobility][techLevel])
-    return data[tile_class_id][mobility][techLevel][armor]
+   return data[tile_class_id][mobility][techLevel][armor]
 }
 
 export {

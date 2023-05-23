@@ -108,7 +108,7 @@
                     {{ evasion }}
                 </text>
             </g>
-            <g id="assault">
+            <g id="assault" v-if="hasAssaultOptions">
                 <polygon id="assault-bg" :class="assaultIconCssClass"
                          points="44.1,83.3 36.5,87.7 36.5,96.5 44.1,100.8 51.7,96.5 51.7,87.7 	"/>
                 <path id="assault-icon" class="icon-white" d="M47.5,83.7l5.5,3.2v1.8l-0.8,0v-1.3l-4.7-2.7l0-0.3L47.5,83.7z M41.6,81.1l0,3.3l2.5,1.5
@@ -196,6 +196,7 @@ export default {
             'printSubTitle',
             'evasion',
             'move',
+            'hasAssaultOptions'
         ]),
         tileNameArray() {
             if (this.tile_name) {

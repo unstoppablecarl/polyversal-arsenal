@@ -24,7 +24,6 @@ const infantry = Repo(infantryData);
 const vehicle  = Repo(vehicleData);
 const building = Repo(buildingData)
 
-console.log(buildingData)
 const map = {
     [TILE_TYPE_INFANTRY_ID]: infantry,
     [TILE_TYPE_CAVALRY_ID]: infantry,

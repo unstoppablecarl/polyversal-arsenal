@@ -2101,8 +2101,8 @@
     },
     {
         "id": 106,
-        "name": "automated-pulse-laser-1",
-        "display_name": "Automated Pulse Laser I",
+        "name": "pulse-laser-1",
+        "display_name": "Pulse Laser I",
         "range": 6,
         "ap": "D4",
         "at": "D4",
@@ -2121,8 +2121,8 @@
     },
     {
         "id": 107,
-        "name": "automated-pulse-laser-2",
-        "display_name": "Automated Pulse Laser II",
+        "name": "pulse-laser-2",
+        "display_name": "Pulse Laser II",
         "range": 10,
         "ap": "D4",
         "at": "D6",
@@ -2141,8 +2141,8 @@
     },
     {
         "id": 108,
-        "name": "automated-pulse-laser-3",
-        "display_name": "Automated Pulse Laser III",
+        "name": "pulse-laser-3",
+        "display_name": "Pulse Laser III",
         "range": 14,
         "ap": "D6",
         "at": "D8",

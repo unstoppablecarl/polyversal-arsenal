@@ -102,7 +102,7 @@ export default {
 
             tile.armor = normalizeArmor(tile_type_id, tile_class_id, armor);
 
-            dispatch('abilities/removeInvalid', tile_type_id, {root: true});
+            dispatch('abilities/removeInvalid', {newTileTypeId: tile_type_id, tile}, {root: true});
 
             commit('update', tile);
         },

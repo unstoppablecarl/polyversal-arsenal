@@ -1,6 +1,12 @@
 import {abilityOptions, amaById} from '../data/options';
-import {ABILITY_JUMP_JETS_ID, TILE_TYPE_VEHICLE_ID} from '../data/constants';
-import {abilityCost, abilityValid, hasDefensiveAbility} from '../data/abilities';
+import {ABILITY_JUMP_JETS_ID, TILE_TYPE_BUILDING_ID, TILE_TYPE_VEHICLE_ID} from '../data/constants';
+import {
+    abilityCost,
+    abilityTileTypeValid,
+    abilityRequirementsValid,
+    hasDefensiveAbility,
+    abilityValid,
+} from '../data/abilities';
 
 export default {
     namespaced: true,
@@ -35,9 +41,9 @@ export default {
         remove({commit, state}, abilityId) {
             commit('remove', abilityId);
         },
-        removeInvalid({commit, state, rootState}, newTileTypeId) {
+        removeInvalid({commit, state, rootState}, {newTileTypeId, tile}) {
             let validIds = state.ability_ids.filter((abilityId) => {
-                return abilityValid(abilityId, newTileTypeId)
+                return abilityValid(abilityId, newTileTypeId, tile)
             });
 
             commit('set', validIds)
@@ -56,40 +62,40 @@ export default {
         },
         options(state, getters, rootState) {
             let isVehicle = rootState.tile.tile_type_id == TILE_TYPE_VEHICLE_ID;
+            let isBuilding = rootState.tile.tile_type_id == TILE_TYPE_BUILDING_ID;
 
             return abilityOptions
                 .map((item) => {
                     let active = state.ability_ids.indexOf(item.id) !== -1;
-                    let valid  = getters.isValid(item.id);
-                    let cost   = false;
-                    if (valid) {
+                    let tileTypeValid = abilityTileTypeValid(item.id, rootState.tile.tile_type_id)
+                    let valid = abilityRequirementsValid(item.id, rootState.tile);
+
+                    let cost = false;
+                    if (tileTypeValid) {
                         cost = getters.cost(item.id);
                     }
 
                     return {
                         id: item.id,
                         display_name: item.display_name,
+                        tileTypeValid,
                         valid,
                         active,
                         cost,
                         is_defensive: item.is_defensive,
-                        is_jumpjet: item.name === 'jump_jets' && isVehicle,
+                        tooltip_title: item.tooltip_title,
+                        tooltip_content: item.tooltip_content,
                     };
                 });
         },
-        canAdd(state, getters) {
+        canAdd(state, getters, rootState) {
             return (abilityId) => {
 
                 let hasAbility = state.ability_ids.indexOf(abilityId) !== -1;
                 if (hasAbility) {
                     return false;
                 }
-                return getters.isValid(abilityId);
-            };
-        },
-        isValid(state, getters, rootState) {
-            return (abilityId) => {
-                return abilityValid(abilityId, rootState.tile.tile_type_id);
+                return abilityTileTypeValid(abilityId, rootState.tile.tile_type_id);
             };
         },
         cost(state, getters, rootState, rootGetters) {
@@ -104,8 +110,8 @@ export default {
             return hasDefensiveAbility(state.ability_ids);
         },
         totalCost(state, getters, rootState, rootGetters) {
-            let sum           = 0;
-            const tileTypeId  = rootState.tile.tile_type_id;
+            let sum = 0;
+            const tileTypeId = rootState.tile.tile_type_id;
             const tileClassId = rootState.tile.tile_class_id;
             const tileWeapons = rootGetters['tile_weapons/tile_weapons'];
 

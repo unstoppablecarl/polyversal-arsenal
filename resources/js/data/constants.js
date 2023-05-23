@@ -1,10 +1,8 @@
-
-
-const D4   = 'D4';
-const D6   = 'D6';
-const D8   = 'D8';
-const D10  = 'D10';
-const D12  = 'D12';
+const D4 = 'D4';
+const D6 = 'D6';
+const D8 = 'D8';
+const D10 = 'D10';
+const D12 = 'D12';
 const NONE = 'NONE';
 
 const DIE_COLORS = {
@@ -15,15 +13,14 @@ const DIE_COLORS = {
     [D12]: '#ED1C24',
 };
 
-const TILE_WEAPON_TYPE_GROUND_ID  = 1;
+const TILE_WEAPON_TYPE_GROUND_ID = 1;
 const TILE_WEAPON_TYPE_WITH_AA_ID = 2;
 const TILE_WEAPON_TYPE_ONLY_AA_ID = 3;
 
 const TILE_TYPE_INFANTRY_ID = 1;
-const TILE_TYPE_CAVALRY_ID  = 2;
-const TILE_TYPE_VEHICLE_ID  = 3;
-
-const TILE_TYPE_BUILDING_ID  = 4;
+const TILE_TYPE_CAVALRY_ID = 2;
+const TILE_TYPE_VEHICLE_ID = 3;
+const TILE_TYPE_BUILDING_ID = 4;
 
 const AMA_NONE_ID = 6;
 const TECH_LEVEL_PRIMITIVE_ID = 1;
