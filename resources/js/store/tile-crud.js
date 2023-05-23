@@ -7,6 +7,7 @@ import server from './server-repo';
 import images from './images';
 
 import {notificationFromErrorResponse, notificationSuccess} from './notification';
+import {router} from '../app';
 
 export default {
     state() {
@@ -60,7 +61,7 @@ export default {
         },
         save({commit, state, getters, dispatch}) {
             state.saving = true;
-            let data     = _.pick(state.tile, [
+            let data = _.pick(state.tile, [
                 'id',
                 'name',
                 'tile_type_id',
@@ -76,7 +77,7 @@ export default {
             ]);
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
-            data.ability_ids  = state.abilities.ability_ids;
+            data.ability_ids = state.abilities.ability_ids;
 
             data.costs = {
                 total: getters.totalCost,
@@ -112,6 +113,11 @@ export default {
                 }
 
                 dispatch('set', payload);
+
+                if (router.currentRoute.params.id == 'create') {
+                    router.push({name: router.currentRoute.name, params: {id: payload.tile.id}});
+
+                }
             };
 
             return Promise.all([
@@ -122,15 +128,15 @@ export default {
             ])
                 .then((results) => {
                     data.new_front_image = results[0];
-                    data.new_front_svg   = results[1];
-                    data.new_back_image  = results[2];
-                    data.new_back_svg    = results[3];
+                    data.new_front_svg = results[1];
+                    data.new_back_image = results[2];
+                    data.new_back_svg = results[3];
                     return sendRequest();
                 })
                 .finally(() => {
-                    state.saving                      = false;
+                    state.saving = false;
                     state.images.front.unsavedChanges = false;
-                    state.images.back.unsavedChanges  = false;
+                    state.images.back.unsavedChanges = false;
                 });
 
             function sendRequest() {
@@ -193,13 +199,13 @@ export default {
         abilities,
         tile_weapons,
         images,
-        tile_print_settings
+        tile_print_settings,
     },
 };
 
 function saveSourceImage({state, dispatch}, side, newImageData) {
 
-    let action          = 'images/' + side + '/saveSourceImage';
+    let action = 'images/' + side + '/saveSourceImage';
     let saveSourceImage = () => dispatch(action, newImageData);
 
     if (!state.tile.id) {

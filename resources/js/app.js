@@ -1,22 +1,24 @@
 import './bootstrap'
 
 import Vue from 'vue'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 import tileCrud from './store/tile-crud'
 import tileSheetStore from './store/tile-sheet'
 import AppTileEdit from './components/app-tile-edit'
 import AppTileGrid from './components/app-tile-grid'
 import AppTileView from './components/app-tile-view'
 import AppTileSheet from './components/app-tile-sheet-create'
-import routes from './app-tile-edit-routes';
+import routes from './app-tile-edit-routes'
 import VueRouter from 'vue-router'
+
+let router
 
 ifIdExists('app-tile-edit', (el) => {
 
-    const router = new VueRouter({
+    router = new VueRouter({
         routes,
     })
-    const store  = new Vuex.Store(tileCrud)
+    const store = new Vuex.Store(tileCrud)
     new Vue({
         store,
         router,
@@ -40,7 +42,6 @@ ifIdExists('app-tile-view', function (el) {
 })
 
 ifIdExists('app-tile-sheet-create', function (el) {
-
     new Vue({
         store: tileSheetStore,
         render: h => h(AppTileSheet),
@@ -49,9 +50,12 @@ ifIdExists('app-tile-sheet-create', function (el) {
 })
 
 function ifIdExists(id, callback) {
-
     let el = document.getElementById(id)
     if (el) {
         callback(el)
     }
 }
+
+export {
+    router,
+};
