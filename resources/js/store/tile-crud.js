@@ -7,6 +7,7 @@ import server from './server-repo';
 import images from './images';
 
 import {notificationFromErrorResponse, notificationSuccess, notificationWarning} from './notification';
+import {router} from '../app';
 
 export default {
     state() {
@@ -117,6 +118,11 @@ export default {
                 }
 
                 dispatch('set', payload);
+
+                if (router.currentRoute.params.id == 'create') {
+                    router.push({name: router.currentRoute.name, params: {id: payload.tile.id}});
+
+                }
             };
 
             return Promise.all([
