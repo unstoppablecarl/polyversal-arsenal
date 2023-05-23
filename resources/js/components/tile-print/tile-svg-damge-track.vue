@@ -42,8 +42,7 @@
                   :x="15 + (cellStressWidth) + (index * 10) + 5"
                   y="4.5"
             >
-                {{val}}
-                <tspan v-if="index == headerColumns.length - 1" font-size="6">+</tspan>
+                {{val}}<tspan v-if="index == headerColumns.length - 1" font-size="6">+</tspan>
             </text>
         </g>
 
@@ -66,7 +65,7 @@
 <script>
     import _ from 'lodash';
     import {mapAbilityGetters, mapTileGetters, mapTileProperties} from '../../data/mappers';
-    import {TILE_TYPE_VEHICLE_ID} from "../../data/constants";
+    import {TILE_TYPE_BUILDING_ID, TILE_TYPE_VEHICLE_ID} from '../../data/constants';
 
     const columnKeyToSvgId = {
         stress: 'damage-stress',
@@ -78,6 +77,7 @@
         hull_breach: 'damage-hull-breach',
         fuel_leak: 'damage-fuel-leak',
         destroyed: 'damage-destroyed',
+        fire: 'fire'
     };
 
     const LABEL_CELL_WIDTH = 15;
@@ -110,6 +110,7 @@
                 hasDefensiveSystems: 'hasDefensiveSystems',
             }),
             ...mapTileProperties({
+                tile_class_id: 'tile_class_id',
                 tile_type_id: 'tile_type_id',
                 tile_stealth: 'stealth',
                 armor: 'armor',
@@ -126,6 +127,9 @@
             damageTrack() {
                 let track = Object.assign({}, this.tileDamageTrack);
 
+                if(this.tile_type_id === TILE_TYPE_BUILDING_ID) {
+                    track.fire = track.destroyed - 1
+                }
                 if (this.hasJumpJets && this.tile_type_id === TILE_TYPE_VEHICLE_ID) {
                     if (track.stress > 0) {
                         track.stress -= 1;
@@ -134,7 +138,17 @@
                 }
 
                 if (this.hasDefensiveSystems) {
-                    if (track.stress > 0) {
+                    if(this.tile_type_id === TILE_TYPE_BUILDING_ID) {
+
+                        if(track.stress < 3){
+                            track.stress -= 1;
+                            track.defensive_system_offline = track.stress + 1;
+                        } else {
+                            track.stress -= 2;
+                            track.defensive_system_offline = track.stress + 2;
+                        }
+
+                    } else if (track.stress > 0) {
                         track.stress -= 1;
                         track.defensive_system_offline = track.stress + 1;
                     }
@@ -183,7 +197,6 @@
 
                 track = track.filter((item) => item.value);
                 track = _.sortBy(track, 'value');
-
 
                 let x = LABEL_CELL_WIDTH + this.cellStressWidth;
                 track.forEach((item, index) => {

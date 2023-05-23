@@ -30,13 +30,13 @@ export default {
         return {
             id: null,
             name: 'New Tile Name',
-            tile_type_id: TILE_TYPE_VEHICLE_ID,
-            tile_class_id: 3,
+            tile_type_id: TILE_TYPE_BUILDING_ID,
+            tile_class_id: 1,
             armor: 0,
             tech_level_id: 2,
-            mobility_id: 10,
+            mobility_id: 17,
             targeting_id: 1,
-            assault_id: 1,
+            assault_id: 6,
             stealth: 0,
             anti_missile_system_id: 6,
             flavor_text: '',
@@ -146,6 +146,10 @@ export default {
             return amaById[state.anti_missile_system_id].cost;
         },
         statsTotalCost(state, getters) {
+
+            if (state.tile_type_id == TILE_TYPE_BUILDING_ID) {
+                return 0;
+            }
             let chassis = getters.chassis;
             let chassisCost = 0;
             if (chassis) {
@@ -175,6 +179,7 @@ export default {
             if (state.anti_missile_system_id !== AMA_NONE_ID) {
                 return true;
             }
+
             return rootGetters['abilities/hasDefensiveAbility'];
         },
         techLevelOptions(state, getters) {
@@ -224,7 +229,7 @@ export default {
 
             let armorOptions = getArmorOptions(state.tile_type_id, state.tile_class_id);
 
-            let x = makeOptions(armorOptions, (tile_armor) => {
+            return makeOptions(armorOptions, (tile_armor) => {
                 if (state.tile_type_id === TILE_TYPE_BUILDING_ID) {
                     return {
                         id: tile_armor,
@@ -236,8 +241,6 @@ export default {
                 }
                 return getZeroArmorChassisMod(tile_armor);
             });
-            console.log('x', x);
-            return x;
 
             function getZeroArmorChassisMod(armor) {
                 let current = getters.getChassis({

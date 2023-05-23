@@ -43,6 +43,7 @@ class ImportAbilities extends Command
                 'infantry_valid'          => $row['infantry_valid'] ?: null,
                 'cavalry_valid'           => $row['cavalry_valid'] ?: null,
                 'vehicle_valid'           => $row['vehicle_valid'] ?: null,
+                'building_valid'           => $row['building_valid'] ?: null,
                 'warhead_cost_multiplier' => $row['warhead_cost_multiplier'] ?: null,
                 'is_defensive'            => $row['is_defensive'] ?: null,
             ];

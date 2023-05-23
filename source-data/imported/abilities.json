@@ -16,6 +16,7 @@
         "infantry_valid": 1,
         "cavalry_valid": 1,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -36,6 +37,7 @@
         "infantry_valid": 1,
         "cavalry_valid": 1,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -56,6 +58,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -76,6 +79,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -96,6 +100,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": 1
     },
@@ -116,6 +121,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -136,6 +142,7 @@
         "infantry_valid": 1,
         "cavalry_valid": 1,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -156,6 +163,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": 1
     },
@@ -176,6 +184,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": 1
     },
@@ -196,6 +205,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": 1
     },
@@ -216,6 +226,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -236,6 +247,7 @@
         "infantry_valid": 1,
         "cavalry_valid": null,
         "vehicle_valid": null,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -256,6 +268,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -276,6 +289,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": null,
         "is_defensive": null
     },
@@ -296,6 +310,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": 10,
         "is_defensive": null
     },
@@ -316,6 +331,7 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": 10,
         "is_defensive": null
     },
@@ -336,7 +352,92 @@
         "infantry_valid": null,
         "cavalry_valid": null,
         "vehicle_valid": 1,
+        "building_valid": null,
         "warhead_cost_multiplier": 20,
         "is_defensive": null
+    },
+    {
+        "id": 18,
+        "name": "fire_suppression_system",
+        "display_name": "Fire Suppression System",
+        "icon": "",
+        "display_order": 18,
+        "cost_static": null,
+        "cost_infantry": null,
+        "cost_cavalry": null,
+        "cost_vehicle_class_1": null,
+        "cost_vehicle_class_2": null,
+        "cost_vehicle_class_3": null,
+        "cost_vehicle_class_4": null,
+        "cost_vehicle_class_5": null,
+        "infantry_valid": null,
+        "cavalry_valid": null,
+        "vehicle_valid": null,
+        "building_valid": 1,
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
+    },
+    {
+        "id": 19,
+        "name": "security_system",
+        "display_name": "Security System",
+        "icon": "",
+        "display_order": 19,
+        "cost_static": null,
+        "cost_infantry": null,
+        "cost_cavalry": null,
+        "cost_vehicle_class_1": null,
+        "cost_vehicle_class_2": null,
+        "cost_vehicle_class_3": null,
+        "cost_vehicle_class_4": null,
+        "cost_vehicle_class_5": null,
+        "infantry_valid": null,
+        "cavalry_valid": null,
+        "vehicle_valid": null,
+        "building_valid": 1,
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
+    },
+    {
+        "id": 20,
+        "name": "fallout_shelter",
+        "display_name": "Fallout Shelter",
+        "icon": "",
+        "display_order": 20,
+        "cost_static": null,
+        "cost_infantry": null,
+        "cost_cavalry": null,
+        "cost_vehicle_class_1": null,
+        "cost_vehicle_class_2": null,
+        "cost_vehicle_class_3": null,
+        "cost_vehicle_class_4": null,
+        "cost_vehicle_class_5": null,
+        "infantry_valid": null,
+        "cavalry_valid": null,
+        "vehicle_valid": null,
+        "building_valid": 1,
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
+    },
+    {
+        "id": 21,
+        "name": "ews_communications_center",
+        "display_name": "EWS \/ Communications Center",
+        "icon": "",
+        "display_order": 21,
+        "cost_static": null,
+        "cost_infantry": null,
+        "cost_cavalry": null,
+        "cost_vehicle_class_1": null,
+        "cost_vehicle_class_2": null,
+        "cost_vehicle_class_3": null,
+        "cost_vehicle_class_4": null,
+        "cost_vehicle_class_5": null,
+        "infantry_valid": null,
+        "cavalry_valid": null,
+        "vehicle_valid": null,
+        "building_valid": 1,
+        "warhead_cost_multiplier": null,
+        "is_defensive": 1
     }
 ]
