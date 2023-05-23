@@ -2,10 +2,10 @@ import {abilityOptions, amaById} from '../data/options';
 import {ABILITY_JUMP_JETS_ID, TILE_TYPE_BUILDING_ID, TILE_TYPE_VEHICLE_ID} from '../data/constants';
 import {
     abilityCost,
-    abilityTileTypeValid,
     abilityRequirementsValid,
-    hasDefensiveAbility,
+    abilityTileTypeValid,
     abilityValid,
+    hasDefensiveAbility,
 } from '../data/abilities';
 
 export default {
@@ -56,14 +56,10 @@ export default {
         abilityList(state) {
             return abilityOptions
                 .filter((item) => {
-                    let active = state.ability_ids.indexOf(item.id) !== -1;
-                    return active;
+                    return state.ability_ids.indexOf(item.id) !== -1;
                 })
         },
         options(state, getters, rootState) {
-            let isVehicle = rootState.tile.tile_type_id == TILE_TYPE_VEHICLE_ID;
-            let isBuilding = rootState.tile.tile_type_id == TILE_TYPE_BUILDING_ID;
-
             return abilityOptions
                 .map((item) => {
                     let active = state.ability_ids.indexOf(item.id) !== -1;

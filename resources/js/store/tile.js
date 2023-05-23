@@ -1,10 +1,12 @@
 import {
     AMA_NONE_ID,
-    COMBAT_VALUE_D4_ID, COMBAT_VALUE_NONE_ID,
+    COMBAT_VALUE_D4_ID,
+    COMBAT_VALUE_NONE_ID,
     TECH_LEVEL_ADVANCED_ID,
     TECH_LEVEL_PRIMITIVE_ID,
     TECH_LEVEL_TYPICAL_ID,
-    TILE_TYPE_BUILDING_ID, TILE_TYPE_CAVALRY_ID,
+    TILE_TYPE_BUILDING_ID,
+    TILE_TYPE_CAVALRY_ID,
     TILE_TYPE_INFANTRY_ID,
     TILE_TYPE_VEHICLE_ID,
 } from '../data/constants';
@@ -12,7 +14,9 @@ import {getChassis} from '../data/chassis';
 import {firstMobilityIdForTileType, mobilityById, mobilityOptionsByTileTypeId} from '../data/options-mobility';
 import {getArmorOptions, normalizeArmor} from '../data/options-armor';
 import {
-    amaById, assaultOptions, buildingAssaultOptions,
+    amaById,
+    assaultOptions,
+    buildingAssaultOptions,
     buildingTargetingOptions,
     targetingById,
     targetingOptions,

@@ -4,7 +4,9 @@ import {
     TILE_WEAPON_TYPE_ONLY_AA_ID,
     TILE_WEAPON_TYPE_WITH_AA_ID,
     TILE_TYPE_INFANTRY_ID,
-    TILE_TYPE_CAVALRY_ID, TILE_TYPE_VEHICLE_ID, TILE_TYPE_BUILDING_ID,
+    TILE_TYPE_CAVALRY_ID,
+    TILE_TYPE_VEHICLE_ID,
+    TILE_TYPE_BUILDING_ID,
 } from './constants';
 
 import weaponData from '../../../source-data/imported/weapons.json';

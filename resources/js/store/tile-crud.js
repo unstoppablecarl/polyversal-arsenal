@@ -14,7 +14,7 @@ export default {
         return {
             fetching: false,
             saving: false,
-        };
+        }
     },
     actions: {
         set({commit, dispatch}, data) {
@@ -25,7 +25,7 @@ export default {
             dispatch('images/back/setSourceImageUrl', data.tile.back_source_image_url);
             dispatch('setTilePrintSettings', data.tile_print_settings || {});
 
-            return data;
+            return data
         },
 
         fetch({commit, state, dispatch}, tileId) {
