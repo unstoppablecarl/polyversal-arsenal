@@ -17,6 +17,14 @@ function notificationError({title, text = ''}) {
         duration: -1,
     });
 }
+function notificationWarning({title, text = ''}) {
+    Vue.notify({
+        type: 'warn',
+        title: title,
+        text: text,
+        duration: -1,
+    });
+}
 
 function notificationFromErrorResponse(response) {
 
@@ -50,5 +58,6 @@ function formatText(response) {
 export {
     notificationSuccess,
     notificationError,
+    notificationWarning,
     notificationFromErrorResponse,
 };

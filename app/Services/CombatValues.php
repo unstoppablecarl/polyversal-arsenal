@@ -24,35 +24,46 @@ class CombatValues extends StaticDBData
     public const NONE = 'none';
 
     protected $data = [
-        self::D4_ID  => [
-            'id'           => self::D4_ID,
-            'name'         => self::D4,
+        self::D4_ID => [
+            'id' => self::D4_ID,
+            'name' => self::D4,
             'display_name' => 'D4',
         ],
-        self::D6_ID  => [
-            'id'           => self::D6_ID,
-            'name'         => self::D6,
+        self::D6_ID => [
+            'id' => self::D6_ID,
+            'name' => self::D6,
             'display_name' => 'D6',
         ],
-        self::D8_ID  => [
-            'id'           => self::D8_ID,
-            'name'         => self::D8,
+        self::D8_ID => [
+            'id' => self::D8_ID,
+            'name' => self::D8,
             'display_name' => 'D8',
         ],
         self::D10_ID => [
-            'id'           => self::D10_ID,
-            'name'         => self::D10,
+            'id' => self::D10_ID,
+            'name' => self::D10,
             'display_name' => 'D10',
         ],
         self::D12_ID => [
-            'id'           => self::D12_ID,
-            'name'         => self::D12,
+            'id' => self::D12_ID,
+            'name' => self::D12,
             'display_name' => 'D12',
         ],
         self::NONE_ID => [
-            'id'           => self::NONE_ID,
-            'name'         => self::NONE,
+            'id' => self::NONE_ID,
+            'name' => self::NONE,
             'display_name' => 'none',
         ],
     ];
+
+    public function idsWithoutNone(): array
+    {
+        $ids = $this->ids();
+
+        return collect($ids)
+            ->filter(function ($id) {
+                return $id !== self::NONE_ID;
+            })
+            ->toArray();
+    }
 }

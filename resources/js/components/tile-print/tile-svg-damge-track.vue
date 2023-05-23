@@ -77,7 +77,7 @@
         hull_breach: 'damage-hull-breach',
         fuel_leak: 'damage-fuel-leak',
         destroyed: 'damage-destroyed',
-        fire: 'fire'
+        fire: 'damage-fire'
     };
 
     const LABEL_CELL_WIDTH = 15;
@@ -127,10 +127,13 @@
             damageTrack() {
                 let track = Object.assign({}, this.tileDamageTrack);
 
-                if(this.tile_type_id === TILE_TYPE_BUILDING_ID) {
+                let isVehicle = this.tile_type_id === TILE_TYPE_VEHICLE_ID;
+                let isBuilding = this.tile_type_id === TILE_TYPE_BUILDING_ID;
+
+                if(isBuilding) {
                     track.fire = track.destroyed - 1
                 }
-                if (this.hasJumpJets && this.tile_type_id === TILE_TYPE_VEHICLE_ID) {
+                if (this.hasJumpJets && isVehicle) {
                     if (track.stress > 0) {
                         track.stress -= 1;
                         track.jump_jets_offline = track.stress + 1;
@@ -138,12 +141,13 @@
                 }
 
                 if (this.hasDefensiveSystems) {
-                    if(this.tile_type_id === TILE_TYPE_BUILDING_ID) {
-
+                    if(isBuilding) {
                         if(track.stress < 3){
+                         // only has room for one defensive system offline slot
                             track.stress -= 1;
                             track.defensive_system_offline = track.stress + 1;
                         } else {
+                            // has room for 2 defensive system offline slots
                             track.stress -= 2;
                             track.defensive_system_offline = track.stress + 2;
                         }

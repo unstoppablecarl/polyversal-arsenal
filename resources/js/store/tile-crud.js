@@ -6,14 +6,14 @@ import tile_print_settings from './tile-print-settings';
 import server from './server-repo';
 import images from './images';
 
-import {notificationFromErrorResponse, notificationSuccess} from './notification';
+import {notificationFromErrorResponse, notificationSuccess, notificationWarning} from './notification';
 
 export default {
     state() {
         return {
             fetching: false,
             saving: false,
-        }
+        };
     },
     actions: {
         set({commit, dispatch}, data) {
@@ -24,7 +24,7 @@ export default {
             dispatch('images/back/setSourceImageUrl', data.tile.back_source_image_url);
             dispatch('setTilePrintSettings', data.tile_print_settings || {});
 
-            return data
+            return data;
         },
 
         fetch({commit, state, dispatch}, tileId) {
@@ -60,7 +60,7 @@ export default {
         },
         save({commit, state, getters, dispatch}) {
             state.saving = true;
-            let data     = _.pick(state.tile, [
+            let data = _.pick(state.tile, [
                 'id',
                 'name',
                 'tile_type_id',
@@ -76,7 +76,7 @@ export default {
             ]);
 
             data.tile_weapons = state.tile_weapons.tile_weapons;
-            data.ability_ids  = state.abilities.ability_ids;
+            data.ability_ids = state.abilities.ability_ids;
 
             data.costs = {
                 total: getters.totalCost,
@@ -109,6 +109,11 @@ export default {
 
                 if (payload.cost_diff) {
                     console.warn('server disagrees with cost calculation!', payload.cost_diff);
+
+                    notificationWarning({
+                        title: 'Cost Calc Error',
+                        text: `Server disagrees with cost calculation. ` + costDiffToMessages(payload),
+                    });
                 }
 
                 dispatch('set', payload);
@@ -122,15 +127,15 @@ export default {
             ])
                 .then((results) => {
                     data.new_front_image = results[0];
-                    data.new_front_svg   = results[1];
-                    data.new_back_image  = results[2];
-                    data.new_back_svg    = results[3];
+                    data.new_front_svg = results[1];
+                    data.new_back_image = results[2];
+                    data.new_back_svg = results[3];
                     return sendRequest();
                 })
                 .finally(() => {
-                    state.saving                      = false;
+                    state.saving = false;
                     state.images.front.unsavedChanges = false;
-                    state.images.back.unsavedChanges  = false;
+                    state.images.back.unsavedChanges = false;
                 });
 
             function sendRequest() {
@@ -165,9 +170,7 @@ export default {
     },
     getters: {
         totalCost(state, getters) {
-            return getters['tile/statsTotalCost'] +
-                getters['abilities/totalCost'] +
-                getters['tile_weapons/totalCost'];
+            return getters['tile/statsTotalCost'] + getters['abilities/totalCost'] + getters['tile_weapons/totalCost'];
         },
         viewURL(state) {
             return server.viewURL(state.tile.id);
@@ -193,13 +196,13 @@ export default {
         abilities,
         tile_weapons,
         images,
-        tile_print_settings
+        tile_print_settings,
     },
 };
 
 function saveSourceImage({state, dispatch}, side, newImageData) {
 
-    let action          = 'images/' + side + '/saveSourceImage';
+    let action = 'images/' + side + '/saveSourceImage';
     let saveSourceImage = () => dispatch(action, newImageData);
 
     if (!state.tile.id) {
@@ -207,4 +210,17 @@ function saveSourceImage({state, dispatch}, side, newImageData) {
             .then(() => saveSourceImage());
     }
     return saveSourceImage();
+}
+
+function costDiffToMessages(payload) {
+    let messages = [];
+    payload.cost_diff.forEach(({
+                                   app,
+                                   key,
+                                   vue,
+                               }) => {
+
+        messages.push(`${key} cost: server=${app}, local=${vue} `);
+    });
+    return messages.join(', ');
 }

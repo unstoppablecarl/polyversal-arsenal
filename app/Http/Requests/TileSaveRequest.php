@@ -6,10 +6,12 @@ use App\Models\Ability;
 use App\Models\AntiMissileSystem;
 use App\Models\Mobility;
 use App\Models\Weapon;
+use App\Services\CombatValues;
 use App\Services\TileTypes;
 use App\Services\Validation\Base64ImageRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class TileSaveRequest extends FormRequest
 {
@@ -21,18 +23,16 @@ class TileSaveRequest extends FormRequest
 
     public function rules()
     {
-        $tileTypeIds          = [1, 2, 3];
-        $tileClassIds         = [1, 2, 3, 4, 5];
-        $targetingIds         = [1, 2, 3, 4, 5];
-        $assaultIds           = [1, 2, 3, 4, 5];
-        $techLevelIds         = [1, 2, 3];
-        $mobilityIds          = Mobility::query()->pluck('id')->toArray();
+        $tileTypeIds = (new TileTypes())->ids();
+        $tileClassIds = [1, 2, 3, 4, 5];
+        $techLevelIds = [1, 2, 3];
+        $mobilityIds = Mobility::query()->pluck('id')->toArray();
         $antiMissileSystemIds = AntiMissileSystem::query()->pluck('id')->toArray();
-        $abilityIds           = Ability::query()->pluck('id')->toArray();
-        $weaponIds            = Weapon::wherePublic()->pluck('id')->toArray();
-        $weaponTypeIds        = [1, 2, 3];
-        $arcSizeIds           = [1, 2, 3, 4];
-        $arcDirectionIds      = [1, 2, 3, 4];
+        $abilityIds = Ability::query()->pluck('id')->toArray();
+        $weaponIds = Weapon::wherePublic()->pluck('id')->toArray();
+        $weaponTypeIds = [1, 2, 3];
+        $arcSizeIds = [1, 2, 3, 4];
+        $arcDirectionIds = [1, 2, 3, 4];
 
 
         $maxStealth = $this->maxStealth();
@@ -44,41 +44,39 @@ class TileSaveRequest extends FormRequest
         }
 
         return [
-            'name'                   => 'required',
-            'app_version'            => Rule::in([1]),
-            'tile_type_id'           => Rule::in($tileTypeIds),
-            'tile_class_id'          => Rule::in($tileClassIds),
-            'targeting_id'           => Rule::in($targetingIds),
-            'assault_id'             => Rule::in($assaultIds),
-            'tech_level_id'          => Rule::in($techLevelIds),
-            'mobility_id'            => Rule::in($mobilityIds),
+            'name' => 'required',
+            'app_version' => Rule::in([1]),
+            'tile_type_id' => Rule::in($tileTypeIds),
+            'tile_class_id' => Rule::in($tileClassIds),
+            'tech_level_id' => Rule::in($techLevelIds),
+            'mobility_id' => Rule::in($mobilityIds),
             'anti_missile_system_id' => Rule::in($antiMissileSystemIds),
-            'armor'                  => 'integer',
-            'stealth'                => 'integer|min:0' . $maxStealth,
-            'cached_cost'            => 'integer',
+            'armor' => 'integer',
+            'stealth' => 'integer|min:0' . $maxStealth,
+            'cached_cost' => 'integer',
 
-            'ability_ids'   => 'array',
+            'ability_ids' => 'array',
             'ability_ids.*' => Rule::in($abilityIds),
 
-            'tile_weapons'                       => 'array',
-            'tile_weapons.*.weapon_id'           => Rule::in($weaponIds),
+            'tile_weapons' => 'array',
+            'tile_weapons.*.weapon_id' => Rule::in($weaponIds),
             'tile_weapons.*.tile_weapon_type_id' => Rule::in($weaponTypeIds),
-            'tile_weapons.*.arc_direction_id'    => Rule::in($arcDirectionIds),
-            'tile_weapons.*.arc_size_id'         => Rule::in($arcSizeIds),
-            'tile_weapons.*.quantity'            => 'integer|min:1',
-            'tile_weapons.*.display_order'       => 'integer',
+            'tile_weapons.*.arc_direction_id' => Rule::in($arcDirectionIds),
+            'tile_weapons.*.arc_size_id' => Rule::in($arcSizeIds),
+            'tile_weapons.*.quantity' => 'integer|min:1',
+            'tile_weapons.*.display_order' => 'integer',
 
-            'costs'              => 'array',
-            'costs.total'        => 'integer|required',
-            'costs.stats'        => 'integer|required',
+            'costs' => 'array',
+            'costs.total' => 'integer|required',
+            'costs.stats' => 'integer|required',
             'costs.tile_weapons' => 'integer|required',
-            'costs.abilities'    => 'integer|required',
+            'costs.abilities' => 'integer|required',
 
             'new_front_image' => [
                 'nullable',
                 app(Base64ImageRule::class)
             ],
-            'new_back_image'  => [
+            'new_back_image' => [
                 'nullable',
                 app(Base64ImageRule::class)
             ],
@@ -87,9 +85,25 @@ class TileSaveRequest extends FormRequest
 
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
+
+        $validator->after(function (Validator $validator) {
+            $tileTypeId = $this->input('tile_type_id');
+            if ($tileTypeId) {
+                if ($tileTypeId != TileTypes::BUILDING_ID) {
+                    $validator->addRules($this->nonBuildingRules());
+                }
+            }
             $this->validateAbilityIds($validator);
         });
+    }
+
+    protected function nonBuildingRules(): array
+    {
+        $combatValues = new CombatValues();
+        return [
+            'targeting_id' => Rule::in($combatValues->idsWithoutNone()),
+            'assault_id' => Rule::in($combatValues->idsWithoutNone())
+        ];
     }
 
     protected function validateAbilityIds($validator)
@@ -119,7 +133,7 @@ class TileSaveRequest extends FormRequest
     protected function maxStealth(): int
     {
         $tileClassId = $this->input('tile_class_id');
-        $tileTypeId  = $this->input('tile_type_id');
+        $tileTypeId = $this->input('tile_type_id');
 
         if (!$tileTypeId) {
             return 0;
@@ -130,6 +144,8 @@ class TileSaveRequest extends FormRequest
             $maxStealth = 2;
         } else if ($tileTypeId === TileTypes::CAVALRY_ID) {
             $maxStealth = 3;
+        } else if ($tileTypeId === TileTypes::BUILDING_ID) {
+            $maxStealth = 0;
         }
 
         return $maxStealth;

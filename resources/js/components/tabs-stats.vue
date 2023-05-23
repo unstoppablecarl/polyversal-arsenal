@@ -35,6 +35,7 @@
             title="Tech Level"
             v-model="tile_tech_level_id"
             :options="techLevelOptions"
+            :disabled="!hasTechLevel"
         />
 
         <tile-stat-select
@@ -56,6 +57,7 @@
             title="Assault"
             v-model="tile_assault_id"
             :options="assaultOptions"
+            :disabled="!hasAssaultOptions"
             :show-move="false"
             :show-evasion="false"
         />
@@ -114,6 +116,8 @@
                 'targetingOptions',
                 'statsTotalCost',
                 'assaultOptions',
+                'hasAssaultOptions',
+                'hasTechLevel'
             ]),
             ...mapTileProperties({
                 tile_type_id: 'tile_type_id',

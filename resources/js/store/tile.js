@@ -257,6 +257,12 @@ export default {
                 };
             }
         },
+        hasTechLevel(state) {
+            return state.tile_type_id !== TILE_TYPE_BUILDING_ID;
+        },
+        hasAssaultOptions(state) {
+            return state.tile_type_id !== TILE_TYPE_BUILDING_ID;
+        },
         hasStealthAbility(state) {
             return state.tile_type_id !== TILE_TYPE_BUILDING_ID;
         },

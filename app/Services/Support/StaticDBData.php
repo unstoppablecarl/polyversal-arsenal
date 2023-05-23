@@ -130,6 +130,11 @@ abstract class StaticDBData
         return false;
     }
 
+    public function ids(): array
+    {
+        return array_keys($this->data);
+    }
+
     protected function convertToModel($value)
     {
         $id = $this->toId($value);

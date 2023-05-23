@@ -12,10 +12,12 @@ class TileTypes extends StaticDBData
     const INFANTRY_ID = 1;
     const CAVALRY_ID = 2;
     const VEHICLE_ID = 3;
+    const BUILDING_ID = 4;
 
     const INFANTRY = 'infantry';
     const CAVALRY = 'cavalry';
     const VEHICLE = 'vehicle';
+    const BUILDING = 'building';
 
     protected $data = [
         self::INFANTRY_ID => [
@@ -32,6 +34,11 @@ class TileTypes extends StaticDBData
             'id'           => self::VEHICLE_ID,
             'name'         => self::VEHICLE,
             'display_name' => 'Vehicle',
+        ],
+        self::BUILDING_ID  => [
+            'id'           => self::BUILDING_ID,
+            'name'         => self::BUILDING,
+            'display_name' => 'Building',
         ],
     ];
 }

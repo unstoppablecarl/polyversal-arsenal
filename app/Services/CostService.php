@@ -12,8 +12,12 @@ class CostService
 {
     public function total(Tile $tile)
     {
-        $cost          = $this->statsCost($tile);
-        $weaponCost    = $this->weaponCost($tile);
+        if ($tile->chassis->tile_type_id == TileTypes::BUILDING_ID) {
+            return 0;
+        }
+
+        $cost = $this->statsCost($tile);
+        $weaponCost = $this->weaponCost($tile);
         $abilitiesCost = $this->abilitiesCost($tile);
 
         return $cost + $weaponCost + $abilitiesCost;
@@ -21,10 +25,14 @@ class CostService
 
     public function statsCost(Tile $tile): int
     {
+        if ($tile->chassis->tile_type_id == TileTypes::BUILDING_ID) {
+            return 0;
+        }
+
         $chassis = $tile->chassis;
 
         $chassisArmorStat = $tile->getChassisArmorStat();
-        $cost             = 0;
+        $cost = 0;
 
         $cost += (int)$tile->assault_id;
         $cost += (int)$tile->targeting_id;
@@ -35,6 +43,10 @@ class CostService
 
     public function weaponCost(Tile $tile)
     {
+        if ($tile->chassis->tile_type_id == TileTypes::BUILDING_ID) {
+            return 0;
+        }
+
         $targetingName = $tile->targeting->name;
 
         $tile->loadMissing(['tileWeapons.weapon']);
@@ -44,12 +56,12 @@ class CostService
         /** @var Collection $weapons */
         $weapons = $tile->tileWeapons;
         return $weapons->sum(function (TileWeapon $tileWeapon) use ($targetingName) {
-            $column        = 'cost_' . $targetingName;
-            $attackCost    = $tileWeapon->weapon[$column];
-            $arcMod        = $tileWeapon->arcSize->cost_multiplier;
+            $column = 'cost_' . $targetingName;
+            $attackCost = $tileWeapon->weapon[$column];
+            $arcMod = $tileWeapon->arcSize->cost_multiplier;
             $weaponTypeMod = $this->tileWeaponTypeCost($tileWeapon->tileWeaponType->name);
-            $baseCost      = round($attackCost * $arcMod);
-            $cost          = round($baseCost * $weaponTypeMod);
+            $baseCost = round($attackCost * $arcMod);
+            $cost = round($baseCost * $weaponTypeMod);
             return max($cost, 1) * $tileWeapon->quantity;
         });
     }
@@ -62,7 +74,7 @@ class CostService
         $weapons = $tile->tileWeapons;
         return $weapons->sum(function (TileWeapon $tileWeapon) {
             $weapon = $tileWeapon->weapon;
-            $class  = (int)$tileWeapon->weapon->class;
+            $class = (int)$tileWeapon->weapon->class;
 
             if ($weapon->has_warheads) {
                 return $class * (int)$tileWeapon->quantity;
@@ -70,12 +82,12 @@ class CostService
         });
     }
 
-    public function getCostDiff($tile, array $costs)
+    public function getCostDiff(Tile $tile, array $costs): array
     {
-        $total        = array_get($costs, 'total');
+        $total = array_get($costs, 'total');
         $tile_weapons = array_get($costs, 'tile_weapons');
-        $abilities    = array_get($costs, 'abilities');
-        $stats        = array_get($costs, 'stats');
+        $abilities = array_get($costs, 'abilities');
+        $stats = array_get($costs, 'stats');
 
         $results = [
             [
@@ -174,7 +186,7 @@ class CostService
             }
 
             $tileClassId = $tile->chassis->tile_class_id;
-            $key         = 'cost_vehicle_class_' . $tileClassId;
+            $key = 'cost_vehicle_class_' . $tileClassId;
             return $ability[$key];
         }
     }
@@ -182,7 +194,7 @@ class CostService
     public function tileWeaponTypeCost(string $tileWeaponTypeName)
     {
         $map = [
-            'ground'  => 5 / 6,
+            'ground' => 5 / 6,
             'with_aa' => 1,
             'only_aa' => 1 / 6,
         ];

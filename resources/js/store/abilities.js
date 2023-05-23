@@ -72,8 +72,8 @@ export default {
                         valid,
                         active,
                         cost,
-                        is_defensive: item.is_defensive && isVehicle,
-                        is_jumpjet: item.is_jumpjet && isVehicle,
+                        is_defensive: item.is_defensive,
+                        is_jumpjet: item.name === 'jump_jets' && isVehicle,
                     };
                 });
         },
