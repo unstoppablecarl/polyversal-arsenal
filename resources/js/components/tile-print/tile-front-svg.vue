@@ -134,7 +134,7 @@
                 </text>
 
             </g>
-            <g id="move">
+            <g id="move" v-if="!isBuilding">
                 <polygon id="move-bg" class="fill-gray"
                          points="72,36.8 67.6,39.4 65,43.8 67.6,48.2 72,50.8 76.4,48.2 79,43.8 79,43.8 76.4,39.4 	"/>
                 <path id="move-icon" class="icon-white" d="M72,56.8l-3.5-6.1v-0.8l3.5,2l3.5-2v0.8L72,56.8z M72,30.9l3.5,6.1v0.8l-3.5-2l-3.5,2V37
@@ -196,7 +196,8 @@ export default {
             'printSubTitle',
             'evasion',
             'move',
-            'hasAssaultOptions'
+            'hasAssaultOptions',
+            'isBuilding',
         ]),
         tileNameArray() {
             if (this.tile_name) {
