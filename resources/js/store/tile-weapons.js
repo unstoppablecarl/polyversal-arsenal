@@ -1,6 +1,7 @@
 import {make as makeTileWeapon, sanitize as sanitizeTileWeapon} from './models/tile-weapon';
 import {copyItem, createItem, deleteItem, moveItem, updateItem} from '../lib/collection-helper';
 import Weapons from '../data/weapons';
+import {TILE_TYPE_BUILDING_ID} from '../data/constants';
 
 export default {
     namespaced: true,
@@ -34,7 +35,7 @@ export default {
         },
         clear(state) {
             state.tile_weapons = [];
-        }
+        },
     },
     actions: {
         set({commit, state, dispatch}, weapons) {
@@ -71,7 +72,7 @@ export default {
         options(state, getters) {
             return getters.weaponRepo.all();
         },
-        tile_weapons(state, getters) {
+        tile_weapons(state, getters, rootState) {
             return state.tile_weapons.map((tileWeapon) => {
 
                 let cost = getters.getWeaponCost(
@@ -81,12 +82,24 @@ export default {
                 );
 
                 let total_cost = cost * tileWeapon.quantity;
-                let weapon     = getters.weaponRepo.get(tileWeapon.weapon_id, tileWeapon.tile_weapon_type_id);
+                let weapon = getters.weaponRepo.get(tileWeapon.weapon_id, tileWeapon.tile_weapon_type_id);
+
+                let isBuilding = rootState.tile.tile_type_id == TILE_TYPE_BUILDING_ID
+                if (isBuilding) {
+                    cost = 0
+                    total_cost = 0
+                }
 
                 return Object.assign({}, tileWeapon, {weapon, cost, total_cost});
             });
         },
-        totalCost(state, getters) {
+        totalCost(state, getters, rootState) {
+
+            let isBuilding = rootState.tile.tile_type_id == TILE_TYPE_BUILDING_ID
+            if (isBuilding) {
+                return 0
+            }
+
             let total = 0;
             state.tile_weapons.forEach((tileWeapon) => {
                 let cost = getters.getWeaponCost(
