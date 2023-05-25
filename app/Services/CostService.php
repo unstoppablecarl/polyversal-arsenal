@@ -189,6 +189,10 @@ class CostService
             $key = 'cost_vehicle_class_' . $tileClassId;
             return $ability[$key];
         }
+
+        if ($tile->chassis->tile_type_id == TileTypes::BUILDING_ID) {
+            return 0;
+        }
     }
 
     public function tileWeaponTypeCost(string $tileWeaponTypeName)

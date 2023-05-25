@@ -40,6 +40,7 @@ class Ability extends Model
             TileTypes::INFANTRY_ID => 'infantry_valid',
             TileTypes::CAVALRY_ID  => 'cavalry_valid',
             TileTypes::VEHICLE_ID  => 'vehicle_valid',
+            TileTypes::BUILDING_ID  => 'building_valid',
         ];
 
         $validTypeAttribute = $map[$tileTypeId];
