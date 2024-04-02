@@ -915,7 +915,7 @@
         "cost_d10": 3,
         "cost_d12": 3,
         "is_infantry": 1,
-        "is_indirect": null,
+        "is_indirect": 1,
         "is_building": null,
         "has_warheads": null
     },
@@ -935,7 +935,7 @@
         "cost_d10": 7,
         "cost_d12": 8,
         "is_infantry": 1,
-        "is_indirect": null,
+        "is_indirect": 1,
         "is_building": null,
         "has_warheads": null
     },
@@ -955,7 +955,7 @@
         "cost_d10": 10,
         "cost_d12": 12,
         "is_infantry": 1,
-        "is_indirect": null,
+        "is_indirect": 1,
         "is_building": null,
         "has_warheads": null
     },
@@ -2235,7 +2235,7 @@
         "cost_d10": 0,
         "cost_d12": 0,
         "is_infantry": null,
-        "is_indirect": 1,
+        "is_indirect": null,
         "is_building": 1,
         "has_warheads": null
     },
@@ -2255,7 +2255,7 @@
         "cost_d10": 0,
         "cost_d12": 0,
         "is_infantry": null,
-        "is_indirect": 1,
+        "is_indirect": null,
         "is_building": 1,
         "has_warheads": null
     },
@@ -2275,7 +2275,7 @@
         "cost_d10": 0,
         "cost_d12": 0,
         "is_infantry": null,
-        "is_indirect": 1,
+        "is_indirect": null,
         "is_building": 1,
         "has_warheads": null
     }
