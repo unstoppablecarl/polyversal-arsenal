@@ -24,6 +24,9 @@
                         <a :href="editURL" class="btn btn-light">
                             Edit
                         </a>
+                        <a :href="copyURL" class="btn btn-light">
+                            Copy
+                        </a>
                         <a :href="deleteURL" class="btn btn-danger">
                             Delete
                         </a>
@@ -106,6 +109,7 @@
                 'fetching',
                 'viewURL',
                 'editURL',
+                'copyURL',
                 'deleteURL',
             ]),
             ...mapTileProperties({

@@ -100,6 +100,21 @@ class TileController extends Controller
             ]);
     }
 
+    public function copy(Tile $tile)
+    {
+        return view('tiles.copy')
+            ->with([
+                'item' => $tile,
+            ]);
+    }
+
+    public function duplicate(TileService $service, Tile $tile, Request $request)
+    {
+        $newTile = $service->copy($tile, null, $request->input('name'));
+
+        return $this->redirectAction('edit', ['tile' => $newTile]);
+    }
+
     public function delete(Tile $tile)
     {
         $urls = $tile->imageUrls();

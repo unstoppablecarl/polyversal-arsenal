@@ -24,6 +24,10 @@ class TilePolicy
     {
         return $this->userIsTileOwner($user, $tile);
     }
+    public function copy(User $user, Tile $tile)
+    {
+        return $this->userIsTileOwner($user, $tile);
+    }
 
     public function delete(User $user, Tile $tile)
     {

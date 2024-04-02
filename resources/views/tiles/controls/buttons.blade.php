@@ -14,6 +14,7 @@ if ($size) {
 
         @include('tiles.controls.buttons-view', ['item' => $item])
         @include('tiles.controls.buttons-edit', ['item' => $item])
+        @include('tiles.controls.buttons-copy', ['item' => $item])
         @include('tiles.controls.buttons-delete', ['item' => $item])
 
         @if($useBtnGroup)

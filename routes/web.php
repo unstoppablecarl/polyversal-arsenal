@@ -70,6 +70,17 @@ Route::group([
 
         Route::delete('tiles/{tile}/back-source-image/delete', 'TileSourceImageController@deleteBack')
             ->name('tiles.back-source-image.delete');
+
+    });
+    Route::group([
+        'middleware' => 'can:copy,tile',
+    ], function () {
+
+        Route::get('tiles/{tile}/copy', 'TileController@copy')
+            ->name('tiles.copy');
+
+        Route::post('tiles/{tile}/copy', 'TileController@duplicate')
+            ->name('tiles.duplicate');
     });
 
     Route::group([

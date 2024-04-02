@@ -258,9 +258,9 @@ class TileService
         return $tile->tilePrintSettings;
     }
 
-    public function copy(Tile $sourceTile, User $newUser = null): Tile
+    public function copy(Tile $sourceTile, User $newUser = null, string $name = null): Tile
     {
-        return DB::transaction(function () use ($sourceTile, $newUser) {
+        return DB::transaction(function () use ($name, $sourceTile, $newUser) {
 
             $source = array_except($sourceTile->attributesToArray(), [
                 'id',
@@ -279,6 +279,9 @@ class TileService
 
             if ($newUser) {
                 $source['user_id'] = $newUser->id;
+            }
+            if ($name) {
+                $source['name'] = $name;
             }
 
             /** @var Tile $tile */

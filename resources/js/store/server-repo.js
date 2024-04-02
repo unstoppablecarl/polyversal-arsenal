@@ -35,6 +35,7 @@ function backSourceImageDelete(tileId) {
 
 const updateURL                 = (tileId) => '/tiles/' + tileId;
 const editURL                   = (tileId) => '/app#/tile/' + tileId;
+const copyURL                   = (tileId) => '/tiles/' + tileId + '/copy';
 const viewURL                   = (tileId) => '/tiles/' + tileId;
 const deleteURL                 = (tileId) => '/tiles/' + tileId + '/delete';
 const frontSourceImageUpdateURL = (tileId) => '/tiles/' + tileId + '/front-source-image/update';
@@ -55,5 +56,6 @@ export default {
 
     viewURL,
     editURL,
+    copyURL,
     deleteURL,
 };

@@ -184,6 +184,9 @@ export default {
         editURL(state) {
             return server.editURL(state.tile.id);
         },
+        copyURL(state) {
+            return server.copyURL(state.tile.id);
+        },
         deleteURL(state) {
             return server.deleteURL(state.tile.id);
         },
