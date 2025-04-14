@@ -144,13 +144,11 @@
                 </text>
             </g>
 
-            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': frontInvertTitle}]">
-                <tspan v-for="(row, index) in tileNameArray" :x="268.3 * 0.5" :y="20 + (index) * nameLineHeight"
-                       v-html="row"></tspan>
-            </text>
-            <text :x="268.3 * 0.5" :y="32 + ((tileNameArray.length - 1) * nameLineHeight)"
-                  :class="['subtitle', {'text-invert': frontInvertTitle}]">{{ printSubTitle }}
-            </text>
+            <tile-title
+                :title="tile_name"
+                :subtitle="printSubTitle"
+                :inverted="frontInvertTitle"
+            />
 
             <tile-weapon-grid-svg/>
 
@@ -168,15 +166,15 @@ import {mapFrontImageGetters, mapTileGetters, mapTileProperties,} from '../../da
 import {targetingById} from '../../data/options';
 import TileSvgDamageTrack from './tile-svg-damge-track';
 import TileWeaponGridSvg from './tile-weapon-grid-svg';
+import TileTitle from './tile-title.vue';
 import getTileSvgCss from '../../lib/get-tile-svg-css';
 import {mapGetters} from 'vuex';
-import textWrap from 'svg-text-wrap';
 
 let prefix = 0;
 
 export default {
     name: 'tile-front-svg',
-    components: {TileWeaponGridSvg, TileSvgDamageTrack},
+    components: {TileWeaponGridSvg, TileSvgDamageTrack, TileTitle},
     props: {
         cutLineColor: null,
     },
@@ -199,22 +197,6 @@ export default {
             'hasAssaultOptions',
             'isBuilding',
         ]),
-        tileNameArray() {
-            if (this.tile_name) {
-
-                let result = [];
-                this.tile_name.split('\n')
-                    .map((str) => {
-                        return textWrap(str + '', 140);
-                    })
-                    .forEach((arr) => {
-                        result = result.concat(arr)
-                    })
-
-                return result;
-            }
-            return '';
-        },
         ...mapFrontImageGetters([
             'sourceImageUrl',
         ]),

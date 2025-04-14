@@ -2,6 +2,7 @@ import {make as makeTileWeapon, sanitize as sanitizeTileWeapon} from './models/t
 import {copyItem, createItem, deleteItem, moveItem, updateItem} from '../lib/collection-helper';
 import Weapons from '../data/weapons';
 import {TILE_TYPE_BUILDING_ID} from '../data/constants';
+import {orderBy} from 'lodash';
 
 export default {
     namespaced: true,
@@ -73,14 +74,13 @@ export default {
             return getters.weaponRepo.all();
         },
         tile_weapons(state, getters, rootState) {
-            return state.tile_weapons.map((tileWeapon) => {
+            let weapons = state.tile_weapons.map((tileWeapon) => {
 
                 let cost = getters.getWeaponCost(
                     tileWeapon.weapon_id,
                     tileWeapon.arc_size_id,
                     tileWeapon.tile_weapon_type_id,
                 );
-
                 let total_cost = cost * tileWeapon.quantity;
                 let weapon = getters.weaponRepo.get(tileWeapon.weapon_id, tileWeapon.tile_weapon_type_id);
 
@@ -92,6 +92,9 @@ export default {
 
                 return Object.assign({}, tileWeapon, {weapon, cost, total_cost});
             });
+            weapons = orderBy(weapons, 'display_order')
+
+            return weapons
         },
         totalCost(state, getters, rootState) {
 

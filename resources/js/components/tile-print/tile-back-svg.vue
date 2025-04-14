@@ -42,9 +42,11 @@
                      class="cut-line"
             />
 
-            <text :x="268.3 * 0.5" y="20" :class="['title', {'text-invert': backInvertTitle}]">{{ tile_name }}</text>
-            <text :x="268.3 * 0.5" y="32" :class="['subtitle', {'text-invert': backInvertTitle}]">{{ printSubTitle }}
-            </text>
+            <tile-title
+                :title="tile_name"
+                :subtitle="printSubTitle"
+                :inverted="backInvertTitle"
+            />
 
             <g v-if="!isBuilding">
                 <text :x="56" y="50.25" :class="['flavor-text', {'text-invert': backInvertFlavorText}]">
@@ -163,12 +165,13 @@ import textWrap from 'svg-text-wrap';
 import {mapGetters} from 'vuex';
 import psychProfiles from '../../data/psych-profiles';
 import {TILE_TYPE_BUILDING_ID} from '../../data/constants';
+import TileTitle from './tile-title.vue';
 
 let prefix = 0;
 
 export default {
     name: 'tile-back-svg',
-    components: {},
+    components: {TileTitle},
     props: {},
     data() {
         prefix++;
